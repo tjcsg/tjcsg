@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
+import NavBar from "./navbar"
 
 export const metadata = {
   title: "True Jesus Church Singapore",
@@ -50,6 +51,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <section className="min-h-screen">
+          <NavBar />
           <main>{children}</main>
           <Footer />
         </section>

@@ -18,5 +18,5 @@ export async function GET(request: Request) {
   }
 
   draftMode().enable();
-  redirect(`/posts/${post.slug}`);
+  redirect(`/events/${post.slug}`);
 }

@@ -1,18 +1,14 @@
-const POST_GRAPHQL_FIELDS = `
+const EVENTS_GRAPHQL_FIELDS = `
   slug
   title
-  coverImage {
-    url
-  }
   date
-  author {
-    name
-    picture {
-      url
-    }
+  date2
+  church
+  poster {
+    url
+    description
   }
-  excerpt
-  content {
+  summary {
     json
     links {
       assets {
@@ -28,8 +24,34 @@ const POST_GRAPHQL_FIELDS = `
   }
 `;
 
+type EventEntry = {
+  slug: string,
+  title: string,
+  date: string,
+  date2: string | null,
+  church: string,
+  poster: {
+    url: string,
+    description: string
+  }
+  summary: {
+    json: any
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string },
+            url: string,
+            description: string
+          }
+        ]
+      }
+    }
+  }
+}
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
-  return fetch(
+  const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
       method: "POST",
@@ -43,28 +65,30 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
       },
       body: JSON.stringify({ query }),
       next: { tags: ["posts"] },
-    },
-  ).then((response) => response.json());
+    }
+  );
+  const result = await response.json();
+  return result;
 }
 
-function extractPost(fetchResponse: any): any {
-  return fetchResponse?.data?.postCollection?.items?.[0];
+function extractPost(fetchResponse: any): EventEntry {
+  return fetchResponse?.data?.eventsCollection?.items?.[0];
 }
 
 function extractPostEntries(fetchResponse: any): any[] {
-  return fetchResponse?.data?.postCollection?.items;
+  return fetchResponse?.data?.eventsCollection?.items;
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   const entry = await fetchGraphQL(
     `query {
-      postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
+      eventsCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${EVENTS_GRAPHQL_FIELDS}
         }
       }
     }`,
-    true,
+    true
   );
   return extractPost(entry);
 }
@@ -72,49 +96,37 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
 export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
-      postCollection(where: { slug_exists: true }, order: date_DESC, preview: ${
+      eventsCollection(order: date_DESC, preview: ${
         isDraftMode ? "true" : "false"
       }) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          slug
         }
       }
     }`,
-    isDraftMode,
+    isDraftMode
   );
   return extractPostEntries(entries);
 }
 
-export async function getPostAndMorePosts(
+export async function getEvent(
   slug: string,
-  preview: boolean,
-): Promise<any> {
+  preview: boolean
+) {
   const entry = await fetchGraphQL(
     `query {
-      postCollection(where: { slug: "${slug}" }, preview: ${
-        preview ? "true" : "false"
-      }, limit: 1) {
+      eventsCollection(where: { slug: "${slug}" }, preview: ${
+      preview ? "true" : "false"
+    }, limit: 1) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${EVENTS_GRAPHQL_FIELDS}
         }
       }
     }`,
-    preview,
+    preview
   );
-  const entries = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
-        preview ? "true" : "false"
-      }, limit: 2) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview,
-  );
+
   return {
-    post: extractPost(entry),
-    morePosts: extractPostEntries(entries),
+    event: extractPost(entry),
   };
 }

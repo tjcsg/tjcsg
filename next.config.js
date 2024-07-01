@@ -4,4 +4,9 @@ module.exports = {
     loader: "custom",
     formats: ["image/avif", "image/webp"],
   },
+  logging: {
+    fetches: {
+      fullUrl: true
+    }
+  }
 };

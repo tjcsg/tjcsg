@@ -7,10 +7,10 @@ import Date from "../../date";
 import CoverImage from "../../cover-image";
 
 import { Markdown } from "@/lib/markdown";
-import { getAllPosts, getEvent } from "@/lib/api";
+import { getAllEventsSlug, getEvent } from "@/lib/api";
 
 export async function generateStaticParams() {
-  const allPosts = await getAllPosts(false);
+  const allPosts = await getAllEventsSlug(false);
 
   return allPosts.map((post) => ({
     slug: post.slug,

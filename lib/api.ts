@@ -93,7 +93,31 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   return extractPost(entry);
 }
 
-export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
+export async function getAllEvents(isDraftMode: boolean): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      eventsCollection(order: date_DESC, preview: ${
+        isDraftMode ? "true" : "false"
+      }) {
+        items {
+          slug
+          title
+          date
+          date2
+          church
+          poster {
+            url
+            description
+          }
+        }
+      }
+    }`,
+    isDraftMode
+  );
+  return extractPostEntries(entries);
+}
+
+export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
       eventsCollection(order: date_DESC, preview: ${

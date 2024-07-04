@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import daisyui from "daisyui";
 
 export default {
   content: [
@@ -20,5 +21,5 @@ export default {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [typography],
+  plugins: [daisyui, typography],
 } satisfies Config;

@@ -8,117 +8,54 @@ import MoreStories from "./more-stories";
 
 import { getAllEvents } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
+import Image from "next/image";
+import ContentfulImage from "@/lib/contentful-image";
+
+
+const carousel_img = [
+  { name: "/carousel/1.jpg", alt: "Telok Kurau Church"},
+  { name: "/carousel/2.jpeg", alt: "Blue skies"},
+  { name: "/carousel/3.jpg", alt: "Adam Road Church"},
+  { name: "/carousel/4.jpeg", alt: "Paddy fields"},
+  { name: "/carousel/5.jpg", alt: "Adam Road Church"}
+]
+
 
 function Intro() {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
-        Blog.
-      </h1>
-      <h2 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A statically generated blog example using{" "}
-        <a
-          href="https://nextjs.org/"
-          className="underline hover:text-success duration-200 transition-colors"
-        >
-          Next.js
-        </a>{" "}
-        and{" "}
-        <a
-          href={CMS_URL}
-          className="underline hover:text-success duration-200 transition-colors"
-        >
-          {CMS_NAME}
-        </a>
-        .
-      </h2>
-    </section>
-  );
-}
+    <div className="relative">
+      {/* Carousel from daisyui */}
+      <div className="carousel carousel-center">
 
-// function Intro() {
-//   return (
-// <div className="carousel carousel-center rounded-box">
-//   <div className="carousel-item">
-//     <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img
-//       src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg"
-//       alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img
-//       src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg"
-//       alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img
-//       src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg"
-//       alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Pizza" />
-//   </div>
-//   <div className="carousel-item">
-//     <img
-//       src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg"
-//       alt="Pizza" />
-//   </div>
-// </div>
-//   );
-// }
-
-function HeroPost({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug,
-}: {
-  title: string;
-  coverImage: any;
-  date: string;
-  excerpt: string;
-  author: any;
-  slug: string;
-}) {
-  return (
-    <section>
-      <div className="mb-8 md:mb-16">
-        <CoverImage title={title} slug={slug} url={coverImage.url} />
-      </div>
-      <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-        <div>
-          <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
-            <Link href={`/events/${slug}`} className="hover:underline">
-              {title}
+        {carousel_img.map((img) => (
+          <div className="carousel-item max-sm:w-full">
+            <ContentfulImage src={img.name} width={693} height={390} alt={img.alt} />
+          </div>
+        ))}
+        <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+          <div className="bg-white dark:bg-gray-900 bg-opacity-80 rounded-lg px-7 pt-4 pb-5 min-w-96 max-w-lg">
+            <h1 className="font-semibold dark:text-white mt-2 mb-2">Welcome</h1>
+            <p className="text-xs mb-5">Here, you can get to know the truth as given by the Lord Jesus Christ and taught by His apostles. Many have experienced God’s presence and salvation in the True Jesus Church through various miracles and gifts of the Holy Spirit.</p>
+            <button
+              type="button"
+              className="rounded-md bg-button mb-3 px-8 py-2 text-sm font-medium text-white shadow-sm hover:bg-button_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-6"
+            >
+              Learn more about us
+            </button>
+            <Link href="#" className="text-button mb-2 hover:text-button_hover text-xs text-nowrap font-semibold underline decoration-2">
+              Find a church
             </Link>
-          </h3>
-          <div className="mb-4 md:mb-0 text-lg">
-            <Date dateString={date} />
           </div>
         </div>
-        <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {author && <Avatar name={author.name} picture={author.picture} />}
-        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
 export default async function Page() {
   const { isEnabled } = draftMode();
   const allPosts = await getAllEvents(isEnabled);
-
   return (
-    <div className="container mx-auto px-5">
       <Intro />
-    </div>
   );
 }

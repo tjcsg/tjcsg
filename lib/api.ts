@@ -2,7 +2,9 @@ const EVENTS_GRAPHQL_FIELDS = `
   slug
   title
   date
+  duration
   date2
+  duration2
   church
   poster {
     url
@@ -28,7 +30,9 @@ type EventEntry = {
   slug: string,
   title: string,
   date: string,
+  duration: number,
   date2: string | null,
+  duration2: number | null,
   church: string,
   poster: {
     url: string,
@@ -84,7 +88,7 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
     `query {
       eventsCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
-          ${EVENTS_GRAPHQL_FIELDS}
+          ${EVENTS_GRAPHQL_FIELDS}  
         }
       }
     }`,
@@ -97,13 +101,15 @@ export async function getAllEvents(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
       eventsCollection(order: date_DESC, preview: ${
-        isDraftMode ? "true" : "false"
+        isDraftMode ? "true" : "false" 
       }) {
         items {
           slug
           title
           date
-          date2
+          duration 
+          date2 
+          duration2
           church
           poster {
             url

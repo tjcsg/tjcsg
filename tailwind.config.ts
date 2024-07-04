@@ -12,6 +12,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-inter)"],
       },
+      colors: {
+        footer: "#eaf7ff"
+      }
     },
   },
   future: {

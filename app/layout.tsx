@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
 import NavBar from "./navbar"
 import Link from "next/link";
@@ -9,8 +9,8 @@ export const metadata = {
   description: "",
 };
 
-const inter = Inter({
-  variable: "--font-inter",
+const noto_sans = Noto_Sans({
+  variable: "--font-noto_sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -113,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={noto_sans.variable}>
       <body>
         <section className="min-h-screen">
           <NavBar />

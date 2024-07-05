@@ -11,6 +11,7 @@ import { CMS_NAME, CMS_URL } from "@/lib/constants";
 import Image from "next/image";
 import ContentfulImage from "@/lib/contentful-image";
 import SpecialEvents from "./special-events";
+import CDBD from "./cdbd";
 
 
 const carousel_img = [
@@ -60,6 +61,7 @@ export default async function Page() {
       <>
         <Intro />
         <SpecialEvents />
+        <CDBD />
       </>
   );
 }

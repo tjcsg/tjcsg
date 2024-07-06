@@ -27,40 +27,40 @@ const EVENTS_GRAPHQL_FIELDS = `
 `;
 
 type EventEntry = {
-  slug: string,
-  title: string,
-  date: string,
-  duration: number,
-  date2: string | null,
-  duration2: number | null,
-  church: string,
+  slug: string;
+  title: string;
+  date: string;
+  duration: number;
+  date2: string | null;
+  duration2: number | null;
+  church: string;
   poster: {
-    url: string,
-    description: string
-  }
+    url: string;
+    description: string;
+  };
   summary: {
-    json: any
+    json: any;
     links: {
       assets: {
         block: [
           {
-            sys: { id: string },
-            url: string,
-            description: string
-          }
-        ]
-      }
-    }
-  }
-}
+            sys: { id: string };
+            url: string;
+            description: string;
+          },
+        ];
+      };
+    };
+  };
+};
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${
           preview
             ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
@@ -68,8 +68,8 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
         }`,
       },
       body: JSON.stringify({ query }),
-      next: { tags: ["posts"] },
-    }
+      next: { tags: ['posts'] },
+    },
   );
   const result = await response.json();
   return result;
@@ -92,7 +92,7 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
         }
       }
     }`,
-    true
+    true,
   );
   return extractPost(entry);
 }
@@ -101,7 +101,7 @@ export async function getAllEvents(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
       eventsCollection(order: date_DESC, preview: ${
-        isDraftMode ? "true" : "false" 
+        isDraftMode ? 'true' : 'false'
       }) {
         items {
           slug
@@ -118,7 +118,7 @@ export async function getAllEvents(isDraftMode: boolean): Promise<any[]> {
         }
       }
     }`,
-    isDraftMode
+    isDraftMode,
   );
   return extractPostEntries(entries);
 }
@@ -127,33 +127,30 @@ export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
       eventsCollection(order: date_DESC, preview: ${
-        isDraftMode ? "true" : "false"
+        isDraftMode ? 'true' : 'false'
       }) {
         items {
           slug
         }
       }
     }`,
-    isDraftMode
+    isDraftMode,
   );
   return extractPostEntries(entries);
 }
 
-export async function getEvent(
-  slug: string,
-  preview: boolean
-) {
+export async function getEvent(slug: string, preview: boolean) {
   const entry = await fetchGraphQL(
     `query {
       eventsCollection(where: { slug: "${slug}" }, preview: ${
-      preview ? "true" : "false"
-    }, limit: 1) {
+        preview ? 'true' : 'false'
+      }, limit: 1) {
         items {
           ${EVENTS_GRAPHQL_FIELDS}
         }
       }
     }`,
-    preview
+    preview,
   );
 
   return {

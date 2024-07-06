@@ -1,13 +1,13 @@
-import Link from "next/link";
-import { draftMode } from "next/headers";
+import Link from 'next/link';
+import { draftMode } from 'next/headers';
 
-import MoreStories from "../../more-stories";
-import Avatar from "../../avatar";
-import Date from "../../date";
-import CoverImage from "../../cover-image";
+import MoreStories from '../../more-stories';
+import Avatar from '../../avatar';
+import Date from '../../date';
+import CoverImage from '../../cover-image';
 
-import { Markdown } from "@/lib/markdown";
-import { getAllEventsSlug, getEvent } from "@/lib/api";
+import { Markdown } from '@/lib/markdown';
+import { getAllEventsSlug, getEvent } from '@/lib/api';
 
 export async function generateStaticParams() {
   const allPosts = await getAllEventsSlug(false);

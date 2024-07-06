@@ -2,14 +2,8 @@ export default async function Container({
   background,
   children,
 }: {
-  background: string,
+  background: string;
   children: React.ReactNode;
 }) {
-
-  return (
-    <div className={`${background} py-10 px-12`}>
-      {children}
-    </div>
-  )
+  return <div className={`${background} px-12 py-10`}>{children}</div>;
 }
-

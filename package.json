@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "dev": "next",
     "lint": "next lint",
-    "prettier": "prettier --write --ignore-unknown ."
+    "prettier": "prettier --write --ignore-unknown .",
+    "start": "next start"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.17.1",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@types/he": "^1.2.3",
-    "daisyui": "^4.12.10",
     "@vercel/style-guide": "^6.0.0",
+    "daisyui": "^4.12.10",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "9.0.0",
     "prettier": "^3.0.3",

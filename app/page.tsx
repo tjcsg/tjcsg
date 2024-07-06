@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { draftMode } from "next/headers";
 
-import Date from "./date";
-import CoverImage from "./cover-image";
-import Avatar from "./avatar";
-import MoreStories from "./more-stories";
-
 import { getAllEvents } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
-import Image from "next/image";
 import ContentfulImage from "@/lib/contentful-image";
 import SpecialEvents from "./special-events";
 import CDBD from "./cdbd";
+import Container from "@/lib/components/container";
 
 
 const carousel_img = [
@@ -60,8 +55,11 @@ export default async function Page() {
   return (
       <>
         <Intro />
-        <SpecialEvents />
-        <CDBD />
+        <Container background="bg-white" children={SpecialEvents()}/>
+
+        <Container background="bg-stone-50">
+          <CDBD />
+        </Container>
       </>
   );
 }

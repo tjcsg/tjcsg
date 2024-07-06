@@ -60,8 +60,8 @@ function truncate( str: string, n:number ){
 
 
     return (
-      !error && cdbdPosts[0] && <div className="bg-stone-50 pt-10 pb-16">
-        <div className="mx-auto max-w-7xl  px-6 md:px-8">
+      !error && cdbdPosts[0] && 
+        <div className="w-full mx-auto">
             <div className="mb-16">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Closer Day By Day</h2>
                 <p className="mt-2 text-xl leading-8 text-gray-600">
@@ -117,7 +117,6 @@ function truncate( str: string, n:number ){
                 </div>
             </div>
         </div>
-      </div>
     )
   }
   

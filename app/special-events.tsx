@@ -5,24 +5,17 @@ import Link from "next/link";
 export default async function SpecialEvents() {
   const allEvents = await getAllEvents(false);
 
-  return (
-    <div className="bg-white py-10">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:max-w-4xl">
-          <h2 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
-            Special Events
-          </h2>
-          <p className="mt-2 text-md leading-8 text-gray-600">
-            Stay tuned for our special services!
-          </p>
-          <div className="mt-12 space-y-20 lg:mt-20 lg:space-y-20">
-            {allEvents &&
-              allEvents.slice(0, 3).map((event) => (
-                <article
-                  key={event.slug}
-                  className="relative isolate flex flex-col gap-8 sm:flex-row"
-                >
-                  <div className="relative aspect-[16/9] sm:w-64 md:w-72 sm:shrink-0">
+    return (
+        <div className="w-full mx-auto">
+            <h2 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">Special Events</h2>
+            <p className="mt-2 text-md leading-8 text-gray-600">
+              Stay tuned for our special services!
+            </p>
+
+            <div className="mt-12 space-y-20 lg:mt-20 lg:space-y-20">
+              {allEvents && allEvents.slice(0,3).map((event) => (
+                <article key={event.slug} className="relative isolate flex flex-col gap-8 sm:flex-row">
+                  <div className="relative aspect-[16/9] sm:w-1/2 md:w-1/3 sm:shrink-0">
                     <img
                       src={event.poster.url}
                       alt=""
@@ -33,13 +26,13 @@ export default async function SpecialEvents() {
                   </div>
                   <div>
                     <div className="group relative max-w-xl">
-                      <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                        <Link href={`/events/${event.slug}`}>
-                          <span className="absolute inset-0" />
-                          {event.title}
-                        </Link>
-                      </h3>
-                      {/* <p className="mt-5 text-sm leading-6 text-gray-600">{post.description}</p> */}
+                        <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                            <Link href={`/events/${event.slug}`}>
+                            <span className="absolute inset-0" /> 
+                            {event.title}
+                            </Link>
+                        </h3>
+                        {/* <p className="mt-5 text-sm leading-6 text-gray-600">{post.description}</p> */}
                     </div>
                     <div className="flex flex-col items-start gap-x-4 text-xs">
                       <time
@@ -114,9 +107,8 @@ export default async function SpecialEvents() {
                   </div>
                 </article>
               ))}
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
-}
+    )
+  }
+  

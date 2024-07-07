@@ -16,7 +16,7 @@ const navigation = [
   { name: 'Livestream', href: '#', current: true },
   { name: 'About', href: '#', current: false },
   { name: 'Articles', href: '#', current: false },
-  { name: 'Locations', href: '#', current: false },
+  { name: 'Locations', href: '/locations', current: false },
   { name: 'Resources', href: '#', current: false },
 ];
 

@@ -42,7 +42,7 @@ function Footer() {
             </Link>
             <p className="mb-2 pr-6 text-xs text-gray-500 dark:text-gray-400">
               👋🏼 Hello, we&apos;re True Jesus Church, a global Bible-based
-              church. We welcome you to join God's loving family.
+              church. We welcome you to join God&apos;s loving family.
             </p>
             <p className="pr-6 text-xs text-gray-500 dark:text-gray-400">
               📌 Our goal is simple: transform lives and make disciples of

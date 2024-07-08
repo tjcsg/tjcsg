@@ -28,8 +28,7 @@ adam: {
     ],
     map_src:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7490206008397!2d103.81067387660289!3d1.3265404616469416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a077b6bbffd%3A0x82517d0abdc4717c!2sTrue%20Jesus%20Church%20(TJC)%20Adam%20Road!5e0!3m2!1sen!2ssg!4v1720335095321!5m2!1sen!2ssg',
-    twitch:
-    'https://player.twitch.tv/?channel=tjcadam&parent=localhost&muted=true',
+    twitch: 'tjcadam',
 },
 tk: {
     name: 'Telok Kurau Church',
@@ -43,8 +42,7 @@ tk: {
     ],
     map_src:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3779.421223711994!2d103.90573914254749!3d1.314719622609561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da180f397d933b%3A0x1972f5a60a0e1a0c!2sTrue%20Jesus%20Church%20(TJC)%20Telok%20Kurau!5e0!3m2!1sen!2ssg!4v1720359243354!5m2!1sen!2ssg',
-    twitch:
-    'https://player.twitch.tv/?channel=tjctk&parent=localhost&muted=true',
+    twitch:'tjctk',
 },
 sembawang: {
     name: 'Sembawang Church',
@@ -58,8 +56,7 @@ sembawang: {
     ],
     map_src:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.56787575159!2d103.80260319999998!3d1.43451350000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da139934355fab%3A0xff5fdd9fb28f7aad!2sTrue%20Jesus%20Church%20(TJC)%20Sembawang!5e0!3m2!1sen!2ssg!4v1720358636486!5m2!1sen!2ssg',
-    twitch:
-    'https://player.twitch.tv/?channel=tjcsbw&parent=localhost&muted=true',
+    twitch: 'tjcsbw',
 },
 serangoon: {
     name: 'Serangoon Church',
@@ -73,7 +70,6 @@ serangoon: {
     ],
     map_src:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15954.664874826683!2d103.86497403139735!3d1.3769460294203737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1725ac4faa7f%3A0xe9a3613c6a5414e3!2sTrue%20Jesus%20Church%20(TJC)%20Serangoon!5e0!3m2!1sen!2ssg!4v1720358678519!5m2!1sen!2ssg',
-    twitch:
-    'https://player.twitch.tv/?channel=tjcs9&parent=localhost&muted=true',
+    twitch: 'tjcs9',
 },
 };

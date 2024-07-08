@@ -34,7 +34,7 @@ type EventEntry = {
   date2: string | null;
   duration2: number | null;
   church: string;
-  poster: {
+  poster: { 
     url: string;
     description: string;
   };

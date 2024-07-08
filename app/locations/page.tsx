@@ -1,5 +1,3 @@
-import Container from '@/lib/components/container';
-import ContentfulImage from '@/lib/contentful-image';
 import ChurchLocation from './church-location';
 
 const adamTimings = [
@@ -37,7 +35,7 @@ export default async function Page() {
         <p className="text-base font-semibold leading-7 text-button">
           Worship with us
         </p>
-        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
+        <h2 className="mt-2 text-4xl font-medium tracking-tight text-gray-900 sm:text-6xl">
           Locations
         </h2>
         <p className="mt-6 text-lg leading-8 text-gray-600">

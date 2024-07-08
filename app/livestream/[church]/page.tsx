@@ -19,7 +19,7 @@ function ChurchLivestream({
     <Container background={background}>
       <div className="mx-auto block">
         <div className="flex w-full flex-col sm:flex-row">
-          <div className="bg-lightblue h-72 basis-1/2 sm:max-w-md">
+          <div className="h-72 basis-1/2 bg-lightblue sm:max-w-md">
             <h1 className="px-4 pt-4 text-3xl font-semibold">
               Service Timings
             </h1>

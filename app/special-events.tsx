@@ -7,7 +7,7 @@ export default async function SpecialEvents() {
   const allEvents = await getAllEvents(false);
 
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto block w-full">
       <h1 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
         Special Events
       </h1>

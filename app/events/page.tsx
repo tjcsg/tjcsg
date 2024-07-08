@@ -4,7 +4,6 @@ import { draftMode } from 'next/headers';
 import Date from '../date';
 import CoverImage from '../cover-image';
 
-import { Markdown } from '@/lib/markdown';
 import { getAllEvents, getEvent } from '@/lib/api';
 
 // export async function generateStaticParams() {

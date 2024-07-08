@@ -72,7 +72,7 @@ export default function CDBD() {
   return (
     !error &&
     cdbdPosts[0] && (
-      <div className="mx-auto w-full">
+      <div className="mx-auto block w-full">
         <div className="mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Closer Day By Day

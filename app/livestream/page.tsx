@@ -46,34 +46,36 @@ function ChurchLivestream({
 }) {
   return (
     <Container background={background}>
-      <h1 className="mb-4 text-lg font-semibold lg:text-2xl">
-        {name} Livestream
-      </h1>
+      <div className="block">
+        <h1 className="mb-4 text-lg font-semibold lg:text-2xl">
+          {name} Livestream
+        </h1>
 
-      <div className="bg-lightblue relative mx-auto mb-8 sm:max-w-md">
-        <ContentfulImage
-          src={`/locations/${name}.jpg`}
-          width={723}
-          height={445}
-          className="w-full"
-        ></ContentfulImage>
-        <Link href={href}>
-          <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
-            Watch Livestream
-          </button>
-        </Link>
-        <table className="table-sm mt-6">
-          <tbody>
-            {timings.map((timing) => (
-              <tr key={timing.day}>
-                <td className="sm:text-md text-sm font-semibold">
-                  {timing.day}
-                </td>
-                <td className="text-sm">{timing.time}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="bg-lightblue relative mx-auto mb-8 sm:max-w-md">
+          <ContentfulImage
+            src={`/locations/${name}.jpg`}
+            width={723}
+            height={445}
+            className="w-full"
+          ></ContentfulImage>
+          <Link href={href}>
+            <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
+              Watch Livestream
+            </button>
+          </Link>
+          <table className="table-sm mt-6">
+            <tbody>
+              {timings.map((timing) => (
+                <tr key={timing.day}>
+                  <td className="sm:text-md text-sm font-semibold">
+                    {timing.day}
+                  </td>
+                  <td className="text-sm">{timing.time}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Container>
   );

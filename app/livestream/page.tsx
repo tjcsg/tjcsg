@@ -2,36 +2,7 @@ import Link from 'next/link';
 
 import ContentfulImage from '@/lib/contentful-image';
 import Container from '@/lib/components/container';
-import SpecialEvents from '../special-events';
-import GlobalLivestream from './global-livestream';
-
-const adamTimings = [
-  { day: 'Wednesday', time: '7:30pm - 8:45pm' },
-  { day: 'Friday', time: '7:30pm - 8:45pm' },
-  { day: 'Saturday - AM', time: '10:30am - 11:45am' },
-  { day: 'Saturday - PM', time: '2:45pm - 4:00pm' },
-];
-
-const tkTimings = [
-  { day: 'Tuesday', time: '7:30pm - 8:45pm' },
-  { day: 'Friday', time: '7:30pm - 8:45pm' },
-  { day: 'Saturday - AM', time: '10:30am - 11:45am' },
-  { day: 'Saturday - PM', time: '2:45pm - 4:00pm' },
-];
-
-const sembawangTimings = [
-  { day: 'Wednesday', time: '7:45pm - 9:00pm' },
-  { day: 'Friday', time: '7:45pm - 9:00pm' },
-  { day: 'Saturday - AM', time: '10:30am - 11:45am' },
-  { day: 'Saturday - PM', time: '2:45pm - 4:00pm' },
-];
-
-const serangoonTimings = [
-  { day: 'Tuesday', time: '7:45pm - 9:00pm' },
-  { day: 'Friday', time: '7:45pm - 9:00pm' },
-  { day: 'Saturday - AM', time: '10:30am - 11:45am' },
-  { day: 'Saturday - PM', time: '1:45pm - 3:00pm' },
-];
+import { details } from '@/lib/church-details';
 
 function ChurchLivestream({
   name,
@@ -99,26 +70,26 @@ export default async function Page() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <ChurchLivestream
-          name="Adam Road Church"
-          timings={adamTimings}
+          name={details['adam'].name}
+          timings={details['adam'].timings}
           background="bg-stone-50"
           href="/livestream/adam"
         />
         <ChurchLivestream
-          name="Telok Kurau Church"
-          timings={tkTimings}
+          name={details['tk'].name}
+          timings={details['tk'].timings}
           background="bg-white"
           href="/livestream/tk"
         />
         <ChurchLivestream
-          name="Sembawang Church"
-          timings={sembawangTimings}
+          name={details['sembawang'].name}
+          timings={details['sembawang'].timings}
           background="bg-stone-50 md:bg-white"
           href="/livestream/sembawang"
         />
         <ChurchLivestream
-          name="Serangoon Church"
-          timings={serangoonTimings}
+          name={details['serangoon'].name}
+          timings={details['serangoon'].timings}
           background="bg-white md:bg-stone-50"
           href="/livestream/serangoon"
         />

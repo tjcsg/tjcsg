@@ -37,10 +37,12 @@ function ChurchLivestream({
   name,
   timings,
   background,
+  href,
 }: {
   name: string;
   timings: { day: string; time: string }[];
   background: string;
+  href: string;
 }) {
   return (
     <Container background={background}>
@@ -55,9 +57,11 @@ function ChurchLivestream({
           height={445}
           className="w-full"
         ></ContentfulImage>
-        <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
-          Watch Livestream
-        </button>
+        <Link href={href}>
+          <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
+            Watch Livestream
+          </button>
+        </Link>
         <table className="table-sm mt-6">
           <tbody>
             {timings.map((timing) => (
@@ -96,29 +100,27 @@ export default async function Page() {
           name="Adam Road Church"
           timings={adamTimings}
           background="bg-stone-50"
+          href="/livestream/adam"
         />
         <ChurchLivestream
           name="Telok Kurau Church"
           timings={tkTimings}
           background="bg-white"
+          href="/livestream/tk"
         />
         <ChurchLivestream
           name="Sembawang Church"
           timings={sembawangTimings}
           background="bg-stone-50 md:bg-white"
+          href="/livestream/sembawang"
         />
         <ChurchLivestream
           name="Serangoon Church"
           timings={serangoonTimings}
           background="bg-white md:bg-stone-50"
+          href="/livestream/serangoon"
         />
       </div>
-      <Container background="bg-white">
-        <SpecialEvents />
-      </Container>
-      <Container background="bg-stone-50">
-        <GlobalLivestream />
-      </Container>
     </>
   );
 }

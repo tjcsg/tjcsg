@@ -8,9 +8,9 @@ export default async function SpecialEvents() {
 
   return (
     <div className="mx-auto w-full">
-      <h2 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
+      <h1 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
         Special Events
-      </h2>
+      </h1>
       <p className="text-md mt-2 leading-8 text-gray-600">
         Stay tuned for our special services!
       </p>

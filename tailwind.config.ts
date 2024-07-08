@@ -16,7 +16,7 @@ export default {
       colors: {
         button: '#1D5598',
         button_hover: '#3D9BE9',
-        footer: '#eaf7ff',
+        lightblue: '#eaf7ff',
       },
     },
   },

@@ -13,7 +13,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Livestream', href: '#', current: true },
+  { name: 'Livestream', href: '/livestream', current: true },
   { name: 'About', href: '#', current: false },
   { name: 'Articles', href: '#', current: false },
   { name: 'Locations', href: '/locations', current: false },

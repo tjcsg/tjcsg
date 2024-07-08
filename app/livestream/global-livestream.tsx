@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function GlobalLivestream() {
   return (
-    <>
+    <div className="block">
       <h1 className="mb-4 text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
         True Jesus Church Global Livestream
       </h1>
@@ -26,6 +26,6 @@ export default function GlobalLivestream() {
           className="max-w-full md:max-w-sm lg:max-w-lg"
         ></ContentfulImage>
       </div>
-    </>
+    </div>
   );
 }

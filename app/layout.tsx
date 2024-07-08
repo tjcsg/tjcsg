@@ -1,7 +1,7 @@
 import './globals.css';
 import { Noto_Sans } from 'next/font/google';
 import { EXAMPLE_PATH, CMS_NAME } from '@/lib/constants';
-import NavBar from './navbar';
+import NavBar from './navbar2';
 import Link from 'next/link';
 
 export const metadata = {

@@ -22,7 +22,7 @@ export default function ChurchLocation({
           <p className="lg:text-md text-sm text-gray-500">{address}</p>
         </div>
         <div className="sm:flex">
-          <div className="bg-lightblue mb-8 sm:max-w-md">
+          <div className="mb-8 bg-lightblue sm:max-w-md">
             <ContentfulImage
               src={`/locations/${name}.jpg`}
               width={723}

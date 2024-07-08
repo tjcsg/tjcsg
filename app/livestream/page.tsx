@@ -22,7 +22,7 @@ function ChurchLivestream({
           {name} Livestream
         </h1>
 
-        <div className="bg-lightblue relative mx-auto mb-8 sm:max-w-md">
+        <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
           <ContentfulImage
             src={`/locations/${name}.jpg`}
             width={723}

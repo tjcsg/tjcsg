@@ -16,6 +16,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
+import { LocaleSwitcherDesktop, LocaleSwitcherMobile } from './locale-switch';
 
 const resources = [
   {
@@ -32,7 +33,7 @@ const resources = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBar({ lang }: { lang: Locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -42,7 +43,7 @@ export default function NavBar() {
         className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link href={`/${lang}`} className="-m-1.5 p-1.5">
             <span className="sr-only">True Jesus Church Singapore</span>
             <ContentfulImage
               src="/site-logo.png"
@@ -65,19 +66,19 @@ export default function NavBar() {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Link
-            href="/livestream"
+            href={`/${lang}/livestream`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Livestream
           </Link>
           <Link
-            href="/about"
+            href={`/${lang}/about`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             About Us
           </Link>
           <Link
-            href="/locations"
+            href={`/${lang}/locations`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Locations
@@ -103,7 +104,7 @@ export default function NavBar() {
                   >
                     <div className="flex-auto">
                       <Link
-                        href={item.href}
+                        href={`/${lang}/${item.href}`}
                         className="block text-nowrap font-semibold text-gray-900"
                       >
                         {item.name}
@@ -117,12 +118,14 @@ export default function NavBar() {
           </Popover>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="#"
+          {/* <Link
+            href="."
+            locale="zh"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Locale <span aria-hidden="true">&rarr;</span>
-          </Link>
+          </Link> */}
+          <LocaleSwitcherDesktop />
         </div>
       </nav>
       <Dialog
@@ -133,7 +136,7 @@ export default function NavBar() {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5">
+            <Link href={`/${lang}`} className="-m-1.5 p-1.5">
               <span className="sr-only">True Jesus Church Singapore</span>
               <ContentfulImage
                 src="/site-logo.png"
@@ -156,21 +159,21 @@ export default function NavBar() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Link
-                  href="/livestream"
+                  href={`/${lang}/livestream`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Livestream
                 </Link>
                 <Link
-                  href="/about"
+                  href={`/${lang}/about`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   About Us
                 </Link>
                 <Link
-                  href="/locations"
+                  href={`/${lang}/locations`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -189,7 +192,7 @@ export default function NavBar() {
                       <DisclosureButton
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        href={`/${lang}/${item.href}`}
                         className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
                         {item.name}
@@ -199,12 +202,7 @@ export default function NavBar() {
                 </Disclosure>
               </div>
               <div className="py-6">
-                <Link
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Locale
-                </Link>
+                <LocaleSwitcherMobile />
               </div>
             </div>
           </div>

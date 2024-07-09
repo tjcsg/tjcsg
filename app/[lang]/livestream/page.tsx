@@ -6,14 +6,18 @@ import { details } from '@/lib/church-details';
 
 function ChurchLivestream({
   name,
+  shortname,
   timings,
   background,
   href,
+  lang,
 }: {
   name: string;
+  shortname: string;
   timings: { day: string; time: string }[];
   background: string;
   href: string;
+  lang: Locale;
 }) {
   return (
     <Container background={background}>
@@ -22,14 +26,14 @@ function ChurchLivestream({
           {name} Livestream
         </h1>
 
-        <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
+        <div className="bg-lightblue relative mx-auto mb-8 sm:max-w-md">
           <ContentfulImage
-            src={`/locations/${name}.jpg`}
+            src={`/locations/${shortname}.jpg`}
             width={723}
             height={445}
             className="w-full"
           ></ContentfulImage>
-          <Link href={href}>
+          <Link href={`/${lang}/${href}`}>
             <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
               Watch Livestream
             </button>
@@ -52,7 +56,8 @@ function ChurchLivestream({
   );
 }
 
-export default async function Page() {
+export default async function Page({ params }: { params: { lang: Locale } }) {
+  const { lang } = params;
   return (
     <>
       <div className="mx-auto px-6 pb-8 pt-4 text-center sm:pt-8">
@@ -71,27 +76,35 @@ export default async function Page() {
       <div className="grid grid-cols-1 md:grid-cols-2">
         <ChurchLivestream
           name={details['adam'].name}
+          shortname={details['adam'].shortform}
           timings={details['adam'].timings}
           background="bg-stone-50"
-          href="/livestream/adam"
+          href="livestream/adam"
+          lang={lang}
         />
         <ChurchLivestream
           name={details['tk'].name}
+          shortname={details['tk'].shortform}
           timings={details['tk'].timings}
           background="bg-white"
-          href="/livestream/tk"
+          href="livestream/tk"
+          lang={lang}
         />
         <ChurchLivestream
           name={details['sembawang'].name}
+          shortname={details['sembawang'].shortform}
           timings={details['sembawang'].timings}
           background="bg-stone-50 md:bg-white"
-          href="/livestream/sembawang"
+          href="livestream/sembawang"
+          lang={lang}
         />
         <ChurchLivestream
           name={details['serangoon'].name}
+          shortname={details['serangoon'].shortform}
           timings={details['serangoon'].timings}
           background="bg-white md:bg-stone-50"
-          href="/livestream/serangoon"
+          href="livestream/serangoon"
+          lang={lang}
         />
       </div>
     </>

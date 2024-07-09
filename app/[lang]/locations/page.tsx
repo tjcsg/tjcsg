@@ -18,6 +18,7 @@ export default async function Page() {
       <div className="grid grid-cols-1 xl:grid-cols-2">
         <ChurchLocation
           name={details['adam'].name}
+          shortname={details['adam'].shortform}
           address={details['adam'].address}
           timings={details['adam'].timings}
           map_src={details['adam'].map_src}
@@ -25,6 +26,7 @@ export default async function Page() {
         />
         <ChurchLocation
           name={details['tk'].name}
+          shortname={details['tk'].shortform}
           address={details['tk'].address}
           timings={details['tk'].timings}
           map_src={details['tk'].map_src}
@@ -32,6 +34,7 @@ export default async function Page() {
         />
         <ChurchLocation
           name={details['sembawang'].name}
+          shortname={details['sembawang'].shortform}
           address={details['sembawang'].address}
           timings={details['sembawang'].timings}
           map_src={details['sembawang'].map_src}
@@ -39,6 +42,7 @@ export default async function Page() {
         />
         <ChurchLocation
           name={details['serangoon'].name}
+          shortname={details['serangoon'].shortform}
           address={details['serangoon'].address}
           timings={details['serangoon'].timings}
           map_src={details['serangoon'].map_src}

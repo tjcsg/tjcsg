@@ -16,7 +16,7 @@ const carousel_img = [
   { name: '/carousel/5.jpg', alt: 'Adam Road Church' },
 ];
 
-function Intro() {
+function Intro({ lang }: { lang: Locale }) {
   return (
     <div className="relative">
       {/* Carousel from daisyui */}
@@ -40,14 +40,17 @@ function Intro() {
               presence and salvation in the True Jesus Church through various
               miracles and gifts of the Holy Spirit.
             </p>
-            <button
-              type="button"
-              className="mb-3 mr-6 rounded-md bg-button px-8 py-2 text-sm font-medium text-white shadow-sm hover:bg-button_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Learn more about us
-            </button>
+            <Link href={`${lang}/about`}>
+              <button
+                type="button"
+                className="mb-3 mr-6 rounded-md bg-button px-8 py-2 text-sm font-medium text-white shadow-sm hover:bg-button_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Learn more about us
+              </button>
+            </Link>
+
             <Link
-              href="#"
+              href={`${lang}/locations`}
               className="mb-2 text-nowrap text-xs font-semibold text-button underline decoration-2 hover:text-button_hover"
             >
               Find a church
@@ -59,14 +62,14 @@ function Intro() {
   );
 }
 
-export default async function Page() {
+export default async function Page({ lang }: { lang: Locale }) {
   const { isEnabled } = draftMode();
   const allPosts = await getAllEvents(isEnabled);
   return (
     <>
-      <Intro />
+      <Intro lang={lang} />
       <Container background="bg-white">
-        <SpecialEvents />
+        <SpecialEvents lang={lang} />
       </Container>
 
       <Container background="bg-stone-50">

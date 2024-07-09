@@ -3,7 +3,7 @@ import EventStatus from '@/lib/components/event-status';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
 
-export default async function SpecialEvents() {
+export default async function SpecialEvents({ lang }: { lang: Locale }) {
   const allEvents = await getAllEvents(false);
 
   return (
@@ -36,7 +36,7 @@ export default async function SpecialEvents() {
               <div>
                 <div className="group relative max-w-xl">
                   <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <Link href={`/events/${event.slug}`}>
+                    <Link href={`${lang}/events/${event.slug}`}>
                       <span className="absolute inset-0" />
                       {event.title}
                     </Link>
@@ -94,13 +94,13 @@ export default async function SpecialEvents() {
                     </time>
                   )}
                   <Link
-                    href={`/events/${event.slug}`}
+                    href={`${lang}/events/${event.slug}`}
                     className="relative z-10 mt-3 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                   >
                     {event.church}
                   </Link>
                   <Link
-                    href={`/events/${event.slug}`}
+                    href={`${lang}/events/${event.slug}`}
                     className="relative z-10 mt-3 text-sm font-medium text-button underline hover:text-button_hover"
                   >
                     Find out more

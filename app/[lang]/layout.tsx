@@ -1,8 +1,12 @@
 import './globals.css';
 import { Noto_Sans } from 'next/font/google';
-import { EXAMPLE_PATH, CMS_NAME } from '@/lib/constants';
+import { i18n, type Locale } from '../../i18n-config';
 import NavBar from './navbar2';
 import Link from 'next/link';
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
 
 export const metadata = {
   title: 'True Jesus Church Singapore',
@@ -29,13 +33,16 @@ const legal = [
   { name: 'Personal Data Protection Policy', href: '#' },
 ];
 
-function Footer() {
+function Footer({ lang }: { lang: Locale }) {
   return (
     <footer className="bg-lightblue pt-2 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 basis-1/2 md:mb-0">
-            <Link href="https://tjc.sg/" className="mb-2 flex items-center">
+            <Link
+              href={`https://tjc.sg/${lang}`}
+              className="mb-2 flex items-center"
+            >
               <span className="text-md self-center whitespace-nowrap font-semibold dark:text-white">
                 True Jesus Church Singapore
               </span>
@@ -57,7 +64,10 @@ function Footer() {
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 {learnmore.map((item) => (
                   <li key={item.name} className="mb-2 text-xs">
-                    <Link href={item.href} className="hover:underline">
+                    <Link
+                      href={`/${lang}/${item.href}`}
+                      className="hover:underline"
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -71,7 +81,10 @@ function Footer() {
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 {legal.map((item) => (
                   <li key={item.name} className="mb-2 text-xs">
-                    <Link href={item.href} className="hover:underline">
+                    <Link
+                      href={`/${lang}/${item.href}`}
+                      className="hover:underline"
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -186,16 +199,19 @@ function Footer() {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Locale };
 }) {
+  const { lang } = params;
   return (
-    <html lang="en" className={noto_sans.variable}>
+    <html lang={params.lang} className={noto_sans.variable}>
       <body>
         <section className="min-h-screen">
-          <NavBar />
+          <NavBar lang={lang} />
           <main>{children}</main>
-          <Footer />
+          <Footer lang={lang} />
         </section>
       </body>
     </html>

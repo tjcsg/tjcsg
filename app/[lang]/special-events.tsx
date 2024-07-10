@@ -1,18 +1,32 @@
+import { Locale } from '@/i18n-config';
 import { getAllEvents } from '@/lib/api';
 import EventStatus from '@/lib/components/event-status';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
 
+const text = {
+  en: {
+    title: 'Special Events',
+    subtitle: 'Stay tuned for our special services!',
+    cta: 'Find out more',
+  },
+  zh: {
+    title: '特别聚会',
+    subtitle: '欢迎您参加我们的特别聚会！',
+    cta: '欲知更多详情',
+  },
+};
+
 export default async function SpecialEvents({ lang }: { lang: Locale }) {
-  const allEvents = await getAllEvents(false);
+  const allEvents = await getAllEvents(false, lang);
 
   return (
     <div className="mx-auto block w-full">
       <h1 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl">
-        Special Events
+        {text[lang].title}
       </h1>
       <p className="text-md mt-2 leading-8 text-gray-600">
-        Stay tuned for our special services!
+        {text[lang].subtitle}
       </p>
 
       <div className="mt-12 space-y-20 lg:mt-20 lg:space-y-20">
@@ -30,11 +44,11 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                   height={648}
                   className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
                 />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-                <EventStatus date={event.date} />
+                {/* <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" /> */}
+                <EventStatus date={event.date} lang={lang} />
               </div>
               <div>
-                <div className="group relative max-w-xl">
+                <div className="relative max-w-xl">
                   <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                     <Link href={`${lang}/events/${event.slug}`}>
                       <span className="absolute inset-0" />
@@ -45,8 +59,8 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                 </div>
                 <div className="flex flex-col items-start gap-x-4 text-xs">
                   <time dateTime={event.date} className="mt-2 text-gray-500">
-                    {new Intl.DateTimeFormat('en-GB', {
-                      timeZone: 'UTC',
+                    {new Intl.DateTimeFormat(`${lang}-SG`, {
+                      timeZone: 'Singapore',
                       weekday: 'short',
                       year: 'numeric',
                       month: 'short',
@@ -56,8 +70,8 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                       hour12: true,
                     }).format(new Date(event.date))}
                     -
-                    {new Intl.DateTimeFormat('en-GB', {
-                      timeZone: 'UTC',
+                    {new Intl.DateTimeFormat(`${lang}-SG`, {
+                      timeZone: 'Singapore',
                       hour: '2-digit',
                       minute: '2-digit',
                       hour12: true,
@@ -69,8 +83,8 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                   </time>
                   {event.date2 && (
                     <time dateTime={event.date} className="mt-2 text-gray-500">
-                      {new Intl.DateTimeFormat('en-GB', {
-                        timeZone: 'UTC',
+                      {new Intl.DateTimeFormat(`${lang}-SG`, {
+                        timeZone: 'Singapore',
                         weekday: 'short',
                         year: 'numeric',
                         month: 'short',
@@ -80,8 +94,8 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                         hour12: true,
                       }).format(new Date(event.date2))}
                       -
-                      {new Intl.DateTimeFormat('en-GB', {
-                        timeZone: 'UTC',
+                      {new Intl.DateTimeFormat(`${lang}-SG`, {
+                        timeZone: 'Singapore',
                         hour: '2-digit',
                         minute: '2-digit',
                         hour12: true,
@@ -103,7 +117,7 @@ export default async function SpecialEvents({ lang }: { lang: Locale }) {
                     href={`${lang}/events/${event.slug}`}
                     className="relative z-10 mt-3 text-sm font-medium text-button underline hover:text-button_hover"
                   >
-                    Find out more
+                    {text[lang].cta}
                   </Link>
                 </div>
               </div>

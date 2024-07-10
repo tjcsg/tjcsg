@@ -1,12 +1,9 @@
 import './globals.css';
 import { Noto_Sans } from 'next/font/google';
-import { i18n, type Locale } from '../../i18n-config';
+import { type Locale } from '../../i18n-config';
 import NavBar from './navbar2';
 import Link from 'next/link';
-
-export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
-}
+import { getWebContent } from '@/lib/api';
 
 export const metadata = {
   title: 'True Jesus Church Singapore',
@@ -19,21 +16,50 @@ const noto_sans = Noto_Sans({
   display: 'swap',
 });
 
+const text = {
+  en: {
+    name: 'True Jesus Church Singapore',
+    resource: 'Resources',
+    legal: 'Legal',
+    copyright: '© 2024 True Jesus Church Singapore. All Rights Reserved.',
+  },
+  zh: {
+    name: '新加坡真耶稣教会',
+    resource: '本会简介',
+    legal: '法律',
+    copyright: '版权所有 © 2024 新加坡真耶穌教会',
+  },
+};
+
 const learnmore = [
-  { name: 'TJC International Assembly', href: '#' },
-  { name: 'Our Stories', href: '#' },
-  { name: 'Our Basic Beliefs', href: '#' },
-  { name: 'Complete Gospel', href: '#' },
-  { name: 'FAQ', href: '#' },
+  {
+    en: 'TJC International Assembly',
+    zh: 'TJC International Assembly',
+    href: '#',
+  },
+  { en: 'Our Stories', zh: '本会的故事', href: '#' },
+  { en: 'Our Basic Beliefs', zh: '信仰简介', href: '#' },
+  { en: 'Complete Gospel', zh: '全备福音', href: '#' },
+  { en: 'FAQ', zh: '信仰问答', href: '#' },
 ];
 
 const legal = [
-  { name: 'Terms & Conditions', href: '#' },
-  { name: 'Declaration on Religious Harmony', href: '#' },
-  { name: 'Personal Data Protection Policy', href: '#' },
+  { en: 'Terms & Conditions', zh: '条规和隐私权方针', href: '#' },
+  {
+    en: 'Declaration on Religious Harmony',
+    zh: '宗教和谐宣言',
+    href: '#',
+  },
+  {
+    en: 'Personal Data Protection Policy',
+    zh: '个人资料保护法令',
+    href: '#',
+  },
 ];
 
-function Footer({ lang }: { lang: Locale }) {
+async function Footer({ lang }: { lang: Locale }) {
+  const contentfulText = await getWebContent(lang, false);
+
   return (
     <footer className="bg-lightblue pt-2 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -44,31 +70,26 @@ function Footer({ lang }: { lang: Locale }) {
               className="mb-2 flex items-center"
             >
               <span className="text-md self-center whitespace-nowrap font-semibold dark:text-white">
-                True Jesus Church Singapore
+                {text[lang].name}
               </span>
             </Link>
             <p className="mb-2 pr-6 text-xs text-gray-500 dark:text-gray-400">
-              👋🏼 Hello, we&apos;re True Jesus Church, a global Bible-based
-              church. We welcome you to join God&apos;s loving family.
-            </p>
-            <p className="pr-6 text-xs text-gray-500 dark:text-gray-400">
-              📌 Our goal is simple: transform lives and make disciples of
-              Christ through preaching God&apos;s full truth of salvation.
+              {contentfulText.footerText}
             </p>
           </div>
           <div className="grid basis-1/2 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6">
             <div>
               <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
-                Resources
+                {text[lang].resource}
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 {learnmore.map((item) => (
-                  <li key={item.name} className="mb-2 text-xs">
+                  <li key={item.en} className="mb-2 text-xs">
                     <Link
                       href={`/${lang}/${item.href}`}
                       className="hover:underline"
                     >
-                      {item.name}
+                      {item[lang]}
                     </Link>
                   </li>
                 ))}
@@ -76,16 +97,16 @@ function Footer({ lang }: { lang: Locale }) {
             </div>
             <div>
               <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
-                Legal
+                {text[lang].legal}
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 {legal.map((item) => (
-                  <li key={item.name} className="mb-2 text-xs">
+                  <li key={item.en} className="mb-2 text-xs">
                     <Link
                       href={`/${lang}/${item.href}`}
                       className="hover:underline"
                     >
-                      {item.name}
+                      {item[lang]}
                     </Link>
                   </li>
                 ))}
@@ -96,7 +117,7 @@ function Footer({ lang }: { lang: Locale }) {
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-xs text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024 True Jesus Church Singapore. All Rights Reserved.
+            {text[lang].copyright}
           </span>
           <div className="mt-4 flex sm:mt-0 sm:justify-center">
             <Link

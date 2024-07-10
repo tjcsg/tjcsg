@@ -30,7 +30,7 @@ export function LocaleSwitcherDesktop() {
   return (
     <Popover className="relative">
       <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-        Locale
+        Language
         <ChevronDownIcon
           aria-hidden="true"
           className="h-5 w-5 flex-none text-gray-400"
@@ -77,7 +77,7 @@ export function LocaleSwitcherMobile() {
     <>
       <Disclosure as="div" className="-mx-3">
         <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-          Locale
+          Language
           <ChevronDownIcon
             aria-hidden="true"
             className="h-5 w-5 flex-none group-data-[open]:rotate-180"

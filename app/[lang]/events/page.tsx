@@ -5,6 +5,7 @@ import Date from '../date';
 import CoverImage from '../cover-image';
 
 import { getAllEvents, getEvent } from '@/lib/api';
+import { Locale } from '@/i18n-config';
 
 // export async function generateStaticParams() {
 //   const allEvents = await getAllEvents(false);
@@ -17,13 +18,12 @@ import { getAllEvents, getEvent } from '@/lib/api';
 export default async function EventsPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; lang: Locale };
 }) {
   const { isEnabled } = draftMode();
   // const { event } = await getEvent(params.slug, isEnabled);
-
-  const allEvents = await getAllEvents(false);
-  console.log(allEvents);
+  const { lang } = params;
+  const allEvents = await getAllEvents(false, lang);
 
   return (
     <div className="container mx-auto px-5">

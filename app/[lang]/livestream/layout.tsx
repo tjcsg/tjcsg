@@ -1,6 +1,7 @@
 import Container from '@/lib/components/container';
 import SpecialEvents from '../special-events';
 import GlobalLivestream from './global-livestream';
+import { Locale } from '@/i18n-config';
 
 export default function Layout({
   children,
@@ -17,7 +18,7 @@ export default function Layout({
         <SpecialEvents lang={lang} />
       </Container>
       <Container background="bg-stone-50">
-        <GlobalLivestream />
+        <GlobalLivestream lang={lang} />
       </Container>
     </>
   );

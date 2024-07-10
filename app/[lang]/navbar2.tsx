@@ -17,21 +17,40 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
 import { LocaleSwitcherDesktop, LocaleSwitcherMobile } from './locale-switch';
+import { Locale } from '@/i18n-config';
 
 const resources = [
   {
-    name: 'Articles',
+    en: 'Articles',
+    zh: 'Articles',
     href: '/articles',
   },
   {
-    name: 'Social Media',
+    en: 'Social Media',
+    zh: 'Articles',
     href: '/socials',
   },
   {
-    name: 'TJC Worldwide',
+    en: 'TJC Worldwide',
+    zh: 'TJC Worldwide',
     href: '/global',
   },
 ];
+
+const text = {
+  en: {
+    about: 'About Us',
+    livestream: 'Livestream',
+    locations: 'Locations',
+    resources: 'Resources',
+  },
+  zh: {
+    about: '​关于本会',
+    livestream: '线上崇拜',
+    locations: '教会地点',
+    resources: '其他资源',
+  },
+};
 
 export default function NavBar({ lang }: { lang: Locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,23 +88,23 @@ export default function NavBar({ lang }: { lang: Locale }) {
             href={`/${lang}/livestream`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Livestream
+            {text[lang].livestream}
           </Link>
           <Link
             href={`/${lang}/about`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            About Us
+            {text[lang].about}
           </Link>
           <Link
             href={`/${lang}/locations`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Locations
+            {text[lang].locations}
           </Link>
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              Resources
+              {text[lang].resources}
               <ChevronDownIcon
                 aria-hidden="true"
                 className="h-5 w-5 flex-none text-gray-400"
@@ -99,7 +118,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
               <div className="p-4">
                 {resources.map((item) => (
                   <div
-                    key={item.name}
+                    key={item.en}
                     className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                   >
                     <div className="flex-auto">
@@ -107,7 +126,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
                         href={`/${lang}/${item.href}`}
                         className="block text-nowrap font-semibold text-gray-900"
                       >
-                        {item.name}
+                        {item[lang]}
                         <span className="absolute inset-0" />
                       </Link>
                     </div>
@@ -163,25 +182,25 @@ export default function NavBar({ lang }: { lang: Locale }) {
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Livestream
+                  {text[lang].livestream}
                 </Link>
                 <Link
                   href={`/${lang}/about`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  About Us
+                  {text[lang].about}
                 </Link>
                 <Link
                   href={`/${lang}/locations`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Location
+                  {text[lang].locations}
                 </Link>
                 <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                    Resources
+                    {text[lang].resources}
                     <ChevronDownIcon
                       aria-hidden="true"
                       className="h-5 w-5 flex-none group-data-[open]:rotate-180"
@@ -190,12 +209,12 @@ export default function NavBar({ lang }: { lang: Locale }) {
                   <DisclosurePanel className="mt-2 space-y-2">
                     {resources.map((item) => (
                       <DisclosureButton
-                        key={item.name}
+                        key={item.en}
                         as="a"
                         href={`/${lang}/${item.href}`}
                         className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        {item.name}
+                        {item[lang]}
                       </DisclosureButton>
                     ))}
                   </DisclosurePanel>

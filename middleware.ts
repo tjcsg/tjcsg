@@ -42,6 +42,7 @@ export function middleware(request: NextRequest) {
       '/locations/serangoon.jpg',
       '/locations/tk.jpg',
       '/site-logo.png',
+      '/global_livestream.png'
       // Your other files in `public`
     ].includes(pathname)
   )

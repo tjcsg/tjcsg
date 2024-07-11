@@ -17,9 +17,7 @@ export default function Layout({
       <Container background="bg-white">
         <SpecialEvents lang={lang} />
       </Container>
-      <Container background="bg-stone-50">
-        <GlobalLivestream lang={lang} />
-      </Container>
+      <GlobalLivestream lang={lang} background="bg-stone-50" />
     </>
   );
 }

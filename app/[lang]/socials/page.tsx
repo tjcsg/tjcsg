@@ -1,5 +1,8 @@
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
+import Youtube from './youtube';
+import Instagram from './instagram';
+import FaceBook from './facebook';
 
 const text = {
   en: {
@@ -21,6 +24,9 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <PageHeader lang={lang} text={text} />
+      <Youtube lang={lang} background="bg-stone-50" />
+      <Instagram lang={lang} background="bg-white" isReversed />
+      <FaceBook lang={lang} background="bg-stone-50" />
     </>
   );
 }

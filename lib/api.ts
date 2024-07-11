@@ -1,5 +1,50 @@
 import { Locale } from "@/i18n-config";
 
+const WEBCONTENT_GRAPHQL_FIELDS = `
+  welcomeText
+  footerText
+  socialsYoutubeTitle
+  socialsYoutubeText
+  socialsYoutubeIframe
+  socialsInstagramTitle
+  socialsInstagramText
+  socialsInstagramMedia {
+    url
+  }
+  socialsFacebookTitle
+  socialsFacebookText
+  socialsFacebookMedia {
+    url
+  }
+  livestreamGlobalTitle
+  livestreamGlobalText
+  livestreamGlobalMedia {
+    url
+  }
+`
+type WebContent = {
+  welcomeText: string;
+  footerText: string;
+  socialsYoutubeTitle: string;
+  socialsYoutubeText: string;
+  socialsYoutubeIframe: string;
+  socialsInstagramTitle: string;
+  socialsInstagramText: string;
+  socialsInstagramMedia: {
+    url: string
+  };
+  socialsFacebookTitle: string;
+  socialsFacebookText: string;
+  socialsFacebookMedia: {
+    url: string
+  };
+  livestreamGlobalTitle: string;
+  livestreamGlobalText: string;
+  livestreamGlobalMedia: {
+    url: string
+  };
+}
+
 const EVENTS_GRAPHQL_FIELDS = `
   slug
   title
@@ -85,7 +130,7 @@ function extractPostEntries(fetchResponse: any): any[] {
   return fetchResponse?.data?.eventsCollection?.items;
 }
 
-function extractWebContent(fetchResponse: any): any {
+function extractWebContent(fetchResponse: any): WebContent {
   return fetchResponse?.data?.webContentCollection?.items?.[0];
 }
 
@@ -169,8 +214,7 @@ export async function getWebContent(locale: string, preview: boolean) {
     `query {
       webContentCollection(limit: 1, locale:"${locale}"){
         items {
-          welcomeText
-          footerText
+          ${WEBCONTENT_GRAPHQL_FIELDS}
         }
       }
     }`,

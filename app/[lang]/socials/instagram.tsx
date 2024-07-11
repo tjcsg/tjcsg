@@ -4,13 +4,13 @@ import ContentStripImage from '@/lib/components/content-strip-image';
 
 const links = [
   {
-    en: 'View global livestream',
-    zh: 'View global livestream',
-    href: 'https://tjc.org/livestream/',
+    en: 'Check out our feed',
+    zh: 'Check out our feed',
+    href: 'https://www.instagram.com/tjc.sg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
   },
 ];
 
-export default async function GlobalLivestream({
+export default async function Instagram({
   lang,
   background,
   isReversed = false,
@@ -23,11 +23,11 @@ export default async function GlobalLivestream({
   return (
     <ContentStripImage
       lang={lang}
-      titleText={contentfulText.livestreamGlobalTitle}
-      bodyText={contentfulText.livestreamGlobalText}
+      titleText={contentfulText.socialsInstagramTitle}
+      bodyText={contentfulText.socialsInstagramText}
       links={links}
       isReversed={isReversed}
-      img="/global_livestream.png"
+      img={contentfulText.socialsInstagramMedia.url}
       background={background}
     />
   );

@@ -1,6 +1,7 @@
 import { details } from '@/lib/church-details';
 import ChurchLocation from './church-location';
 import { Locale } from '@/i18n-config';
+import PageHeader from '@/lib/components/page-header';
 
 const text = {
   en: {
@@ -20,17 +21,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   return (
     <>
-      <div className="mx-auto px-6 pb-8 pt-4 text-center sm:pt-8">
-        <p className="text-base font-semibold leading-7 text-button">
-          {text[lang].eyebrow}
-        </p>
-        <h2 className="mt-2 text-4xl font-medium tracking-tight text-gray-900 sm:text-6xl">
-          {text[lang].title}
-        </h2>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          {text[lang].subtitle}
-        </p>
-      </div>
+      <PageHeader lang={lang} text={text} />
       <div className="grid grid-cols-1 xl:grid-cols-2">
         <ChurchLocation
           name={details[lang]['adam'].name}

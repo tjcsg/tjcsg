@@ -4,13 +4,13 @@ import ContentStripImage from '@/lib/components/content-strip-image';
 
 const links = [
   {
-    en: 'View global livestream',
-    zh: 'View global livestream',
-    href: 'https://tjc.org/livestream/',
+    en: 'Like our Facebook page',
+    zh: 'Like our Facebook page',
+    href: 'https://www.facebook.com/truejesuschurchsg',
   },
 ];
 
-export default async function GlobalLivestream({
+export default async function FaceBook({
   lang,
   background,
   isReversed = false,
@@ -23,11 +23,11 @@ export default async function GlobalLivestream({
   return (
     <ContentStripImage
       lang={lang}
-      titleText={contentfulText.livestreamGlobalTitle}
-      bodyText={contentfulText.livestreamGlobalText}
+      titleText={contentfulText.socialsFacebookTitle}
+      bodyText={contentfulText.socialsFacebookText}
       links={links}
       isReversed={isReversed}
-      img="/global_livestream.png"
+      img={contentfulText.socialsFacebookMedia.url}
       background={background}
     />
   );

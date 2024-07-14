@@ -21,6 +21,16 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
   livestreamGlobalMedia {
     url
   }
+  globalTjciaTitle
+  globalTjciaText
+  globalTjciaMedia {
+    url
+  }
+  globalStudyTitle
+  globalStudyText
+  globalStudyMedia {
+    url
+  }
 `
 type WebContent = {
   welcomeText: string;
@@ -43,6 +53,16 @@ type WebContent = {
   livestreamGlobalMedia: {
     url: string
   };
+  globalTjciaTitle: string;
+  globalTjciaText: string;
+  globalTjciaMedia: {
+    url: string;
+  }
+  globalStudyTitle: string;
+  globalStudyText: string;
+  globalStudyMedia: {
+    url: string;
+  }
 }
 
 const EVENTS_GRAPHQL_FIELDS = `

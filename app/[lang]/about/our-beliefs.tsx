@@ -12,7 +12,6 @@ export default async function OurBeliefs({
   lang: Locale;
   background: string;
 }) {
-  const contentfulText = await getWebContent(lang, false);
   return (
     <Container background={`${background}`}>
       <div className="block w-full max-w-4xl">

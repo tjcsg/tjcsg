@@ -23,7 +23,6 @@ const text = {
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
-  const contentfulText = await getWebContent(lang, false);
   return (
     <>
       <PageHeader lang={lang} text={text} />

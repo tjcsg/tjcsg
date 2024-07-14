@@ -4,13 +4,18 @@ import ContentStripImage from '@/lib/components/content-strip-image';
 
 const links = [
   {
-    en: 'View global livestream',
-    zh: 'View global livestream',
-    href: 'https://tjc.org/livestream/',
+    en: 'Our basic beliefs',
+    zh: 'Our basic beliefs',
+    href: 'https://tjc.org/intro-to-basic-beliefs/',
+  },
+  {
+    en: 'Bible study guides',
+    zh: 'Bible study guides',
+    href: 'https://bsg.tjc.org/',
   },
 ];
 
-export default async function GlobalLivestream({
+export default async function IaStudy({
   lang,
   background,
   isReversed = false,
@@ -23,11 +28,11 @@ export default async function GlobalLivestream({
   return (
     <ContentStripImage
       lang={lang}
-      titleText={contentfulText.livestreamGlobalTitle}
-      bodyText={contentfulText.livestreamGlobalText}
+      titleText={contentfulText.globalStudyTitle}
+      bodyText={contentfulText.globalStudyText}
       links={links}
       isReversed={isReversed}
-      img={contentfulText.livestreamGlobalMedia.url}
+      img={contentfulText.globalStudyMedia.url}
       background={background}
     />
   );

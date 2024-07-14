@@ -45,7 +45,7 @@ export default function ContentStrip({
               links.slice(1, links.length).map((link) => (
                 <button
                   key={link.en}
-                  className="block text-nowrap px-2 py-2 text-sm font-semibold text-button underline decoration-2 hover:text-button_hover sm:leading-4"
+                  className={`clear-right block text-nowrap px-2 py-2 text-sm font-semibold text-button underline decoration-2 hover:text-button_hover sm:leading-4 ${isReversed ? 'md:float-right' : ''}`}
                 >
                   <Link href={link.href}>{link[lang]}</Link>
                 </button>

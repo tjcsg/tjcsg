@@ -76,11 +76,73 @@ async function Intro({ lang }: { lang: Locale }) {
   );
 }
 
+async function Intro2({ lang }: { lang: Locale }) {
+  const contentfulText = await getWebContent(lang, false);
+
+  return (
+    <div className="bg-stone-50">
+      <div className="mx-auto max-w-screen-xl">
+        <div className={`flex items-center justify-center`}>
+          <div className="relative w-full">
+            <main className="lg:relative">
+              <div className="mx-auto w-full max-w-7xl py-8 text-center md:pb-20 md:pt-16 lg:py-48 lg:text-left">
+                <div className="px-6 sm:px-8 lg:w-1/2 xl:pr-16">
+                  <h1 className="text-5xl font-medium tracking-tight text-gray-900 lg:text-5xl xl:text-6xl">
+                    {text[lang].welcome}
+                  </h1>
+                  <p className="text-md mx-auto mt-3 max-w-md text-gray-500 sm:text-lg lg:mt-5 lg:max-w-3xl">
+                    {contentfulText.welcomeText}
+                  </p>
+                  <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
+                    <div className="rounded-md shadow">
+                      <a
+                        href="#"
+                        className="flex w-full items-center justify-center text-nowrap rounded-md border border-transparent bg-button px-8 py-3 text-base font-medium text-white hover:bg-button_hover md:px-10 md:py-4 md:text-lg"
+                      >
+                        {text[lang].learnMore}
+                      </a>
+                    </div>
+                    <div className="mt-3 rounded-md shadow sm:ml-3 sm:mt-0">
+                      <a
+                        href="#"
+                        className="flex w-full  items-center justify-center text-nowrap rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-button hover:bg-gray-50 md:px-10 md:py-4 md:text-lg"
+                      >
+                        {text[lang].findChurch}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative mx-auto h-64 w-full sm:h-72 md:h-96 md:w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
+                {' '}
+                <ContentfulImage
+                  alt=""
+                  src="/landingpage.jpg"
+                  width={720}
+                  height={898}
+                  className="absolute inset-0 hidden h-full w-full object-cover lg:block lg:max-w-none"
+                />
+                <ContentfulImage
+                  alt=""
+                  src="/landingpage_landscape.jpg"
+                  width={1459}
+                  height={1062}
+                  className="absolute inset-0 h-full w-full object-cover lg:hidden lg:max-w-none"
+                />
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   return (
     <>
-      <Intro lang={lang} />
+      <Intro2 lang={lang} />
       <Container background="bg-white">
         <SpecialEvents lang={lang} />
       </Container>

@@ -3,6 +3,51 @@ import { Locale } from "@/i18n-config";
 const WEBCONTENT_GRAPHQL_FIELDS = `
   welcomeText
   footerText
+  aboutWhoweare {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+        }
+      }
+    }
+  }
+  aboutWhoweareIframe
+  aboutWhywearehere {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+        }
+      }
+    }
+  }
+  aboutWhytrue {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+          width
+          height
+        }
+      }
+    }
+  }
   socialsYoutubeTitle
   socialsYoutubeText
   socialsYoutubeIframe
@@ -35,6 +80,51 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
 type WebContent = {
   welcomeText: string;
   footerText: string;
+  aboutWhoweareIframe: string;
+  aboutWhoweare: {
+    json: any;
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string };
+            url: string;
+            description: string;
+          },
+        ];
+      };
+    };
+  };
+  aboutWhywearehere: {
+    json: any;
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string };
+            url: string;
+            description: string;
+          },
+        ];
+      };
+    };
+  };
+  aboutWhytrue: {
+    json: any;
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string };
+            url: string;
+            description: string;
+            width: number;
+            height: number;
+          },
+        ];
+      };
+    };
+  };
   socialsYoutubeTitle: string;
   socialsYoutubeText: string;
   socialsYoutubeIframe: string;

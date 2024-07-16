@@ -67,5 +67,7 @@ export function Markdown({ content }: { content: EventEntry["summary"] }) {
         }
       },
     },
+    renderText: (text) =>
+      text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),
   });
 }

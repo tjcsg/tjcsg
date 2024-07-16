@@ -14,8 +14,8 @@ import {
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const resources = [
   {
@@ -44,7 +44,7 @@ export default function NavBar() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">True Jesus Church Singapore</span>
-            <ContentfulImage
+            <Image
               src="/site-logo.png"
               width={242}
               height={46}
@@ -135,7 +135,7 @@ export default function NavBar() {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">True Jesus Church Singapore</span>
-              <ContentfulImage
+              <Image
                 src="/site-logo.png"
                 width={242}
                 height={46}

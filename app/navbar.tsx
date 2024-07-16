@@ -1,5 +1,4 @@
 'use client';
-import ContentfulImage from '@/lib/contentful-image';
 import {
   Disclosure,
   DisclosureButton,
@@ -45,7 +44,7 @@ export default function NavBar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <ContentfulImage
+                  <Image
                     src="/site-logo.png"
                     width={242}
                     height={46}

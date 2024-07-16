@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ContentfulImage from '@/lib/contentful-image';
 import Container from '@/lib/components/container';
 import { details } from '@/lib/church-details';
+import Image from 'next/image';
 
 function ChurchLivestream({
   name,
@@ -23,12 +24,13 @@ function ChurchLivestream({
         </h1>
 
         <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
-          <ContentfulImage
+          <Image
             src={`/locations/${name}.jpg`}
             width={723}
             height={445}
             className="w-full"
-          ></ContentfulImage>
+            alt={`A picture of ${name}'s exterior`}
+          />
           <Link href={href}>
             <button className="text-md absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-nowrap rounded-md bg-button px-10 py-2 font-semibold text-white shadow-lg hover:bg-button_hover sm:text-xs">
               Watch Livestream

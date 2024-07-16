@@ -1,9 +1,9 @@
 'use client';
 
-import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import he from 'he';
+import Image from 'next/image';
 
 const CDBD_EXCERPT_LENGTH = 265;
 
@@ -83,11 +83,12 @@ export default function CDBD() {
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2">
           <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-3xl">
-            <ContentfulImage
+            <Image
               src={cdbdPosts[0].image}
               width={200}
               height={200}
               className="mx-auto mb-8 w-1/2 max-w-md"
+              alt=""
             />
             <Link
               href="."

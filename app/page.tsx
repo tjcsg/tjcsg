@@ -3,10 +3,10 @@ import { draftMode } from 'next/headers';
 
 import { getAllEvents } from '@/lib/api';
 import { CMS_NAME, CMS_URL } from '@/lib/constants';
-import ContentfulImage from '@/lib/contentful-image';
 import SpecialEvents from './special-events';
 import CDBD from './cdbd';
 import Container from '@/lib/components/container';
+import Image from 'next/image';
 
 const carousel_img = [
   { name: '/carousel/1.jpg', alt: 'Telok Kurau Church' },
@@ -23,7 +23,7 @@ function Intro() {
       <div className="carousel carousel-center">
         {carousel_img.map((img) => (
           <div key={img.name} className="carousel-item max-sm:w-full">
-            <ContentfulImage
+            <Image
               src={img.name}
               width={693}
               height={390}

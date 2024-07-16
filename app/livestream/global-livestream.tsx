@@ -1,4 +1,4 @@
-import ContentfulImage from '@/lib/contentful-image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function GlobalLivestream() {
@@ -19,12 +19,13 @@ export default function GlobalLivestream() {
             </button>
           </Link>
         </div>
-        <ContentfulImage
+        <Image
           src="/global_livestream.png"
+          alt=""
           width={1414}
           height={640}
           className="max-w-full md:max-w-sm lg:max-w-lg"
-        ></ContentfulImage>
+        ></Image>
       </div>
     </div>
   );

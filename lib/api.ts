@@ -1,3 +1,70 @@
+import { Locale } from "@/i18n-config";
+
+const WEBCONTENT_GRAPHQL_FIELDS = `
+  welcomeText
+  footerText
+  socialsYoutubeTitle
+  socialsYoutubeText
+  socialsYoutubeIframe
+  socialsInstagramTitle
+  socialsInstagramText
+  socialsInstagramMedia {
+    url
+  }
+  socialsFacebookTitle
+  socialsFacebookText
+  socialsFacebookMedia {
+    url
+  }
+  livestreamGlobalTitle
+  livestreamGlobalText
+  livestreamGlobalMedia {
+    url
+  }
+  globalTjciaTitle
+  globalTjciaText
+  globalTjciaMedia {
+    url
+  }
+  globalStudyTitle
+  globalStudyText
+  globalStudyMedia {
+    url
+  }
+`
+type WebContent = {
+  welcomeText: string;
+  footerText: string;
+  socialsYoutubeTitle: string;
+  socialsYoutubeText: string;
+  socialsYoutubeIframe: string;
+  socialsInstagramTitle: string;
+  socialsInstagramText: string;
+  socialsInstagramMedia: {
+    url: string
+  };
+  socialsFacebookTitle: string;
+  socialsFacebookText: string;
+  socialsFacebookMedia: {
+    url: string
+  };
+  livestreamGlobalTitle: string;
+  livestreamGlobalText: string;
+  livestreamGlobalMedia: {
+    url: string
+  };
+  globalTjciaTitle: string;
+  globalTjciaText: string;
+  globalTjciaMedia: {
+    url: string;
+  }
+  globalStudyTitle: string;
+  globalStudyText: string;
+  globalStudyMedia: {
+    url: string;
+  }
+}
+
 const EVENTS_GRAPHQL_FIELDS = `
   slug
   title
@@ -91,6 +158,10 @@ function extractPostEntries(fetchResponse: any): any[] {
   return fetchResponse?.data?.eventsCollection?.items;
 }
 
+function extractWebContent(fetchResponse: any): WebContent {
+  return fetchResponse?.data?.webContentCollection?.items?.[0];
+}
+
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   const entry = await fetchGraphQL(
     `query {
@@ -105,10 +176,10 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   return extractPost(entry);
 }
 
-export async function getAllEvents(isDraftMode: boolean): Promise<any[]> {
+export async function getAllEvents(isDraftMode: boolean, locale: Locale): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
-      eventsCollection(order: date_DESC, preview: ${
+      eventsCollection(locale: "${locale}", order: date_DESC, preview: ${
         isDraftMode ? 'true' : 'false'
       }) {
         items {
@@ -164,4 +235,18 @@ export async function getEvent(slug: string, preview: boolean) {
   return {
     event: extractPost(entry),
   };
+}
+
+export async function getWebContent(locale: string, preview: boolean) {
+  const entry = await fetchGraphQL(
+    `query {
+      webContentCollection(limit: 1, locale:"${locale}"){
+        items {
+          ${WEBCONTENT_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractWebContent(entry);
 }

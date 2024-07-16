@@ -1,9 +1,10 @@
+import { Locale } from '@/i18n-config';
 import { details } from '@/lib/church-details';
 import Container from '@/lib/components/container';
 import Header from '@/lib/components/header';
 
 export async function generateStaticParams() {
-  return ['tk', 'adam', 'serangoon', 'sembawang'] as any;
+  return ['tk', 'adam', 'serangoon', 'sembawang'];
 }
 
 function ChurchLivestream({
@@ -56,23 +57,23 @@ function ChurchLivestream({
 export default function Page({
   params,
 }: {
-  params: { church: 'adam' | 'tk' | 'sembawang' | 'serangoon' };
+  params: { church: 'adam' | 'tk' | 'sembawang' | 'serangoon'; lang: Locale };
 }) {
-  const { church } = params;
+  const { church, lang } = params;
   return (
     <>
       <Header
-        title={`${details[church].name} Livestream`}
+        title={`${details[lang][church].name} Livestream`}
         breadcrumbs={[
           { name: 'Livestreams', href: '/livestream' },
-          { name: `${details[church].name} Livestream`, href: '#' },
+          { name: `${details[lang][church].name} Livestream`, href: '#' },
         ]}
       />
       <div className="block bg-stone-50">
         <div className="mx-auto px-6 py-10 sm:px-12 md:max-w-4xl">
           <div className="relative w-full pt-[56.25%]">
             <iframe
-              src={`https://player.twitch.tv/?channel=${details[church].twitch}&parent=${process.env.TWITCH_PARENT}&muted=true`}
+              src={`https://player.twitch.tv/?channel=${details[lang][church].twitch}&parent=${process.env.TWITCH_PARENT}&muted=true`}
               height="720"
               width="1280"
               allowFullScreen
@@ -82,9 +83,9 @@ export default function Page({
         </div>
       </div>
       <ChurchLivestream
-        timings={details[church].timings}
+        timings={details[lang][church].timings}
         background="bg-white"
-        map_src={details[church].map_src}
+        map_src={details[lang][church].map_src}
       />
     </>
   );

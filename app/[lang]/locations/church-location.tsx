@@ -3,12 +3,14 @@ import Image from 'next/image';
 
 export default function ChurchLocation({
   name,
+  shortname,
   address,
   timings,
   map_src,
   background,
 }: {
   name: string;
+  shortname: string;
   address: string;
   timings: { day: string; time: string }[];
   map_src: string;
@@ -22,9 +24,9 @@ export default function ChurchLocation({
           <p className="lg:text-md text-sm text-gray-500">{address}</p>
         </div>
         <div className="sm:flex">
-          <div className="mb-8 bg-lightblue sm:max-w-md">
+          <div className="bg-lightblue mb-8 sm:max-w-md">
             <Image
-              src={`/locations/${name}.jpg`}
+              src={`/locations/${shortname}.jpg`}
               width={723}
               height={445}
               className="w-full"

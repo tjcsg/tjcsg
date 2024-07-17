@@ -18,6 +18,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LocaleSwitcherDesktop, LocaleSwitcherMobile } from './locale-switch';
 import { Locale } from '@/i18n-config';
+import sitelogo from '@/public/site-logo.png';
 
 const resources = [
   {
@@ -65,11 +66,9 @@ export default function NavBar({ lang }: { lang: Locale }) {
           <Link href={`/${lang}`} className="-m-1.5 p-1.5">
             <span className="sr-only">True Jesus Church Singapore</span>
             <Image
-              src="/site-logo.png"
-              width={242}
-              height={46}
+              src={sitelogo}
               className="h-10 w-auto"
-              alt="Screenshots of the dashboard project showing desktop version"
+              alt="True Jesus Church logo"
             />
           </Link>
         </div>
@@ -158,11 +157,9 @@ export default function NavBar({ lang }: { lang: Locale }) {
             <Link href={`/${lang}`} className="-m-1.5 p-1.5">
               <span className="sr-only">True Jesus Church Singapore</span>
               <Image
-                src="/site-logo.png"
-                width={242}
-                height={46}
+                src={sitelogo}
                 className="h-8 w-auto"
-                alt="Screenshots of the dashboard project showing desktop version"
+                alt="True Jesus Church logo"
               />
             </Link>
             <button

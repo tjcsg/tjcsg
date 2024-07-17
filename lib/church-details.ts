@@ -3,7 +3,7 @@ type Details = {
   timings: { day: string; time: string }[];
   map_src: string;
   twitch: string;
-  shortform: string;
+  shortform: "adam" | "tk" | "sembawang" | "serangoon";
   address: string;
 };
 

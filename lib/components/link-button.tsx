@@ -14,11 +14,11 @@ export default function LinkButton({
 }) {
   return (
     <button
-      className={`sm:text-md mt-6 block text-nowrap rounded-md border-2 border-button py-2 text-sm font-semibold shadow-sm hover:bg-button_hover sm:leading-4
+      className={`sm:text-md mt-6 block text-nowrap rounded-md border-2 border-button py-2 text-sm font-semibold shadow-sm  sm:leading-4
         ${
           type === 'default'
-            ? 'bg-button text-white'
-            : 'border-button bg-white text-button hover:text-white'
+            ? 'bg-button text-white hover:border-button_hover hover:bg-button_hover'
+            : 'border-button bg-white text-button  hover:bg-button hover:text-white'
         }
         ${className}
       `}

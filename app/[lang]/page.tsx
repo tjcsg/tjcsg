@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import ContentfulImage from '@/lib/contentful-image';
 import SpecialEvents from './special-events';
 import CDBD from './cdbd';
 import Container from '@/lib/components/container';
 import { Locale } from '@/i18n-config';
 import { getWebContent } from '@/lib/api';
+import Image from 'next/image';
 
 const carousel_img = [
   { name: '/carousel/1.jpg', alt: 'Telok Kurau Church' },
@@ -36,7 +36,7 @@ async function Intro({ lang }: { lang: Locale }) {
       <div className="carousel carousel-center">
         {carousel_img.map((img) => (
           <div key={img.name} className="carousel-item max-sm:w-full">
-            <ContentfulImage
+            <Image
               src={img.name}
               width={693}
               height={390}
@@ -115,14 +115,14 @@ async function Intro2({ lang }: { lang: Locale }) {
               </div>
               <div className="relative mx-auto h-64 w-full sm:h-72 md:h-96 md:w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
                 {' '}
-                <ContentfulImage
+                <Image
                   alt=""
                   src="/landingpage.jpg"
                   width={720}
                   height={898}
                   className="absolute inset-0 hidden h-full w-full object-cover lg:block lg:max-w-none"
                 />
-                <ContentfulImage
+                <Image
                   alt=""
                   src="/landingpage_landscape.jpg"
                   width={1459}

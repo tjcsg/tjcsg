@@ -31,6 +31,7 @@ export default function ContentStripImage({
       <div className="flex items-center justify-center">
         <div className="block">
           <ContentfulImage
+            alt=""
             src={img}
             width={1414}
             height={640}

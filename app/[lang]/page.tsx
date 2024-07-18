@@ -3,7 +3,7 @@ import SpecialEvents from './special-events';
 import CDBD from './cdbd';
 import Container from '@/lib/components/container';
 import { Locale } from '@/i18n-config';
-import { getWebContent } from '@/lib/api';
+import { getCDBDSchedule, getWebContent } from '@/lib/api';
 import Image from 'next/image';
 import LinkButton from '@/lib/components/link-button';
 import tkPicPortrait from '@/public/landingpage.jpg';
@@ -129,13 +129,15 @@ async function Intro2({ lang }: { lang: Locale }) {
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
+  const { schedule } = await getCDBDSchedule(false);
   return (
     <>
       <Intro2 lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
 
+      {/* For some reason, adding the container into the CDBD client component gives an error */}
       <Container background="bg-stone-50">
-        <CDBD />
+        <CDBD lang={lang} schedule={schedule.url} />
       </Container>
     </>
   );

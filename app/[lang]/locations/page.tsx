@@ -1,5 +1,5 @@
 import { details } from '@/lib/church-details';
-import ChurchLocation from './church-location';
+import ChurchLocation from '../../../lib/components/church-location';
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
 
@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <PageHeader lang={lang} text={text} />
-      <div className="grid grid-cols-1 xl:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 xl:grid-cols-2">
         <ChurchLocation
           name={details[lang]['adam'].name}
           shortname={details[lang]['adam'].shortform}

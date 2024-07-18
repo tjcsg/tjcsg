@@ -1,6 +1,7 @@
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
 import ContentStrip from './content-strip';
+import { MarkdownType } from '../api';
 
 export default function ContentStripImage({
   lang,
@@ -9,14 +10,16 @@ export default function ContentStripImage({
   links,
   img,
   isReversed = false,
+  isMarkdown = false,
   background,
 }: {
   lang: Locale;
   titleText: string;
-  bodyText: string;
+  bodyText: string | MarkdownType;
   links: { en: string; zh: string; href: string }[];
   img: string;
   isReversed?: boolean;
+  isMarkdown?: boolean;
   background: string;
 }) {
   return (
@@ -27,6 +30,7 @@ export default function ContentStripImage({
       bodyText={bodyText}
       links={links}
       isReversed={isReversed}
+      isMarkdown={isMarkdown}
     >
       <div className="flex items-center justify-center">
         <div className="block">

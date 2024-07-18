@@ -5,10 +5,10 @@ import { Markdown } from '@/lib/markdown';
 import { getAllArticlesSlug, getArticle } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
-import { aofDetails } from '@/lib/articles-of-faith';
+import { categoryDetails } from '@/lib/articles-of-faith';
 import { Locale } from '@/i18n-config';
 export const dynamic = 'force-static';
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const allArticles = await getAllArticlesSlug(false);
@@ -49,8 +49,12 @@ export default async function PostPage({
         breadcrumbs={[
           { name: 'Articles', href: '/articles' },
           {
-            name: aofDetails[lang][doctrine].name,
+            name: categoryDetails[lang][doctrine].name,
             href: `/articles/${doctrine}`,
+          },
+          {
+            name: article.category.subcategory,
+            href: `/articles/${doctrine}/${article.category.subcategory}`,
           },
           {
             name: article.title,
@@ -64,7 +68,7 @@ export default async function PostPage({
         </div>
       </article>
 
-      {relatedArticles && (
+      {relatedArticles.length > 0 && (
         <div>
           <h3 className="mt-8 text-nowrap text-lg font-semibold">
             {text[lang].seeAlso}

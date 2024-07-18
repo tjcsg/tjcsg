@@ -1,11 +1,21 @@
-import { details } from '@/lib/church-details';
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
-import { getArticlesCategories, getArticlesSubcategories } from '@/lib/api';
-import { aof, Aof, aofDetails } from '@/lib/articles-of-faith';
-import Link from 'next/link';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { getArticlesCategories } from '@/lib/api';
+import {
+  aof,
+  Aof,
+  categoryDetails,
+  OtherCategories,
+  otherCategories,
+} from '@/lib/articles-of-faith';
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import Container from '@/lib/components/container';
+import Header from '@/lib/components/header';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@headlessui/react';
 
 const text = {
   en: {
@@ -22,59 +32,63 @@ const text = {
   },
 };
 
-async function getArticlesSubcat(aof: Aof) {
-  const subcat = await getArticlesSubcategories(aof, false);
-  return subcat.join(' | ');
-}
-
-async function BasicBeliefs({ lang }: { lang: Locale }) {
-  const subCategories = await getArticlesCategories(false);
+async function ArticleDirectory({ lang }: { lang: Locale }) {
+  const categoriesMap = await getArticlesCategories(false);
 
   return (
     <Container background="bg-white">
       <div className="block w-full">
-        <div>
-          <h2 className="pb-4 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:pl-8 sm:text-3xl sm:tracking-tight">
-            Our Basic Beliefs
-          </h2>
-        </div>
-        <ul role="list" className="divide-y divide-gray-100">
-          {aof.map((category: Aof) => (
-            <li key={category} className="relative py-5 hover:bg-gray-50">
-              <div className="px-4 sm:px-6 lg:px-8">
-                <div className="mx-auto flex max-w-4xl justify-between gap-x-6">
-                  <div className="flex min-w-0 gap-x-4">
-                    {/* <img
-                    alt=""
-                    src={person.imageUrl}
-                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                  /> */}
-                    <div className="min-w-0 ">
-                      <p className="text-md font-semibold leading-6 text-gray-900">
-                        <Link
-                          href={`./articles/${category}`}
-                          className="text-md"
-                        >
-                          <span className="absolute inset-x-0 -top-px bottom-0" />
-                          {aofDetails[lang][category].name}
-                        </Link>
-                      </p>
-                      <p className="mt-1 flex text-sm leading-5 text-gray-500">
-                        {getArticlesSubcat(category)}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-x-4">
-                    <ChevronRightIcon
-                      aria-hidden="true"
-                      className="h-5 w-5 flex-none text-gray-400"
-                    />
-                  </div>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <Header title={'Our Basic Beliefs'} />
+
+        {aof.map((category: Aof) => (
+          <Disclosure as="div" className="-mx-3" key={category}>
+            <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-4 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+              {categoryDetails[lang][category].name}
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+              />
+            </DisclosureButton>
+            <DisclosurePanel className="mt-2 space-y-2">
+              {categoriesMap.get(category) &&
+                Array.from(categoriesMap.get(category)).map((item: any) => (
+                  <DisclosureButton
+                    key={item}
+                    as="a"
+                    href={`/${lang}/articles/${category}/${item}`}
+                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    {item}
+                  </DisclosureButton>
+                ))}
+            </DisclosurePanel>
+          </Disclosure>
+        ))}
+        <Header title={'Other Articles'} />
+        {otherCategories.map((category: OtherCategories) => (
+          <Disclosure as="div" className="-mx-3" key={category}>
+            <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-4 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+              {categoryDetails[lang][category].name}
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+              />
+            </DisclosureButton>
+            <DisclosurePanel className="mt-2 space-y-2">
+              {categoriesMap.get(category) &&
+                Array.from(categoriesMap.get(category)).map((item: any) => (
+                  <DisclosureButton
+                    key={item}
+                    as="a"
+                    href={`/${lang}/articles/${category}/${item}`}
+                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    {item}
+                  </DisclosureButton>
+                ))}
+            </DisclosurePanel>
+          </Disclosure>
+        ))}
       </div>
     </Container>
   );
@@ -86,7 +100,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <PageHeader lang={lang} text={text} />
-      <BasicBeliefs lang={lang} />
+      <ArticleDirectory lang={lang} />
     </>
   );
 }

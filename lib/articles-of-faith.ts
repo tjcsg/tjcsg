@@ -1,34 +1,44 @@
-export const aof = ["jesus-christ", "bible", "one-true-church", "baptism", "holy-spirit", "footwashing", "holy-communion", "sabbath", "salvation", "second-coming"] as const;
-
+export const aof = ["jesus-christ", "bible", "one-true-church", "baptism", "holy-spirit", "footwashing", "holy-communion", "sabbath", "salvation", "second-coming" ] as const;
 export type Aof = typeof aof[number];
+
+
+export const otherCategories = ['devotionals', 'testimonies'] as const;
+export type OtherCategories = (typeof otherCategories)[number];
+
+export const articleCategories = [...otherCategories, ...aof];
+export type ArticleCategories = typeof articleCategories[number];
   
-type AofDetails = {
+type CategoryDetails = {
   name: string;
   details: string;
 };
   
-export const aofDetails: {en: {
-  "jesus-christ": AofDetails;
-  "bible": AofDetails;
-  "one-true-church": AofDetails;
-  "baptism": AofDetails;
-  "holy-spirit": AofDetails;
-  "footwashing": AofDetails;
-  "holy-communion": AofDetails;
-  "sabbath": AofDetails;
-  "salvation": AofDetails;
-  "second-coming": AofDetails;
+export const categoryDetails: {en: {
+  "jesus-christ": CategoryDetails;
+  "bible": CategoryDetails;
+  "one-true-church": CategoryDetails;
+  "baptism": CategoryDetails;
+  "holy-spirit": CategoryDetails;
+  "footwashing": CategoryDetails;
+  "holy-communion": CategoryDetails;
+  "sabbath": CategoryDetails;
+  "salvation": CategoryDetails;
+  "second-coming": CategoryDetails;
+  "devotionals": CategoryDetails;
+  "testimonies": CategoryDetails;
 }, zh: {
-  "jesus-christ": AofDetails;
-  "bible": AofDetails;
-  "one-true-church": AofDetails;
-  "baptism": AofDetails;
-  "holy-spirit": AofDetails;
-  "footwashing": AofDetails;
-  "holy-communion": AofDetails;
-  "sabbath": AofDetails;
-  "salvation": AofDetails;
-  "second-coming": AofDetails;
+  "jesus-christ": CategoryDetails;
+  "bible": CategoryDetails;
+  "one-true-church": CategoryDetails;
+  "baptism": CategoryDetails;
+  "holy-spirit": CategoryDetails;
+  "footwashing": CategoryDetails;
+  "holy-communion": CategoryDetails;
+  "sabbath": CategoryDetails;
+  "salvation": CategoryDetails;
+  "second-coming": CategoryDetails;
+  "devotionals": CategoryDetails;
+  "testimonies": CategoryDetails;
 }} = {
   en: {
       "jesus-christ": {
@@ -70,6 +80,14 @@ export const aofDetails: {en: {
       "second-coming": {
           name: "Second Coming",
           details: "The Lord’s Second Coming will take place on the Last Day when He descends from heaven to judge the world: the righteous will receive eternal life, while the wicked will be eternally condemned."
+      },
+      devotionals: {
+          name: "Devotionals",
+          details: ""
+      },
+      testimonies: {
+          name: "Testimonies",
+          details: ""
       }
   },
   zh: {
@@ -112,6 +130,14 @@ export const aofDetails: {en: {
       "second-coming": {
           name: "审判",
           details: "信主耶稣必于世界末日从天降临，审判万民。义人得永生，罪人受永刑。"
-      }
+      },
+      devotionals: {
+        name: "Devotionals",
+        details: ""
+    },
+    testimonies: {
+        name: "Testimonies",
+        details: "T"
+    }
   }
 }

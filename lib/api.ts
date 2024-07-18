@@ -317,6 +317,7 @@ function extractWebContent(fetchResponse: any): WebContent {
 
 function extractCdbdSchedule(fetchResponse: any): any {
   return fetchResponse?.data?.cdbdScheduleCollection?.items?.[0];
+}
 
 function extractArticleCategories(fetchResponse: any): any {
   const categories = new Set();
@@ -324,6 +325,22 @@ function extractArticleCategories(fetchResponse: any): any {
     categories.add(item.doctrine)
   })
   return Array.from(categories);
+}
+
+function extractArticleCategories2(fetchResponse: any): any {
+  const categories = new Map<string,Set<string>>();
+  fetchResponse?.data?.categoryCollection?.items?.forEach(({doctrine, subcategory}: { doctrine: string; subcategory: string; }) => {
+    if (!categories.has(doctrine)) {
+      let subcat = new Set<string>();
+      subcat.add(subcategory);
+      categories.set(doctrine, subcat)
+    } else {
+      let cat = categories.get(doctrine) as Set<string>;
+      cat.add(subcategory);
+      categories.set(doctrine, cat);
+    }
+  })
+  return categories;
 }
 
 function extractArticleSubcategories(fetchResponse: any): any {
@@ -453,13 +470,13 @@ export async function getArticlesCategories(preview: boolean) {
       categoryCollection{ 
         items {
           doctrine
+          subcategory
         }
       }
     }`,
     preview,
   );
-  
-  return extractArticleCategories(entry);
+  return extractArticleCategories2(entry);
 }
 
 export async function getArticlesSubcategories(doctrine: string, preview: boolean) {
@@ -490,6 +507,40 @@ export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
     isDraftMode,
   );
   return extractArticleEntries(entries);
+}
+
+
+
+export async function getArticlesInSubcat(cat: string, subcat: string, preview: boolean):Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(where: { category: { doctrine: "${cat}", subcategory: "${subcat}"} }, preview: ${
+        preview ? 'true' : 'false'
+      }, limit: 1) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticleEntries(entry);
+}
+
+export async function getLatestArticles(limit: number, preview: boolean):Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(where: { limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticleEntries(entry);
 }
 
 export async function getArticle(slug: string, preview: boolean):Promise<ArticleEntry> {

@@ -6,14 +6,6 @@ import { Markdown } from '@/lib/markdown';
 import adamPic from '@/public/locations/adam.jpg';
 import Image from 'next/image';
 
-const links = [
-  {
-    en: 'Like our Facebook page',
-    zh: 'Like our Facebook page',
-    href: 'https://www.facebook.com/truejesuschurchsg',
-  },
-];
-
 const text = {
   en: {
     title: 'Why "True" Jesus Church?',

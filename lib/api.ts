@@ -76,6 +76,8 @@ const EVENTS_GRAPHQL_FIELDS = `
   poster {
     url
     description
+    width
+    height
   }
   summary {
     json
@@ -87,13 +89,15 @@ const EVENTS_GRAPHQL_FIELDS = `
           }
           url
           description
+          width
+          height
         }
       }
     }
   }
 `;
 
-type EventEntry = {
+export type EventEntry = {
   slug: string;
   title: string;
   date: string;
@@ -104,6 +108,8 @@ type EventEntry = {
   poster: {
     url: string;
     description: string;
+    width: number;
+    height: number;
   };
   summary: {
     json: any;
@@ -114,6 +120,8 @@ type EventEntry = {
             sys: { id: string };
             url: string;
             description: string;
+            width: number;
+            height: number;
           },
         ];
       };
@@ -159,7 +167,7 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
     `query {
       eventsCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
-          ${EVENTS_GRAPHQL_FIELDS}  
+          ${EVENTS_GRAPHQL_FIELDS}
         }
       }
     }`,
@@ -178,8 +186,8 @@ export async function getAllEvents(isDraftMode: boolean, locale: Locale): Promis
           slug
           title
           date
-          duration 
-          date2 
+          duration
+          date2
           duration2
           church
           poster {

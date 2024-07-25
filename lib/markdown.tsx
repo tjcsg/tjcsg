@@ -3,25 +3,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import Link from 'next/link';
 import ContentfulImage from './contentful-image';
+import type { EventEntry } from './api';
 
-interface Asset {
-  sys: {
-    id: string;
-  };
-  url: string;
-  description: string;
-}
+type Asset = EventEntry["summary"]["links"]["assets"]["block"][number];
 
-interface AssetLink {
-  block: Asset[];
-}
-
-interface Content {
-  json: any;
-  links: {
-    assets: AssetLink;
-  };
-}
 
 function RichTextAsset({
   id,
@@ -34,14 +19,14 @@ function RichTextAsset({
 
   if (asset?.url) {
     return (
-      <ContentfulImage src={asset.url} layout="fill" alt={asset.description} />
+      <ContentfulImage src={asset.url} width={asset.width} height={asset.height} alt={asset.description} />
     );
   }
 
   return null;
 }
 
-export function Markdown({ content }: { content: Content }) {
+export function Markdown({ content }: { content: EventEntry["summary"] }) {
   return documentToReactComponents(content.json, {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => (

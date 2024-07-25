@@ -1,5 +1,5 @@
 import Container from '@/lib/components/container';
-import ContentfulImage from '@/lib/contentful-image';
+import Image from 'next/image';
 
 export default function ChurchLocation({
   name,
@@ -25,12 +25,13 @@ export default function ChurchLocation({
         </div>
         <div className="sm:flex">
           <div className="bg-lightblue mb-8 sm:max-w-md">
-            <ContentfulImage
+            <Image
               src={`/locations/${shortname}.jpg`}
               width={723}
               height={445}
               className="w-full"
-            ></ContentfulImage>
+              alt={`A picture of ${name}'s exterior`}
+            />
             <table className="table-sm mt-1">
               <tbody>
                 {timings.map((timing) => (

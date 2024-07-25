@@ -1,12 +1,24 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  images: {
-    loader: 'custom',
-    formats: ['image/avif', 'image/webp'],
-  },
   logging: {
     fetches: {
       fullUrl: true,
     },
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'closerdaybyday.org'
+      },
+      {
+        protocol: 'http',
+        hostname: 'closerdaybyday.org'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net'
+      }
+    ]
   }
 };

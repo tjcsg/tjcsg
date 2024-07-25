@@ -1,5 +1,4 @@
 import { Locale } from '@/i18n-config';
-import ContentfulImage from '@/lib/contentful-image';
 import ContentStrip from './content-strip';
 
 export default function ContentStripIFrame({

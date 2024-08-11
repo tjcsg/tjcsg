@@ -1,5 +1,16 @@
 import Container from '@/lib/components/container';
 import Image from 'next/image';
+import adamPic from '@/public/locations/adam.jpg';
+import tkPic from '@/public/locations/tk.jpg';
+import sembawangPic from '@/public/locations/sembawang.jpg';
+import serangoonPic from '@/public/locations/serangoon.jpg';
+
+const pic = {
+  adam: adamPic,
+  tk: tkPic,
+  sembawang: sembawangPic,
+  serangoon: serangoonPic,
+};
 
 export default function ChurchLocation({
   name,
@@ -10,7 +21,7 @@ export default function ChurchLocation({
   background,
 }: {
   name: string;
-  shortname: string;
+  shortname: 'adam' | 'tk' | 'serangoon' | 'sembawang';
   address: string;
   timings: { day: string; time: string }[];
   map_src: string;
@@ -24,11 +35,9 @@ export default function ChurchLocation({
           <p className="lg:text-md text-sm text-gray-500">{address}</p>
         </div>
         <div className="sm:flex">
-          <div className="bg-lightblue mb-8 sm:max-w-md">
+          <div className="mb-8 bg-lightblue sm:max-w-md">
             <Image
-              src={`/locations/${shortname}.jpg`}
-              width={723}
-              height={445}
+              src={pic[shortname]}
               className="w-full"
               alt={`A picture of ${name}'s exterior`}
             />

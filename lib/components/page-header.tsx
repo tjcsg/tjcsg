@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n-config';
 import Link from 'next/link';
+import LinkButton from '@/lib/components/link-button';
 
 type header = {
   title: string;
@@ -31,9 +32,12 @@ export default async function PageHeader({
           </p>
         )}
         {link && (
-          <button className="sm:text-md mt-6 rounded-md border-2 border-button bg-white px-10 py-2 text-sm font-semibold text-button shadow-sm hover:bg-button hover:text-white sm:leading-4">
-            <Link href={link.href}>{link[lang]}</Link>
-          </button>
+          <LinkButton
+            text={link[lang]}
+            href={link.href}
+            type={'inverse'}
+            className=" mx-auto px-10 py-2"
+          />
         )}
       </div>
     </>

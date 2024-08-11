@@ -1,6 +1,7 @@
 import { Locale } from '@/i18n-config';
 import Link from 'next/link';
 import Container from './container';
+import LinkButton from '@/lib/components/link-button';
 
 export default function ContentStrip({
   lang,
@@ -35,11 +36,12 @@ export default function ContentStrip({
           >
             <p className={`text-md mt-2 leading-8 text-gray-600`}>{bodyText}</p>
             {links[0] && (
-              <button
-                className={`sm:text-md mb-4 mt-6 block text-nowrap rounded-md border-2 border-button bg-white px-10 py-2 text-sm font-semibold text-button shadow-sm hover:bg-button hover:text-white sm:leading-4 ${isReversed ? 'md:float-right' : ''}`}
-              >
-                <Link href={links[0].href}>{links[0][lang]}</Link>
-              </button>
+              <LinkButton
+                text={links[0][lang]}
+                href={links[0].href}
+                type={'inverse'}
+                className={`mb-4 px-5 py-2 ${isReversed ? 'md:float-right' : ''}`}
+              />
             )}
             {links.length > 1 &&
               links.slice(1, links.length).map((link) => (

@@ -44,7 +44,8 @@ export function middleware(request: NextRequest) {
       '/site-logo.png',
       '/global_livestream.png',
       '/landingpage.jpg',
-      '/landingpage_landscape.jpg'
+      '/landingpage_landscape.jpg',
+      '/marble.png'
       // Your other files in `public`
     ].includes(pathname)
   )

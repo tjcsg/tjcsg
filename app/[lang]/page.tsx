@@ -5,6 +5,9 @@ import Container from '@/lib/components/container';
 import { Locale } from '@/i18n-config';
 import { getWebContent } from '@/lib/api';
 import Image from 'next/image';
+import LinkButton from '@/lib/components/link-button';
+import tkPicPortrait from '@/public/landingpage.jpg';
+import tkPicLandscape from '@/public/landingpage_landscape.jpg';
 
 const carousel_img = [
   { name: '/carousel/1.jpg', alt: 'Telok Kurau Church' },
@@ -36,12 +39,7 @@ async function Intro({ lang }: { lang: Locale }) {
       <div className="carousel carousel-center">
         {carousel_img.map((img) => (
           <div key={img.name} className="carousel-item max-sm:w-full">
-            <Image
-              src={img.name}
-              width={693}
-              height={390}
-              alt={img.alt}
-            />
+            <Image src={img.name} width={693} height={390} alt={img.alt} />
           </div>
         ))}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -54,21 +52,16 @@ async function Intro({ lang }: { lang: Locale }) {
               <p className="mb-5 text-xs">{contentfulText.welcomeText}</p>
             )}
 
-            <Link href={`${lang}/about`}>
-              <button
-                type="button"
-                className="mb-3 mr-6 rounded-md bg-button px-8 py-2 text-sm font-medium text-white shadow-sm hover:bg-button_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {text[lang].learnMore}
-              </button>
-            </Link>
-
-            <Link
-              href={`${lang}/locations`}
-              className="mb-2 text-nowrap text-xs font-semibold text-button underline decoration-2 hover:text-button_hover"
-            >
-              {text[lang].findChurch}
-            </Link>
+            <LinkButton
+              text={text[lang].learnMore}
+              href={`${lang}/about`}
+              type={'default'}
+            />
+            <LinkButton
+              text={text[lang].findChurch}
+              href={`${lang}/location`}
+              type={'inverse'}
+            />
           </div>
         </div>
       </div>
@@ -90,25 +83,25 @@ async function Intro2({ lang }: { lang: Locale }) {
                   <h1 className="text-5xl font-medium tracking-tight text-gray-900 lg:text-5xl xl:text-6xl">
                     {text[lang].welcome}
                   </h1>
-                  <p className="text-md mx-auto mt-3 max-w-md text-gray-500 sm:text-lg lg:mt-5 lg:max-w-3xl">
+                  <p className="text-md mx-auto mt-3 max-w-lg text-gray-500 sm:text-lg lg:mt-5 lg:max-w-3xl">
                     {contentfulText.welcomeText}
                   </p>
-                  <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
-                    <div className="rounded-md shadow">
-                      <a
-                        href="#"
-                        className="flex w-full items-center justify-center text-nowrap rounded-md border border-transparent bg-button px-8 py-3 text-base font-medium text-white hover:bg-button_hover md:px-10 md:py-4 md:text-lg"
-                      >
-                        {text[lang].learnMore}
-                      </a>
+                  <div className="mt-4 gap-x-4 sm:flex sm:justify-center lg:justify-start">
+                    <div>
+                      <LinkButton
+                        text={text[lang].learnMore}
+                        href={`${lang}/about`}
+                        type={'default'}
+                        className="w-full px-8 text-lg md:text-lg lg:px-10 lg:py-4"
+                      />
                     </div>
-                    <div className="mt-3 rounded-md shadow sm:ml-3 sm:mt-0">
-                      <a
-                        href="#"
-                        className="flex w-full  items-center justify-center text-nowrap rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-button hover:bg-gray-50 md:px-10 md:py-4 md:text-lg"
-                      >
-                        {text[lang].findChurch}
-                      </a>
+                    <div>
+                      <LinkButton
+                        text={text[lang].findChurch}
+                        href={`${lang}/location`}
+                        type={'inverse'}
+                        className=" w-full px-8 md:text-lg lg:px-10 lg:py-4"
+                      />
                     </div>
                   </div>
                 </div>
@@ -116,17 +109,13 @@ async function Intro2({ lang }: { lang: Locale }) {
               <div className="relative mx-auto h-64 w-full sm:h-72 md:h-96 md:w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
                 {' '}
                 <Image
-                  alt=""
-                  src="/landingpage.jpg"
-                  width={720}
-                  height={898}
+                  alt="A picture of the front of Telok Kurau Church"
+                  src={tkPicPortrait}
                   className="absolute inset-0 hidden h-full w-full object-cover lg:block lg:max-w-none"
                 />
                 <Image
-                  alt=""
-                  src="/landingpage_landscape.jpg"
-                  width={1459}
-                  height={1062}
+                  alt="A landscape picture of the top of Telok Kurau Church"
+                  src={tkPicLandscape}
                   className="absolute inset-0 h-full w-full object-cover lg:hidden lg:max-w-none"
                 />
               </div>

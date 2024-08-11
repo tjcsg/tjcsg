@@ -248,6 +248,10 @@ function extractWebContent(fetchResponse: any): WebContent {
   return fetchResponse?.data?.webContentCollection?.items?.[0];
 }
 
+function extractCdbdSchedule(fetchResponse: any): any {
+  return fetchResponse?.data?.cdbdScheduleCollection?.items?.[0];
+}
+
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   const entry = await fetchGraphQL(
     `query {
@@ -334,6 +338,21 @@ export async function getWebContent(locale: string, preview: boolean) {
     }`,
     preview,
   );
-  console.log(entry);
   return extractWebContent(entry);
+}
+
+export async function getCDBDSchedule(preview:boolean) {
+  const entry = await fetchGraphQL(
+    `query {
+      cdbdScheduleCollection(limit: 1, order:month_DESC){
+        items{
+          schedule {
+            url
+          }
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractCdbdSchedule(entry);
 }

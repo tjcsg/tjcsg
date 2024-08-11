@@ -229,9 +229,9 @@ export default function RootLayout({
   return (
     <html lang={params.lang} className={noto_sans.variable}>
       <body>
-        <section className="min-h-screen">
+        <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />
-          <main>{children}</main>
+          <main className="mb-auto block">{children}</main>
           <Footer lang={lang} />
         </section>
       </body>

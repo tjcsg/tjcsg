@@ -23,7 +23,7 @@ export default async function PageHeader({
         <p className="text-base font-semibold leading-7 text-button">
           {text[lang].eyebrow}
         </p>
-        <h2 className="mt-2 text-4xl font-medium tracking-tight text-gray-900 sm:text-6xl">
+        <h2 className="mt-2 text-5xl font-medium tracking-tight text-gray-900 sm:text-6xl">
           {text[lang].title}
         </h2>
         {text[lang].subtitle && (

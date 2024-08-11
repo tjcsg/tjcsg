@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n-config";
+import { Aof } from "./articles-of-faith";
 
 export type MarkdownType = {
   json: any;
@@ -30,6 +31,8 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
           }
           url
           description
+          width
+          height
         }
       }
     }
@@ -45,6 +48,8 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
           }
           url
           description
+          width
+          height
         }
       }
     }
@@ -215,6 +220,68 @@ export type EventEntry = {
   summary: MarkdownType;
 };
 
+const ARTICLE_GRAPHQL_FIELDS = `
+  slug
+  title
+  content {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+          width
+          height
+        }
+      }
+    }
+  }
+  category {
+      doctrine
+      subcategory
+  }
+  relatedArticlesCollection {
+    items {
+      slug
+      title
+    }
+  }
+`
+
+export type ArticleEntry = {
+  slug: string;
+  title: string;
+  content: {
+    json: any;
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string };
+            url: string;
+            description: string;
+            width: number;
+            height: number;
+          },
+        ];
+      };
+    };
+  };
+  category: {
+    doctrine: Aof;
+    subcategory: string;
+  }
+  relatedArticlesCollection: {
+    items: {
+      slug: string;
+      title: string;
+    }[]
+  }
+};
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -250,6 +317,46 @@ function extractWebContent(fetchResponse: any): WebContent {
 
 function extractCdbdSchedule(fetchResponse: any): any {
   return fetchResponse?.data?.cdbdScheduleCollection?.items?.[0];
+}
+
+function extractArticleCategories(fetchResponse: any): any {
+  const categories = new Set();
+  fetchResponse?.data?.categoryCollection?.items?.forEach((item: { doctrine: string; }) => {
+    categories.add(item.doctrine)
+  })
+  return Array.from(categories);
+}
+
+function extractArticleCategories2(fetchResponse: any): any {
+  const categories = new Map<string,Set<string>>();
+  fetchResponse?.data?.categoryCollection?.items?.forEach(({doctrine, subcategory}: { doctrine: string; subcategory: string; }) => {
+    if (!categories.has(doctrine)) {
+      let subcat = new Set<string>();
+      subcat.add(subcategory);
+      categories.set(doctrine, subcat)
+    } else {
+      let cat = categories.get(doctrine) as Set<string>;
+      cat.add(subcategory);
+      categories.set(doctrine, cat);
+    }
+  })
+  return categories;
+}
+
+function extractArticleSubcategories(fetchResponse: any): any {
+  const categories = new Set();
+  fetchResponse?.data?.categoryCollection?.items?.forEach((item: { subcategory: string; }) => {
+    categories.add(item.subcategory)
+  })
+  return Array.from(categories);
+}
+
+function extractArticleEntries(fetchResponse: any): any[] {
+  return fetchResponse?.data?.articleCollection?.items;
+}
+
+function extractArticle(fetchResponse: any): ArticleEntry {
+  return fetchResponse?.data?.articleCollection?.items?.[0];
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
@@ -353,6 +460,101 @@ export async function getCDBDSchedule(preview:boolean) {
       }
     }`,
     preview,
+);
+return extractCdbdSchedule(entry);
+}
+
+export async function getArticlesCategories(preview: boolean) {
+  const entry = await fetchGraphQL(
+    `query {
+      categoryCollection{ 
+        items {
+          doctrine
+          subcategory
+        }
+      }
+    }`,
+    preview,
   );
-  return extractCdbdSchedule(entry);
+  return extractArticleCategories2(entry);
+}
+
+export async function getArticlesSubcategories(doctrine: string, preview: boolean) {
+  const entry = await fetchGraphQL(
+    `query {
+      categoryCollection(where:{doctrine:"${doctrine}"}){
+        items {
+          subcategory
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticleSubcategories(entry);
+}
+
+export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      articleCollection(preview: ${
+        isDraftMode ? 'true' : 'false'
+      }) {
+        items {
+          slug
+        }
+      }
+    }`,
+    isDraftMode,
+  );
+  return extractArticleEntries(entries);
+}
+
+
+
+export async function getArticlesInSubcat(cat: string, subcat: string, preview: boolean):Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(where: { category: { doctrine: "${cat}", subcategory: "${subcat}"} }, preview: ${
+        preview ? 'true' : 'false'
+      }, limit: 1) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticleEntries(entry);
+}
+
+export async function getLatestArticles(limit: number, preview: boolean):Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(where: { limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticleEntries(entry);
+}
+
+export async function getArticle(slug: string, preview: boolean):Promise<ArticleEntry> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(where: { slug: "${slug}" }, preview: ${
+        preview ? 'true' : 'false'
+      }, limit: 1) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractArticle(entry);
 }

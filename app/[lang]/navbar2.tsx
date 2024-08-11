@@ -158,7 +158,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
               <span className="sr-only">True Jesus Church Singapore</span>
               <Image
                 src={sitelogo}
-                className="h-8 w-auto"
+                className="h-8 w-auto sm:hidden"
                 alt="True Jesus Church logo"
               />
             </Link>

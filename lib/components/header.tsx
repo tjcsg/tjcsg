@@ -4,12 +4,14 @@ import Link from 'next/link';
 export default function Header({
   title,
   breadcrumbs,
+  className,
 }: {
   title: string;
   breadcrumbs?: { name: string; href: string }[];
+  className?: string;
 }) {
   return (
-    <div className="px-6 pb-4 sm:px-12 sm:py-10">
+    <div className={`pb-6 sm:py-8 ${className}`}>
       {breadcrumbs && (
         <div>
           {breadcrumbs.length > 1 && (
@@ -59,7 +61,7 @@ export default function Header({
           </nav>
         </div>
       )}
-      <h2 className="mt-2 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:truncate sm:tracking-tight">
+      <h2 className="mt-2 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:tracking-tight">
         {title}
       </h2>
     </div>

@@ -1,5 +1,22 @@
 import { Locale } from "@/i18n-config";
 
+export type MarkdownType = {
+  json: any;
+  links: {
+    assets: {
+      block: [
+        {
+          sys: { id: string };
+          url: string;
+          description: string;
+          width: number;
+          height: number;
+        },
+      ];
+    };
+  };
+};
+
 const WEBCONTENT_GRAPHQL_FIELDS = `
   welcomeText
   footerText
@@ -48,6 +65,31 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
       }
     }
   }
+  worshipInpersonTitle
+  worshipInpersonText
+  worshipInpersonMedia {
+    url
+  }
+  worshipHowtoprayTitle
+  worshipHowtoprayText {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+          width
+          height
+        }
+      }
+    }
+  }
+  worshipHowtoprayMedia {
+    url
+  }
   socialsYoutubeTitle
   socialsYoutubeText
   socialsYoutubeIframe
@@ -81,49 +123,18 @@ type WebContent = {
   welcomeText: string;
   footerText: string;
   aboutWhoweareIframe: string;
-  aboutWhoweare: {
-    json: any;
-    links: {
-      assets: {
-        block: [
-          {
-            sys: { id: string };
-            url: string;
-            description: string;
-          },
-        ];
-      };
-    };
+  aboutWhoweare: MarkdownType;
+  aboutWhywearehere: MarkdownType;
+  aboutWhytrue: MarkdownType;
+  worshipInpersonTitle: string;
+  worshipInpersonText: string;
+  worshipInpersonMedia: {
+    url: string
   };
-  aboutWhywearehere: {
-    json: any;
-    links: {
-      assets: {
-        block: [
-          {
-            sys: { id: string };
-            url: string;
-            description: string;
-          },
-        ];
-      };
-    };
-  };
-  aboutWhytrue: {
-    json: any;
-    links: {
-      assets: {
-        block: [
-          {
-            sys: { id: string };
-            url: string;
-            description: string;
-            width: number;
-            height: number;
-          },
-        ];
-      };
-    };
+  worshipHowtoprayTitle: string;
+  worshipHowtoprayText:  MarkdownType;
+  worshipHowtoprayMedia: {
+    url: string
   };
   socialsYoutubeTitle: string;
   socialsYoutubeText: string;
@@ -201,22 +212,7 @@ export type EventEntry = {
     width: number;
     height: number;
   };
-  summary: {
-    json: any;
-    links: {
-      assets: {
-        block: [
-          {
-            sys: { id: string };
-            url: string;
-            description: string;
-            width: number;
-            height: number;
-          },
-        ];
-      };
-    };
-  };
+  summary: MarkdownType;
 };
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -338,5 +334,6 @@ export async function getWebContent(locale: string, preview: boolean) {
     }`,
     preview,
   );
+  console.log(entry);
   return extractWebContent(entry);
 }

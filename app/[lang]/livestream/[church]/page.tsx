@@ -63,9 +63,9 @@ export default function Page({
   return (
     <>
       <Header
-        title={`${details[lang][church].name} Livestream`}
+        title={`${details[lang][church].name} Livestreams`}
         breadcrumbs={[
-          { name: 'Livestreams', href: '/livestream' },
+          { name: 'Worship', href: '/worship' },
           { name: `${details[lang][church].name} Livestream`, href: '#' },
         ]}
       />
@@ -84,7 +84,7 @@ export default function Page({
       </div>
       <ChurchLivestream
         timings={details[lang][church].timings}
-        background="bg-white"
+        background={"bg-[url('/marble.png')] "}
         map_src={details[lang][church].map_src}
       />
     </>

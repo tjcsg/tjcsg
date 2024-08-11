@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n-config';
 import ContentStrip from './content-strip';
+import { MarkdownType } from '../api';
 
 export default function ContentStripIFrame({
   lang,
@@ -8,14 +9,16 @@ export default function ContentStripIFrame({
   links,
   url,
   isReversed = false,
+  isMarkdown = false,
   background,
 }: {
   lang: Locale;
   titleText: string;
-  bodyText: string;
+  bodyText: string | MarkdownType;
   links: { en: string; zh: string; href: string }[];
   url: string;
   isReversed?: boolean;
+  isMarkdown?: boolean;
   background: string;
 }) {
   return (
@@ -26,6 +29,7 @@ export default function ContentStripIFrame({
       bodyText={bodyText}
       links={links}
       isReversed={isReversed}
+      isMarkdown={isMarkdown}
     >
       <div className="w-full md:px-16">
         <div className="relative block w-full overflow-hidden pt-[56.25%]">

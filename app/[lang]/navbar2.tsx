@@ -41,13 +41,13 @@ const resources = [
 const text = {
   en: {
     about: 'About Us',
-    livestream: 'Livestream',
+    worship: 'Worship',
     locations: 'Locations',
     resources: 'Resources',
   },
   zh: {
     about: '​关于本会',
-    livestream: '线上崇拜',
+    worship: '崇拜',
     locations: '教会地点',
     resources: '其他资源',
   },
@@ -84,10 +84,10 @@ export default function NavBar({ lang }: { lang: Locale }) {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Link
-            href={`/${lang}/livestream`}
+            href={`/${lang}/worship`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            {text[lang].livestream}
+            {text[lang].worship}
           </Link>
           <Link
             href={`/${lang}/about`}
@@ -112,13 +112,13 @@ export default function NavBar({ lang }: { lang: Locale }) {
 
             <PopoverPanel
               transition
-              className="absolute -left-8 top-full z-10 mt-3 w-auto max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+              className="absolute -left-8 top-full z-10 mt-3 w-auto max-w-md overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
             >
               <div className="p-4">
                 {resources.map((item) => (
                   <div
                     key={item.en}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    className="group relative flex items-center gap-x-6 rounded-sm px-4 py-2 text-sm leading-6 hover:bg-gray-50"
                   >
                     <div className="flex-auto">
                       <Link
@@ -175,11 +175,11 @@ export default function NavBar({ lang }: { lang: Locale }) {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Link
-                  href={`/${lang}/livestream`}
+                  href={`/${lang}/worship`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {text[lang].livestream}
+                  {text[lang].worship}
                 </Link>
                 <Link
                   href={`/${lang}/about`}

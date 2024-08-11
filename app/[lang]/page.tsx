@@ -132,9 +132,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <Intro2 lang={lang} />
-      <Container background="bg-white">
-        <SpecialEvents lang={lang} />
-      </Container>
+      <SpecialEvents lang={lang} background="bg-white" />
 
       <Container background="bg-stone-50">
         <CDBD />

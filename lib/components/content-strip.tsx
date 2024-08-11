@@ -2,6 +2,8 @@ import { Locale } from '@/i18n-config';
 import Link from 'next/link';
 import Container from './container';
 import LinkButton from '@/lib/components/link-button';
+import { Markdown } from '../markdown';
+import { MarkdownType } from '../api';
 
 export default function ContentStrip({
   lang,
@@ -9,14 +11,16 @@ export default function ContentStrip({
   bodyText,
   links,
   isReversed = false,
+  isMarkdown = false,
   background,
   children,
 }: {
   lang: Locale;
   titleText: string;
-  bodyText: string;
+  bodyText: string | MarkdownType;
   links: { en: string; zh: string; href: string }[];
   isReversed?: boolean;
+  isMarkdown?: boolean;
   background: string;
   children: React.ReactNode;
 }) {
@@ -29,12 +33,20 @@ export default function ContentStrip({
           {titleText}
         </h1>
         <div
-          className={`flex flex-col md:${isReversed ? 'flex-row-reverse' : 'flex-row'} md:justify-end`}
+          className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} md:justify-end`}
         >
           <div
             className={`mb-8 block lg:basis-2/3  ${isReversed ? 'md:text-right' : ''}`}
           >
-            <p className={`text-md mt-2 leading-8 text-gray-600`}>{bodyText}</p>
+            {isMarkdown ? (
+              <div className="prose max-w-none">
+                <Markdown content={bodyText as MarkdownType} />
+              </div>
+            ) : (
+              <p className={`text-md mt-2 leading-8 text-gray-600`}>
+                {bodyText as string}
+              </p>
+            )}
             {links[0] && (
               <LinkButton
                 text={links[0][lang]}

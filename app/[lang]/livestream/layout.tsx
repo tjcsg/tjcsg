@@ -14,9 +14,7 @@ export default function Layout({
   return (
     <>
       {children}
-      <Container background="bg-white">
-        <SpecialEvents lang={lang} />
-      </Container>
+      <SpecialEvents lang={lang} background="bg-white" />
       <GlobalLivestream lang={lang} background="bg-stone-50" />
     </>
   );

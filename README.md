@@ -2,6 +2,7 @@
 ## MVP by end Sept
 - Contact us form
 - Articles landing page
+- Events landing page
 - Footer links
 - Homepage (upcoming events)
 - Homepage (latest articles)

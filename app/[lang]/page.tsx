@@ -8,6 +8,8 @@ import Image from 'next/image';
 import LinkButton from '@/lib/components/link-button';
 import tkPicPortrait from '@/public/landingpage.jpg';
 import tkPicLandscape from '@/public/landingpage_landscape.jpg';
+import OurBeliefs from './about/our-beliefs';
+import FeaturedArticles from './featured-articles';
 
 const carousel_img = [
   { name: '/carousel/1.jpg', alt: 'Telok Kurau Church' },
@@ -132,6 +134,8 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     <>
       <Intro2 lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
+      <FeaturedArticles lang={lang} />
+      <OurBeliefs lang={lang} background={''} />
 
       {/* For some reason, adding the container into the CDBD client component gives an error */}
       {/* <Container background="bg-stone-50">

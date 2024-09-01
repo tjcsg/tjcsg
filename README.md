@@ -3,7 +3,7 @@
 - Contact us form
 - Articles landing page
 - Events landing page
-- Footer links
+- ~~Footer links~~
 - Homepage (upcoming events)
 - Homepage (latest articles)
 

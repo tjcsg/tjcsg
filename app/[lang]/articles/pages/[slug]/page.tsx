@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
 import { categoryDetails } from '@/lib/articles-of-faith';
 import { Locale } from '@/i18n-config';
+import ContentfulImage from '@/lib/contentful-image';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -63,6 +64,13 @@ export default async function PostPage({
         ]}
       />
       <article>
+        <ContentfulImage
+          src={article.image.url}
+          height={article.image.height}
+          width={article.image.width}
+          alt={article.image.description}
+          className="w-full py-8"
+        />
         <div className="prose max-w-none">
           <Markdown content={article.content} />
         </div>

@@ -223,6 +223,7 @@ export type EventEntry = {
 const ARTICLE_GRAPHQL_FIELDS = `
   slug
   title
+  description
   content {
     json
     links {
@@ -239,6 +240,12 @@ const ARTICLE_GRAPHQL_FIELDS = `
       }
     }
   }
+  image {
+    url
+    description
+    width
+    height
+  }
   category {
       doctrine
       subcategory
@@ -254,6 +261,7 @@ const ARTICLE_GRAPHQL_FIELDS = `
 export type ArticleEntry = {
   slug: string;
   title: string;
+  description: string;
   content: {
     json: any;
     links: {
@@ -269,6 +277,12 @@ export type ArticleEntry = {
         ];
       };
     };
+  };
+  image: {
+    url: string;
+    description: string;
+    width: number;
+    height: number;
   };
   category: {
     doctrine: Aof;
@@ -319,15 +333,8 @@ function extractCdbdSchedule(fetchResponse: any): any {
   return fetchResponse?.data?.cdbdScheduleCollection?.items?.[0];
 }
 
-function extractArticleCategories(fetchResponse: any): any {
-  const categories = new Set();
-  fetchResponse?.data?.categoryCollection?.items?.forEach((item: { doctrine: string; }) => {
-    categories.add(item.doctrine)
-  })
-  return Array.from(categories);
-}
 
-function extractArticleCategories2(fetchResponse: any): any {
+function extractArticleCategories(fetchResponse: any): any {
   const categories = new Map<string,Set<string>>();
   fetchResponse?.data?.categoryCollection?.items?.forEach(({doctrine, subcategory}: { doctrine: string; subcategory: string; }) => {
     if (!categories.has(doctrine)) {
@@ -476,7 +483,7 @@ export async function getArticlesCategories(preview: boolean) {
     }`,
     preview,
   );
-  return extractArticleCategories2(entry);
+  return extractArticleCategories(entry);
 }
 
 export async function getArticlesSubcategories(doctrine: string, preview: boolean) {
@@ -530,7 +537,7 @@ export async function getArticlesInSubcat(cat: string, subcat: string, preview: 
 export async function getLatestArticles(limit: number, preview: boolean):Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
-      articleCollection(where: { limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
+      articleCollection(limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
         preview ? 'true' : 'false'
       }) {
         items {
@@ -540,6 +547,7 @@ export async function getLatestArticles(limit: number, preview: boolean):Promise
     }`,
     preview,
   );
+  console.log(entry);
   return extractArticleEntries(entry);
 }
 

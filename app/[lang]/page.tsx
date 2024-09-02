@@ -6,17 +6,24 @@ import LinkButton from '@/lib/components/link-button';
 import tkPicOverlay from '@/public/landingpage_overlap.svg';
 import OurBeliefs from './about/our-beliefs';
 import FeaturedArticles from './featured-articles';
+import Container from '@/lib/components/container';
 
 const text = {
   en: {
     welcome: 'Discover the full truth of salvation',
     learnMore: 'Learn more about us',
     findChurch: 'Find a church',
+    truthWill: 'The truth will',
+    truthWillScrollingTexts: ['Change your life', 'Set you free', 'Save you'],
+    whatWeBelieve: 'What we believe',
   },
   zh: {
     welcome: '欢迎到访新加坡真耶稣教会',
     learnMore: '查看本会简介',
     findChurch: '搜寻教会地址',
+    truthWill: 'The truth will',
+    truthWillScrollingTexts: ['Change your life', 'Set you free', 'Save you'],
+    whatWeBelieve: 'What we believe',
   },
 };
 
@@ -69,12 +76,40 @@ async function Hero({ lang }: { lang: Locale }) {
   );
 }
 
+async function TruthTransforms({ lang }: { lang: Locale }) {
+  return (
+    <Container background="bg-white">
+      <div className="block py-16 md:py-20 xl:py-24">
+        <p className="xs:text-4xl text-center text-3xl font-extrabold uppercase tracking-wide text-black sm:text-5xl md:text-6xl xl:text-7xl">
+          {text[lang].truthWill}
+        </p>
+        <ol className="xs:h-[36px]  h-[30px] list-none overflow-hidden  sm:h-[48px] md:h-[60px] xl:h-[72px]">
+          {text[lang].truthWillScrollingTexts.map((item) => (
+            <li key={item} className="animate-slide-up text-center">
+              <span className="xs:text-4xl xs:leading-[40px] xs:h-[36px] h-[30px] bg-gradient-to-r from-[#294bc3] to-[#007da444] bg-clip-text text-3xl font-extrabold uppercase leading-[30px] tracking-wide text-black text-transparent sm:h-[48px] sm:text-5xl sm:leading-[48px] md:h-[60px] md:text-6xl md:leading-[60px] xl:h-[72px] xl:text-7xl xl:leading-[72px]">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ol>
+        <LinkButton
+          text={text[lang].whatWeBelieve}
+          href={`${lang}/about`}
+          type={'inverse'}
+          className="sm:text-md mx-auto mt-8 w-fit px-4 py-2 text-xs uppercase sm:px-6 md:text-lg lg:mt-12"
+        />
+      </div>
+    </Container>
+  );
+}
+
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   const { schedule } = await getCDBDSchedule(false);
   return (
     <>
       <Hero lang={lang} />
+      <TruthTransforms lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
       <OurBeliefs lang={lang} background={''} />

@@ -43,7 +43,7 @@ export default async function SpecialEvents({
             allEvents.slice(0, 3).map((event) => (
               <article
                 key={event.slug}
-                className="xs:w-2/3 mx-auto flex w-11/12 flex-col items-start md:w-full"
+                className="mx-auto flex w-11/12 flex-col items-start xs:w-2/3 md:w-full"
               >
                 <div className="relative aspect-[16/9] w-full">
                   <ContentfulImage

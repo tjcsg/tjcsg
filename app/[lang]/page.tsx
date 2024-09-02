@@ -57,7 +57,7 @@ async function Intro({ lang }: { lang: Locale }) {
             />
             <LinkButton
               text={text[lang].findChurch}
-              href={`${lang}/location`}
+              href={`${lang}/locations`}
               type={'inverse'}
             />
           </div>
@@ -96,7 +96,7 @@ async function Intro2({ lang }: { lang: Locale }) {
                     <div>
                       <LinkButton
                         text={text[lang].findChurch}
-                        href={`${lang}/location`}
+                        href={`${lang}/locations`}
                         type={'inverse'}
                         className=" w-full px-8 md:text-lg lg:px-10 lg:py-4"
                       />

@@ -35,12 +35,20 @@ const learnmore = [
   {
     en: 'TJC International Assembly',
     zh: 'TJC International Assembly',
-    href: '#',
+    href: 'https://tjc.org/',
   },
-  { en: 'Our Stories', zh: '本会的故事', href: '#' },
-  { en: 'Our Basic Beliefs', zh: '信仰简介', href: '#' },
-  { en: 'Complete Gospel', zh: '全备福音', href: '#' },
-  { en: 'FAQ', zh: '信仰问答', href: '#' },
+  { en: 'Our Stories', zh: '本会的故事', href: 'https://tjc.org/our-stories/' },
+  {
+    en: 'Our Basic Beliefs',
+    zh: '信仰简介',
+    href: 'https://tjc.org/intro-to-basic-beliefs/',
+  },
+  {
+    en: 'Complete Gospel',
+    zh: '全备福音',
+    href: 'https://tjc.org/blog/the-complete-gospel/',
+  },
+  { en: 'FAQ', zh: '信仰问答', href: 'https://tjc.org/seek/' },
 ];
 
 const legal = [
@@ -48,12 +56,12 @@ const legal = [
   {
     en: 'Declaration on Religious Harmony',
     zh: '宗教和谐宣言',
-    href: '#',
+    href: '/declaration',
   },
   {
     en: 'Personal Data Protection Policy',
     zh: '个人资料保护法令',
-    href: '#',
+    href: 'https://github.com/tjcscb/pdpp',
   },
 ];
 
@@ -65,10 +73,7 @@ async function Footer({ lang }: { lang: Locale }) {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 basis-1/2 md:mb-0">
-            <Link
-              href={`https://tjc.sg/${lang}`}
-              className="mb-2 flex items-center"
-            >
+            <Link href={`/${lang}`} className="mb-2 flex items-center">
               <span className="text-md self-center whitespace-nowrap font-semibold text-gray-900">
                 {text[lang].name}
               </span>
@@ -85,10 +90,7 @@ async function Footer({ lang }: { lang: Locale }) {
               <ul className="font-medium text-gray-500">
                 {learnmore.map((item) => (
                   <li key={item.en} className="mb-2 text-xs">
-                    <Link
-                      href={`/${lang}/${item.href}`}
-                      className="hover:underline"
-                    >
+                    <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
                   </li>
@@ -102,10 +104,7 @@ async function Footer({ lang }: { lang: Locale }) {
               <ul className="font-medium text-gray-500">
                 {legal.map((item) => (
                   <li key={item.en} className="mb-2 text-xs">
-                    <Link
-                      href={`/${lang}/${item.href}`}
-                      className="hover:underline"
-                    >
+                    <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
                   </li>

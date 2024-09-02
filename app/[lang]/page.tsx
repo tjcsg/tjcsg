@@ -134,9 +134,9 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <SpecialEvents lang={lang} background="bg-white" />
 
       {/* For some reason, adding the container into the CDBD client component gives an error */}
-      <Container background="bg-stone-50">
+      {/* <Container background="bg-stone-50">
         <CDBD lang={lang} schedule={schedule.url} />
-      </Container>
+      </Container> */}
     </>
   );
 }

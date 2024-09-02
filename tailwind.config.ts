@@ -9,6 +9,7 @@ export default {
     './components/**/*.{ts,tsx}',
     './lib/**/*.{ts,tsx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       animation: {
@@ -38,5 +39,5 @@ export default {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [daisyui, typography],
+  plugins: [typography],
 } satisfies Config;

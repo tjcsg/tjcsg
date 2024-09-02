@@ -1,4 +1,5 @@
 import SpecialEvents from './special-events';
+import { Rock_Salt } from 'next/font/google';
 import { Locale } from '@/i18n-config';
 import { getCDBDSchedule, getWebContent } from '@/lib/api';
 import Image from 'next/image';
@@ -8,6 +9,12 @@ import OurBeliefs from './about/our-beliefs';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 
+const rockSalt = Rock_Salt({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+});
+
 const text = {
   en: {
     welcome: 'Discover the full truth of salvation',
@@ -16,6 +23,8 @@ const text = {
     truthWill: 'The truth will',
     truthWillScrollingTexts: ['Change your life', 'Set you free', 'Save you'],
     whatWeBelieve: 'What we believe',
+    withUsYouCan: 'With us, you can',
+    receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
   },
   zh: {
     welcome: '欢迎到访新加坡真耶稣教会',
@@ -24,6 +33,8 @@ const text = {
     truthWill: 'The truth will',
     truthWillScrollingTexts: ['Change your life', 'Set you free', 'Save you'],
     whatWeBelieve: 'What we believe',
+    withUsYouCan: 'With us, you can',
+    receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
   },
 };
 
@@ -103,6 +114,26 @@ async function TruthTransforms({ lang }: { lang: Locale }) {
   );
 }
 
+async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
+  return (
+    <Container background="bg-white">
+      <div className="block py-16 md:py-20 xl:py-24">
+        <div className="relative">
+          <p
+            className={`xs:text-2xl xs:-left-8 xs:-top-8 absolute -left-6 -top-6 rotate-[-7.12deg] text-gray-800 sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl xl:-left-20 xl:-top-20 xl:text-5xl ${rockSalt.className}`}
+          >
+            {' '}
+            {text[lang].withUsYouCan}
+          </p>
+        </div>
+        <pre className="xs:text-4xl text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black sm:text-5xl md:text-6xl xl:text-7xl">
+          {text[lang].receiveCompleteGospel}
+        </pre>
+      </div>
+    </Container>
+  );
+}
+
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   const { schedule } = await getCDBDSchedule(false);
@@ -110,6 +141,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     <>
       <Hero lang={lang} />
       <TruthTransforms lang={lang} />
+      <ReceiveCompleteGospel lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
       <OurBeliefs lang={lang} background={''} />

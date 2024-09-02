@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
 import daisyui from 'daisyui';
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
   content: [
@@ -12,7 +12,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xs': '475px',
+        xs: '475px',
         ...defaultTheme.screens,
       },
       fontFamily: {

@@ -1,5 +1,5 @@
-import { Locale } from "@/i18n-config";
-import { Aof } from "./articles-of-faith";
+import { Locale } from '@/i18n-config';
+import { Aof } from './articles-of-faith';
 
 export type MarkdownType = {
   json: any;
@@ -123,7 +123,7 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
   globalStudyMedia {
     url
   }
-`
+`;
 type WebContent = {
   welcomeText: string;
   footerText: string;
@@ -134,12 +134,12 @@ type WebContent = {
   worshipInpersonTitle: string;
   worshipInpersonText: string;
   worshipInpersonMedia: {
-    url: string
+    url: string;
   };
   worshipHowtoprayTitle: string;
-  worshipHowtoprayText:  MarkdownType;
+  worshipHowtoprayText: MarkdownType;
   worshipHowtoprayMedia: {
-    url: string
+    url: string;
   };
   socialsYoutubeTitle: string;
   socialsYoutubeText: string;
@@ -147,29 +147,29 @@ type WebContent = {
   socialsInstagramTitle: string;
   socialsInstagramText: string;
   socialsInstagramMedia: {
-    url: string
+    url: string;
   };
   socialsFacebookTitle: string;
   socialsFacebookText: string;
   socialsFacebookMedia: {
-    url: string
+    url: string;
   };
   livestreamGlobalTitle: string;
   livestreamGlobalText: string;
   livestreamGlobalMedia: {
-    url: string
+    url: string;
   };
   globalTjciaTitle: string;
   globalTjciaText: string;
   globalTjciaMedia: {
     url: string;
-  }
+  };
   globalStudyTitle: string;
   globalStudyText: string;
   globalStudyMedia: {
     url: string;
-  }
-}
+  };
+};
 
 const EVENTS_GRAPHQL_FIELDS = `
   slug
@@ -256,7 +256,7 @@ const ARTICLE_GRAPHQL_FIELDS = `
       title
     }
   }
-`
+`;
 
 export type ArticleEntry = {
   slug: string;
@@ -287,13 +287,13 @@ export type ArticleEntry = {
   category: {
     doctrine: Aof;
     subcategory: string;
-  }
+  };
   relatedArticlesCollection: {
     items: {
       slug: string;
       title: string;
-    }[]
-  }
+    }[];
+  };
 };
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -333,28 +333,31 @@ function extractCdbdSchedule(fetchResponse: any): any {
   return fetchResponse?.data?.cdbdScheduleCollection?.items?.[0];
 }
 
-
 function extractArticleCategories(fetchResponse: any): any {
-  const categories = new Map<string,Set<string>>();
-  fetchResponse?.data?.categoryCollection?.items?.forEach(({doctrine, subcategory}: { doctrine: string; subcategory: string; }) => {
-    if (!categories.has(doctrine)) {
-      let subcat = new Set<string>();
-      subcat.add(subcategory);
-      categories.set(doctrine, subcat)
-    } else {
-      let cat = categories.get(doctrine) as Set<string>;
-      cat.add(subcategory);
-      categories.set(doctrine, cat);
-    }
-  })
+  const categories = new Map<string, Set<string>>();
+  fetchResponse?.data?.categoryCollection?.items?.forEach(
+    ({ doctrine, subcategory }: { doctrine: string; subcategory: string }) => {
+      if (!categories.has(doctrine)) {
+        let subcat = new Set<string>();
+        subcat.add(subcategory);
+        categories.set(doctrine, subcat);
+      } else {
+        let cat = categories.get(doctrine) as Set<string>;
+        cat.add(subcategory);
+        categories.set(doctrine, cat);
+      }
+    },
+  );
   return categories;
 }
 
 function extractArticleSubcategories(fetchResponse: any): any {
   const categories = new Set();
-  fetchResponse?.data?.categoryCollection?.items?.forEach((item: { subcategory: string; }) => {
-    categories.add(item.subcategory)
-  })
+  fetchResponse?.data?.categoryCollection?.items?.forEach(
+    (item: { subcategory: string }) => {
+      categories.add(item.subcategory);
+    },
+  );
   return Array.from(categories);
 }
 
@@ -380,7 +383,10 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   return extractPost(entry);
 }
 
-export async function getAllEvents(isDraftMode: boolean, locale: Locale): Promise<any[]> {
+export async function getAllEvents(
+  isDraftMode: boolean,
+  locale: Locale,
+): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
       eventsCollection(locale: "${locale}", order: date_DESC, preview: ${
@@ -455,7 +461,7 @@ export async function getWebContent(locale: string, preview: boolean) {
   return extractWebContent(entry);
 }
 
-export async function getCDBDSchedule(preview:boolean) {
+export async function getCDBDSchedule(preview: boolean) {
   const entry = await fetchGraphQL(
     `query {
       cdbdScheduleCollection(limit: 1, order:month_DESC){
@@ -467,8 +473,8 @@ export async function getCDBDSchedule(preview:boolean) {
       }
     }`,
     preview,
-);
-return extractCdbdSchedule(entry);
+  );
+  return extractCdbdSchedule(entry);
 }
 
 export async function getArticlesCategories(preview: boolean) {
@@ -486,7 +492,10 @@ export async function getArticlesCategories(preview: boolean) {
   return extractArticleCategories(entry);
 }
 
-export async function getArticlesSubcategories(doctrine: string, preview: boolean) {
+export async function getArticlesSubcategories(
+  doctrine: string,
+  preview: boolean,
+) {
   const entry = await fetchGraphQL(
     `query {
       categoryCollection(where:{doctrine:"${doctrine}"}){
@@ -503,9 +512,7 @@ export async function getArticlesSubcategories(doctrine: string, preview: boolea
 export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
-      articleCollection(preview: ${
-        isDraftMode ? 'true' : 'false'
-      }) {
+      articleCollection(preview: ${isDraftMode ? 'true' : 'false'}) {
         items {
           slug
         }
@@ -516,9 +523,11 @@ export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
   return extractArticleEntries(entries);
 }
 
-
-
-export async function getArticlesInSubcat(cat: string, subcat: string, preview: boolean):Promise<ArticleEntry[]> {
+export async function getArticlesInSubcat(
+  cat: string,
+  subcat: string,
+  preview: boolean,
+): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(where: { category: { doctrine: "${cat}", subcategory: "${subcat}"} }, preview: ${
@@ -534,7 +543,10 @@ export async function getArticlesInSubcat(cat: string, subcat: string, preview: 
   return extractArticleEntries(entry);
 }
 
-export async function getLatestArticles(limit: number, preview: boolean):Promise<ArticleEntry[]> {
+export async function getLatestArticles(
+  limit: number,
+  preview: boolean,
+): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
@@ -551,7 +563,10 @@ export async function getLatestArticles(limit: number, preview: boolean):Promise
   return extractArticleEntries(entry);
 }
 
-export async function getArticle(slug: string, preview: boolean):Promise<ArticleEntry> {
+export async function getArticle(
+  slug: string,
+  preview: boolean,
+): Promise<ArticleEntry> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(where: { slug: "${slug}" }, preview: ${

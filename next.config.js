@@ -9,16 +9,16 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'closerdaybyday.org'
+        hostname: 'closerdaybyday.org',
       },
       {
         protocol: 'http',
-        hostname: 'closerdaybyday.org'
+        hostname: 'closerdaybyday.org',
       },
       {
         protocol: 'https',
-        hostname: 'images.ctfassets.net'
-      }
-    ]
-  }
+        hostname: 'images.ctfassets.net',
+      },
+    ],
+  },
 };

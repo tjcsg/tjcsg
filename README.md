@@ -1,5 +1,7 @@
 # Things to do
+
 ## MVP by end Sept
+
 - Contact us form
 - Articles landing page
 - Events landing page
@@ -8,6 +10,7 @@
 - Homepage (latest articles)
 
 ## Good to have by end Sept
+
 - Homepage (hero)
 - Homepage (truth will...)
 - Homepage (Worship the true God)
@@ -17,12 +20,14 @@
 - Performance
 
 ## Needs help from others
+
 - Text content
 - Translate English texts to Chinese
 - Pictures/Images for website
 - Articles
 
 ## Needs discussion with others
+
 - Articles stuff (see tele)
 - Do we aim to support localisation by end Sept?
 - Do we want to port old events over to the new website or start from scratch?

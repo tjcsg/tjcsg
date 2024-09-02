@@ -5,8 +5,7 @@ import Link from 'next/link';
 import ContentfulImage from './contentful-image';
 import type { EventEntry } from './api';
 
-type Asset = EventEntry["summary"]["links"]["assets"]["block"][number];
-
+type Asset = EventEntry['summary']['links']['assets']['block'][number];
 
 function RichTextAsset({
   id,
@@ -19,14 +18,19 @@ function RichTextAsset({
 
   if (asset?.url) {
     return (
-      <ContentfulImage src={asset.url} width={asset.width} height={asset.height} alt={asset.description} />
+      <ContentfulImage
+        src={asset.url}
+        width={asset.width}
+        height={asset.height}
+        alt={asset.description}
+      />
     );
   }
 
   return null;
 }
 
-export function Markdown({ content }: { content: EventEntry["summary"] }) {
+export function Markdown({ content }: { content: EventEntry['summary'] }) {
   return documentToReactComponents(content.json, {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => (

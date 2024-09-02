@@ -61,7 +61,7 @@ async function Footer({ lang }: { lang: Locale }) {
   const contentfulText = await getWebContent(lang, false);
 
   return (
-    <footer className="bg-lightblue pt-2 dark:bg-gray-900">
+    <footer className="bg-lightblue pt-2">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 basis-1/2 md:mb-0">
@@ -69,20 +69,20 @@ async function Footer({ lang }: { lang: Locale }) {
               href={`https://tjc.sg/${lang}`}
               className="mb-2 flex items-center"
             >
-              <span className="text-md self-center whitespace-nowrap font-semibold dark:text-white">
+              <span className="text-md self-center whitespace-nowrap font-semibold text-gray-900">
                 {text[lang].name}
               </span>
             </Link>
-            <p className="mb-2 pr-6 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mb-2 pr-6 text-xs text-gray-500">
               {contentfulText.footerText}
             </p>
           </div>
           <div className="grid basis-1/2 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6">
             <div>
-              <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-2 text-sm font-semibold text-gray-900">
                 {text[lang].resource}
               </h2>
-              <ul className="font-medium text-gray-500 dark:text-gray-400">
+              <ul className="font-medium text-gray-500">
                 {learnmore.map((item) => (
                   <li key={item.en} className="mb-2 text-xs">
                     <Link
@@ -96,10 +96,10 @@ async function Footer({ lang }: { lang: Locale }) {
               </ul>
             </div>
             <div>
-              <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-2 text-sm font-semibold text-gray-900">
                 {text[lang].legal}
               </h2>
-              <ul className="font-medium text-gray-500 dark:text-gray-400">
+              <ul className="font-medium text-gray-500">
                 {legal.map((item) => (
                   <li key={item.en} className="mb-2 text-xs">
                     <Link
@@ -114,16 +114,13 @@ async function Footer({ lang }: { lang: Locale }) {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
+        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8 " />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-xs text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-xs text-gray-500 sm:text-center">
             {text[lang].copyright}
           </span>
           <div className="mt-4 flex sm:mt-0 sm:justify-center">
-            <Link
-              href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
-            >
+            <Link href="#" className="text-gray-500 hover:text-gray-900">
               <svg
                 className="h-4 w-4"
                 aria-hidden="true"
@@ -139,10 +136,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </svg>
               <span className="sr-only">Facebook page</span>
             </Link>
-            <Link
-              href="#"
-              className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
-            >
+            <Link href="#" className="ms-5 text-gray-500 hover:text-gray-900">
               <svg
                 className="h-4 w-4"
                 aria-hidden="true"
@@ -154,10 +148,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </svg>
               <span className="sr-only">Discord community</span>
             </Link>
-            <Link
-              href="#"
-              className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
-            >
+            <Link href="#" className="ms-5 text-gray-500 hover:text-gray-900">
               <svg
                 className="h-4 w-4"
                 aria-hidden="true"
@@ -173,10 +164,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </svg>
               <span className="sr-only">Twitter page</span>
             </Link>
-            <Link
-              href="#"
-              className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
-            >
+            <Link href="#" className="ms-5 text-gray-500 hover:text-gray-900">
               <svg
                 className="h-4 w-4"
                 aria-hidden="true"
@@ -192,10 +180,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </svg>
               <span className="sr-only">GitHub account</span>
             </Link>
-            <Link
-              href="#"
-              className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
-            >
+            <Link href="#" className="ms-5 text-gray-500 hover:text-gray-900">
               <svg
                 className="h-4 w-4"
                 aria-hidden="true"

@@ -43,10 +43,8 @@ async function Intro({ lang }: { lang: Locale }) {
           </div>
         ))}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="min-w-96 max-w-lg rounded-lg bg-white bg-opacity-80 px-7 pb-5 pt-4 dark:bg-gray-900 dark:bg-opacity-85">
-            <h1 className="mb-2 mt-2 font-semibold dark:text-white">
-              {text[lang].welcome}
-            </h1>
+          <div className="min-w-96 max-w-lg rounded-lg bg-white bg-opacity-80 px-7 pb-5 pt-4">
+            <h1 className="mb-2 mt-2 font-semibold">{text[lang].welcome}</h1>
 
             {contentfulText && (
               <p className="mb-5 text-xs">{contentfulText.welcomeText}</p>

@@ -143,7 +143,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
           >
             Locale <span aria-hidden="true">&rarr;</span>
           </Link> */}
-          <LocaleSwitcherDesktop />
+          {/* <LocaleSwitcherDesktop /> */}
         </div>
       </nav>
       <Dialog
@@ -217,9 +217,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
                   </DisclosurePanel>
                 </Disclosure>
               </div>
-              <div className="py-6">
-                <LocaleSwitcherMobile />
-              </div>
+              <div className="py-6">{/* <LocaleSwitcherMobile /> */}</div>
             </div>
           </div>
         </DialogPanel>

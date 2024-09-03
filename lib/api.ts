@@ -20,6 +20,7 @@ export type MarkdownType = {
 
 const WEBCONTENT_GRAPHQL_FIELDS = `
   welcomeText
+  homepageWorshipTrueGodText
   footerText
   aboutWhoweare {
     json
@@ -126,6 +127,7 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
 `;
 type WebContent = {
   welcomeText: string;
+  homepageWorshipTrueGodText: string;
   footerText: string;
   aboutWhoweareIframe: string;
   aboutWhoweare: MarkdownType;

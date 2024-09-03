@@ -30,7 +30,7 @@ export default {
         sans: ['var(--font-noto_sans)'],
       },
       colors: {
-        button: '#1D5598',
+        button: '#007DA4',
         button_hover: '#3D9BE9',
         lightblue: '#eaf7ff',
       },

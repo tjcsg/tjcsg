@@ -14,12 +14,24 @@ export default {
     extend: {
       animation: {
         'slide-up': 'list-slide-up 8s infinite',
+        'highlight': 'highlight-text 5s infinite',
       },
       keyframes: {
         'list-slide-up': {
           '0%, 10%': {transform: 'translateY(0%)'},
           '33%, 43%': {transform: 'translateY(-100%)'},
           '66%, 76%': {transform: 'translateY(-200%)'},
+        },
+        'highlight-text': {
+          from: {
+            "background-size": "0% 80%"
+          },
+          "35%": {
+            "background-size": "100% 80%"
+          },
+          to: {
+            "background-size": "100% 80%"
+          },
         },
       },
       screens: {

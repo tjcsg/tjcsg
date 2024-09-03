@@ -135,9 +135,14 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
             {text[lang].withUsYouCan}
           </p>
         </div>
-        <pre className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+        {/* prettier-ignore */}
+        <p className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+          Receive the <span className="animate-highlight whitespace-pre-line inline bg-no-repeat transition-all ease-in delay-500 bg-left bg-[length:0%_95%] bg-gradient-to-r from-sky-400 to-indigo-400">{`True
+          & Complete`}</span> Gospel
+        </p>
+        {/* <pre className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
           {text[lang].receiveCompleteGospel}
-        </pre>
+        </pre> */}
       </div>
     </Container>
   );

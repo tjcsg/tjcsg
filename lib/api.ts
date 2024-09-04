@@ -564,7 +564,6 @@ export async function getLatestArticles(
     }`,
     preview,
   );
-  console.log(entry);
   return extractArticleEntries(entry);
 }
 

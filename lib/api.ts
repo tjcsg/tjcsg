@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
+import { books } from './bible-books';
 
 export type MarkdownType = {
   json: any;
@@ -300,6 +301,66 @@ export type ArticleEntry = {
   };
 };
 
+const CDBD_GRAPHQL_FIELDS = `
+  slug
+  title
+  book
+  author
+  date
+  content {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+          width
+          height
+        }
+      }
+    }
+  }
+  image {
+    url
+    description
+    width
+    height
+  }
+`;
+
+export type CDBDEntry = {
+  slug: string;
+  title: string;
+  book: typeof books[number];
+  author: string;
+  date: string;
+  content: {
+    json: any;
+    links: {
+      assets: {
+        block: [
+          {
+            sys: { id: string };
+            url: string;
+            description: string;
+            width: number;
+            height: number;
+          },
+        ];
+      };
+    };
+  };
+  image: {
+    url: string;
+    description: string;
+    width: number;
+    height: number;
+  };
+};
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -365,12 +426,20 @@ function extractArticleSubcategories(fetchResponse: any): any {
   return Array.from(categories);
 }
 
-function extractArticleEntries(fetchResponse: any): any[] {
+function extractArticleEntries(fetchResponse: any): ArticleEntry[] {
   return fetchResponse?.data?.articleCollection?.items;
 }
 
 function extractArticle(fetchResponse: any): ArticleEntry {
   return fetchResponse?.data?.articleCollection?.items?.[0];
+}
+
+function extractCdbdEntries(fetchResponse: any): CDBDEntry[] {
+  return fetchResponse?.data?.cdbdCollection?.items;
+}
+
+function extractCdbd(fetchResponse: any): CDBDEntry {
+  return fetchResponse?.data?.cdbdCollection?.items?.[0];
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
@@ -584,4 +653,65 @@ export async function getArticle(
     preview,
   );
   return extractArticle(entry);
+}
+
+export async function getAllCDBDSlug(isDraftMode: boolean): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      cdbdCollection(preview: ${isDraftMode ? 'true' : 'false'}) {
+        items {
+          slug
+        }
+      }
+    }`,
+    isDraftMode,
+  );
+  return extractCdbdEntries(entries);
+}
+
+export async function getCDBD(
+  slug: string,
+  preview: boolean,
+  locale: Locale,
+): Promise<CDBDEntry> {
+  const entry = await fetchGraphQL(
+    `query {
+      cdbdCollection(where: { slug: "${slug}" }, locale:"${locale}", preview: ${
+        preview ? 'true' : 'false'
+      }, limit: 1) {
+        items {
+          ${CDBD_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  // console.log(obtainTextContent(extractCdbd(entry)));
+  // console.log(extractCdbd(entry));
+  return extractCdbd(entry);
+}
+function obtainTextContent(item:any) {
+  let text = "";
+  item.content.json.content.forEach((content:any) => content.nodeType === 'paragraph' && (text = `${text} ${content.content[0].value}`));
+  return text;
+}
+
+export async function getLatestCDBD(
+  limit: number,
+  preview: boolean,
+  locale: Locale,
+): Promise<CDBDEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      cdbdCollection(limit: ${limit}, order: date_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          ${CDBD_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview,
+  );
+  return extractCdbdEntries(entry);
 }

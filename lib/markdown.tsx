@@ -39,10 +39,13 @@ export function Markdown({ content }: { content: EventEntry['summary'] }) {
           assets={content.links.assets.block}
         />
       ),
+      [BLOCKS.HEADING_1]: (node: any, children) => (
+        <h1 className="font-bold">{children}</h1>
+      ),
       [INLINES.HYPERLINK]: (node: any, children) => {
         if (node.data.uri.includes('youtube.com/embed')) {
           return (
-            <div>
+            <div className="relative w-full pt-[56.25%]">
               <iframe
                 src={node.data.uri}
                 height="315"
@@ -51,6 +54,7 @@ export function Markdown({ content }: { content: EventEntry['summary'] }) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
+                className="absolute bottom-0 left-0 right-0 top-0 h-full w-full"
               />
             </div>
           );

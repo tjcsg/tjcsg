@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { draftMode } from 'next/headers';
 
-import Date from '../date';
+import Date from '../date-component';
 import CoverImage from '../cover-image';
 
 import { getAllEvents, getEvent } from '@/lib/api';

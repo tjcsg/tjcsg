@@ -178,6 +178,7 @@ const EVENTS_GRAPHQL_FIELDS = `
   title
   date
   duration
+  title2
   date2
   duration2
   church
@@ -208,11 +209,12 @@ const EVENTS_GRAPHQL_FIELDS = `
 export type EventEntry = {
   slug: string;
   title: string;
+  title2: string;
   date: string;
   duration: number;
   date2: string | null;
   duration2: number | null;
-  church: string;
+  church: 'adam' | 'tk' | 'sembawang' | 'serangoon';
   poster: {
     url: string;
     description: string;
@@ -397,6 +399,7 @@ export async function getAllEvents(
         items {
           slug
           title
+          title2
           date
           duration
           date2

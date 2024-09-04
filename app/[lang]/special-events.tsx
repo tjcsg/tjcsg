@@ -68,7 +68,6 @@ export default async function SpecialEvents({
                         <div className="relative max-w-xl">
                           <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
                             <Link href={`${lang}/events/${event.slug}`}>
-                              <span className="absolute inset-0" />
                               {event.title}
                             </Link>
                           </h3>
@@ -103,7 +102,6 @@ export default async function SpecialEvents({
                         {event.title2 && (
                           <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
                             <Link href={`${lang}/events/${event.slug}`}>
-                              <span className="absolute inset-0" />
                               {event.title2}
                             </Link>
                           </h3>

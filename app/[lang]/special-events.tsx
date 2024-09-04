@@ -57,15 +57,15 @@ export default async function SpecialEvents({
                 </div>
                 <div className="max-w-xl">
                   <div>
-                    <div className="relative max-w-xl">
-                      <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
-                        <Link href={`${lang}/events/${event.slug}`}>
-                          <span className="absolute inset-0" />
-                          {event.title}
-                        </Link>
-                      </h3>
-                    </div>
                     <div className="flex flex-col items-start justify-start text-xs">
+                      <div className="relative max-w-xl">
+                        <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
+                          <Link href={`${lang}/events/${event.slug}`}>
+                            <span className="absolute inset-0" />
+                            {event.title}
+                          </Link>
+                        </h3>
+                      </div>
                       <time
                         dateTime={event.date}
                         className="mt-2 text-gray-500"
@@ -93,6 +93,14 @@ export default async function SpecialEvents({
                           ),
                         )}
                       </time>
+                      {event.title2 && (
+                        <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
+                          <Link href={`${lang}/events/${event.slug}`}>
+                            <span className="absolute inset-0" />
+                            {event.title2}
+                          </Link>
+                        </h3>
+                      )}
                       {event.date2 && (
                         <time
                           dateTime={event.date}
@@ -141,8 +149,6 @@ export default async function SpecialEvents({
             ))}
         </div>
       </div>
-      {/* </div>
-      </div> */}
     </Container>
   );
 }

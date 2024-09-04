@@ -27,7 +27,7 @@ function ChurchLivestream({
             <p className="px-4 pt-4 text-sm">
               We welcome you to worship with us in-person.
             </p>
-            <table className="table-xs ml-4 mt-4 md:table-sm">
+            <table className="table-xs md:table-sm ml-4 mt-4">
               <tbody>
                 {timings.map((timing) => (
                   <tr key={timing.day}>

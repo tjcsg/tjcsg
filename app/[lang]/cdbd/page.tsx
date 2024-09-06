@@ -7,6 +7,7 @@ import CdbdSchedule from './cdbd-schedule';
 import PageHeader from '@/lib/components/page-header';
 import { bibleBooks, books } from '@/lib/bible-books';
 import { obtainTextContent } from '@/lib/utils';
+import AvatarLogo from '@/lib/components/avatar-logo';
 
 const text = {
   en: {
@@ -83,21 +84,28 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
                     >
                       {bibleBooks[book][lang]}
                     </Link>
-                    <h1 className="mb-2 text-xl font-bold">{article.title}</h1>
+                    <Link href={`/articles/${article.slug}`}>
+                      <h1 className="mb-2 mt-2 text-xl font-bold">
+                        {article.title}
+                      </h1>
+                    </Link>
                     <p className="text-md line-clamp-3 text-gray-700">
                       {article.description !== null
                         ? article.description
                         : obtainTextContent(article.content)}
                     </p>
-                    <p className="mt-3 text-sm capitalize text-gray-600">
-                      {article.author}
-                    </p>
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="mt-4 text-sm font-medium text-button underline hover:text-button_hover"
+                      className="mt-5 text-sm font-medium text-button underline hover:text-button_hover"
                     >
                       {text[lang].cta}
                     </Link>
+                    <div className="mt-3">
+                      <AvatarLogo size={7} />
+                      <p className="inline text-sm capitalize text-gray-600">
+                        {article.author}
+                      </p>
+                    </div>
                   </div>
                 </div>
               );

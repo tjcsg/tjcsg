@@ -8,6 +8,7 @@ import Header from '@/lib/components/header';
 import { categoryDetails } from '@/lib/articles-of-faith';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
+import AvatarLogo from '@/lib/components/avatar-logo';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -85,7 +86,12 @@ export default async function PostPage({
         <div className="prose max-w-none">
           <Markdown content={article.content} />
         </div>
-        {article.author && <p className="mt-6 text-sm">{article.author}</p>}
+        {article.author && (
+          <div className="mt-6">
+            <AvatarLogo size={7} />
+            <p className="inline text-sm capitalize">{article.author}</p>
+          </div>
+        )}
       </article>
 
       {relatedArticles.length > 0 && (

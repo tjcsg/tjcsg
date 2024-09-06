@@ -40,30 +40,40 @@ export default async function PostPage({
   if (!article) {
     notFound();
   }
-  const { doctrine } = article.category;
   const relatedArticles = article.relatedArticlesCollection?.items;
+  let isCdbd = article.contentfulMetadata.tags.some(
+    (tag) => tag.id === 'categoryCdbd',
+  );
 
   return (
     <div className="container mx-auto mb-8 max-w-3xl px-6 sm:px-12">
-      <Header
-        title={article.title}
-        breadcrumbs={[
-          { name: 'Articles', href: '/articles' },
-          {
-            name: categoryDetails[lang][doctrine].name,
-            href: `/articles/${doctrine}`,
-          },
-          {
-            name: article.category.subcategory,
-            href: `/articles/${doctrine}/${article.category.subcategory}`,
-          },
-          {
-            name: article.title,
-            href: `./${article.slug}`,
-          },
-        ]}
-      />
+      {isCdbd ? (
+        <Header
+          title={article.title}
+          breadcrumbs={[
+            { name: 'Closer Day by Day', href: '/cdbd' },
+            {
+              name: article.title,
+              href: `./${article.slug}`,
+            },
+          ]}
+        />
+      ) : (
+        <Header
+          title={article.title}
+          breadcrumbs={[
+            { name: 'Articles', href: '/articles' },
+            {
+              name: article.title,
+              href: `./${article.slug}`,
+            },
+          ]}
+        />
+      )}
       <article>
+        {article.description && (
+          <p className="text-md text-gray-500">{article.description}</p>
+        )}
         <ContentfulImage
           src={article.image.url}
           height={article.image.height}
@@ -71,9 +81,11 @@ export default async function PostPage({
           alt={article.image.description}
           className="w-full py-8"
         />
+
         <div className="prose max-w-none">
           <Markdown content={article.content} />
         </div>
+        {article.author && <p className="mt-6 text-sm">{article.author}</p>}
       </article>
 
       {relatedArticles.length > 0 && (

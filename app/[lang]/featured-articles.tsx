@@ -2,6 +2,7 @@ import { Locale } from '@/i18n-config';
 import { getLatestArticles } from '@/lib/api';
 import Container from '@/lib/components/container';
 import ContentfulImage from '@/lib/contentful-image';
+import { obtainTextContent } from '@/lib/utils';
 import Link from 'next/link';
 
 const text = {
@@ -18,7 +19,7 @@ const text = {
 };
 
 export default async function FeaturedArticles({ lang }: { lang: Locale }) {
-  const articles = await getLatestArticles(3, false);
+  const articles = await getLatestArticles(3, lang);
   return (
     <Container background="">
       <div className="mx-auto block w-full">
@@ -45,28 +46,40 @@ export default async function FeaturedArticles({ lang }: { lang: Locale }) {
                   className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
                 />
               </div>
-              {/* <div className="flex items-center gap-x-4 text-xs">
-                <time dateTime={post.datetime} className="text-gray-500">
-                  {post.date}
+              <div className="flex items-center gap-x-4 text-xs">
+                <time
+                  dateTime={article.date}
+                  className="mt-2 text-sm text-gray-500"
+                >
+                  {new Intl.DateTimeFormat(`${lang}-SG`, {
+                    timeZone: 'Singapore',
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                    hour12: true,
+                  }).format(new Date(article.date))}
                 </time>
-              </div> */}
+              </div>
               <div className="flex flex-col items-start justify-start text-xs">
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
                   <Link href={`${lang}/articles/pages/${article.slug}`}>
                     {article.title}
                   </Link>
                 </h3>
-                <Link
+                {/* <Link
                   href={`${lang}/articles/${article.category.doctrine}`}
                   className="mt-2 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                 >
                   {article.category.doctrine}
-                </Link>
+                </Link> */}
                 <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">
-                  {article.description}
+                  {article.description !== null
+                    ? article.description
+                    : obtainTextContent(article.content)}
                 </p>
                 <Link
-                  href={`${lang}/articles/pages/${article.slug}`}
+                  href={`${lang}/articles/${article.slug}`}
                   className="mt-3 text-sm font-medium text-button underline hover:text-button_hover"
                 >
                   {text[lang].cta}

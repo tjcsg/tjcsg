@@ -61,9 +61,9 @@ export default function Header({
           </nav>
         </div>
       )}
-      <h2 className="mt-2 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:tracking-tight">
+      <h1 className="mt-2 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:tracking-tight">
         {title}
-      </h2>
+      </h1>
     </div>
   );
 }

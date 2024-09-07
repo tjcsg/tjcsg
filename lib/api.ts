@@ -537,8 +537,28 @@ export async function getLatestArticles(
       }
     }`,
   );
-  console.log(entry)
   return extractArticleEntries(entry);
+}
+
+export async function getTotalArticles(
+  locale: Locale,
+  tags: string[]=[]
+): Promise<number> {
+  const entry = await fetchGraphQL(
+    `query {
+        articleCollection(
+          locale:"${locale}",
+          order: date_DESC
+          where: {
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("\",\"")}"` : ``} ] } }
+          }
+          
+        ) {
+        total
+      }
+    }`,
+  );
+  return entry?.data?.articleCollection?.total;
 }
 
 export async function getArticle(

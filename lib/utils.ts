@@ -1,13 +1,13 @@
 export function obtainTextContent(item: any) {
-    let text = '';
-    item &&
-      item?.json?.content?.forEach(
-        (content: any) =>
-          content.nodeType === 'paragraph' &&
-          (text = `${text} ${content.content[0].value}`),
-      );
-    return text;
-  }
+  let text = '';
+  item &&
+    item?.json?.content?.forEach(
+      (content: any) =>
+        content.nodeType === 'paragraph' &&
+        (text = `${text} ${content.content[0].value}`),
+    );
+  return text;
+}
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,

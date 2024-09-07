@@ -1,6 +1,5 @@
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
-import { getArticlesCategories } from '@/lib/api';
 import {
   aof,
   Aof,

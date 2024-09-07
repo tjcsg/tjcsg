@@ -5,7 +5,6 @@ import { Markdown } from '@/lib/markdown';
 import { getAllArticlesSlug, getArticle } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
-import { categoryDetails } from '@/lib/articles-of-faith';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
 import AvatarLogo from '@/lib/components/avatar-logo';

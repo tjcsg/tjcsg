@@ -225,7 +225,7 @@ export type EventEntry = {
   summary: MarkdownType;
 };
 
-// Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000. 
+// Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000.
 const ARTICLE_GRAPHQL_FIELDS = `
   slug
   title
@@ -290,8 +290,8 @@ export type ArticleEntry = {
     tags: {
       id: string;
       name: string;
-    }[]
-  }
+    }[];
+  };
 };
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -514,7 +514,7 @@ export async function getLatestArticles(
   locale: Locale,
   limit: number = 100,
   skip: number = 0,
-  tags: string[]=[]
+  tags: string[] = [],
 ): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
@@ -524,7 +524,7 @@ export async function getLatestArticles(
           locale:"${locale}",
           order: date_DESC
           where: {
-            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("\",\"")}"` : ``} ] } }
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
           }
           
         ) {
@@ -542,7 +542,7 @@ export async function getLatestArticles(
 
 export async function getTotalArticles(
   locale: Locale,
-  tags: string[]=[]
+  tags: string[] = [],
 ): Promise<number> {
   const entry = await fetchGraphQL(
     `query {
@@ -550,7 +550,7 @@ export async function getTotalArticles(
           locale:"${locale}",
           order: date_DESC
           where: {
-            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("\",\"")}"` : ``} ] } }
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
           }
           
         ) {

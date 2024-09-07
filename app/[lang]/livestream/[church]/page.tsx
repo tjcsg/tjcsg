@@ -69,7 +69,7 @@ export default function Page({
           { name: 'Worship', href: '/worship' },
           { name: `${details[lang][church].name} Livestream`, href: '#' },
         ]}
-        className="px-6 sm:px-12"
+        className="px-6 pb-6 sm:px-12"
       />
       <div className="block bg-stone-50">
         <div className="mx-auto px-6 py-10 sm:px-12 md:max-w-4xl">

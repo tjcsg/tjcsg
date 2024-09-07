@@ -11,7 +11,7 @@ export default function Header({
   className?: string;
 }) {
   return (
-    <div className={`pb-6 sm:py-8 ${className}`}>
+    <div className={`sm:pt-8 ${className}`}>
       {breadcrumbs && (
         <div>
           {breadcrumbs.length > 1 && (
@@ -61,7 +61,7 @@ export default function Header({
           </nav>
         </div>
       )}
-      <h1 className="mt-2 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:tracking-tight">
+      <h1 className="mt-4 min-w-0 text-3xl font-semibold leading-7 text-gray-900 sm:tracking-tight">
         {title}
       </h1>
     </div>

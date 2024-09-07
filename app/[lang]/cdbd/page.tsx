@@ -1,11 +1,6 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
-import { books } from '@/lib/bible-books';
 import CdbdList from './cdbd-list';
-
-export async function generateStaticParams() {
-  return books;
-}
 
 const MAX_ITEMS_PER_PAGE = 8;
 

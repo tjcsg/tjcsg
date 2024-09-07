@@ -1,13 +1,13 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
-import { bibleBooks, books } from '@/lib/bible-books';
+import { bibleBooks, books, booksNoConst } from '@/lib/bible-books';
 import AvatarLogo from '@/lib/components/avatar-logo';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../cdbd-list';
-// export const dynamic = 'force-static';
+export const dynamic = 'force-static';
 
-const MAX_ITEMS_PER_PAGE = 5;
+const MAX_ITEMS_PER_PAGE = 8;
 
 const text = {
   en: {
@@ -19,6 +19,10 @@ const text = {
     cta: 'Read More',
   },
 };
+
+export async function generateStaticParams() {
+  return booksNoConst;
+}
 
 // This function converts the bible book slug into the Contentful tag (e.g. 1-samuel to book1Samuel)
 function slugToContentfulTag(string: String) {

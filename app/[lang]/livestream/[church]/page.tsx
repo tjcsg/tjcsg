@@ -2,6 +2,7 @@ import { Locale } from '@/i18n-config';
 import { details } from '@/lib/church-details';
 import Container from '@/lib/components/container';
 import Header from '@/lib/components/header';
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   return ['tk', 'adam', 'serangoon', 'sembawang'];

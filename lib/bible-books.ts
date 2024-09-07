@@ -202,47 +202,47 @@ type BibleBooks = {
           category: ""
       },
       matthew: {
-          en: "",
+          en: "Matthew",
           zh: "",
-          category: ""
+          category: "Gospels"
       },
       mark: {
-          en: "",
+          en: "Mark",
           zh: "",
           category: ""
       },
       luke: {
-          en: "",
+          en: "Luke",
           zh: "",
           category: ""
       },
       john: {
-          en: "",
+          en: "John",
           zh: "",
           category: ""
       },
       acts: {
-          en: "",
+          en: "Acts",
           zh: "",
           category: ""
       },
       romans: {
-          en: "",
+          en: "Romans",
           zh: "",
           category: ""
       },
       "1-corinthians": {
-          en: "",
+          en: "1 Corinthians",
           zh: "",
           category: ""
       },
       "2-corinthians": {
-          en: "",
+          en: "2 Corinthians",
           zh: "",
           category: ""
       },
       galatians: {
-          en: "",
+          en: "Galatians",
           zh: "",
           category: ""
       },

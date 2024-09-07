@@ -524,7 +524,7 @@ export async function getLatestArticles(
           locale:"${locale}",
           order: date_DESC
           where: {
-            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("','")}"` : ``} ] } }
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("\",\"")}"` : ``} ] } }
           }
           
         ) {

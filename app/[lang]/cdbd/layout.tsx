@@ -31,16 +31,14 @@ export default async function Layout({
   return (
     <>
       <PageHeader lang={lang} text={text} />
-      <Container background="bg-white">
+      <div className={`flex items-center justify-center px-6 sm:px-12`}>
         <div className="block w-full max-w-screen-lg">
-          <div>
-            <CdbdSchedule
-              schedule={schedule.url}
-              text={text[lang].openSchedule}
-            />
-          </div>
+          <CdbdSchedule
+            schedule={schedule.url}
+            text={text[lang].openSchedule}
+          />
         </div>
-      </Container>
+      </div>
       {children}
     </>
   );

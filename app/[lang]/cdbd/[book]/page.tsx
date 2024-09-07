@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { bibleBooks, books } from '@/lib/bible-books';
 import { obtainTextContent } from '@/lib/utils';
 import AvatarLogo from '@/lib/components/avatar-logo';
+export const dynamic = 'force-static';
 
 const text = {
   en: {
@@ -16,19 +17,35 @@ const text = {
   },
 };
 
-export async function generateStaticParams() {
-  return books;
+// This function converts the bible book slug into the Contentful tag (e.g. 1-samuel to book1Samuel)
+function slugToContentfulTag(string: String) {
+  let arr = string.split('-');
+
+  arr[arr.length - 1] =
+    arr[arr.length - 1].charAt(0).toUpperCase() + arr[arr.length - 1].slice(1);
+
+  return `book${arr.join('')}`;
 }
 
-export default async function Page({ params }: { params: { lang: Locale } }) {
-  const { lang } = params;
+export default async function Page({
+  params,
+}: {
+  params: { lang: Locale; book: (typeof books)[number] };
+}) {
+  const { lang, book } = params;
 
-  const allCdbd = await getLatestArticles(lang, 100, 0, ['categoryCdbd']);
+  const allCdbd = await getLatestArticles(lang, 100, 0, [
+    'categoryCdbd',
+    slugToContentfulTag(book),
+  ]);
 
   return (
     <>
       <Container background="bg-white">
         <div className="block w-full max-w-screen-lg">
+          <h1 className="mb-8 text-3xl font-bold">
+            All articles for {bibleBooks[book][lang]}
+          </h1>
           {allCdbd &&
             allCdbd.map((article) => {
               const book = article.contentfulMetadata.tags
@@ -64,7 +81,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
                       }).format(new Date(article.date))}
                     </time>
                     <Link
-                      href={`/cdbd/${book}`}
+                      href={`#`}
                       className="ml-4 mt-2 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 hover:bg-gray-200"
                     >
                       {bibleBooks[book][lang]}

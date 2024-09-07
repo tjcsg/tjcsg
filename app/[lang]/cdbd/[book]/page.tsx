@@ -7,7 +7,7 @@ import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../cdbd-list';
 // export const dynamic = 'force-static';
 
-const MAX_ITEMS_PER_PAGE = 3;
+const MAX_ITEMS_PER_PAGE = 5;
 
 const text = {
   en: {

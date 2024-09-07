@@ -53,10 +53,7 @@ export default async function CdbdList({
             ?.name.split('-')[1] as (typeof books)[number];
 
           return (
-            <div
-              key={article.slug}
-              className="mb-8 flex flex-col md:mb-16 md:flex-row"
-            >
+            <div key={article.slug} className="mb-16 flex flex-col md:flex-row">
               <div className="relative mb-6 aspect-[16/9] w-full flex-none md:mb-0 md:mr-8 md:max-w-72">
                 <ContentfulImage
                   src={article.image.url}
@@ -102,12 +99,12 @@ export default async function CdbdList({
                 >
                   {text[lang].cta}
                 </Link>
-                <div className="mt-3">
-                  {/* <AvatarLogo size={7} /> */}
+                {/* <div className="mt-3">
+                  <AvatarLogo size={7} />
                   <p className="inline text-sm capitalize text-gray-600">
                     {article.author}
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           );

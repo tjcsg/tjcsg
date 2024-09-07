@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   return books;
 }
 
-const MAX_ITEMS_PER_PAGE = 5;
+const MAX_ITEMS_PER_PAGE = 8;
 
 export default async function Page({
   params,

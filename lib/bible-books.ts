@@ -132,7 +132,7 @@ type BibleBooks = {
           category: ""
       },
       lamentations: {
-          en: "",
+          en: "Lamentations",
           zh: "",
           category: ""
       },

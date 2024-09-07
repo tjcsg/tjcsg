@@ -58,10 +58,10 @@ export default async function PostPage({
           breadcrumbs={[
             { name: 'Closer Day by Day', href: '/cdbd' },
             { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
-            {
-              name: article.title,
-              href: `./${article.slug}`,
-            },
+            // {
+            //   name: article.title,
+            //   href: `./${article.slug}`,
+            // },
           ]}
         />
       ) : (
@@ -69,10 +69,10 @@ export default async function PostPage({
           title={article.title}
           breadcrumbs={[
             { name: 'Articles', href: '/articles' },
-            {
-              name: article.title,
-              href: `./${article.slug}`,
-            },
+            // {
+            //   name: article.title,
+            //   href: `./${article.slug}`,
+            // },
           ]}
         />
       )}
@@ -80,23 +80,37 @@ export default async function PostPage({
         {article.description && (
           <p className="text-md text-gray-500">{article.description}</p>
         )}
+        {article.author && (
+          <div className="pt-2">
+            {/* <AvatarLogo size={7} /> */}
+            <p className="text-md italic text-gray-500">{`Written by ${article.author}`}</p>
+          </div>
+        )}
+
+        <time
+          dateTime={article.date}
+          className="text-md mt-3 italic text-gray-500"
+        >
+          {new Intl.DateTimeFormat(`${lang}-SG`, {
+            timeZone: 'Singapore',
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour12: true,
+          }).format(new Date(article.date))}
+        </time>
         <ContentfulImage
           src={article.image.url}
           height={article.image.height}
           width={article.image.width}
           alt={article.image.description}
-          className="w-full py-8"
+          className="w-full py-6"
         />
 
-        <div className="prose max-w-none">
+        <div className="prose mb-3 max-w-none">
           <Markdown content={article.content} />
         </div>
-        {article.author && (
-          <div className="mt-6">
-            <AvatarLogo size={7} />
-            <p className="inline text-sm capitalize">{article.author}</p>
-          </div>
-        )}
       </article>
 
       {relatedArticles.length > 0 && (

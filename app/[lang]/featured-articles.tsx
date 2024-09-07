@@ -19,7 +19,7 @@ const text = {
 };
 
 export default async function FeaturedArticles({ lang }: { lang: Locale }) {
-  const articles = await getLatestArticles(3, lang);
+  const articles = await getLatestArticles(lang, 3);
   return (
     <Container background="">
       <div className="mx-auto block w-full">

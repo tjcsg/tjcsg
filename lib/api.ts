@@ -225,28 +225,13 @@ export type EventEntry = {
   summary: MarkdownType;
 };
 
+// Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000. 
 const ARTICLE_GRAPHQL_FIELDS = `
   slug
   title
   author
   date
   description
-  content {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          url
-          description
-          width
-          height
-        }
-      }
-    }
-  }
   image {
     url
     description
@@ -491,38 +476,6 @@ export async function getCDBDSchedule(preview: boolean) {
   return extractCdbdSchedule(entry);
 }
 
-export async function getArticlesCategories(preview: boolean) {
-  const entry = await fetchGraphQL(
-    `query {
-      categoryCollection{ 
-        items {
-          doctrine
-          subcategory
-        }
-      }
-    }`,
-    preview,
-  );
-  return extractArticleCategories(entry);
-}
-
-export async function getArticlesSubcategories(
-  doctrine: string,
-  preview: boolean,
-) {
-  const entry = await fetchGraphQL(
-    `query {
-      categoryCollection(where:{doctrine:"${doctrine}"}){
-        items {
-          subcategory
-        }
-      }
-    }`,
-    preview,
-  );
-  return extractArticleSubcategories(entry);
-}
-
 export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
@@ -558,14 +511,16 @@ export async function getArticlesInSubcat(
 }
 
 export async function getLatestArticles(
-  limit: number,
   locale: Locale,
+  limit: number = 100,
+  skip: number = 0,
   tags: string[]=[]
 ): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
         articleCollection(
-          limit: ${limit}
+          limit: ${limit},
+          skip: ${skip},
           locale:"${locale}",
           order: date_DESC
           where: {
@@ -575,10 +530,14 @@ export async function getLatestArticles(
         ) {
         items {
           ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+            }
         }
       }
     }`,
   );
+  console.log(entry)
   return extractArticleEntries(entry);
 }
 
@@ -593,6 +552,22 @@ export async function getArticle(
       }, limit: 1) {
         items {
           ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+              links {
+                assets {
+                  block {
+                    sys {
+                      id
+                    }
+                    url
+                    description
+                    width
+                    height
+                  }
+                }
+              }
+            }
         }
       }
     }`,

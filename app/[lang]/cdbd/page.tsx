@@ -1,27 +1,17 @@
 import { Locale } from '@/i18n-config';
-import { getCDBDSchedule, getLatestArticles } from '@/lib/api';
+import { getLatestArticles } from '@/lib/api';
 import Container from '@/lib/components/container';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
-import CdbdSchedule from './cdbd-schedule';
-import PageHeader from '@/lib/components/page-header';
 import { bibleBooks, books } from '@/lib/bible-books';
 import { obtainTextContent } from '@/lib/utils';
 import AvatarLogo from '@/lib/components/avatar-logo';
 
 const text = {
   en: {
-    title: 'Closer Day By Day',
-    subtitle: 'Drawing closer to Jesus through His words',
-    eyebrow: 'Study with us',
-    openSchedule: 'See our latest Bible reading schedule',
     cta: 'Read More',
   },
   zh: {
-    title: 'Closer Day By Day',
-    subtitle: 'Drawing closer to Jesus through His words',
-    eyebrow: 'Study with us',
-    openSchedule: 'See our latest Bible reading schedule',
     cta: 'Read More',
   },
 };
@@ -29,21 +19,12 @@ const text = {
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
 
-  const allCdbd = await getLatestArticles(3, lang, ['categoryCdbd']);
-  const { schedule } = await getCDBDSchedule(false);
+  const allCdbd = await getLatestArticles(lang, 100, 0, ['categoryCdbd']);
 
   return (
     <>
-      <PageHeader lang={lang} text={text} />
       <Container background="bg-white">
         <div className="block w-full max-w-screen-lg">
-          <div className="mb-8">
-            <CdbdSchedule
-              schedule={schedule.url}
-              text={text[lang].openSchedule}
-            />
-          </div>
-
           {allCdbd &&
             allCdbd.map((article) => {
               const book = article.contentfulMetadata.tags
@@ -53,7 +34,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
               return (
                 <div
                   key={article.slug}
-                  className="mb-8 flex flex-col md:flex-row"
+                  className="mb-8 flex flex-col md:mb-16 md:flex-row"
                 >
                   <div className="relative mb-6 aspect-[16/9] w-full flex-none md:mb-0 md:mr-8 md:max-w-72">
                     <ContentfulImage

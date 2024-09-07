@@ -9,6 +9,7 @@ import { categoryDetails } from '@/lib/articles-of-faith';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
 import AvatarLogo from '@/lib/components/avatar-logo';
+import { bibleBooks, books } from '@/lib/bible-books';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -45,6 +46,9 @@ export default async function PostPage({
   let isCdbd = article.contentfulMetadata.tags.some(
     (tag) => tag.id === 'categoryCdbd',
   );
+  const book = article.contentfulMetadata.tags
+    .find((tag) => tag.id.startsWith('book'))
+    ?.name.split('-')[1] as (typeof books)[number];
 
   return (
     <div className="container mx-auto mb-8 max-w-3xl px-6 sm:px-12">
@@ -53,6 +57,7 @@ export default async function PostPage({
           title={article.title}
           breadcrumbs={[
             { name: 'Closer Day by Day', href: '/cdbd' },
+            { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
             {
               name: article.title,
               href: `./${article.slug}`,

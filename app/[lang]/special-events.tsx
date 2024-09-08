@@ -27,7 +27,7 @@ export default async function SpecialEvents({
   lang: Locale;
   background: string;
 }) {
-  const allEvents = await getAllEvents(false, lang);
+  const allEvents = await getAllEvents(lang);
 
   return (
     <Container background={`${background}`}>

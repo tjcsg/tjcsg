@@ -382,14 +382,18 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
 }
 
 export async function getAllEvents(
-  isDraftMode: boolean,
   locale: Locale,
+  limit: number = 100,
+  skip: number = 0,
 ): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
-      eventsCollection(locale: "${locale}", order: date_DESC, preview: ${
-        isDraftMode ? 'true' : 'false'
-      }) {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: ${limit},
+        skip: ${skip}
+      ) {
         items {
           slug
           title
@@ -406,7 +410,6 @@ export async function getAllEvents(
         }
       }
     }`,
-    isDraftMode,
   );
   return extractPostEntries(entries);
 }
@@ -444,6 +447,19 @@ export async function getEvent(slug: string, preview: boolean) {
   return {
     event: extractPost(entry),
   };
+}
+
+export async function getTotalEvents(
+): Promise<number> {
+  const entry = await fetchGraphQL(
+    `query {
+        eventsCollection(limit:1000) {
+        total
+      }
+    }`,
+  );
+  console.log(entry)
+  return entry?.data?.eventsCollection?.total;
 }
 
 export async function getWebContent(locale: string, preview: boolean) {

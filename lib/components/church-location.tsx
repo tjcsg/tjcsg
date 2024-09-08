@@ -31,7 +31,7 @@ export default function ChurchLocation({
     <Container background={background}>
       <div className="block">
         <div className="mb-4 flex-col sm:flex-row">
-          <h1 className="text-lg font-semibold lg:text-2xl">{name}</h1>
+          <h1 className="text-lg font-semibold lg:text-2xl">{`True Jesus Church (${name})`}</h1>
           <p className="lg:text-md text-sm text-gray-500">{address}</p>
         </div>
         <div className="sm:flex">

@@ -5,6 +5,7 @@ import Container from '@/lib/components/container';
 import EventStatus from '@/lib/components/event-status';
 import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
+import { MapPinIcon } from '@heroicons/react/20/solid';
 
 const text = {
   en: {
@@ -139,7 +140,8 @@ export default async function SpecialEvents({
                           href={`${lang}/locations`}
                           className="relative z-10 mt-3 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                         >
-                          {details[lang][church].name}
+                          <MapPinIcon className="mb-1 mr-1 inline w-4" />
+                          <p className="inline">{details[lang][church].name}</p>
                         </Link>
                         <Link
                           href={`${lang}/events/${event.slug}`}

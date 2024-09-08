@@ -1,13 +1,10 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
-import { bibleBooks, Book, books, booksNoConst } from '@/lib/bible-books';
-import AvatarLogo from '@/lib/components/avatar-logo';
+import { booksNoConst } from '@/lib/bible-books';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
-import CdbdList from '../cdbd-list';
-import { bookSlugToContentfulTag } from '@/lib/utils';
-import { getAllCdbdBooks } from '@/lib/api';
-import BookSelector from '../book-selector';
+import CdbdList from '../../cdbd-list';
+import { getAllCdbdAuthors } from '@/lib/api';
 export const dynamic = 'force-static';
 
 const MAX_ITEMS_PER_PAGE = 8;
@@ -15,39 +12,34 @@ const MAX_ITEMS_PER_PAGE = 8;
 const text = {
   en: {
     back: 'Back to all CDBD Devotionals',
-    all: 'All Devotionals for',
+    all: 'All Devotionals by',
     cta: 'Read More',
   },
   zh: {
     back: 'Back to all CDBD Devotionals',
-    all: 'All Devotionals for',
+    all: 'All Devotionals by',
     cta: 'Read More',
   },
 };
 
 export async function generateStaticParams() {
-  return booksNoConst;
+  const authors = await getAllCdbdAuthors();
+  return authors;
 }
 
 export default async function Page({
   params,
   searchParams,
 }: {
-  params: { lang: Locale; book: Book };
+  params: { lang: Locale; author: string };
   searchParams?: {
     page?: string;
   };
 }) {
-  const { lang, book } = params;
+  const { lang, author } = params;
   const currentPage = Number(searchParams?.page) || 1;
-
-  const booksWithDevotionals = await getAllCdbdBooks();
-  // Ensures the books in the Book selector are displayed in the correct order
-  let cdbdBooks = books.filter((book: Book) =>
-    booksWithDevotionals.some(
-      (bookWithDevotionals) => bookWithDevotionals === book,
-    ),
-  );
+  let author_Text = author.split('-').join(' ');
+  author_Text = author_Text[0].toUpperCase() + author_Text.slice(1);
 
   return (
     <>
@@ -67,17 +59,19 @@ export default async function Page({
           </nav>
 
           <h1 className="mb-8 text-3xl font-bold">
-            {`${text[lang].all} ${bibleBooks[book][lang]}`}
+            {`${text[lang].all} ${author
+              .split('-')
+              .map((string) => string[0].toUpperCase() + string.slice(1))
+              .join(' ')}`}
           </h1>
-          <div className="mb-8">
-            <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
-          </div>
+
           <CdbdList
             lang={lang}
             currentPage={currentPage}
             maxItemsPerPage={MAX_ITEMS_PER_PAGE}
-            tags={['categoryCdbd', bookSlugToContentfulTag(book)]}
-            redirectUrl={`/cdbd/${book}`}
+            tags={['categoryCdbd']}
+            redirectUrl={`/cdbd/author/${author}`}
+            author={author_Text}
           />
         </div>
       </Container>

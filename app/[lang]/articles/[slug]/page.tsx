@@ -143,9 +143,18 @@ export default async function PostPage({
           <p className="text-md text-gray-500">{article.description}</p>
         )}
         {article.author && (
-          <div className="pt-2">
-            {/* <AvatarLogo size={7} /> */}
-            <p className="text-md italic text-gray-500">{`Written by ${article.author}`}</p>
+          <div className="text-md pt-2 italic text-gray-500">
+            <p className="inline">{`Written by `}</p>
+            {isCdbd ? (
+              <Link
+                href={`/cdbd/author/${article.author.toLowerCase().split(' ').join('-')}`}
+                className="underline hover:text-gray-700"
+              >
+                <p className="inline">{article.author}</p>
+              </Link>
+            ) : (
+              <p className="inline">{article.author}</p>
+            )}
           </div>
         )}
 

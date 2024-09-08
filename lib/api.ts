@@ -515,6 +515,7 @@ export async function getLatestArticles(
   limit: number = 100,
   skip: number = 0,
   tags: string[] = [],
+  author: string = '',
 ): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
@@ -524,6 +525,7 @@ export async function getLatestArticles(
           locale:"${locale}",
           order: date_DESC
           where: {
+            ${author ? `author: "${author}"` : ``}
             contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
           }
           
@@ -543,6 +545,7 @@ export async function getLatestArticles(
 export async function getTotalArticles(
   locale: Locale,
   tags: string[] = [],
+  author: string = '',
 ): Promise<number> {
   const entry = await fetchGraphQL(
     `query {
@@ -550,6 +553,7 @@ export async function getTotalArticles(
           locale:"${locale}",
           order: date_DESC,
           where: {
+            ${author ? `author: "${author}"` : ``}
             contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
           }
           
@@ -646,4 +650,31 @@ export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
     }`,
   );
   return entry?.data?.articleCollection?.items;
+}
+
+function extractCdbdAuthors(fetchResponse: any): any {
+  const authors = new Set();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach(
+    (item: any) => {
+      authors.add(item.author?.split(' ').join('-').toLowerCase());
+    },
+  );
+  return Array.from(authors);
+}
+
+
+export async function getAllCdbdAuthors(): Promise<string[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          author
+        }
+      }
+    }`,
+  );
+  return extractCdbdAuthors(entry);
 }

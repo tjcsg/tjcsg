@@ -1,17 +1,11 @@
 import { Locale } from '@/i18n-config';
-import {
-  getAllCdbdBooks,
-  getLatestArticles,
-  getTotalArticles,
-} from '@/lib/api';
-import { bibleBooks, Book, books } from '@/lib/bible-books';
-import AvatarLogo from '@/lib/components/avatar-logo';
+import { getLatestArticles, getTotalArticles } from '@/lib/api';
+import { bibleBooks, Book } from '@/lib/bible-books';
 import ContentfulImage from '@/lib/contentful-image';
 import { obtainTextContent } from '@/lib/utils';
 import Link from 'next/link';
 import Pagination from '../../../lib/components/pagination';
 import { redirect } from 'next/navigation';
-import BookSelector from './book-selector';
 
 const text = {
   en: {
@@ -28,14 +22,16 @@ export default async function CdbdList({
   maxItemsPerPage,
   tags = ['categoryCdbd'],
   redirectUrl = '/cdbd',
+  author = '',
 }: {
   lang: Locale;
   currentPage: number;
   maxItemsPerPage: number;
   tags?: string[];
   redirectUrl?: string;
+  author?: string;
 }) {
-  const totalItems = await getTotalArticles(lang, tags);
+  const totalItems = await getTotalArticles(lang, tags, author);
   const totalPages = Math.ceil(totalItems / maxItemsPerPage);
 
   if (currentPage > totalPages) {
@@ -47,21 +43,11 @@ export default async function CdbdList({
     maxItemsPerPage,
     (currentPage - 1) * maxItemsPerPage,
     tags,
-  );
-
-  const booksWithDevotionals = await getAllCdbdBooks();
-  // Ensures the books in the Book selector are displayed in the correct order
-  let cdbdBooks = books.filter((book: Book) =>
-    booksWithDevotionals.some(
-      (bookWithDevotionals) => bookWithDevotionals === book,
-    ),
+    author,
   );
 
   return (
     <>
-      <div className="mb-8">
-        <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
-      </div>
       {allCdbd &&
         allCdbd.map((article) => {
           const book = article.contentfulMetadata.tags
@@ -115,12 +101,6 @@ export default async function CdbdList({
                 >
                   {text[lang].cta}
                 </Link>
-                {/* <div className="mt-3">
-                  <AvatarLogo size={7} />
-                  <p className="inline text-sm capitalize text-gray-600">
-                    {article.author}
-                  </p>
-                </div> */}
               </div>
             </div>
           );

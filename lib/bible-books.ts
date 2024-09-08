@@ -135,14 +135,16 @@ export const books = [
   'revelation',
 ] as const;
 
-type Book = {
+export type Book = (typeof books)[number];
+
+type BookDetails = {
   en: string;
   zh: string;
   category: string;
 };
 
 type BibleBooks = {
-  [K in (typeof books)[number]]: Book;
+  [K in Book]: BookDetails;
 };
 
 export const bibleBooks: BibleBooks = {

@@ -1,6 +1,6 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
-import { books } from './bible-books';
+import { Book, books } from './bible-books';
 
 export type MarkdownType = {
   json: any;
@@ -594,4 +594,39 @@ export async function getArticle(
     preview,
   );
   return extractArticle(entry);
+}
+
+function extractCdbdBooks(fetchResponse: any): any {
+  const books = new Set();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach(
+    (item: any) => {
+      let book = item.contentfulMetadata.tags.find((tag:any) => tag.id.startsWith('book'))
+      ?.name.split('-')
+      book.shift();
+      books.add(book.join("-"));
+    },
+  );
+  return Array.from(books);
+}
+
+
+export async function getAllCdbdBooks(): Promise<Book[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          contentfulMetadata {
+            tags {
+              id
+              name
+            }
+          }
+        }
+      }
+    }`,
+  );
+  return extractCdbdBooks(entry);
 }

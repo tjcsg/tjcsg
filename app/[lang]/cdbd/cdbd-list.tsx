@@ -1,12 +1,17 @@
 import { Locale } from '@/i18n-config';
-import { getLatestArticles, getTotalArticles } from '@/lib/api';
-import { bibleBooks, books } from '@/lib/bible-books';
+import {
+  getAllCdbdBooks,
+  getLatestArticles,
+  getTotalArticles,
+} from '@/lib/api';
+import { bibleBooks, Book, books } from '@/lib/bible-books';
 import AvatarLogo from '@/lib/components/avatar-logo';
 import ContentfulImage from '@/lib/contentful-image';
 import { obtainTextContent } from '@/lib/utils';
 import Link from 'next/link';
 import Pagination from '../../../lib/components/pagination';
 import { redirect } from 'next/navigation';
+import BookSelector from './book-selector';
 
 const text = {
   en: {
@@ -44,13 +49,24 @@ export default async function CdbdList({
     tags,
   );
 
+  const booksWithDevotionals = await getAllCdbdBooks();
+  // Ensures the books in the Book selector are displayed in the correct order
+  let cdbdBooks = books.filter((book: Book) =>
+    booksWithDevotionals.some(
+      (bookWithDevotionals) => bookWithDevotionals === book,
+    ),
+  );
+
   return (
     <>
+      <div className="mb-8">
+        <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
+      </div>
       {allCdbd &&
         allCdbd.map((article) => {
           const book = article.contentfulMetadata.tags
             .find((tag) => tag.id.startsWith('book'))
-            ?.name.split('-')[1] as (typeof books)[number];
+            ?.name.split('-')[1] as Book;
 
           return (
             <div key={article.slug} className="mb-16 flex flex-col md:flex-row">
@@ -88,14 +104,14 @@ export default async function CdbdList({
                     {article.title}
                   </h1>
                 </Link>
-                <p className="text-md line-clamp-3 text-gray-700">
+                <p className="text-md mb-1 line-clamp-3 text-gray-700">
                   {article.description !== null
                     ? article.description
                     : obtainTextContent(article.content)}
                 </p>
                 <Link
                   href={`/articles/${article.slug}`}
-                  className="mt-5 text-sm font-medium text-button underline hover:text-button_hover"
+                  className="mt-6 text-sm font-medium text-button underline hover:text-button_hover"
                 >
                   {text[lang].cta}
                 </Link>

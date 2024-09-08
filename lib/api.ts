@@ -548,7 +548,7 @@ export async function getTotalArticles(
     `query {
         articleCollection(
           locale:"${locale}",
-          order: date_DESC
+          order: date_DESC,
           where: {
             contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
           }
@@ -629,4 +629,21 @@ export async function getAllCdbdBooks(): Promise<Book[]> {
     }`,
   );
   return extractCdbdBooks(entry);
+}
+
+export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        order: date_DESC,
+        limit:1000, 
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          slug
+        }
+      }
+    }`,
+  );
+  return entry?.data?.articleCollection?.items;
 }

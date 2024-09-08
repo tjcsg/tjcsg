@@ -2,13 +2,18 @@ import Link from 'next/link';
 import { draftMode } from 'next/headers';
 
 import { Markdown } from '@/lib/markdown';
-import { getAllArticlesSlug, getArticle } from '@/lib/api';
+import {
+  ArticleEntry,
+  getAllArticlesSlug,
+  getAllCdbdSlugs,
+  getArticle,
+} from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
-import AvatarLogo from '@/lib/components/avatar-logo';
-import { bibleBooks, Book, books } from '@/lib/bible-books';
+import { bibleBooks, Book } from '@/lib/bible-books';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -23,11 +28,94 @@ export async function generateStaticParams() {
 const text = {
   en: {
     seeAlso: 'See Also',
+    previous: 'Newer',
+    next: 'Older',
   },
   zh: {
     seeAlso: 'See Also',
+    previous: 'Newer',
+    next: 'Older',
   },
 };
+
+async function ArticleHead({
+  isCdbd,
+  article,
+  lang,
+}: {
+  isCdbd: boolean;
+  article: ArticleEntry;
+  lang: Locale;
+}) {
+  if (isCdbd) {
+    const book = article.contentfulMetadata.tags
+      .find((tag) => tag.id.startsWith('book'))
+      ?.name.split('-')[1] as Book;
+
+    return (
+      <Header
+        title={article.title}
+        breadcrumbs={[
+          { name: 'Closer Day by Day', href: '/cdbd' },
+          { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
+        ]}
+      />
+    );
+  }
+
+  return (
+    <>
+      <Header
+        title={article.title}
+        breadcrumbs={[{ name: 'Articles', href: '/articles' }]}
+      />
+    </>
+  );
+}
+
+async function ArticleFoot({
+  isCdbd,
+  article,
+  lang,
+}: {
+  isCdbd: boolean;
+  article: ArticleEntry;
+  lang: Locale;
+}) {
+  if (isCdbd) {
+    const cdbdSlugs = await getAllCdbdSlugs();
+    const index = cdbdSlugs.findIndex(
+      (cdbdSlug) => cdbdSlug.slug === article.slug,
+    );
+
+    return (
+      <div className="text-md mt-6 flex justify-between text-button underline">
+        {index > 0 ? (
+          <Link
+            href={`/articles/${cdbdSlugs[index - 1].slug}`}
+            className="flex hover:text-button_hover"
+          >
+            <ChevronLeftIcon aria-hidden="true" className="block w-6" />
+            {index > 0 && text[lang].previous}
+          </Link>
+        ) : (
+          <p></p>
+        )}
+        {index < cdbdSlugs.length - 1 && (
+          <Link
+            href={`/articles/${cdbdSlugs[index + 1].slug}`}
+            className="flex hover:text-button_hover"
+          >
+            {text[lang].next}
+            <ChevronRightIcon aria-hidden="true" className="block w-6" />
+          </Link>
+        )}
+      </div>
+    );
+  }
+
+  return <></>;
+}
 
 export default async function PostPage({
   params,
@@ -45,36 +133,11 @@ export default async function PostPage({
   let isCdbd = article.contentfulMetadata.tags.some(
     (tag) => tag.id === 'categoryCdbd',
   );
-  const book = article.contentfulMetadata.tags
-    .find((tag) => tag.id.startsWith('book'))
-    ?.name.split('-')[1] as Book;
 
   return (
     <div className="container mx-auto mb-8 max-w-3xl px-6 sm:px-12">
-      {isCdbd ? (
-        <Header
-          title={article.title}
-          breadcrumbs={[
-            { name: 'Closer Day by Day', href: '/cdbd' },
-            { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
-            // {
-            //   name: article.title,
-            //   href: `./${article.slug}`,
-            // },
-          ]}
-        />
-      ) : (
-        <Header
-          title={article.title}
-          breadcrumbs={[
-            { name: 'Articles', href: '/articles' },
-            // {
-            //   name: article.title,
-            //   href: `./${article.slug}`,
-            // },
-          ]}
-        />
-      )}
+      <ArticleHead isCdbd={isCdbd} article={article} lang={lang} />
+
       <article>
         {article.description && (
           <p className="text-md text-gray-500">{article.description}</p>
@@ -111,6 +174,8 @@ export default async function PostPage({
           <Markdown content={article.content} />
         </div>
       </article>
+
+      <ArticleFoot isCdbd={isCdbd} article={article} lang={lang} />
 
       {relatedArticles.length > 0 && (
         <div>

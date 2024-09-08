@@ -8,7 +8,7 @@ import Header from '@/lib/components/header';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
 import AvatarLogo from '@/lib/components/avatar-logo';
-import { bibleBooks, books } from '@/lib/bible-books';
+import { bibleBooks, Book, books } from '@/lib/bible-books';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -47,7 +47,7 @@ export default async function PostPage({
   );
   const book = article.contentfulMetadata.tags
     .find((tag) => tag.id.startsWith('book'))
-    ?.name.split('-')[1] as (typeof books)[number];
+    ?.name.split('-')[1] as Book;
 
   return (
     <div className="container mx-auto mb-8 max-w-3xl px-6 sm:px-12">

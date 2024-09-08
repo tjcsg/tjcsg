@@ -1,10 +1,11 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
-import { bibleBooks, books, booksNoConst } from '@/lib/bible-books';
+import { bibleBooks, Book, books, booksNoConst } from '@/lib/bible-books';
 import AvatarLogo from '@/lib/components/avatar-logo';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../cdbd-list';
+import { bookSlugToContentfulTag } from '@/lib/utils';
 export const dynamic = 'force-static';
 
 const MAX_ITEMS_PER_PAGE = 8;
@@ -12,10 +13,12 @@ const MAX_ITEMS_PER_PAGE = 8;
 const text = {
   en: {
     back: 'Back to all CDBD Devotionals',
+    all: 'All Devotionals for',
     cta: 'Read More',
   },
   zh: {
     back: 'Back to all CDBD Devotionals',
+    all: 'All Devotionals for',
     cta: 'Read More',
   },
 };
@@ -24,21 +27,11 @@ export async function generateStaticParams() {
   return booksNoConst;
 }
 
-// This function converts the bible book slug into the Contentful tag (e.g. 1-samuel to book1Samuel)
-function slugToContentfulTag(string: String) {
-  let arr = string.split('-');
-
-  arr[arr.length - 1] =
-    arr[arr.length - 1].charAt(0).toUpperCase() + arr[arr.length - 1].slice(1);
-
-  return `book${arr.join('')}`;
-}
-
 export default async function Page({
   params,
   searchParams,
 }: {
-  params: { lang: Locale; book: (typeof books)[number] };
+  params: { lang: Locale; book: Book };
   searchParams?: {
     page?: string;
   };
@@ -64,13 +57,13 @@ export default async function Page({
           </nav>
 
           <h1 className="mb-8 text-3xl font-bold">
-            All devotionals for {bibleBooks[book][lang]}
+            {`${text[lang].all} ${bibleBooks[book][lang]}`}
           </h1>
           <CdbdList
             lang={lang}
             currentPage={currentPage}
             maxItemsPerPage={MAX_ITEMS_PER_PAGE}
-            tags={['categoryCdbd', slugToContentfulTag(book)]}
+            tags={['categoryCdbd', bookSlugToContentfulTag(book)]}
             redirectUrl={`/cdbd/${book}`}
           />
         </div>

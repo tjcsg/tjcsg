@@ -4,6 +4,15 @@ import CdbdList from './cdbd-list';
 
 const MAX_ITEMS_PER_PAGE = 8;
 
+const text = {
+  en: {
+    all: 'All Devotionals',
+  },
+  zh: {
+    all: 'All Devotionals',
+  },
+};
+
 export default async function Page({
   params,
   searchParams,
@@ -22,7 +31,7 @@ export default async function Page({
     <>
       <Container background="bg-white">
         <div className="block w-full max-w-screen-lg">
-          <h1 className="mb-8 text-3xl font-bold">All devotionals</h1>
+          <h1 className="mb-8 text-3xl font-bold">{text[lang].all}</h1>
           <CdbdList
             lang={lang}
             currentPage={currentPage}

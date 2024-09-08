@@ -1,11 +1,16 @@
 import Link from 'next/link';
-import { getAllEvents } from '@/lib/api';
+import { getAllEvents, getTotalEvents } from '@/lib/api';
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import ContentfulImage from '@/lib/contentful-image';
 import EventStatus from '@/lib/components/event-status';
 import { details } from '@/lib/church-details';
 import { MapPinIcon } from '@heroicons/react/20/solid';
+import { redirect } from 'next/navigation';
+import Pagination from '@/lib/components/pagination';
+import Header from '@/lib/components/header';
+
+const MAX_ITEMS_PER_PAGE = 5;
 
 const text = {
   en: {
@@ -58,20 +63,43 @@ function DateAndTime({
 
 export default async function EventsPage({
   params,
+  searchParams,
 }: {
   params: { slug: string; lang: Locale };
+  searchParams?: {
+    page?: string;
+  };
 }) {
   const { lang } = params;
-  const allEvents = await getAllEvents(false, lang);
+
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalItems = await getTotalEvents();
+  const totalPages = Math.ceil(totalItems / MAX_ITEMS_PER_PAGE);
+
+  if (currentPage > totalPages) {
+    redirect('/events');
+  }
+
+  const allEvents = await getAllEvents(
+    lang,
+    MAX_ITEMS_PER_PAGE,
+    (currentPage - 1) * MAX_ITEMS_PER_PAGE,
+  );
 
   return (
     <Container background="bg-white">
       <div className="container mx-auto max-w-screen-lg sm:px-5">
-        <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
-          All Events
-        </h2>
+        <Header
+          title={'All Special Events'}
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'All Special Events', href: '/events' },
+          ]}
+          className="mb-10"
+        />
 
-        <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-20 border-t pt-1  xs:w-5/6 sm:w-3/4 md:w-3/5 lg:w-full">
+        <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6  sm:w-3/4 md:w-3/5 lg:w-full lg:gap-y-16">
           {allEvents &&
             allEvents.map((event) => {
               const church = event.church as
@@ -80,7 +108,7 @@ export default async function EventsPage({
                 | 'sembawang'
                 | 'serangoon';
               return (
-                <article
+                <div
                   key={event.slug}
                   className={`mx-auto flex w-full flex-col justify-start rounded-2xl border border-neutral-300 bg-neutral-100 pb-4 lg:flex-row lg:pb-0`}
                 >
@@ -141,9 +169,12 @@ export default async function EventsPage({
                       </Link>
                     </div>
                   </div>
-                </article>
+                </div>
               );
             })}
+        </div>
+        <div className="mt-10 flex w-full justify-center lg:mt-16">
+          <Pagination totalPages={totalPages} />
         </div>
       </div>
     </Container>

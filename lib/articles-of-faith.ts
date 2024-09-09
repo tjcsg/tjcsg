@@ -95,7 +95,7 @@ export const categoryDetails: {
         'The Sabbath Day, the seventh day of the week (Saturday), is a Holy Day, blessed and sanctified by God. It is to be observed under the Lord’s grace for the commemoration of God’s creation and salvation and with the hope of eternal rest in the life to come.',
     },
     salvation: {
-      name: 'Salvation',
+      name: 'Salvation By Grace',
       details:
         'Salvation is given by the grace of God through faith. Believers must rely on the Holy Spirit to pursue holiness, to honor God, and to love humanity.',
     },

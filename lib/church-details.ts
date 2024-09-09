@@ -20,7 +20,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       name: 'True Jesus Church (Adam Road)',
       shortform: 'adam',
       address:
-        '17D Adam Road, Singapore 289890. (Nearest MRT – Botanic Gardens, Tan Kah Kee',
+        '17D Adam Road, Singapore 289890',
       timings: [
         { day: 'Wednesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -35,7 +35,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       name: 'True Jesus Church (Telok Kurau)',
       shortform: 'tk',
       address:
-        '32 Lorong H, Telok Kurau, Singapore 426020. (Nearest MRT – Eunos)',
+        '32 Lorong H, Telok Kurau, Singapore 426020',
       timings: [
         { day: 'Tuesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -50,7 +50,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       name: 'True Jesus Church (Sembawang)',
       shortform: 'sembawang',
       address:
-        'Woodlands 11, Unit #04-19, 11 Woodlands Close, Singapore 737853. (Nearest MRT – Admiralty)',
+        '11 Woodlands Close, Unit #04-19, Singapore 737853',
       timings: [
         { day: 'Wednesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },
@@ -65,7 +65,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       name: 'True Jesus Church (Serangoon)',
       shortform: 'serangoon',
       address:
-        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859. (Nearest MRT – Hougang))',
+        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
       timings: [
         { day: 'Tuesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },

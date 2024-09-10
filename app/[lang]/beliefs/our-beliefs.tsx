@@ -1,8 +1,6 @@
 import { Locale } from '@/i18n-config';
-import { getWebContent } from '@/lib/api';
 import { aof, categoryDetails } from '@/lib/articles-of-faith';
 import Container from '@/lib/components/container';
-import { Markdown } from '@/lib/markdown';
 import Link from 'next/link';
 
 export default async function OurBeliefs({
@@ -21,18 +19,18 @@ export default async function OurBeliefs({
           </h2>
           <dl className="mt-2 space-y-8 divide-y divide-gray-900/10">
             {aof.map((aof) => (
-              <Link key={aof} href={`/articles/${aof}`}>
-                <div className="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
-                  <dt className="text-base font-bold leading-7 text-gray-900 lg:col-span-3">
-                    {categoryDetails[lang][aof].name}
-                  </dt>
-                  <dd className="mt-4 lg:col-span-9 lg:mt-0">
-                    <p className="text-base leading-7 text-gray-600">
-                      {categoryDetails[lang][aof].details}
-                    </p>
-                  </dd>
-                </div>
-              </Link>
+              // <Link key={aof} href={`/articles/${aof}`}>
+              <div className="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                <dt className="text-base font-bold leading-7 text-gray-900 lg:col-span-3">
+                  {categoryDetails[lang][aof].name}
+                </dt>
+                <dd className="mt-4 lg:col-span-9 lg:mt-0">
+                  <p className="text-base leading-7 text-gray-600">
+                    {categoryDetails[lang][aof].details}
+                  </p>
+                </dd>
+              </div>
+              // </Link>
             ))}
           </dl>
         </div>

@@ -1,6 +1,6 @@
 import { Locale } from '@/i18n-config';
 import { getWebContent, MarkdownType } from '@/lib/api';
-import OurBeliefs from './our-beliefs';
+import OurBeliefs from '../beliefs/our-beliefs';
 import Link from 'next/link';
 import WhyTrueJesusChurch from './why-true-jesus-church';
 import tjcMap from '@/public/tjcmap.png';
@@ -207,7 +207,7 @@ async function BasicBeliefs({ lang }: { lang: Locale }) {
           </div>
         ))}
         <div className="self-center justify-self-center pb-[30%] text-xl xs:text-2xl">
-          <Link href="#">
+          <Link href="/beliefs">
             <label className="text-button underline hover:text-button_hover">
               {text[lang].learnMore}
             </label>
@@ -230,7 +230,6 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <TJCGlobalMap lang={lang} />
       <BasicBeliefs lang={lang} />
       <WhyTrueJesusChurch lang={lang} background="bg-stone-50" />
-      <OurBeliefs lang={lang} background="bg-white-" />
     </>
   );
 }

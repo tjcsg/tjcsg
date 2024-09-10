@@ -8,7 +8,7 @@ import tkPicOverlay from '@/public/landingpage_overlap.svg';
 import prayerPic from '@/public/landingpage_prayer.png';
 import biblePic from '@/public/landingpage_bible2.png';
 import biblePic2 from '@/public/landingpage_bible.png';
-import OurBeliefs from './about/our-beliefs';
+import OurBeliefs from './beliefs/our-beliefs';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 

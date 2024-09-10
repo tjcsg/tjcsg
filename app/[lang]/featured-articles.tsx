@@ -1,28 +1,27 @@
 import { Locale } from '@/i18n-config';
 import { getLatestArticles } from '@/lib/api';
+import ArticleCard from '@/lib/components/article-card';
 import Container from '@/lib/components/container';
-import ContentfulImage from '@/lib/contentful-image';
-import { obtainTextContent } from '@/lib/utils';
 import Link from 'next/link';
 
 const text = {
   en: {
     title: 'Latest Articles',
     subtitle: 'Read our latest articles here!',
-    cta: 'Read article',
+    viewAll: 'View all articles',
   },
   zh: {
     title: '特别聚会',
     subtitle: '欢迎您参加我们的特别聚会！',
-    cta: 'Read article',
+    viewAll: 'View all articles',
   },
 };
 
 export default async function FeaturedArticles({ lang }: { lang: Locale }) {
-  const articles = await getLatestArticles(lang, 3);
+  const articles = await getLatestArticles(lang, 6);
   return (
     <Container background="">
-      <div className="mx-auto block w-full">
+      <div className="mx-auto my-8 block w-full md:my-16">
         <div className="mx-auto max-w-2xl md:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {text[lang].title}
@@ -31,62 +30,18 @@ export default async function FeaturedArticles({ lang }: { lang: Locale }) {
             {text[lang].subtitle}
           </p>
         </div>
-        <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-12 md:mx-0 md:max-w-none md:grid-cols-3">
+        <div className="mx-auto mt-4 grid max-w-screen-xl grid-cols-1 gap-8 border-t border-gray-200 pt-12 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
-            <article
-              key={article.slug}
-              className="mx-auto flex w-11/12 flex-col items-start xs:w-2/3 md:w-full"
-            >
-              <div className="relative aspect-[16/9] w-full">
-                <ContentfulImage
-                  src={article.image.url}
-                  alt=""
-                  width={1152}
-                  height={648}
-                  className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
-                />
-              </div>
-              <div className="flex items-center gap-x-4 text-xs">
-                <time
-                  dateTime={article.date}
-                  className="mt-2 text-sm text-gray-500"
-                >
-                  {new Intl.DateTimeFormat(`${lang}-SG`, {
-                    timeZone: 'Singapore',
-                    weekday: 'short',
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                    hour12: true,
-                  }).format(new Date(article.date))}
-                </time>
-              </div>
-              <div className="flex flex-col items-start justify-start text-xs">
-                <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
-                  <Link href={`${lang}/articles/pages/${article.slug}`}>
-                    {article.title}
-                  </Link>
-                </h3>
-                {/* <Link
-                  href={`${lang}/articles/${article.category.doctrine}`}
-                  className="mt-2 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                >
-                  {article.category.doctrine}
-                </Link> */}
-                <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">
-                  {article.description !== null
-                    ? article.description
-                    : obtainTextContent(article.content)}
-                </p>
-                <Link
-                  href={`${lang}/articles/${article.slug}`}
-                  className="mt-3 text-sm font-medium text-button underline hover:text-button_hover"
-                >
-                  {text[lang].cta}
-                </Link>
-              </div>
-            </article>
+            <ArticleCard key={article.slug} lang={lang} article={article} />
           ))}
+        </div>
+        <div className="mt-10 block text-center">
+          <Link
+            href={'/articles'}
+            className="text-lg capitalize text-button underline hover:text-button_hover lg:text-xl"
+          >
+            {text[lang].viewAll}
+          </Link>
         </div>
       </div>
     </Container>

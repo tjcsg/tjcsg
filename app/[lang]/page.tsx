@@ -225,7 +225,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <ReceiveCompleteGospel lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
-      <OurBeliefs lang={lang} background={''} />
+      {/* <OurBeliefs lang={lang} background={''} /> */}
 
       {/* For some reason, adding the container into the CDBD client component gives an error */}
       {/* <Container background="bg-stone-50">

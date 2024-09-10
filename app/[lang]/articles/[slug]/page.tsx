@@ -56,6 +56,7 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
+          { name: 'All Articles', href: '/articles' },
           { name: 'Closer Day by Day', href: '/cdbd' },
           { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
         ]}

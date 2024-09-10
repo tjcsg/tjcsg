@@ -458,7 +458,6 @@ export async function getTotalEvents(
       }
     }`,
   );
-  console.log(entry)
   return entry?.data?.eventsCollection?.total;
 }
 
@@ -579,6 +578,41 @@ export async function getTotalArticles(
     }`,
   );
   return entry?.data?.articleCollection?.total;
+}
+
+function extractArticleTags(fetchResponse: any): Map<string,string> {
+  const tags = new Map();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach(
+    (item: any) => {
+      item.contentfulMetadata.tags?.forEach((tag: {name: string, id: string}) => {
+        if (!tags.get(tag.id)) {
+          tags.set(tag.id, tag.name)
+        }
+      }
+      )
+    },
+  );
+  return tags;
+}
+
+
+export async function getAllArticleTags(): Promise<Map<string,string>> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(limit: 1000) {
+        items {
+          contentfulMetadata {
+            tags {
+              id
+              name
+            }
+          } 
+        }
+      }
+    }`,
+  );
+  return extractArticleTags(entry);
 }
 
 export async function getArticle(

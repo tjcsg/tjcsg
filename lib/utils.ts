@@ -19,6 +19,13 @@ export function bookSlugToContentfulTag(string: String) {
   return `book${arr.join('')}`;
 }
 
+// This function converts the contentful tags into the readable text (e.g. category-cdbd to Cdbd, book-ezekiel to Ezekiel)
+export function tagNameToText(string: String) {
+  let arr = string.split('-');
+  arr.shift();
+  return arr[0] === "cdbd" ? arr.join(" ").toUpperCase() : arr.join(" ");
+}
+
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.
@@ -28,13 +35,21 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 
   // If the current page is among the first 3 pages,
   // show the first 3, an ellipsis, and the last 2 pages.
-  if (currentPage <= 3) {
+  if (currentPage < 3) {
     return [1, 2, 3, '...', totalPages - 1, totalPages];
+  }
+
+  if (currentPage == 3) {
+    return [1, 2, 3, 4, '...', totalPages - 1, totalPages];
+  }
+
+  if (currentPage === totalPages - 2) {
+    return [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
   }
 
   // If the current page is among the last 3 pages,
   // show the first 2, an ellipsis, and the last 3 pages.
-  if (currentPage >= totalPages - 2) {
+  if (currentPage > totalPages - 2) {
     return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
   }
 

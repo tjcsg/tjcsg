@@ -23,7 +23,7 @@ export function bookSlugToContentfulTag(string: String) {
 export function tagNameToText(string: String) {
   let arr = string.split('-');
   arr.shift();
-  return arr[0] === "cdbd" ? arr.join(" ").toUpperCase() : arr.join(" ");
+  return arr[0] === 'cdbd' ? arr.join(' ').toUpperCase() : arr.join(' ');
 }
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
@@ -44,7 +44,14 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   }
 
   if (currentPage === totalPages - 2) {
-    return [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    return [
+      1,
+      '...',
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages,
+    ];
   }
 
   // If the current page is among the last 3 pages,

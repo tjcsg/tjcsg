@@ -57,7 +57,7 @@ export default function ArticleCard({
           </h3>
           <div className="mt-2 flex gap-2">
             {tags.map((tag) => (
-              <ArticleTag tag={tag} />
+              <ArticleTag key={tag.id} tag={tag} />
             ))}
           </div>
           <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">

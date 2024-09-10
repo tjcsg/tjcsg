@@ -449,8 +449,7 @@ export async function getEvent(slug: string, preview: boolean) {
   };
 }
 
-export async function getTotalEvents(
-): Promise<number> {
+export async function getTotalEvents(): Promise<number> {
   const entry = await fetchGraphQL(
     `query {
         eventsCollection(limit:1000) {
@@ -580,24 +579,22 @@ export async function getTotalArticles(
   return entry?.data?.articleCollection?.total;
 }
 
-function extractArticleTags(fetchResponse: any): Map<string,string> {
+function extractArticleTags(fetchResponse: any): Map<string, string> {
   const tags = new Map();
 
-  fetchResponse?.data?.articleCollection?.items?.forEach(
-    (item: any) => {
-      item.contentfulMetadata.tags?.forEach((tag: {name: string, id: string}) => {
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    item.contentfulMetadata.tags?.forEach(
+      (tag: { name: string; id: string }) => {
         if (!tags.get(tag.id)) {
-          tags.set(tag.id, tag.name)
+          tags.set(tag.id, tag.name);
         }
-      }
-      )
-    },
-  );
+      },
+    );
+  });
   return tags;
 }
 
-
-export async function getAllArticleTags(): Promise<Map<string,string>> {
+export async function getAllArticleTags(): Promise<Map<string, string>> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(limit: 1000) {
@@ -653,17 +650,15 @@ export async function getArticle(
 function extractCdbdBooks(fetchResponse: any): any {
   const books = new Set();
 
-  fetchResponse?.data?.articleCollection?.items?.forEach(
-    (item: any) => {
-      let book = item.contentfulMetadata.tags.find((tag:any) => tag.id.startsWith('book'))
-      ?.name.split('-')
-      book.shift();
-      books.add(book.join("-"));
-    },
-  );
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    let book = item.contentfulMetadata.tags
+      .find((tag: any) => tag.id.startsWith('book'))
+      ?.name.split('-');
+    book.shift();
+    books.add(book.join('-'));
+  });
   return Array.from(books);
 }
-
 
 export async function getAllCdbdBooks(): Promise<Book[]> {
   const entry = await fetchGraphQL(
@@ -685,7 +680,7 @@ export async function getAllCdbdBooks(): Promise<Book[]> {
   return extractCdbdBooks(entry);
 }
 
-export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
+export async function getAllCdbdSlugs(): Promise<{ slug: string }[]> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(
@@ -705,14 +700,11 @@ export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
 function extractCdbdAuthors(fetchResponse: any): any {
   const authors = new Set();
 
-  fetchResponse?.data?.articleCollection?.items?.forEach(
-    (item: any) => {
-      authors.add(item.author?.split(' ').join('-').toLowerCase());
-    },
-  );
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    authors.add(item.author?.split(' ').join('-').toLowerCase());
+  });
   return Array.from(authors);
 }
-
 
 export async function getAllCdbdAuthors(): Promise<string[]> {
   const entry = await fetchGraphQL(

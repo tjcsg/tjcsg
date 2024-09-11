@@ -99,9 +99,13 @@ function InfoBox({
   description: string;
 }) {
   return (
-    <div className="max-w-48 text-center">
-      <p className="text-4xl font-light sm:text-5xl xl:text-6xl">{largeText}</p>
-      <p className="mt-4 text-lg sm:text-xl xl:text-2xl">{description}</p>
+    <div className="flex max-w-48 flex-col text-center text-gray-700 ">
+      <p className="text-3xl font-light xs:text-4xl sm:text-5xl xl:text-6xl">
+        {largeText}
+      </p>
+      <p className="xs:text-md mt-4 text-pretty text-sm sm:text-lg md:text-xl xl:text-2xl">
+        {description}
+      </p>
     </div>
   );
 }
@@ -114,7 +118,7 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
           About
         </label>
         <div>
-          <div className="prose w-full text-2xl  xl:text-3xl">
+          <div className="prose w-full text-lg sm:text-xl md:text-2xl xl:text-3xl">
             <p className="leading-normal">{text[lang].about_1}</p>
             <p className="leading-normal">{text[lang].about_2}</p>
           </div>

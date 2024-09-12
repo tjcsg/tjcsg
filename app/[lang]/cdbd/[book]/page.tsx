@@ -49,37 +49,35 @@ export default async function Page({
   );
 
   return (
-    <>
-      <Container background="bg-white">
-        <div className="block w-full max-w-screen-lg">
-          <nav aria-label="Back" className="mb-4">
-            <Link
-              href={'/cdbd'}
-              className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
-            >
-              <ChevronLeftIcon
-                aria-hidden="true"
-                className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
-              />
-              {text[lang].back}
-            </Link>
-          </nav>
+    <Container>
+      <div className="max-w-screen-lg">
+        <nav aria-label="Back" className="mb-4">
+          <Link
+            href={'/cdbd'}
+            className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
+          >
+            <ChevronLeftIcon
+              aria-hidden="true"
+              className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
+            />
+            {text[lang].back}
+          </Link>
+        </nav>
 
-          <h1 className="mb-8 text-3xl font-bold">
-            {`${text[lang].all} ${bibleBooks[book][lang]}`}
-          </h1>
-          <div className="mb-8">
-            <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
-          </div>
-          <CdbdList
-            lang={lang}
-            currentPage={currentPage}
-            maxItemsPerPage={MAX_ITEMS_PER_PAGE}
-            tags={['categoryCdbd', `book${slugToContentfulTag(book)}`]}
-            redirectUrl={`/cdbd/${book}`}
-          />
+        <h1 className="mb-8 text-3xl font-bold">
+          {`${text[lang].all} ${bibleBooks[book][lang]}`}
+        </h1>
+        <div className="mb-8">
+          <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
         </div>
-      </Container>
-    </>
+        <CdbdList
+          lang={lang}
+          currentPage={currentPage}
+          maxItemsPerPage={MAX_ITEMS_PER_PAGE}
+          tags={['categoryCdbd', `book${slugToContentfulTag(book)}`]}
+          redirectUrl={`/cdbd/${book}`}
+        />
+      </div>
+    </Container>
   );
 }

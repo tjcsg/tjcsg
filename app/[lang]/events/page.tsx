@@ -40,8 +40,8 @@ export default async function EventsPage({
   );
 
   return (
-    <Container background="bg-white">
-      <div className="mx-auto block w-full sm:px-5">
+    <Container>
+      <div className="sm:px-5">
         <Header
           title={'All Special Events'}
           breadcrumbs={[{ name: 'Home', href: '/' }]}

@@ -95,12 +95,12 @@ function InfoBox({
 
 async function WhoWeAre({ lang }: { lang: Locale }) {
   return (
-    <Container background="bg-white">
-      <div className="mt-8 lg:mt-16">
+    <Container>
+      <div className="mt-8 flex w-full justify-stretch lg:mt-16">
         <ModernContentStrip
           title={'About'}
           contents={[text[lang].about_1, text[lang].about_2]}
-          paragraphClasses="text-lg sm:text-xl md:text-2xl xl:text-3xl"
+          paragraphClasses="text-lg xs:text-xl sm:text-2xl xl:text-3xl"
           children={
             <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
               <InfoBox
@@ -125,18 +125,20 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
 
 async function BringingSalvationToAll({ lang }: { lang: Locale }) {
   return (
-    <Container background="bg-white">
-      <div className="block py-12 xs:py-16 xl:py-44">
-        <div className="relative">
-          <p
-            className={`absolute -left-6 -top-6 rotate-[-7.12deg] text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12 lg:-top-20  ${rockSalt.className}`}
-          >
-            {text[lang].ourMission}
+    <Container>
+      <div className="flex items-center justify-center">
+        <div className="py-12 xs:py-16 xl:py-44">
+          <div className="relative">
+            <p
+              className={`absolute -left-6 -top-6 rotate-[-7.12deg] text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12 lg:-top-20  ${rockSalt.className}`}
+            >
+              {text[lang].ourMission}
+            </p>
+          </div>
+          <p className="max-w-2xl text-pretty text-center font-sans text-2xl font-extrabold uppercase tracking-wide text-black xs:text-3xl md:text-4xl lg:max-w-5xl lg:text-5xl">
+            {text[lang].preachToAll}
           </p>
         </div>
-        <p className="max-w-2xl text-pretty text-center font-sans text-2xl font-extrabold uppercase tracking-wide text-black xs:text-3xl md:text-4xl lg:max-w-5xl lg:text-5xl">
-          {text[lang].preachToAll}
-        </p>
       </div>
     </Container>
   );
@@ -167,8 +169,8 @@ async function TJCGlobalMap({ lang }: { lang: Locale }) {
 
 async function BasicBeliefs({ lang }: { lang: Locale }) {
   return (
-    <Container background={'bg-white'}>
-      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-4">
+    <Container>
+      <div className="grid max-w-screen-xl grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-4">
         <div>
           <label className="text-md uppercase xl:text-lg">
             {text[lang].whatWeBelieve}

@@ -42,36 +42,34 @@ export default function ChurchLivestream({
 }) {
   return (
     <Container background={background}>
-      <div className="block">
-        <h1 className="mb-4 text-lg font-semibold lg:text-2xl">
-          {name} {text[lang].livestream}
-        </h1>
+      <h1 className="mb-4 text-lg font-semibold lg:text-2xl">
+        {name} {text[lang].livestream}
+      </h1>
 
-        <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
-          <Image
-            src={pic[shortname]}
-            className="w-full"
-            alt={`A picture of ${name}'s exterior`}
-          />
-          <LinkButton
-            text={text[lang].card_button}
-            href={`/${lang}/${href}`}
-            type={'default'}
-            className={`text-md absolute left-1/2 -translate-x-1/2 -translate-y-full px-10 py-2`}
-          />
-          <table className="table-sm mt-6">
-            <tbody>
-              {timings.map((timing) => (
-                <tr key={timing.day}>
-                  <td className="sm:text-md text-sm font-semibold">
-                    {timing.day}
-                  </td>
-                  <td className="text-sm">{timing.time}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
+        <Image
+          src={pic[shortname]}
+          className="w-full"
+          alt={`A picture of ${name}'s exterior`}
+        />
+        <LinkButton
+          text={text[lang].card_button}
+          href={`/${lang}/${href}`}
+          type={'default'}
+          className={`text-md absolute left-1/2 -translate-x-1/2 -translate-y-full px-10 py-2`}
+        />
+        <table className="table-sm mt-6">
+          <tbody>
+            {timings.map((timing) => (
+              <tr key={timing.day}>
+                <td className="sm:text-md text-sm font-semibold">
+                  {timing.day}
+                </td>
+                <td className="text-sm">{timing.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </Container>
   );

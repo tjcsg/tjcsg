@@ -135,24 +135,20 @@ export default async function Page({
 
   return (
     <>
-      <Container background="bg-white">
-        <div className="mx-auto w-full">
-          <Header
-            title={aofDetails[lang][aof].name}
-            breadcrumbs={[
-              { name: 'Home', href: '/' },
-              { name: 'Our Beliefs', href: '/beliefs' },
-            ]}
-          />
-        </div>
+      <Container>
+        <Header
+          title={aofDetails[lang][aof].name}
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'Our Beliefs', href: '/beliefs' },
+          ]}
+        />
       </Container>
       <FeaturedVideo url={pageContent[aof].featuredVideoUrl} maxWidth="lg" />
-      <Container background="bg-white">
-        <div className="mx-auto w-full">
-          <AOFStatement aof={aof} lang={lang} />
-          <FeaturedVerses verses={aofDetails[lang][aof].verses} />
-          <RelatedArticles articles={articles} lang={lang} />
-        </div>
+      <AOFStatement aof={aof} lang={lang} />
+      <Container>
+        <FeaturedVerses verses={aofDetails[lang][aof].verses} />
+        <RelatedArticles articles={articles} lang={lang} />
       </Container>
     </>
   );

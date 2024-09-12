@@ -31,6 +31,7 @@ const text = {
     receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
+    watchSermons: 'Watch our latest sermons',
   },
   zh: {
     welcome: '欢迎到访新加坡真耶稣教会',
@@ -44,6 +45,7 @@ const text = {
     receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
+    watchSermons: 'Watch our latest sermons',
   },
 };
 
@@ -212,9 +214,35 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
   );
 }
 
+function LatestYoutubeVideos({ lang }: { lang: Locale }) {
+  return (
+    <Container>
+      <h1 className="mb-6 text-2xl font-bold">{text[lang].watchSermons}</h1>
+
+      <div className={`flex overflow-x-scroll`}>
+        <div className="flex flex-nowrap gap-8">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div className="w-[30rem]">
+              <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
+                <iframe
+                  src={`https://www.youtube.com/embed?listType=playlist&list=PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH&index=${i}&modestbranding=1&rel=0`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute bottom-0 left-0 right-0 top-0 h-full w-full"
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  );
+}
+
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
-  const { schedule } = await getCDBDSchedule(false);
   return (
     <>
       <Hero lang={lang} />
@@ -223,6 +251,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <ReceiveCompleteGospel lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
+      <LatestYoutubeVideos lang={lang} />
     </>
   );
 }

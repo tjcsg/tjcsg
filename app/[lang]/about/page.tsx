@@ -6,13 +6,15 @@ import WhyTrueJesusChurch from './why-true-jesus-church';
 import tjcMap from '@/public/tjcmap.png';
 import Container from '@/lib/components/container';
 import Image from 'next/image';
-import { Aof, aof, categoryDetails } from '@/lib/articles-of-faith';
+import { Aof, aof, aofDetails } from '@/lib/articles-of-faith';
 import jesusChristPic from '@/public/beliefs/jesus-christ.jpg';
 import biblePic from '@/public/beliefs/holy-bible.jpg';
 import salvationPic from '@/public/beliefs/salvation.jpg';
 import secondComingPic from '@/public/beliefs/second-coming.jpg';
 import sabbathPic from '@/public/beliefs/sabbath-day.jpg';
 import { Rock_Salt } from 'next/font/google';
+import ModernContentStrip from '@/lib/components/modern-content-strip';
+import FeaturedVideo from '@/lib/components/featured-video';
 
 const rockSalt = Rock_Salt({
   subsets: ['latin'],
@@ -72,25 +74,6 @@ const pic: { [K in Aof]: any } = {
   'second-coming': secondComingPic,
 };
 
-async function IntroductionVideo({ url }: { url: string }) {
-  return (
-    <div className="bg-black">
-      <div className=" mx-auto block w-full max-w-screen-2xl">
-        <div className="relative w-full overflow-hidden pt-[56.25%]">
-          <iframe
-            src={`${url}?autoplay=1&mute=1&rel=0`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            className="absolute bottom-0 left-0 right-0 top-0 h-full w-full"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function InfoBox({
   largeText,
   description,
@@ -113,30 +96,28 @@ function InfoBox({
 async function WhoWeAre({ lang }: { lang: Locale }) {
   return (
     <Container background="bg-white">
-      <div className="mt-10 flex flex-col md:mt-16 md:flex-row">
-        <label className="text-md mb-8 basis-1/3 font-normal uppercase md:mb-0 xl:text-lg">
-          About
-        </label>
-        <div>
-          <div className="prose w-full text-lg sm:text-xl md:text-2xl xl:text-3xl">
-            <p className="leading-normal">{text[lang].about_1}</p>
-            <p className="leading-normal">{text[lang].about_2}</p>
-          </div>
-          <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
-            <InfoBox
-              largeText={'1917'}
-              description={text[lang].yearEstablished}
-            />
-            <InfoBox
-              largeText={'1927'}
-              description={text[lang].yearSingapore}
-            />
-            <InfoBox
-              largeText={'60+'}
-              description={text[lang].countriesWithTJC}
-            />
-          </div>
-        </div>
+      <div className="mt-8 lg:mt-16">
+        <ModernContentStrip
+          title={'About'}
+          contents={[text[lang].about_1, text[lang].about_2]}
+          paragraphClasses="text-lg sm:text-xl md:text-2xl xl:text-3xl"
+          children={
+            <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
+              <InfoBox
+                largeText={'1917'}
+                description={text[lang].yearEstablished}
+              />
+              <InfoBox
+                largeText={'1927'}
+                description={text[lang].yearSingapore}
+              />
+              <InfoBox
+                largeText={'60+'}
+                description={text[lang].countriesWithTJC}
+              />
+            </div>
+          }
+        />
       </div>
     </Container>
   );
@@ -194,7 +175,7 @@ async function BasicBeliefs({ lang }: { lang: Locale }) {
           </label>
         </div>
         {aof.map((aof, i) => (
-          <div key={categoryDetails[lang][aof].name} className="">
+          <div key={aofDetails[lang][aof].name} className="">
             <div className="relative w-full pt-[170%]">
               <Image
                 src={pic[aof]}
@@ -205,8 +186,9 @@ async function BasicBeliefs({ lang }: { lang: Locale }) {
                 {i == 9 ? i + 1 : `0${i + 1}`}
               </p>
               <p className="absolute bottom-[20%] left-[10%] max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
-                {categoryDetails[lang][aof].name}
+                {aofDetails[lang][aof].name}
               </p>
+              <Link className="absolute inset-0" href={`/beliefs/${aof}`} />
             </div>
           </div>
         ))}
@@ -228,7 +210,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
 
   return (
     <>
-      <IntroductionVideo url={contentfulText.aboutWhoweareIframe} />
+      <FeaturedVideo url={`${contentfulText.aboutWhoweareIframe}?`} />
       <WhoWeAre lang={lang} />
       <BringingSalvationToAll lang={lang} />
       <TJCGlobalMap lang={lang} />

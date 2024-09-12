@@ -11,7 +11,7 @@ export default function Header({
   className?: string;
 }) {
   return (
-    <div className={`sm:pt-8 ${className}`}>
+    <div className={className}>
       {breadcrumbs && (
         <div>
           {breadcrumbs.length > 1 && (

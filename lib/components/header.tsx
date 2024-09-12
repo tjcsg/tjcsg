@@ -14,20 +14,18 @@ export default function Header({
     <div className={className}>
       {breadcrumbs && (
         <div>
-          {breadcrumbs.length > 1 && (
-            <nav aria-label="Back" className="sm:hidden">
-              <Link
-                href={breadcrumbs[breadcrumbs.length - 1].href}
-                className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
-              >
-                <ChevronLeftIcon
-                  aria-hidden="true"
-                  className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
-                />
-                Back
-              </Link>
-            </nav>
-          )}
+          <nav aria-label="Back" className="sm:hidden">
+            <Link
+              href={breadcrumbs[breadcrumbs.length - 1].href}
+              className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
+            >
+              <ChevronLeftIcon
+                aria-hidden="true"
+                className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
+              />
+              Back
+            </Link>
+          </nav>
           <nav aria-label="Breadcrumb" className="hidden sm:flex">
             <ol role="list" className="flex items-center space-x-4">
               <li>

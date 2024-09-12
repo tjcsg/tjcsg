@@ -30,7 +30,7 @@ export default function ChurchLocation({
   return (
     <div id={shortname}>
       <Container background={background}>
-        <div className="max-w-md md:max-w-screen-lg">
+        <div className="mx-auto max-w-md md:max-w-screen-lg">
           <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
             <h1 className="text-xl font-semibold sm:text-2xl">{name}</h1>
             <p className="text-base text-gray-500 md:text-lg lg:self-end lg:pl-4">
@@ -48,7 +48,7 @@ export default function ChurchLocation({
               <div className="flex flex-col px-4 py-6 xs:px-8 md:px-4 md:py-6">
                 {timings.map((timing) => (
                   <div key={timing.day} className="flex flex-row pt-2">
-                    <p className="md:text-md basis-1/2 text-sm font-semibold xs:text-base md:basis-5/12 lg:text-lg xl:text-xl">
+                    <p className="basis-1/2 text-sm font-semibold xs:text-base md:basis-5/12 lg:text-lg xl:text-xl">
                       {timing.day}
                     </p>
                     <p className="text-sm xs:text-base md:pl-3 lg:text-lg xl:text-xl">

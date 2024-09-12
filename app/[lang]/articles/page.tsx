@@ -46,10 +46,7 @@ export default async function Page({
       <div className="mx-auto block w-full">
         <Header
           title={'Read Our Articles'}
-          breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'All Articles', href: '/articles' },
-          ]}
+          breadcrumbs={[{ name: 'Home', href: '/' }]}
           className="mb-10"
         />
         {tags.length > 0 && (

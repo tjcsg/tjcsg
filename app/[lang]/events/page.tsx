@@ -44,10 +44,7 @@ export default async function EventsPage({
       <div className="mx-auto block w-full sm:px-5">
         <Header
           title={'All Special Events'}
-          breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'All Special Events', href: '/events' },
-          ]}
+          breadcrumbs={[{ name: 'Home', href: '/' }]}
           className="mb-10"
         />
 

@@ -15,10 +15,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <div className="block">
         <Header
           title={text[lang].title}
-          breadcrumbs={[
-            { name: text[lang].home, href: '/' },
-            { name: text[lang].title, href: '.' },
-          ]}
+          breadcrumbs={[{ name: text[lang].home, href: '/' }]}
           className="pb-6"
         />
         <p>

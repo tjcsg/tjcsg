@@ -56,6 +56,7 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
+          { name: 'Home', href: '/' },
           { name: 'All Articles', href: '/articles' },
           { name: 'Closer Day by Day', href: '/cdbd' },
           { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
@@ -68,7 +69,10 @@ async function ArticleHead({
     <>
       <Header
         title={article.title}
-        breadcrumbs={[{ name: 'Articles', href: '/articles' }]}
+        breadcrumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Articles', href: '/articles' },
+        ]}
       />
     </>
   );

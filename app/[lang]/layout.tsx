@@ -138,7 +138,7 @@ export default function RootLayout({
 }) {
   const { lang } = params;
   return (
-    <html lang={params.lang} className={noto_sans.variable}>
+    <html lang={params.lang} className={`${noto_sans.variable} scroll-smooth`}>
       <body>
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />

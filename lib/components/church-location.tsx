@@ -4,6 +4,7 @@ import adamPic from '@/public/locations/adam.jpg';
 import tkPic from '@/public/locations/tk.jpg';
 import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
+import { Church } from '@/lib/church-details';
 
 const pic = {
   adam: adamPic,
@@ -21,7 +22,7 @@ export default function ChurchLocation({
   background,
 }: {
   name: string;
-  shortname: 'adam' | 'tk' | 'serangoon' | 'sembawang';
+  shortname: Church;
   address: string;
   timings: { day: string; time: string }[];
   map_src: string;
@@ -30,7 +31,7 @@ export default function ChurchLocation({
   return (
     <div id={shortname}>
       <Container background={background}>
-        <div className="mx-auto max-w-md md:max-w-screen-lg">
+        <div className="mx-auto max-w-lg md:max-w-screen-lg">
           <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
             <h1 className="text-xl font-semibold sm:text-2xl">{name}</h1>
             <p className="text-base text-gray-500 md:text-lg lg:self-end lg:pl-4">
@@ -65,7 +66,7 @@ export default function ChurchLocation({
                 height="350"
                 style={{ border: 0 }}
                 allowFullScreen={false}
-                loading="lazy"
+                loading="eager"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="inset-0 w-full md:absolute md:h-full"
               ></iframe>

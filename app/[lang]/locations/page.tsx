@@ -1,5 +1,5 @@
 import { details } from '@/lib/church-details';
-import ChurchLocation from '../../../lib/components/church-location';
+import ChurchLocation from '@/lib/components/church-location';
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
 

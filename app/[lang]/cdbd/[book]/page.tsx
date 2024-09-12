@@ -2,10 +2,9 @@ import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
 import { bibleBooks, Book, books, booksNoConst } from '@/lib/bible-books';
-import AvatarLogo from '@/lib/components/avatar-logo';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../cdbd-list';
-import { bookSlugToContentfulTag } from '@/lib/utils';
+import { slugToContentfulTag } from '@/lib/utils';
 import { getAllCdbdBooks } from '@/lib/api';
 import BookSelector from '../book-selector';
 export const dynamic = 'force-static';
@@ -76,7 +75,7 @@ export default async function Page({
             lang={lang}
             currentPage={currentPage}
             maxItemsPerPage={MAX_ITEMS_PER_PAGE}
-            tags={['categoryCdbd', bookSlugToContentfulTag(book)]}
+            tags={['categoryCdbd', `book${slugToContentfulTag(book)}`]}
             redirectUrl={`/cdbd/${book}`}
           />
         </div>

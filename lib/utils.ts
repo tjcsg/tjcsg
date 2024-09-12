@@ -9,14 +9,15 @@ export function obtainTextContent(item: any) {
   return text;
 }
 
-// This function converts the bible book slug into the Contentful tag (e.g. 1-samuel to book1Samuel)
-export function bookSlugToContentfulTag(string: String) {
+// This function converts the bible book slug into the Contentful tag (e.g. 1-samuel to 1Samuel)
+export function slugToContentfulTag(string: String) {
   let arr = string.split('-');
 
-  arr[arr.length - 1] =
-    arr[arr.length - 1].charAt(0).toUpperCase() + arr[arr.length - 1].slice(1);
+  arr = arr.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
+  // arr[arr.length - 1] =
+  //   arr[arr.length - 1].charAt(0).toUpperCase() + arr[arr.length - 1].slice(1);
 
-  return `book${arr.join('')}`;
+  return arr.join('');
 }
 
 // This function converts the contentful tags into the readable text (e.g. category-cdbd to Cdbd, book-ezekiel to Ezekiel)

@@ -12,7 +12,7 @@ export default async function OurBeliefs({
 }) {
   return (
     <Container background={`${background}`}>
-      <div className="block w-full max-w-4xl">
+      <div className="max-w-4xl">
         <div className="mx-auto max-w-7xl divide-y divide-gray-900/10 px-6 py-8 lg:px-8">
           <h2 className="mb-4 min-w-0 text-center text-3xl font-semibold leading-7 text-gray-900 sm:truncate sm:tracking-tight">
             Our Beliefs

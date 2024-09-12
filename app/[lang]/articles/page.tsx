@@ -42,49 +42,47 @@ export default async function Page({
   const allTags = await getAllArticleTags();
 
   return (
-    <Container background="bg-white">
-      <div className="mx-auto block w-full">
-        <Header
-          title={'Read Our Articles'}
-          breadcrumbs={[{ name: 'Home', href: '/' }]}
-          className="mb-10"
-        />
+    <Container>
+      <Header
+        title={'Read Our Articles'}
+        breadcrumbs={[{ name: 'Home', href: '/' }]}
+        className="mb-10"
+      />
+      {tags.length > 0 && (
+        <Link
+          href={'/articles'}
+          className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
+        >
+          <ChevronLeftIcon
+            aria-hidden="true"
+            className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+          Back to all articles
+        </Link>
+      )}
+
+      <div className="mb-8 text-2xl">
         {tags.length > 0 && (
-          <Link
-            href={'/articles'}
-            className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
-          >
-            <ChevronLeftIcon
-              aria-hidden="true"
-              className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
-            />
-            Back to all articles
-          </Link>
+          <h2 className="inline">Showing all articles for </h2>
         )}
+        {tags.map((tagid) => {
+          let tagName = allTags.get(tagid) as string;
+          return (
+            <h2 key={tagid} className="inline capitalize">
+              {`${tagNameToText(tagName)} `}
+            </h2>
+          );
+        })}
+      </div>
 
-        <div className="mb-8 text-2xl">
-          {tags.length > 0 && (
-            <h2 className="inline">Showing all articles for </h2>
-          )}
-          {tags.map((tagid) => {
-            let tagName = allTags.get(tagid) as string;
-            return (
-              <h2 key={tagid} className="inline capitalize">
-                {`${tagNameToText(tagName)} `}
-              </h2>
-            );
-          })}
-        </div>
-
-        <div className="grid max-w-screen-xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {allArticles &&
-            allArticles.map((article) => (
-              <ArticleCard key={article.slug} lang={lang} article={article} />
-            ))}
-        </div>
-        <div className="mt-10 flex w-full justify-center lg:mt-16">
-          <Pagination totalPages={totalPages} />
-        </div>
+      <div className="grid max-w-screen-xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {allArticles &&
+          allArticles.map((article) => (
+            <ArticleCard key={article.slug} lang={lang} article={article} />
+          ))}
+      </div>
+      <div className="mt-10 flex w-full justify-center lg:mt-16">
+        <Pagination totalPages={totalPages} />
       </div>
     </Container>
   );

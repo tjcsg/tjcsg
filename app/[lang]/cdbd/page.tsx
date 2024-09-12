@@ -40,8 +40,8 @@ export default async function Page({
 
   return (
     <>
-      <Container background="bg-white">
-        <div className="block w-full max-w-screen-lg">
+      <Container>
+        <div className="max-w-screen-lg">
           <h1 className="mb-8 text-3xl font-bold">{text[lang].all}</h1>
           <div className="mb-8">
             <BookSelector cdbdBooks={cdbdBooks} lang={lang} />

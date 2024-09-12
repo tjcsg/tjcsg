@@ -1,8 +1,8 @@
 export default async function Container({
-  background,
+  background = 'bg-white',
   children,
 }: {
-  background: string;
+  background?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -11,7 +11,8 @@ export default async function Container({
         <div
           className={`flex items-center justify-center px-6 py-6 sm:px-12 sm:py-10`}
         >
-          {children}
+          <div className="mx-auto block w-full">{children}</div>
+          {/* {children} */}
         </div>
       </div>
     </div>

@@ -10,14 +10,14 @@ export default function ModernContentStrip({
   paragraphClasses?: string;
 }) {
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex w-full flex-col md:flex-row">
       <h1 className="text-md mb-8 basis-1/3 font-normal uppercase md:mb-0 xl:text-lg">
         {title}
       </h1>
       <div>
-        <div className={`w-full md:prose `}>
+        <div className={`prose w-full ${paragraphClasses}`}>
           {contents.map((content, i) => (
-            <p key={i} className={`leading-normal ${paragraphClasses}`}>
+            <p key={i} className={`leading-normal`}>
               {content}
             </p>
           ))}

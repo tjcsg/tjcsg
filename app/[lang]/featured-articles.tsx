@@ -20,8 +20,8 @@ const text = {
 export default async function FeaturedArticles({ lang }: { lang: Locale }) {
   const articles = await getLatestArticles(lang, 6);
   return (
-    <Container background="">
-      <div className="mx-auto my-8 block w-full md:my-16">
+    <Container>
+      <div className="my-8 md:my-16">
         <div className="mx-auto max-w-2xl md:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {text[lang].title}

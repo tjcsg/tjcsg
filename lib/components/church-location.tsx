@@ -30,7 +30,7 @@ export default function ChurchLocation({
   return (
     <div id={shortname}>
       <Container background={background}>
-        <div className="block w-full max-w-md md:max-w-screen-lg">
+        <div className="max-w-md md:max-w-screen-lg">
           <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
             <h1 className="text-xl font-semibold sm:text-2xl">{name}</h1>
             <p className="text-base text-gray-500 md:text-lg lg:self-end lg:pl-4">

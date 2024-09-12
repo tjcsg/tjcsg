@@ -66,8 +66,8 @@ export default function Page({
       <Header
         title={`${details[lang][church].name} Livestreams`}
         breadcrumbs={[
+          { name: 'Home', href: '/' },
           { name: 'Worship', href: '/worship' },
-          { name: `${details[lang][church].name} Livestream`, href: '#' },
         ]}
         className="px-6 pb-6 sm:px-12"
       />

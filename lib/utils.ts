@@ -13,7 +13,7 @@ export function obtainTextContent(item: any) {
 export function slugToContentfulTag(string: String) {
   let arr = string.split('-');
 
-  arr = arr.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
+  arr = arr.map((a) => a.charAt(0).toUpperCase() + a.slice(1));
   // arr[arr.length - 1] =
   //   arr[arr.length - 1].charAt(0).toUpperCase() + arr[arr.length - 1].slice(1);
 

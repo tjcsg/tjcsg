@@ -17,7 +17,7 @@ export default function Header({
           {breadcrumbs.length > 1 && (
             <nav aria-label="Back" className="sm:hidden">
               <Link
-                href={breadcrumbs[breadcrumbs.length - 2].href}
+                href={breadcrumbs[breadcrumbs.length - 1].href}
                 className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
               >
                 <ChevronLeftIcon

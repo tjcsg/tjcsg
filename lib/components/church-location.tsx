@@ -28,44 +28,51 @@ export default function ChurchLocation({
   background: string;
 }) {
   return (
-    <Container background={background}>
-      <div className="block">
-        <div className="mb-4 flex-col sm:flex-row">
-          <h1 className="text-lg font-semibold lg:text-2xl">{`True Jesus Church (${name})`}</h1>
-          <p className="lg:text-md text-sm text-gray-500">{address}</p>
-        </div>
-        <div className="sm:flex">
-          <div className="mb-8 bg-lightblue sm:max-w-md">
-            <Image
-              src={pic[shortname]}
-              className="w-full"
-              alt={`A picture of ${name}'s exterior`}
-            />
-            <table className="table-sm mt-1">
-              <tbody>
-                {timings.map((timing) => (
-                  <tr key={timing.day}>
-                    <td className="sm:text-md text-sm font-semibold">
-                      {timing.day}
-                    </td>
-                    <td className="text-sm">{timing.time}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div id={shortname}>
+      <Container background={background}>
+        <div className="block w-full max-w-md md:max-w-screen-lg">
+          <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
+            <h1 className="text-xl font-semibold sm:text-2xl">{name}</h1>
+            <p className="text-base text-gray-500 md:text-lg lg:self-end lg:pl-4">
+              {address}
+            </p>
           </div>
-          <iframe
-            src={map_src}
-            width="600"
-            height="350"
-            style={{ border: 0 }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full sm:max-w-md"
-          ></iframe>
+
+          <div className="flex flex-col gap-6 md:flex-row md:gap-2 lg:gap-8">
+            <div className=" bg-lightblue md:mb-0 md:basis-1/2">
+              <Image
+                src={pic[shortname]}
+                className="w-full"
+                alt={`A picture of ${name}'s exterior`}
+              />
+              <div className="flex flex-col px-4 py-6 xs:px-8 md:px-4 md:py-6">
+                {timings.map((timing) => (
+                  <div key={timing.day} className="flex flex-row pt-2">
+                    <p className="md:text-md basis-1/2 text-sm font-semibold xs:text-base md:basis-5/12 lg:text-lg xl:text-xl">
+                      {timing.day}
+                    </p>
+                    <p className="text-sm xs:text-base md:pl-3 lg:text-lg xl:text-xl">
+                      {timing.time}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="md:relative md:basis-1/2">
+              <iframe
+                src={map_src}
+                width="600"
+                height="350"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="inset-0 w-full md:absolute md:h-full"
+              ></iframe>
+            </div>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }

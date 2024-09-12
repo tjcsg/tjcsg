@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   return (
     <>
       <PageHeader lang={lang} text={text} />
-      <div className="mx-auto grid max-w-7xl grid-cols-1 xl:grid-cols-2">
+      <div className="mx-auto grid grid-cols-1">
         <ChurchLocation
           name={details[lang]['adam'].name}
           shortname={details[lang]['adam'].shortform}

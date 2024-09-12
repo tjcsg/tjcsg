@@ -10,7 +10,7 @@ export default async function FeaturedVideo({
       <div className={`max-w- mx-auto block w-full max-w-screen-${maxWidth}`}>
         <div className="relative w-full overflow-hidden pt-[56.25%]">
           <iframe
-            src={`${url}&autoplay=1&mute=1&rel=0`}
+            src={`${url}&autoplay=1&mute=1&rel=0&loop=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
             referrerPolicy="strict-origin-when-cross-origin"

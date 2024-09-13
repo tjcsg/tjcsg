@@ -8,6 +8,11 @@ import Image from 'next/image';
 import { Aof, aof, aofDetails } from '@/lib/articles-of-faith';
 import jesusChristPic from '@/public/beliefs/jesus-christ.jpg';
 import biblePic from '@/public/beliefs/holy-bible.jpg';
+import churchPic from '@/public/beliefs/one-true-church.jpg';
+import baptismPic from '@/public/beliefs/baptism.jpg';
+import holySpiritPic from '@/public/beliefs/holy-spirit.jpg';
+import footwashingPic from '@/public/beliefs/footwashing.jpg';
+import holyCommunionPic from '@/public/beliefs/holy-communion.png';
 import salvationPic from '@/public/beliefs/salvation.jpg';
 import secondComingPic from '@/public/beliefs/second-coming.jpg';
 import sabbathPic from '@/public/beliefs/sabbath-day.jpg';
@@ -23,10 +28,7 @@ const rockSalt = Rock_Salt({
 
 const text = {
   en: {
-    title: 'About Us',
-    subtitle:
-      'The True Jesus Church is an international church with presence in over 60 countries.',
-    eyebrow: 'Learn more about us',
+    whoWeAre: 'Who we are',
     about_1:
       "We're the True Jesus Church, a global, non-denominational church built upon the teachings of Jesus and His apostles.",
     about_2:
@@ -41,10 +43,7 @@ const text = {
     learnMore: 'Learn more',
   },
   zh: {
-    title: 'About Us',
-    subtitle:
-      'The True Jesus Church is an international church with presence in over 60 countries.',
-    eyebrow: 'Learn more about us',
+    whoWeAre: 'Who we are',
     about_1:
       "We're the True Jesus Church, a global, non-denominational church built upon the teachings of Jesus and His apostles.",
     about_2:
@@ -63,11 +62,11 @@ const text = {
 const pic: { [K in Aof]: any } = {
   'jesus-christ': jesusChristPic,
   bible: biblePic,
-  'one-true-church': jesusChristPic,
-  baptism: jesusChristPic,
-  'holy-spirit': jesusChristPic,
-  footwashing: jesusChristPic,
-  'holy-communion': jesusChristPic,
+  'one-true-church': churchPic,
+  baptism: baptismPic,
+  'holy-spirit': holySpiritPic,
+  footwashing: footwashingPic,
+  'holy-communion': holyCommunionPic,
   sabbath: sabbathPic,
   salvation: salvationPic,
   'second-coming': secondComingPic,
@@ -97,7 +96,7 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
     <Container>
       <div className="mt-8 flex w-full justify-stretch lg:mt-16">
         <ModernContentStrip
-          title={'About'}
+          title={text[lang].whoWeAre}
           contents={[text[lang].about_1, text[lang].about_2]}
           paragraphClasses="text-lg xs:text-xl sm:text-2xl xl:text-3xl"
           otherContents={
@@ -168,40 +167,42 @@ async function TJCGlobalMap({ lang }: { lang: Locale }) {
 
 async function BasicBeliefs({ lang }: { lang: Locale }) {
   return (
-    <Container>
-      <div className="grid max-w-screen-xl grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-4">
-        <div>
-          <label className="text-md uppercase xl:text-lg">
-            {text[lang].whatWeBelieve}
-          </label>
-        </div>
-        {aof.map((aof, i) => (
-          <div key={aofDetails[lang][aof].name} className="">
-            <div className="relative w-full pt-[170%]">
-              <Image
-                src={pic[aof]}
-                alt={''}
-                className="absolute inset-0 rounded-ee-3xl rounded-ss-3xl object-contain"
-              />
-              <p className="absolute left-[10%] top-[10%] text-4xl font-thin text-white">
-                {i == 9 ? i + 1 : `0${i + 1}`}
-              </p>
-              <p className="absolute bottom-[20%] left-[10%] max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
-                {aofDetails[lang][aof].name}
-              </p>
-              <Link className="absolute inset-0" href={`/beliefs/${aof}`} />
-            </div>
-          </div>
-        ))}
-        <div className="self-center justify-self-center pb-[30%] text-xl xs:text-2xl">
-          <Link href="/beliefs">
-            <label className="text-button underline hover:text-button_hover">
-              {text[lang].learnMore}
+    <div id="beliefs">
+      <Container>
+        <div className="grid max-w-screen-xl grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+          <div>
+            <label className="text-md uppercase xl:text-lg">
+              {text[lang].whatWeBelieve}
             </label>
-          </Link>
+          </div>
+          {aof.map((aof, i) => (
+            <div key={aofDetails[lang][aof].name} className="">
+              <div className="relative w-full pt-[150%]">
+                <Image
+                  src={pic[aof]}
+                  alt={''}
+                  className="absolute inset-0 rounded-ee-3xl rounded-ss-3xl object-fill"
+                />
+                <p className="absolute left-[10%] top-[10%] text-3xl font-light text-white xs:text-4xl">
+                  {i == 9 ? i + 1 : `0${i + 1}`}
+                </p>
+                <p className="absolute bottom-[8%] left-[10%] max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
+                  {aofDetails[lang][aof].name}
+                </p>
+                <Link className="absolute inset-0" href={`/beliefs/${aof}`} />
+              </div>
+            </div>
+          ))}
+          <div className="self-center justify-self-center pb-[10%] text-xl xs:text-2xl">
+            <Link href="/beliefs">
+              <label className="text-button underline hover:text-button_hover">
+                {text[lang].learnMore}
+              </label>
+            </Link>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 
@@ -211,12 +212,14 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
 
   return (
     <>
-      <FeaturedVideo url={`${contentfulText.aboutWhoweareIframe}?`} />
+      <FeaturedVideo
+        url={`${contentfulText.aboutWhoweareIframe}?playlist=1_6TnUEDym4`}
+      />
       <WhoWeAre lang={lang} />
       <BringingSalvationToAll lang={lang} />
       <TJCGlobalMap lang={lang} />
       <BasicBeliefs lang={lang} />
-      <WhyTrueJesusChurch lang={lang} background="bg-stone-50" />
+      <WhyTrueJesusChurch lang={lang} />
     </>
   );
 }

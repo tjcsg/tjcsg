@@ -3,26 +3,26 @@ export default function ModernContentStrip({
   contents,
   children = <></>,
   paragraphClasses = 'text-lg sm:text-xl md:text-2xl xl:text-3xl',
+  labelClasses = 'text-base font-normal uppercase xl:text-lg',
 }: {
   title: string;
   contents: string[];
   children?: React.ReactNode;
   paragraphClasses?: string;
+  labelClasses?: string;
 }) {
   return (
     <div className="flex w-full flex-col md:flex-row">
-      <h1 className="text-md mb-8 basis-1/3 font-normal uppercase md:mb-0 xl:text-lg">
-        {title}
-      </h1>
+      <h1 className={`mb-8 basis-1/3 md:mb-0 ${labelClasses}`}>{title}</h1>
       <div>
-        <div className={`prose w-full ${paragraphClasses}`}>
+        <div className={`prose w-full text-pretty ${paragraphClasses}`}>
           {contents.map((content, i) => (
             <p key={i} className={`leading-normal`}>
               {content}
             </p>
           ))}
         </div>
-        {children}
+        <div className="max-w-[65ch]">{children}</div>
       </div>
     </div>
   );

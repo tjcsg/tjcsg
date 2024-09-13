@@ -3,6 +3,7 @@ import { ArticleEntry, getLatestArticles } from '@/lib/api';
 import { Aof, aofNoConst, aofDetails } from '@/lib/articles-of-faith';
 import ArticleCard from '@/lib/components/article-card';
 import Container from '@/lib/components/container';
+import FeaturedVerses from '@/lib/components/featured-verses';
 import FeaturedVideo from '@/lib/components/featured-video';
 import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
@@ -85,40 +86,17 @@ function RelatedArticles({
   );
 }
 
-function FeaturedVerses({
-  verses,
-}: {
-  verses: {
-    verse: string;
-    verseLocation: string;
-  }[];
-}) {
-  return (
-    <>
-      {verses.map((v) => {
-        const { verse, verseLocation } = v;
-        return (
-          <div className="mx-auto max-w-screen-md pb-8 pt-16">
-            <div className="text-md text-pretty text-center font-serif sm:text-xl md:text-2xl">
-              <p className="mb-4">{verse}</p>
-              <p>{verseLocation}</p>
-            </div>
-          </div>
-        );
-      })}
-    </>
-  );
-}
-
 function AOFStatement({ lang, aof }: { lang: Locale; aof: Aof }) {
   return (
-    <div className="my-8 lg:my-12">
-      <ModernContentStrip
-        title={'Article of Faith'}
-        contents={aofDetails[lang][aof].details}
-        paragraphClasses="text-sm xs:text-md sm:text-lg xl:text-xl mb-4 text-pretty"
-      />
-    </div>
+    <Container>
+      <div className="mt-8 flex w-full justify-stretch lg:mt-12">
+        <ModernContentStrip
+          title={'Article of Faith'}
+          contents={aofDetails[lang][aof].details}
+          paragraphClasses="text-md xs:text-lg sm:text-xl mb-4"
+        />
+      </div>
+    </Container>
   );
 }
 
@@ -144,10 +122,19 @@ export default async function Page({
           ]}
         />
       </Container>
+      {/* <div className="relative h-96">
+          <iframe
+            src="/pdf/footwashing.pdf"
+            className="absolute inset-0 h-full w-full"
+          />
+        </div> */}
       <FeaturedVideo url={pageContent[aof].featuredVideoUrl} maxWidth="lg" />
       <AOFStatement aof={aof} lang={lang} />
       <Container>
-        <FeaturedVerses verses={aofDetails[lang][aof].verses} />
+        <FeaturedVerses
+          verses={aofDetails[lang][aof].verses}
+          className="mb-8"
+        />
         <RelatedArticles articles={articles} lang={lang} />
       </Container>
     </>

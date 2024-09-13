@@ -22,15 +22,39 @@ const pic = {
 const text = {
   en: {
     title: 'Locations',
-    subtitle:
-      'We welcome you to join us at one of our four churches in Singapore.',
     eyebrow: 'Worship with us',
   },
   zh: {
     title: '教会地点',
-    subtitle: '我们欢迎您来我们其中的四件教会与我们一起崇拜。',
     eyebrow: '与我们一起崇拜',
   },
+};
+
+const joinUs = {
+  en: (
+    <>
+      We welcome you to join us at one of our churches in Singapore. Not from
+      Singapore? Feel free to contact us or{' '}
+      <Link
+        href={'https://tjc.org/find-a-church/'}
+        className="text-button underline hover:text-button_hover"
+      >
+        find a church near you.
+      </Link>
+    </>
+  ),
+  zh: (
+    <>
+      We welcome you to join us at one of our churches in Singapore. Not from
+      Singapore? Feel free to contact us or{' '}
+      <Link
+        href={'https://tjc.org/find-a-church/'}
+        className="text-button underline hover:text-button_hover"
+      >
+        find a church near you.
+      </Link>
+    </>
+  ),
 };
 
 function ChurchLink({ lang, church }: { lang: Locale; church: Church }) {
@@ -58,10 +82,14 @@ function ChurchLink({ lang, church }: { lang: Locale; church: Church }) {
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   const churches = ['adam', 'tk', 'sembawang', 'serangoon'] as Church[];
+
   return (
     <div className="scroll-smooth">
       <PageHeader lang={lang} text={text} />
       <Container>
+        <p className="mx-auto -mt-8 mb-20 max-w-lg text-pretty text-center text-gray-600 sm:-mt-12 sm:text-lg md:-mt-14 md:max-w-xl">
+          {joinUs[lang]}
+        </p>
         <div className="mx-auto grid max-w-lg grid-cols-2 justify-around gap-x-4 gap-y-16 py-2 md:max-w-screen-lg md:grid-cols-4 md:gap-4">
           {churches.map((church) => (
             <ChurchLink key={church} lang={lang} church={church} />

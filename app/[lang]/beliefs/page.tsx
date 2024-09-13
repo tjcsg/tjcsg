@@ -4,40 +4,65 @@ import Container from '@/lib/components/container';
 import FeaturedVerses from '@/lib/components/featured-verses';
 import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
+import YoutubeList from '@/lib/components/youtube-list';
 import Link from 'next/link';
 
-function TrueGospel({ lang }: { lang: Locale }) {
-  return (
-    <div className="mt-8">
-      <ModernContentStrip
-        title={'True Gospel'}
-        contents={[
-          'There so many Christian denominations and churches in the world. Are all churches the same? Which church should one go to?',
-          'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
-        ]}
-        labelClasses="capitalize font-semibold"
-        paragraphClasses="text-base"
-        otherContents={
-          <p className="text-pretty pt-5 text-base text-gray-700">
-            Here in the True Jesus Church, we preach the truth that is taught in
-            the Bible and upheld by the Apostolic church. We welcome you to
-            study the truth with us, or even better, to{' '}
-            <Link
-              href={'/locations'}
-              className="text-button underline hover:text-button_hover"
-            >
-              visit one of our churches
-            </Link>
-            .
-          </p>
-        }
-      />
-    </div>
-  );
-}
+const text = {
+  en: {
+    watchAofSermons: 'Sermons introducing our beliefs',
+    trueGospel: 'True Gospel',
+    trueGospelContents: [
+      'There so many Christian denominations and churches in the world. Are all churches the same? Which church should one go to?',
+      'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
+    ],
+    ourAof: 'Our Articles Of Faith',
+    findOutMore: 'Find Our More',
+  },
+  zh: {
+    watchAofSermons: 'Sermons introducing our beliefs',
+    trueGospel: 'True Gospel',
+    trueGospelContents: [
+      'There so many Christian denominations and churches in the world. Are all churches the same? Which church should one go to?',
+      'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
+    ],
+    ourAof: 'Our Articles Of Faith',
+    findOutMore: 'Find Our More',
+  },
+};
 
-function AofPublications({ lang }: { lang: Locale }) {
-  const publications = [
+const trueGospelCta = {
+  en: (
+    <p className="text-pretty text-base text-gray-700">
+      Here in the True Jesus Church, we preach the truth that is taught in the
+      Bible and upheld by the Apostolic church. We welcome you to study the
+      truth for yourself, or even better, to{' '}
+      <Link
+        href={'/locations'}
+        className="text-button underline hover:text-button_hover"
+      >
+        come and visit us
+      </Link>
+      .
+    </p>
+  ),
+  zh: (
+    <p className="text-pretty text-base text-gray-700">
+      Here in the True Jesus Church, we preach the truth that is taught in the
+      Bible and upheld by the Apostolic church. We welcome you to study the
+      truth for yourself, or even better, to{' '}
+      <Link
+        href={'/locations'}
+        className="text-button underline hover:text-button_hover"
+      >
+        come and visit us
+      </Link>
+      .
+    </p>
+  ),
+};
+
+const publications = {
+  en: [
     {
       name: 'Our Basic Beliefs (Introduction)',
       href: '/pdf/intro-to-TJC-basic-beliefs.pdf',
@@ -53,15 +78,67 @@ function AofPublications({ lang }: { lang: Locale }) {
       href: '/pdf/essential-biblical-doctrines.pdf',
       desc: 'Looking to study more in-depth and go into more details? Perhaps this publication is for you!',
     },
-  ];
+  ],
+  zh: [
+    {
+      name: 'Our Basic Beliefs (Introduction)',
+      href: '/pdf/intro-to-TJC-basic-beliefs.pdf',
+      desc: 'Want a simple overview of what we believe in? This booklet gives a simple introduction.',
+    },
+    {
+      name: 'Q & A on The Basic Beliefs',
+      href: '/pdf/QnA.pdf',
+      desc: 'Have questions about our beliefs that you would like answered? Check out this Q & A publication on our beliefs!',
+    },
+    {
+      name: 'Essential Biblical Doctrines',
+      href: '/pdf/essential-biblical-doctrines.pdf',
+      desc: 'Looking to study more in-depth and go into more details? Perhaps this publication is for you!',
+    },
+  ],
+};
+
+function AofSermons({ lang }: { lang: Locale }) {
   return (
-    <div className="mt-8">
+    <div className="mb-20 mt-16">
+      <h1 className="mb-8 text-lg font-semibold capitalize">
+        {text[lang].watchAofSermons}
+      </h1>
+      <YoutubeList
+        playlist={'PLvc6U8OPfT_mUfBv_KHKCT7nb_l_q1UXh'}
+        index={[1, 2, 3, 4, 5]}
+      />
+    </div>
+  );
+}
+
+function TrueGospel({ lang }: { lang: Locale }) {
+  return (
+    <div className="pb-4 pt-8">
+      <h2 className="mb-8 text-lg font-semibold capitalize">
+        {text[lang].trueGospel}
+      </h2>
+      <div className={`w-full text-pretty text-base`}>
+        {text[lang].trueGospelContents.map((content, i) => (
+          <p key={i} className={`pb-5`}>
+            {content}
+          </p>
+        ))}
+        {trueGospelCta[lang]}
+      </div>
+    </div>
+  );
+}
+
+function AofPublications({ lang }: { lang: Locale }) {
+  return (
+    <div className="mt-6 md:mt-12">
       <ModernContentStrip
         title={'Our Publications'}
         contents={[]}
-        labelClasses="capitalize font-semibold"
+        labelClasses="capitalize font-semibold text-lg mb-8"
         paragraphClasses="text-base"
-        otherContents={publications.map((pub) => (
+        otherContents={publications[lang].map((pub) => (
           <div className="mb-4" key={pub.href}>
             <Link
               href={pub.href}
@@ -81,16 +158,14 @@ function AofPublications({ lang }: { lang: Locale }) {
 
 async function OurBeliefs({ lang }: { lang: Locale }) {
   return (
-    <div className="mt-16">
-      <h2 className="text-base font-semibold capitalize">
-        Our Articles of Faith
-      </h2>
+    <div className="mt-8 md:mt-12">
+      <h2 className="text-lg font-semibold capitalize">{text[lang].ourAof}</h2>
       {aof.map((aof) => (
-        <div key={aof} className="mt-12">
+        <div key={aof} className="mt-8 md:mt-12">
           <ModernContentStrip
             title={aofDetails[lang][aof].name}
             paragraphClasses="text-base"
-            labelClasses="capitalize"
+            labelClasses="capitalize mb-3 font-medium"
             contents={[aofDetails[lang][aof].details.join(' ')]}
             otherContents={
               <div className="mt-2 block">
@@ -99,7 +174,7 @@ async function OurBeliefs({ lang }: { lang: Locale }) {
                   href={`/beliefs/${aof}`}
                   className="text-base text-button underline hover:text-button_hover"
                 >
-                  Find out more
+                  {text[lang].findOutMore}
                 </Link>
               </div>
             }
@@ -120,7 +195,8 @@ export default function Page({ params }: { params: { lang: Locale } }) {
           breadcrumbs={[{ name: 'Home', href: '/' }]}
         />
         <TrueGospel lang={lang} />
-        <AofPublications lang={lang} />
+        <OurBeliefs lang={lang} />
+        <AofSermons lang={lang} />
         <FeaturedVerses
           verses={[
             {
@@ -131,7 +207,8 @@ export default function Page({ params }: { params: { lang: Locale } }) {
           ]}
           className="my-16"
         />
-        <OurBeliefs lang={lang} />
+
+        <AofPublications lang={lang} />
       </div>
     </Container>
   );

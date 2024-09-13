@@ -3,7 +3,7 @@ export default function ModernContentStrip({
   contents,
   otherContents = <></>,
   paragraphClasses = 'text-lg sm:text-xl md:text-2xl xl:text-3xl',
-  labelClasses = 'text-base font-normal uppercase xl:text-lg',
+  labelClasses = 'mb-8 text-base font-normal uppercase xl:text-lg',
 }: {
   title: string;
   contents: string[];
@@ -13,7 +13,7 @@ export default function ModernContentStrip({
 }) {
   return (
     <div className="flex w-full flex-col md:flex-row">
-      <h1 className={`mb-8 basis-1/3 md:mb-0 ${labelClasses}`}>{title}</h1>
+      <h1 className={`basis-1/3 md:mb-0 ${labelClasses}`}>{title}</h1>
       <div>
         <div className={`prose w-full text-pretty ${paragraphClasses}`}>
           {contents.map((content, i) => (

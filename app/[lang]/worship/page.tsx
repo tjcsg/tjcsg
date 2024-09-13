@@ -87,7 +87,7 @@ async function HowToPray({ lang }: { lang: Locale }) {
       <ModernContentStrip
         title={text[lang].howToPray}
         contents={text[lang].howToPrayContent}
-        labelClasses="capitalize text-2xl font-bold"
+        labelClasses="capitalize text-2xl font-bold mb-8"
         paragraphClasses="text-base lg:text-lg lg:max-w-none"
       />
     </div>

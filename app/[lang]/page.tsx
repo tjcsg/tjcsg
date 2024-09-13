@@ -217,7 +217,9 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
 function LatestYoutubeVideos({ lang }: { lang: Locale }) {
   return (
     <Container>
-      <h1 className="mb-6 text-2xl font-bold">{text[lang].watchSermons}</h1>
+      <h1 className="mb-10 text-2xl font-bold capitalize tracking-tight text-gray-900 sm:text-3xl">
+        {text[lang].watchSermons}
+      </h1>
       <YoutubeList
         playlist={'PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH'}
         index={[1, 2, 3, 4, 5]}

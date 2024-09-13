@@ -107,6 +107,7 @@ function AofSermons({ lang }: { lang: Locale }) {
       <YoutubeList
         playlist={'PLvc6U8OPfT_mUfBv_KHKCT7nb_l_q1UXh'}
         index={[1, 2, 3, 4, 5]}
+        sizes="w-[24rem] xs:w-[30rem]"
       />
     </div>
   );

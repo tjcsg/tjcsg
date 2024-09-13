@@ -11,6 +11,7 @@ import biblePic2 from '@/public/landingpage_bible.png';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 import YoutubeList from '@/lib/components/youtube-list';
+import InstagramEmbed from '@/lib/components/instagram-embed';
 
 const rockSalt = Rock_Salt({
   subsets: ['latin'],
@@ -239,6 +240,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
       <LatestYoutubeVideos lang={lang} />
+      <InstagramEmbed />
     </>
   );
 }

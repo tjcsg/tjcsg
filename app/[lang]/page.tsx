@@ -1,14 +1,13 @@
 import SpecialEvents from './special-events';
 import { Rock_Salt } from 'next/font/google';
 import { Locale } from '@/i18n-config';
-import { getCDBDSchedule, getWebContent } from '@/lib/api';
+import { getWebContent } from '@/lib/api';
 import Image from 'next/image';
 import LinkButton from '@/lib/components/link-button';
 import tkPicOverlay from '@/public/landingpage_overlap.svg';
 import prayerPic from '@/public/landingpage_prayer.png';
 import biblePic from '@/public/landingpage_bible2.png';
 import biblePic2 from '@/public/landingpage_bible.png';
-import OurBeliefs from './beliefs/our-beliefs';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 
@@ -222,7 +221,7 @@ function LatestYoutubeVideos({ lang }: { lang: Locale }) {
       <div className={`flex overflow-x-scroll`}>
         <div className="flex flex-nowrap gap-8">
           {[1, 2, 3, 4, 5].map((i) => (
-            <div className="w-[30rem]">
+            <div className="w-[30rem]" key={i}>
               <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
                 <iframe
                   src={`https://www.youtube.com/embed?listType=playlist&list=PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH&index=${i}&modestbranding=1&rel=0`}

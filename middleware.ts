@@ -31,11 +31,6 @@ export function middleware(request: NextRequest) {
   // If you have one
   if (
     [
-      '/carousel/1.jpg',
-      '/carousel/2.jpeg',
-      '/carousel/3.jpg',
-      '/carousel/4.jpeg',
-      '/carousel/5.jpg',
       '/favicon.ico',
       '/locations/adam.jpg',
       '/locations/sembawang.jpg',
@@ -46,6 +41,21 @@ export function middleware(request: NextRequest) {
       '/landingpage.jpg',
       '/landingpage_landscape.jpg',
       '/marble.png',
+      '/pdf/baptism.pdf',
+      '/pdf/bible.pdf',
+      '/pdf/church.pdf',
+      '/pdf/essential-biblical-doctrines.pdf',
+      '/pdf/footwashing.pdf',
+      '/pdf/holy-communion.pdf',
+      '/pdf/holy-spirit.pdf',
+      '/pdf/intro-to-TJC-basic-beliefs.pdf',
+      '/pdf/jesus-christ.pdf',
+      '/pdf/QnA.pdf',
+      '/pdf/sabbath.pdf',
+      '/pdf/salvation.pdf',
+      '/pdf/saving-grace-vol1.pdf',
+      '/pdf/saving-grace-vol2.pdf',
+      '/pdf/second-coming.pdf'
       // Your other files in `public`
     ].includes(pathname)
   )

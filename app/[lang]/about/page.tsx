@@ -1,6 +1,5 @@
 import { Locale } from '@/i18n-config';
 import { getWebContent, MarkdownType } from '@/lib/api';
-import OurBeliefs from '../beliefs/our-beliefs';
 import Link from 'next/link';
 import WhyTrueJesusChurch from './why-true-jesus-church';
 import tjcMap from '@/public/tjcmap.png';
@@ -101,7 +100,7 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
           title={'About'}
           contents={[text[lang].about_1, text[lang].about_2]}
           paragraphClasses="text-lg xs:text-xl sm:text-2xl xl:text-3xl"
-          children={
+          otherContents={
             <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
               <InfoBox
                 largeText={'1917'}

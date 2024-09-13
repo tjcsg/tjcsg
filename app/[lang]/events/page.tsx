@@ -11,7 +11,7 @@ import Pagination from '@/lib/components/pagination';
 import Header from '@/lib/components/header';
 import EventCard from '@/lib/components/event-card';
 
-const MAX_ITEMS_PER_PAGE = 5;
+const MAX_ITEMS_PER_PAGE = 6;
 
 export default async function EventsPage({
   params,
@@ -47,16 +47,15 @@ export default async function EventsPage({
           breadcrumbs={[{ name: 'Home', href: '/' }]}
           className="mb-10"
         />
-
-        <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-4/5 md:w-2/3  lg:w-full lg:gap-y-16">
-          {allEvents &&
-            allEvents.map((event) => (
-              <EventCard key={event.slug} lang={'en'} event={event} />
-            ))}
-        </div>
-        <div className="mt-10 flex w-full justify-center lg:mt-16">
-          <Pagination totalPages={totalPages} />
-        </div>
+      </div>
+      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-8 lg:w-full lg:grid-cols-1 lg:gap-y-16">
+        {allEvents &&
+          allEvents.map((event) => (
+            <EventCard key={event.slug} lang={'en'} event={event} />
+          ))}
+      </div>
+      <div className="mt-10 flex w-full justify-center lg:mt-16">
+        <Pagination totalPages={totalPages} />
       </div>
     </Container>
   );

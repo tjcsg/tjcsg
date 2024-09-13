@@ -50,7 +50,7 @@ export default function ArticleCard({
         </time>
 
         <div className="flex flex-col items-start justify-start">
-          <h3 className="sm:text-md mt-1 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
+          <h3 className="mt-1 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
             <Link href={`/articles/${article.slug}`}>{article.title}</Link>
           </h3>
           <div className="mt-2 flex gap-2">

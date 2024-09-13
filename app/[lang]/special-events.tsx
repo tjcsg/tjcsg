@@ -30,30 +30,32 @@ export default async function SpecialEvents({
   lang: Locale;
   background: string;
 }) {
-  const allEvents = await getAllEvents(lang);
+  const allEvents = await getAllEvents(lang, 2);
 
   return (
     <Container background={`${background}`}>
       <div className="mb-8 lg:mb-16">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
           {text[lang].title}
         </h2>
         <p className="mt-2 text-xl leading-8 text-gray-600">
           {text[lang].subtitle}
         </p>
-        <Link href="/events">
-          <p className="mt-2 text-xl leading-8 text-button underline hover:text-button_hover">
+        <p className="mt-2">
+          <Link
+            href="/events"
+            className="text-xl leading-8 text-button underline hover:text-button_hover"
+          >
             {text[lang].viewall}
-          </p>
-        </Link>
+          </Link>
+        </p>
       </div>
-      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-4/5 md:w-2/3 lg:w-full lg:gap-y-16">
+
+      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-8 lg:w-full lg:grid-cols-1 lg:gap-y-16">
         {allEvents &&
-          allEvents
-            .slice(0, 3)
-            .map((event) => (
-              <EventCard key={event.slug} lang={'en'} event={event} />
-            ))}
+          allEvents.map((event) => (
+            <EventCard key={event.slug} lang={'en'} event={event} />
+          ))}
       </div>
     </Container>
   );

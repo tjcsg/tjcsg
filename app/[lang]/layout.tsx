@@ -142,7 +142,9 @@ export default function RootLayout({
       <body>
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />
-          <main className="mb-auto block">{children}</main>
+          <main className="mb-auto block">
+            <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">{children}</div>
+          </main>
           <Footer lang={lang} />
         </section>
       </body>

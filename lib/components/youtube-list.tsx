@@ -3,15 +3,17 @@ import Link from 'next/link';
 export default function YoutubeList({
   playlist,
   index,
+  sizes = 'w-[24rem] xs:w-[30rem] sm:w-[35rem]',
 }: {
   playlist: string;
   index: number[];
+  sizes?: string;
 }) {
   return (
     <div className={`flex overflow-x-scroll`}>
       <div className="flex flex-nowrap gap-8">
         {index.map((i) => (
-          <div className="w-[20em] xs:w-[25em] sm:w-[30rem]" key={i}>
+          <div className={`${sizes}`} key={i}>
             <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
               <iframe
                 src={`https://www.youtube.com/embed?listType=playlist&list=${playlist}&index=${i}&modestbranding=1&rel=0`}
@@ -24,7 +26,7 @@ export default function YoutubeList({
             </div>
           </div>
         ))}
-        <div className="w-[20em] xs:w-[25em] sm:w-[30rem]">
+        <div className={`${sizes}`}>
           <div className="flex h-full w-full items-center justify-center">
             <div className="block text-pretty text-center ">
               <Link

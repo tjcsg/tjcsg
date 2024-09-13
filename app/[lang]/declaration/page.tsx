@@ -19,6 +19,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
             { name: text[lang].home, href: '/' },
             { name: text[lang].title, href: '.' },
           ]}
+          className="pb-6"
         />
         <p>
           We acknowledge that religious harmony is vital for peace, progress and

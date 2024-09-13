@@ -2,6 +2,7 @@ import { Locale } from '@/i18n-config';
 import { details } from '@/lib/church-details';
 import Container from '@/lib/components/container';
 import Header from '@/lib/components/header';
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   return ['tk', 'adam', 'serangoon', 'sembawang'];
@@ -68,7 +69,7 @@ export default function Page({
           { name: 'Worship', href: '/worship' },
           { name: `${details[lang][church].name} Livestream`, href: '#' },
         ]}
-        className="px-6 sm:px-12"
+        className="px-6 pb-6 sm:px-12"
       />
       <div className="block bg-stone-50">
         <div className="mx-auto px-6 py-10 sm:px-12 md:max-w-4xl">

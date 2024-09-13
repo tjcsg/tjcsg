@@ -17,10 +17,9 @@ type ChurchDetails = {
 export const details: { en: ChurchDetails; zh: ChurchDetails } = {
   en: {
     adam: {
-      name: 'Adam Road Church',
+      name: 'True Jesus Church (Adam Road)',
       shortform: 'adam',
-      address:
-        '17D Adam Road, Singapore 289890. (Nearest MRT – Botanic Gardens, Tan Kah Kee',
+      address: '17D Adam Road, Singapore 289890',
       timings: [
         { day: 'Wednesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -32,10 +31,9 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjcadam',
     },
     tk: {
-      name: 'Telok Kurau Church',
+      name: 'True Jesus Church (Telok Kurau)',
       shortform: 'tk',
-      address:
-        '32 Lorong H, Telok Kurau, Singapore 426020. (Nearest MRT – Eunos)',
+      address: '32 Lorong H, Telok Kurau, Singapore 426020',
       timings: [
         { day: 'Tuesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -47,10 +45,9 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjctk',
     },
     sembawang: {
-      name: 'Sembawang Church',
+      name: 'True Jesus Church (Sembawang)',
       shortform: 'sembawang',
-      address:
-        'Woodlands 11, Unit #04-19, 11 Woodlands Close, Singapore 737853. (Nearest MRT – Admiralty)',
+      address: '11 Woodlands Close, Unit #04-19, Singapore 737853',
       timings: [
         { day: 'Wednesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },
@@ -62,10 +59,9 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjcsbw',
     },
     serangoon: {
-      name: 'Serangoon Church',
+      name: 'True Jesus Church (Serangoon)',
       shortform: 'serangoon',
-      address:
-        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859. (Nearest MRT – Hougang))',
+      address: '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
       timings: [
         { day: 'Tuesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },

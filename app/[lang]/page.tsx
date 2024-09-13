@@ -10,6 +10,7 @@ import biblePic from '@/public/landingpage_bible2.png';
 import biblePic2 from '@/public/landingpage_bible.png';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
+import YoutubeList from '@/lib/components/youtube-list';
 
 const rockSalt = Rock_Salt({
   subsets: ['latin'],
@@ -115,7 +116,7 @@ async function TruthTransforms({ lang }: { lang: Locale }) {
         </ol>
         <LinkButton
           text={text[lang].whatWeBelieve}
-          href={`${lang}/about`}
+          href={`${lang}/beliefs`}
           type={'inverse'}
           className="sm:text-md mx-auto mt-8 w-fit px-4 py-2 text-xs uppercase sm:px-6 md:text-lg lg:mt-12"
         />
@@ -217,25 +218,10 @@ function LatestYoutubeVideos({ lang }: { lang: Locale }) {
   return (
     <Container>
       <h1 className="mb-6 text-2xl font-bold">{text[lang].watchSermons}</h1>
-
-      <div className={`flex overflow-x-scroll`}>
-        <div className="flex flex-nowrap gap-8">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div className="w-[30rem]" key={i}>
-              <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
-                <iframe
-                  src={`https://www.youtube.com/embed?listType=playlist&list=PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH&index=${i}&modestbranding=1&rel=0`}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  className="absolute bottom-0 left-0 right-0 top-0 h-full w-full"
-                ></iframe>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <YoutubeList
+        playlist={'PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH'}
+        index={[1, 2, 3, 4, 5]}
+      />
     </Container>
   );
 }

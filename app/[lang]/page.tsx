@@ -8,7 +8,7 @@ import tkPicOverlay from '@/public/landingpage_overlap.svg';
 import prayerPic from '@/public/landingpage_prayer.png';
 import biblePic from '@/public/landingpage_bible2.png';
 import biblePic2 from '@/public/landingpage_bible.png';
-import OurBeliefs from './about/our-beliefs';
+import OurBeliefs from './beliefs/our-beliefs';
 import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 
@@ -31,6 +31,7 @@ const text = {
     receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
+    watchSermons: 'Watch our latest sermons',
   },
   zh: {
     welcome: '欢迎到访新加坡真耶稣教会',
@@ -44,6 +45,7 @@ const text = {
     receiveCompleteGospel: 'Receive the true &\ncomplete gospel',
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
+    watchSermons: 'Watch our latest sermons',
   },
 };
 
@@ -98,8 +100,8 @@ async function Hero({ lang }: { lang: Locale }) {
 
 async function TruthTransforms({ lang }: { lang: Locale }) {
   return (
-    <Container background="bg-white">
-      <div className="block py-10 md:py-14 xl:py-16">
+    <Container>
+      <div className="py-10 md:py-14 xl:py-16">
         <p className="text-center text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
           {text[lang].truthWill}
         </p>
@@ -125,8 +127,8 @@ async function TruthTransforms({ lang }: { lang: Locale }) {
 
 async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
   return (
-    <Container background="bg-white">
-      <div className="block pb-16 pt-20 md:pb-20 md:pt-24 xl:pb-24 xl:pt-32">
+    <Container>
+      <div className=" pb-16 pt-20 md:pb-20 md:pt-24 xl:pb-24 xl:pt-32">
         <div className="relative">
           <p
             className={`absolute -left-6 -top-6 rotate-[-7.12deg] text-gray-800 xs:-left-8 xs:-top-8 xs:text-2xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl xl:-left-20 xl:-top-20 xl:text-5xl ${rockSalt.className}`}
@@ -152,62 +154,87 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
   const contentfulText = await getWebContent(lang, false);
 
   return (
-    <Container background="bg-white">
-      <div className="block w-full">
-        <div className="flex flex-col justify-between py-8 md:py-12 lg:flex-row xl:py-16">
-          <div className="flex justify-center lg:block">
-            <div>
-              <div className="relative">
-                <h1 className="w-full text-center text-3xl font-extrabold uppercase tracking-tight text-gray-900 xs:text-4xl md:text-5xl lg:mx-0 lg:text-left">
-                  {text[lang].worshipTrueGod}
-                </h1>
-                <p
-                  className={`absolute -right-2 -top-8 rotate-[9.8deg] text-lg text-gray-800 xs:-right-4 xs:text-2xl md:-right-16 md:-top-12 md:text-3xl lg:-right-32 xl:-top-12 ${rockSalt.className}`}
-                >
-                  {' '}
-                  {text[lang].joinUs}
-                </p>
-              </div>
-              <p className="text-md mx-auto mt-3 block w-full max-w-xl text-center text-gray-500 md:mx-0 lg:mt-5 lg:text-left lg:text-lg">
-                {contentfulText.homepageWorshipTrueGodText}
+    <Container>
+      <div className="flex flex-col justify-between py-8 md:py-12 lg:flex-row xl:py-16">
+        <div className="flex justify-center lg:block">
+          <div>
+            <div className="relative">
+              <h1 className="w-full text-center text-3xl font-extrabold uppercase tracking-tight text-gray-900 xs:text-4xl md:text-5xl lg:mx-0 lg:text-left">
+                {text[lang].worshipTrueGod}
+              </h1>
+              <p
+                className={`absolute -right-2 -top-8 rotate-[9.8deg] text-lg text-gray-800 xs:-right-4 xs:text-2xl md:-right-16 md:-top-12 md:text-3xl lg:-right-32 xl:-top-12 ${rockSalt.className}`}
+              >
+                {' '}
+                {text[lang].joinUs}
               </p>
-              <div className="mt-4 gap-x-4 sm:flex sm:justify-center lg:justify-start lg:gap-x-8">
-                <div>
-                  <LinkButton
-                    text={text[lang].findChurch}
-                    href={`${lang}/locations`}
-                    type={'default'}
-                    className="text-md w-full px-6 lg:px-6 lg:py-2 lg:text-lg"
-                  />
-                </div>
-                <div>
-                  <LinkButton
-                    text={text[lang].livestream}
-                    href={`${lang}/livestream`}
-                    type={'inverse'}
-                    className=" text-md w-full px-6 lg:px-6 lg:py-2 lg:text-lg"
-                  />
-                </div>
+            </div>
+            <p className="text-md mx-auto mt-3 block w-full max-w-xl text-center text-gray-500 md:mx-0 lg:mt-5 lg:text-left lg:text-lg">
+              {contentfulText.homepageWorshipTrueGodText}
+            </p>
+            <div className="mt-4 gap-x-4 sm:flex sm:justify-center lg:justify-start lg:gap-x-8">
+              <div>
+                <LinkButton
+                  text={text[lang].findChurch}
+                  href={`${lang}/locations`}
+                  type={'default'}
+                  className="text-md w-full px-6 lg:px-6 lg:py-2 lg:text-lg"
+                />
+              </div>
+              <div>
+                <LinkButton
+                  text={text[lang].livestream}
+                  href={`${lang}/livestream`}
+                  type={'inverse'}
+                  className=" text-md w-full px-6 lg:px-6 lg:py-2 lg:text-lg"
+                />
               </div>
             </div>
           </div>
-          <div className="relative mt-12 flex justify-center md:mt-16 lg:mt-0 lg:justify-end">
-            <Image
-              alt="A picture of the front of Telok Kurau Church"
-              src={prayerPic}
-              className="block w-2/3 object-contain md:w-1/2 lg:w-72 xl:w-96"
-            />
-            <Image
-              alt="A picture of the front of Telok Kurau Church"
-              src={biblePic}
-              className="absolute -right-[5%] -top-[10%] w-28 max-w-xl object-contain xs:w-32 md:w-40 lg:-right-8 lg:-top-16 lg:w-32 xl:-right-10 xl:w-40"
-            />
-            <Image
-              alt="A picture of the front of Telok Kurau Church"
-              src={biblePic2}
-              className="absolute right-3/4 top-3/4 w-28 max-w-xl object-contain xs:w-32 md:w-40 lg:right-80 lg:top-40 lg:w-32 xl:-left-48 xl:top-48 xl:w-40"
-            />
-          </div>
+        </div>
+        <div className="relative mt-12 flex justify-center md:mt-16 lg:mt-0 lg:justify-end">
+          <Image
+            alt="A picture of the front of Telok Kurau Church"
+            src={prayerPic}
+            className="block w-2/3 object-contain md:w-1/2 lg:w-72 xl:w-96"
+          />
+          <Image
+            alt="A picture of the front of Telok Kurau Church"
+            src={biblePic}
+            className="absolute -right-[5%] -top-[10%] w-28 max-w-xl object-contain xs:w-32 md:w-40 lg:-right-8 lg:-top-16 lg:w-32 xl:-right-10 xl:w-40"
+          />
+          <Image
+            alt="A picture of the front of Telok Kurau Church"
+            src={biblePic2}
+            className="absolute right-3/4 top-3/4 w-28 max-w-xl object-contain xs:w-32 md:w-40 lg:right-80 lg:top-40 lg:w-32 xl:-left-48 xl:top-48 xl:w-40"
+          />
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+function LatestYoutubeVideos({ lang }: { lang: Locale }) {
+  return (
+    <Container>
+      <h1 className="mb-6 text-2xl font-bold">{text[lang].watchSermons}</h1>
+
+      <div className={`flex overflow-x-scroll`}>
+        <div className="flex flex-nowrap gap-8">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div className="w-[30rem]">
+              <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
+                <iframe
+                  src={`https://www.youtube.com/embed?listType=playlist&list=PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH&index=${i}&modestbranding=1&rel=0`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute bottom-0 left-0 right-0 top-0 h-full w-full"
+                ></iframe>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </Container>
@@ -216,7 +243,6 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
-  const { schedule } = await getCDBDSchedule(false);
   return (
     <>
       <Hero lang={lang} />
@@ -225,12 +251,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <ReceiveCompleteGospel lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
-      <OurBeliefs lang={lang} background={''} />
-
-      {/* For some reason, adding the container into the CDBD client component gives an error */}
-      {/* <Container background="bg-stone-50">
-        <CDBD lang={lang} schedule={schedule.url} />
-      </Container> */}
+      <LatestYoutubeVideos lang={lang} />
     </>
   );
 }

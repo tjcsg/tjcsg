@@ -1,61 +1,63 @@
 import Link from 'next/link';
-import { draftMode } from 'next/headers';
-
-import Date from '../date-component';
-import CoverImage from '../cover-image';
-
-import { getAllEvents, getEvent } from '@/lib/api';
+import { getAllEvents, getTotalEvents } from '@/lib/api';
 import { Locale } from '@/i18n-config';
+import Container from '@/lib/components/container';
+import ContentfulImage from '@/lib/contentful-image';
+import EventStatus from '@/lib/components/event-status';
+import { details } from '@/lib/church-details';
+import { MapPinIcon } from '@heroicons/react/20/solid';
+import { redirect } from 'next/navigation';
+import Pagination from '@/lib/components/pagination';
+import Header from '@/lib/components/header';
+import EventCard from '@/lib/components/event-card';
 
-// export async function generateStaticParams() {
-//   const allEvents = await getAllEvents(false);
-
-//   return allEvents.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+const MAX_ITEMS_PER_PAGE = 5;
 
 export default async function EventsPage({
   params,
+  searchParams,
 }: {
   params: { slug: string; lang: Locale };
+  searchParams?: {
+    page?: string;
+  };
 }) {
-  const { isEnabled } = draftMode();
-  // const { event } = await getEvent(params.slug, isEnabled);
   const { lang } = params;
-  const allEvents = await getAllEvents(false, lang);
+
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalItems = await getTotalEvents();
+  const totalPages = Math.ceil(totalItems / MAX_ITEMS_PER_PAGE);
+
+  if (currentPage > totalPages) {
+    redirect('/events');
+  }
+
+  const allEvents = await getAllEvents(
+    lang,
+    MAX_ITEMS_PER_PAGE,
+    (currentPage - 1) * MAX_ITEMS_PER_PAGE,
+  );
 
   return (
-    <div className="container mx-auto px-5">
-      <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
-        <Link href="/" className="hover:underline">
-          Blog
-        </Link>
-        .
-      </h2>
-      <article>
-        {allEvents.map((event) => (
-          <>
-            <h1 className="mb-12 text-center text-6xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
-              {event.title}
-            </h1>
-            <div className="mb-8 sm:mx-0 md:mb-16">
-              <CoverImage title={event.title} url={event.poster.url} />
-            </div>
-            <div className="mx-auto max-w-2xl">
-              <div className="mb-6 text-lg">
-                <Date dateString={event.date} />
-              </div>
-            </div>
-          </>
-        ))}
-        {/*
-        <div className="mx-auto max-w-2xl">
-          <div className="prose">
-            <Markdown content={event.summary} />
-          </div>
-        </div> */}
-      </article>
-    </div>
+    <Container>
+      <div className="sm:px-5">
+        <Header
+          title={'All Special Events'}
+          breadcrumbs={[{ name: 'Home', href: '/' }]}
+          className="mb-10"
+        />
+
+        <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-4/5 md:w-2/3  lg:w-full lg:gap-y-16">
+          {allEvents &&
+            allEvents.map((event) => (
+              <EventCard key={event.slug} lang={'en'} event={event} />
+            ))}
+        </div>
+        <div className="mt-10 flex w-full justify-center lg:mt-16">
+          <Pagination totalPages={totalPages} />
+        </div>
+      </div>
+    </Container>
   );
 }

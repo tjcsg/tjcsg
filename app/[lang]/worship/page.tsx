@@ -4,9 +4,13 @@ import PageHeader from '@/lib/components/page-header';
 import GlobalLivestream from '../livestream/global-livestream';
 import SpecialEvents from '../special-events';
 import Header from '@/lib/components/header';
+import adamChapel from '@/public/adam_chapel.jpg';
 import LivestreamList from '../livestream/livestreams-list';
 import YoutubeList from '@/lib/components/youtube-list';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
+import Image from 'next/image';
+import ImageBanner from '@/lib/components/image-banner';
+import Link from 'next/link';
 
 const text = {
   en: {
@@ -98,8 +102,26 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   return (
     <>
-      <PageHeader lang={lang} text={text} link={headerButton} />
+      <ImageBanner
+        src={adamChapel}
+        alt={'Picture of the chapel at Adam Road church'}
+      />
+      {/* <PageHeader lang={lang} text={text} link={headerButton} /> */}
       <Container>
+        <Header
+          title={text[lang].title}
+          breadcrumbs={[{ name: 'Home', href: '/' }]}
+        />
+        <p className="pb-12 pt-4 text-gray-800 md:text-lg lg:pb-16">
+          The best way to worship with us is to{' '}
+          <Link
+            href={'/locations'}
+            className="text-button underline hover:text-button_hover"
+          >
+            come and join us for an in-person church service
+          </Link>
+          .
+        </p>
         <FeaturedSermon lang={lang} />
         <OlderSermons lang={lang} />
         <HowToPray lang={lang} />

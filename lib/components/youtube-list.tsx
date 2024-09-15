@@ -11,9 +11,9 @@ export default function YoutubeList({
 }) {
   return (
     <div className={`flex overflow-x-scroll`}>
-      <div className="flex flex-nowrap gap-8">
+      <div className="shadow-gray-150 flex snap-x flex-nowrap gap-8 px-8 py-2 shadow-inner">
         {index.map((i) => (
-          <div className={`${sizes}`} key={i}>
+          <div className={`${sizes} snap-center`} key={i}>
             <div className="relative inline-block w-full overflow-hidden pt-[56.25%]">
               <iframe
                 src={`https://www.youtube.com/embed?listType=playlist&list=${playlist}&index=${i}&modestbranding=1&rel=0`}
@@ -26,14 +26,14 @@ export default function YoutubeList({
             </div>
           </div>
         ))}
-        <div className={`${sizes}`}>
+        <div className={`${sizes} snap-center`}>
           <div className="flex h-full w-full items-center justify-center">
             <div className="block text-pretty text-center ">
               <Link
                 href={`https://www.youtube.com/playlist?list=${playlist}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-2xl leading-loose text-button underline hover:text-button_hover"
+                className="text-lg leading-loose text-button underline hover:text-button_hover xs:text-xl sm:text-2xl"
               >
                 Check out the full playlist on our YouTube channel!
               </Link>

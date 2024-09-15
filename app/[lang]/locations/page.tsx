@@ -2,7 +2,7 @@ import { Church, details } from '@/lib/church-details';
 import ChurchLocation from '@/lib/components/church-location';
 import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
-import tkChurch from '@/public/landingpage_landscape.jpg';
+import adamFlowers from '@/public/adam_flowers.jpg';
 import Image from 'next/image';
 import Header from '@/lib/components/header';
 import Container from '@/lib/components/container';
@@ -11,6 +11,7 @@ import adamPic from '@/public/locations/adam.jpg';
 import tkPic from '@/public/locations/tk.jpg';
 import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
+import ImageBanner from '@/lib/components/image-banner';
 
 const pic = {
   adam: adamPic,
@@ -84,7 +85,11 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   const churches = ['adam', 'tk', 'sembawang', 'serangoon'] as Church[];
 
   return (
-    <div className="scroll-smooth">
+    <>
+      <ImageBanner
+        src={adamFlowers}
+        alt={'Picture of flowers at Adam road church'}
+      />
       <PageHeader lang={lang} text={text} />
       <Container>
         <p className="mx-auto -mt-8 mb-20 max-w-lg text-pretty text-center text-gray-600 sm:-mt-12 sm:text-lg md:-mt-14 md:max-w-xl">
@@ -109,6 +114,6 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }

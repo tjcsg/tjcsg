@@ -26,16 +26,6 @@ const resources = [
     zh: 'Articles',
     href: '/articles',
   },
-  {
-    en: 'Social Media',
-    zh: 'Articles',
-    href: '/socials',
-  },
-  {
-    en: 'TJC Worldwide',
-    zh: 'TJC Worldwide',
-    href: '/global',
-  },
 ];
 
 const text = {

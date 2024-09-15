@@ -32,7 +32,7 @@ const text = {
 
 const trueGospelCta = {
   en: (
-    <p className="text-pretty text-base text-gray-700">
+    <p className="text-pretty text-base text-black">
       Here in the True Jesus Church, we preach the truth that is taught in the
       Bible and upheld by the Apostolic church. We welcome you to study the
       truth for yourself, or even better, to{' '}
@@ -46,7 +46,7 @@ const trueGospelCta = {
     </p>
   ),
   zh: (
-    <p className="text-pretty text-base text-gray-700">
+    <p className="text-pretty text-base text-black">
       Here in the True Jesus Church, we preach the truth that is taught in the
       Bible and upheld by the Apostolic church. We welcome you to study the
       truth for yourself, or even better, to{' '}

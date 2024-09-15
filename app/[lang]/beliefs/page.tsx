@@ -1,11 +1,18 @@
 import { Locale } from '@/i18n-config';
 import { aof, aofDetails } from '@/lib/articles-of-faith';
+import { Rock_Salt } from 'next/font/google';
 import Container from '@/lib/components/container';
 import FeaturedVerses from '@/lib/components/featured-verses';
 import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import YoutubeList from '@/lib/components/youtube-list';
 import Link from 'next/link';
+
+const rockSalt = Rock_Salt({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+});
 
 const text = {
   en: {
@@ -17,6 +24,7 @@ const text = {
     ],
     ourAof: 'Our Articles Of Faith',
     findOutMore: 'Find Out More',
+    withUsYouCan: 'With us, you can',
   },
   zh: {
     watchAofSermons: 'Sermons introducing our beliefs',
@@ -27,6 +35,7 @@ const text = {
     ],
     ourAof: 'Our Articles Of Faith',
     findOutMore: 'Find Out More',
+    withUsYouCan: 'With us, you can',
   },
 };
 
@@ -98,6 +107,31 @@ const publications = {
   ],
 };
 
+async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
+  return (
+    <Container>
+      <div className=" pb-16 pt-32 md:pb-28 md:pt-40">
+        <div className="relative mx-auto w-full">
+          <p
+            className={`absolute -top-10 rotate-[-7.12deg] text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl ${rockSalt.className}`}
+          >
+            {' '}
+            {text[lang].withUsYouCan}
+          </p>
+        </div>
+        {/* prettier-ignore */}
+        <p className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+          Receive the <span className="animate-highlight whitespace-pre-line inline bg-no-repeat transition-all ease-in delay-500 bg-left bg-[length:0%_95%] bg-gradient-to-r from-[#294ac39e] to-[#007da444]">{`True
+          & Complete`}</span> Gospel
+        </p>
+        {/* <pre className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+          {text[lang].receiveCompleteGospel}
+        </pre> */}
+      </div>
+    </Container>
+  );
+}
+
 function AofSermons({ lang }: { lang: Locale }) {
   return (
     <div className="mb-20 mt-16">
@@ -138,18 +172,17 @@ function AofPublications({ lang }: { lang: Locale }) {
         title={'Our Publications'}
         contents={[]}
         labelClasses="capitalize font-semibold text-lg mb-8"
-        paragraphClasses="text-base"
         otherContents={publications[lang].map((pub) => (
           <div className="mb-4" key={pub.href}>
             <Link
               href={pub.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-button hover:text-button_hover"
+              className="block text-button hover:text-button_hover sm:text-lg"
             >
               {pub.name}
             </Link>
-            <p className="text-sm text-gray-500">{pub.desc}</p>
+            <p className="text-sm text-gray-500 sm:text-base">{pub.desc}</p>
           </div>
         ))}
       />
@@ -189,28 +222,41 @@ async function OurBeliefs({ lang }: { lang: Locale }) {
 export default function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   return (
-    <Container>
-      <div className="mx-auto max-w-4xl pb-10">
-        <Header
-          title={'Our Beliefs'}
-          breadcrumbs={[{ name: 'Home', href: '/' }]}
-        />
-        <TrueGospel lang={lang} />
-        <OurBeliefs lang={lang} />
-        <AofSermons lang={lang} />
-        <FeaturedVerses
-          verses={[
-            {
-              verse:
-                'There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism;',
-              verseLocation: 'Ephesians 4:4-5 NKJV',
-            },
-          ]}
-          className="my-16"
-        />
+    <>
+      <ReceiveCompleteGospel lang={lang} />
+      <Container>
+        <div className="mx-auto max-w-4xl pb-10">
+          {/* <Header
+            title={'Our Beliefs'}
+            breadcrumbs={[{ name: 'Home', href: '/' }]}
+          /> */}
+          <TrueGospel lang={lang} />
+          <FeaturedVerses
+            verses={[
+              {
+                verse:
+                  "Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven, but he who does the will of My Father in heaven.",
+                verseLocation: 'Matthew 7:21 NKJV',
+              },
+            ]}
+            className="my-16 sm:my-24 md:my-28 lg:my-32"
+          />
+          <OurBeliefs lang={lang} />
+          <FeaturedVerses
+            verses={[
+              {
+                verse:
+                  'There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism;',
+                verseLocation: 'Ephesians 4:4-5 NKJV',
+              },
+            ]}
+            className="my-16 sm:my-24 md:my-28 lg:my-32"
+          />
+          <AofSermons lang={lang} />
 
-        <AofPublications lang={lang} />
-      </div>
-    </Container>
+          <AofPublications lang={lang} />
+        </div>
+      </Container>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import SpecialEvents from './special-events';
 import { Rock_Salt } from 'next/font/google';
 import { Locale } from '@/i18n-config';
 import { getWebContent } from '@/lib/api';
+import tjcMap from '@/public/tjcmap.png';
 import Image from 'next/image';
 import LinkButton from '@/lib/components/link-button';
 import tkPicOverlay from '@/public/landingpage_overlap.svg';
@@ -42,6 +43,9 @@ const text = {
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
     watchSermons: 'Watch our latest sermons',
+    mapLegend: 'Countries with True Jesus Church',
+    mapJoinFamily: 'Join Our Global Family',
+    learnMore: 'Learn more about us',
   },
   zh: {
     welcome: '欢迎到访新加坡真耶稣教会',
@@ -65,6 +69,9 @@ const text = {
     worshipTrueGod: 'Worship the true God',
     joinUs: 'Join us!',
     watchSermons: 'Watch our latest sermons',
+    mapLegend: 'Countries with True Jesus Church',
+    mapJoinFamily: 'Join Our Global Family',
+    learnMore: 'Learn more about us',
   },
 };
 
@@ -165,6 +172,40 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
   );
 }
 
+async function JoinGlobalFamily({ lang }: { lang: Locale }) {
+  return (
+    <div className="block py-32 sm:pt-40">
+      <Container>
+        <h1 className="mb-8 w-full text-3xl font-black uppercase tracking-tight text-gray-900 xs:text-4xl md:text-5xl ">
+          {text[lang].mapJoinFamily}
+        </h1>
+      </Container>
+      <Image src={tjcMap} className="w-full" alt={`A map of TJC worldwide`} />
+      <div className="mt-4 flex justify-center">
+        <div className="w-4 self-center  text-button">
+          <svg
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="1" y="1" width="20" height="20" fill="currentColor" />
+          </svg>
+        </div>
+        <p className="xs:text-md ml-3 text-sm text-gray-500 sm:text-lg">
+          {text[lang].mapLegend}
+        </p>
+      </div>
+      <LinkButton
+        text={text[lang].learnMore}
+        href={`${lang}/about`}
+        type={'inverse'}
+        className="mx-auto w-fit px-4 py-1 uppercase sm:px-6 md:text-lg"
+      />
+    </div>
+  );
+}
+
 async function WorshipTrueGod({ lang }: { lang: Locale }) {
   const contentfulText = await getWebContent(lang, false);
 
@@ -250,7 +291,8 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <Hero lang={lang} />
       <TruthTransforms lang={lang} />
       <WorshipTrueGod lang={lang} />
-      <ReceiveCompleteGospel lang={lang} />
+      {/* <ReceiveCompleteGospel lang={lang} /> */}
+      <JoinGlobalFamily lang={lang} />
       <SpecialEvents lang={lang} background="bg-white" />
       <FeaturedArticles lang={lang} />
       <LatestYoutubeVideos lang={lang} />

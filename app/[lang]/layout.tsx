@@ -1,7 +1,7 @@
 import './globals.css';
 import { Noto_Sans } from 'next/font/google';
 import { type Locale } from '../../i18n-config';
-import NavBar from './navbar2';
+import NavBar from './navbar';
 import Link from 'next/link';
 import { getWebContent } from '@/lib/api';
 import Socials from '@/lib/components/socials';

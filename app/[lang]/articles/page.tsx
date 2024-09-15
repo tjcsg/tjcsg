@@ -46,7 +46,7 @@ export default async function Page({
       <Header
         title={'Read Our Articles'}
         breadcrumbs={[{ name: 'Home', href: '/' }]}
-        className="mb-10"
+        className="mb-10 mt-2"
       />
       {tags.length > 0 && (
         <Link

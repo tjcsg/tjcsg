@@ -16,7 +16,7 @@ const text = {
       'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
     ],
     ourAof: 'Our Articles Of Faith',
-    findOutMore: 'Find Our More',
+    findOutMore: 'Find Out More',
   },
   zh: {
     watchAofSermons: 'Sermons introducing our beliefs',
@@ -26,7 +26,7 @@ const text = {
       'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
     ],
     ourAof: 'Our Articles Of Faith',
-    findOutMore: 'Find Our More',
+    findOutMore: 'Find Out More',
   },
 };
 

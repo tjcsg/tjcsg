@@ -1,17 +1,14 @@
 import { Locale } from '@/i18n-config';
 import { getAllEvents } from '@/lib/api';
-import { details } from '@/lib/church-details';
 import Container from '@/lib/components/container';
-import EventStatus from '@/lib/components/event-status';
-import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
-import { MapPinIcon } from '@heroicons/react/20/solid';
 import EventCard from '@/lib/components/event-card';
 
 const text = {
   en: {
     title: 'Special Events',
-    subtitle: 'Stay tuned for our special services!',
+    subtitle:
+      'Our special services are a great starting point for you to dive into specific topics from the Bible',
     viewall: 'View all events',
     cta: 'Find out more',
   },
@@ -38,7 +35,7 @@ export default async function SpecialEvents({
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
           {text[lang].title}
         </h2>
-        <p className="mt-2 text-xl leading-8 text-gray-600">
+        <p className="mt-2 text-pretty text-lg text-gray-600 md:text-xl">
           {text[lang].subtitle}
         </p>
         <p className="mt-2">

@@ -7,7 +7,6 @@ export default function InstagramEmbed() {
       <Script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></Script>
       <iframe
         src="https://cdn.lightwidget.com/widgets/3e3831ed7d2d5a2cae4dfd0dd4bc8eb1.html"
-        allowTransparency
         className="lightwidget-widget h-full w-full overflow-hidden border-0"
       ></iframe>
     </Container>

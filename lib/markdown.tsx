@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import Link from 'next/link';
 import ContentfulImage from './contentful-image';
 import type { EventEntry } from './api';
@@ -74,6 +74,9 @@ export function Markdown({ content }: { content: EventEntry['summary'] }) {
           }
         }
       },
+    },
+    renderMark: {
+      [MARKS.BOLD]: (text) => <span className="font-bold">{text}</span>,
     },
     renderText: (text) =>
       text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),

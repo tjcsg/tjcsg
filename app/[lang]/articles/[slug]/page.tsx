@@ -56,7 +56,7 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
-          { name: 'Home', href: '/' },
+          // { name: 'Home', href: '/' },
           { name: 'All Articles', href: '/articles' },
           { name: 'Closer Day by Day', href: '/cdbd' },
           { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
@@ -70,7 +70,7 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
-          { name: 'Home', href: '/' },
+          // { name: 'Home', href: '/' },
           { name: 'Articles', href: '/articles' },
         ]}
       />
@@ -140,7 +140,7 @@ export default async function PostPage({
   );
 
   return (
-    <div className="container mx-auto mb-8 max-w-3xl px-6 sm:px-12">
+    <div className="container mx-auto mb-8 mt-6 max-w-3xl px-6 sm:px-12">
       <ArticleHead isCdbd={isCdbd} article={article} lang={lang} />
 
       <article>

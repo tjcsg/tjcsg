@@ -107,6 +107,7 @@ async function Hero({ lang }: { lang: Locale }) {
               alt="A picture of the front of Telok Kurau Church"
               src={tkPicOverlay}
               className="h-fit w-3/4 object-contain xs:w-2/3 md:h-full md:w-full"
+              priority
             />
           </div>
         </main>

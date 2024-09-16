@@ -1,18 +1,10 @@
 import { Locale } from '@/i18n-config';
 import { aof, aofDetails } from '@/lib/articles-of-faith';
-import { Rock_Salt } from 'next/font/google';
 import Container from '@/lib/components/container';
 import FeaturedVerses from '@/lib/components/featured-verses';
-import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import YoutubeList from '@/lib/components/youtube-list';
 import Link from 'next/link';
-
-const rockSalt = Rock_Salt({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: '400',
-});
 
 const text = {
   en: {
@@ -113,7 +105,7 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
       <div className=" pb-16 pt-32 md:pb-28 md:pt-40">
         <div className="relative mx-auto w-full">
           <p
-            className={`absolute -top-10 rotate-[-7.12deg] text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl ${rockSalt.className}`}
+            className={`font-handwriting absolute -top-10 rotate-[-7.12deg] text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl`}
           >
             {' '}
             {text[lang].withUsYouCan}

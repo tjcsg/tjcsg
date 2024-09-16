@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
-import daisyui from 'daisyui';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
@@ -41,7 +40,8 @@ export default {
         ...defaultTheme.screens,
       },
       fontFamily: {
-        sans: ['var(--font-noto_sans)'],
+        sans: ['var(--font-source_sans)'],
+        handwriting: ['var(--font-rock_salt)']
       },
       colors: {
         button: '#007DA4',

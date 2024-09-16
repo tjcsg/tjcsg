@@ -1,5 +1,4 @@
 import SpecialEvents from './special-events';
-import { Rock_Salt } from 'next/font/google';
 import { Locale } from '@/i18n-config';
 import { getWebContent } from '@/lib/api';
 import tjcMap from '@/public/tjcmap.png';
@@ -13,12 +12,6 @@ import FeaturedArticles from './featured-articles';
 import Container from '@/lib/components/container';
 import YoutubeList from '@/lib/components/youtube-list';
 import InstagramEmbed from '@/lib/components/instagram-embed';
-
-const rockSalt = Rock_Salt({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: '400',
-});
 
 const text = {
   en: {
@@ -153,7 +146,7 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
       <div className=" pb-16 pt-32 md:pb-28 md:pt-40">
         <div className="relative mx-auto w-full">
           <p
-            className={`absolute -top-10 rotate-[-7.12deg] text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl ${rockSalt.className}`}
+            className={`font-handwriting absolute -top-10 rotate-[-7.12deg] text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl`}
           >
             {' '}
             {text[lang].withUsYouCan}
@@ -219,7 +212,7 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
                 {text[lang].worshipTrueGod}
               </h1>
               <p
-                className={`absolute -right-[3%] -top-8 rotate-[9.8deg] text-lg text-gray-800 xs:text-2xl md:-top-12 md:text-3xl lg:-right-[6%] xl:-top-12 ${rockSalt.className}`}
+                className={`font-handwriting absolute -right-[3%] -top-8 rotate-[9.8deg] text-lg text-gray-800 xs:text-2xl md:-top-12 md:text-3xl lg:-right-[6%] xl:-top-12`}
               >
                 {' '}
                 {text[lang].joinUs}

@@ -5,10 +5,50 @@ import NavBar from './navbar';
 import Link from 'next/link';
 import { getWebContent } from '@/lib/api';
 import Socials from '@/lib/components/socials';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'True Jesus Church Singapore',
-  description: '',
+export const metadata: Metadata = {
+  title: {
+    template: '%s | True Jesus Church Singapore',
+    default: 'True Jesus Church Singapore',
+  },
+  description:
+    "We're True Jesus Church, a global Bible-based church. We welcome you to join God's loving family. Our goal is simple: transform lives and make disciples of Christ through preaching God's full truth of salvation.",
+  keywords: [
+    'Church',
+    'Christianity',
+    'Bible',
+    'Truth',
+    'Gospel',
+    'God',
+    'Jesus Christ',
+  ],
+  metadataBase: new URL('https://tjc.sg/'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      en: '/en',
+      // 'zh': '/zh',
+    },
+  },
+  manifest: 'https://tjc.sg/manifest.json',
+  category: 'christianity',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    apple: { url: '/apple-touch-icon.png', sizes: '120x120' },
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    other: {
+      rel: 'mask-icon',
+      url: '/safari-pinned-tab.svg',
+      color: '#007da4',
+    },
+  },
 };
 
 const notoSans = Noto_Sans({

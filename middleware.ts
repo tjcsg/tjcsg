@@ -32,6 +32,13 @@ export function middleware(request: NextRequest) {
   if (
     [
       '/favicon.ico',
+      '/android-chrome-96x96.png',
+      '/apple-touch-icon.png',
+      '/browserconfig.xml',
+      '/favicon-16x16.png',
+      '/favicon-32x32.png',
+      '/mstile-150x150.png',
+      '/safari-pinned-tab.svg',
       '/site-logo.png',
       '/marble.png',
       '/pdf/baptism.pdf',
@@ -77,5 +84,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|android-chrome-96x96|apple-touch-icon|browserconfig.xml|favicon-16x16|favicon-32x32|mstile-150x150|safari-pinned-tab).*)'],
 };

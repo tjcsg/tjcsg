@@ -1,5 +1,5 @@
 import './globals.css';
-import { Noto_Sans } from 'next/font/google';
+import { Noto_Sans, Rock_Salt, Source_Sans_3 } from 'next/font/google';
 import { type Locale } from '../../i18n-config';
 import NavBar from './navbar';
 import Link from 'next/link';
@@ -11,10 +11,23 @@ export const metadata = {
   description: '',
 };
 
-const noto_sans = Noto_Sans({
+const notoSans = Noto_Sans({
   variable: '--font-noto_sans',
   subsets: ['latin'],
   display: 'swap',
+});
+
+const sourceSans = Source_Sans_3({
+  variable: '--font-source_sans',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const rockSalt = Rock_Salt({
+  variable: '--font-rock_salt',
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
 });
 
 const text = {
@@ -138,7 +151,10 @@ export default function RootLayout({
 }) {
   const { lang } = params;
   return (
-    <html lang={params.lang} className={`${noto_sans.variable} scroll-smooth`}>
+    <html
+      lang={params.lang}
+      className={`${notoSans.variable} ${sourceSans.variable} ${rockSalt.variable} scroll-smooth`}
+    >
       <body>
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />

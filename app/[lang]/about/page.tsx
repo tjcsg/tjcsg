@@ -16,15 +16,8 @@ import holyCommunionPic from '@/public/beliefs/holy-communion.png';
 import salvationPic from '@/public/beliefs/salvation.jpg';
 import secondComingPic from '@/public/beliefs/second-coming.jpg';
 import sabbathPic from '@/public/beliefs/sabbath-day.jpg';
-import { Rock_Salt } from 'next/font/google';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import FeaturedVideo from '@/lib/components/featured-video';
-
-const rockSalt = Rock_Salt({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: '400',
-});
 
 const text = {
   en: {
@@ -128,7 +121,7 @@ async function BringingSalvationToAll({ lang }: { lang: Locale }) {
         <div className="py-12 xs:py-16 xl:py-44">
           <div className="relative">
             <p
-              className={`absolute -left-6 -top-6 rotate-[-7.12deg] text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12 lg:-top-20  ${rockSalt.className}`}
+              className={`font-handwriting absolute -left-6 -top-6 rotate-[-7.12deg] text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12  lg:-top-20`}
             >
               {text[lang].ourMission}
             </p>

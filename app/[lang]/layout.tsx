@@ -1,7 +1,7 @@
 import './globals.css';
 import { Noto_Sans } from 'next/font/google';
 import { type Locale } from '../../i18n-config';
-import NavBar from './navbar2';
+import NavBar from './navbar';
 import Link from 'next/link';
 import { getWebContent } from '@/lib/api';
 import Socials from '@/lib/components/socials';
@@ -138,11 +138,13 @@ export default function RootLayout({
 }) {
   const { lang } = params;
   return (
-    <html lang={params.lang} className={noto_sans.variable}>
+    <html lang={params.lang} className={`${noto_sans.variable} scroll-smooth`}>
       <body>
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />
-          <main className="mb-auto block">{children}</main>
+          <main className="mb-auto block">
+            <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">{children}</div>
+          </main>
           <Footer lang={lang} />
         </section>
       </body>

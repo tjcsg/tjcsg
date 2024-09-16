@@ -26,7 +26,7 @@ export default function ContentStrip({
 }) {
   return (
     <Container background={background}>
-      <div className="mx-auto block w-full lg:w-11/12 xl:w-4/5 2xl:w-3/4">
+      <div className="lg:w-11/12 xl:w-4/5 2xl:w-3/4">
         <h1
           className={`mb-4 text-3xl font-medium tracking-tight text-gray-900 sm:text-3xl ${isReversed ? 'md:text-right' : ''}`}
         >

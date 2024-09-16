@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
+import { Book, books } from './bible-books';
 
 export type MarkdownType = {
   json: any;
@@ -224,40 +225,29 @@ export type EventEntry = {
   summary: MarkdownType;
 };
 
+// Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000.
 const ARTICLE_GRAPHQL_FIELDS = `
   slug
   title
+  author
+  date
   description
-  content {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          url
-          description
-          width
-          height
-        }
-      }
-    }
-  }
   image {
     url
     description
     width
     height
   }
-  category {
-      doctrine
-      subcategory
-  }
   relatedArticlesCollection {
     items {
       slug
       title
+    }
+  }
+  contentfulMetadata {
+    tags {
+      id
+      name
     }
   }
 `;
@@ -266,6 +256,8 @@ export type ArticleEntry = {
   slug: string;
   title: string;
   description: string;
+  author: string;
+  date: string;
   content: {
     json: any;
     links: {
@@ -288,14 +280,16 @@ export type ArticleEntry = {
     width: number;
     height: number;
   };
-  category: {
-    doctrine: Aof;
-    subcategory: string;
-  };
   relatedArticlesCollection: {
     items: {
       slug: string;
       title: string;
+    }[];
+  };
+  contentfulMetadata: {
+    tags: {
+      id: string;
+      name: string;
     }[];
   };
 };
@@ -365,7 +359,7 @@ function extractArticleSubcategories(fetchResponse: any): any {
   return Array.from(categories);
 }
 
-function extractArticleEntries(fetchResponse: any): any[] {
+function extractArticleEntries(fetchResponse: any): ArticleEntry[] {
   return fetchResponse?.data?.articleCollection?.items;
 }
 
@@ -388,14 +382,18 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
 }
 
 export async function getAllEvents(
-  isDraftMode: boolean,
   locale: Locale,
+  limit: number = 100,
+  skip: number = 0,
 ): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
-      eventsCollection(locale: "${locale}", order: date_DESC, preview: ${
-        isDraftMode ? 'true' : 'false'
-      }) {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: ${limit},
+        skip: ${skip}
+      ) {
         items {
           slug
           title
@@ -412,7 +410,6 @@ export async function getAllEvents(
         }
       }
     }`,
-    isDraftMode,
   );
   return extractPostEntries(entries);
 }
@@ -452,6 +449,17 @@ export async function getEvent(slug: string, preview: boolean) {
   };
 }
 
+export async function getTotalEvents(): Promise<number> {
+  const entry = await fetchGraphQL(
+    `query {
+        eventsCollection(limit:1000) {
+        total
+      }
+    }`,
+  );
+  return entry?.data?.eventsCollection?.total;
+}
+
 export async function getWebContent(locale: string, preview: boolean) {
   const entry = await fetchGraphQL(
     `query {
@@ -480,38 +488,6 @@ export async function getCDBDSchedule(preview: boolean) {
     preview,
   );
   return extractCdbdSchedule(entry);
-}
-
-export async function getArticlesCategories(preview: boolean) {
-  const entry = await fetchGraphQL(
-    `query {
-      categoryCollection{ 
-        items {
-          doctrine
-          subcategory
-        }
-      }
-    }`,
-    preview,
-  );
-  return extractArticleCategories(entry);
-}
-
-export async function getArticlesSubcategories(
-  doctrine: string,
-  preview: boolean,
-) {
-  const entry = await fetchGraphQL(
-    `query {
-      categoryCollection(where:{doctrine:"${doctrine}"}){
-        items {
-          subcategory
-        }
-      }
-    }`,
-    preview,
-  );
-  return extractArticleSubcategories(entry);
 }
 
 export async function getAllArticlesSlug(isDraftMode: boolean): Promise<any[]> {
@@ -549,22 +525,91 @@ export async function getArticlesInSubcat(
 }
 
 export async function getLatestArticles(
-  limit: number,
-  preview: boolean,
+  locale: Locale,
+  limit: number = 100,
+  skip: number = 0,
+  tags: string[] = [],
+  author: string = '',
 ): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
-      articleCollection(limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
-        preview ? 'true' : 'false'
-      }) {
+        articleCollection(
+          limit: ${limit},
+          skip: ${skip},
+          locale:"${locale}",
+          order: date_DESC
+          where: {
+            ${author ? `author: "${author}"` : ``}
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
+          }
+          
+        ) {
         items {
           ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+            }
         }
       }
     }`,
-    preview,
   );
   return extractArticleEntries(entry);
+}
+
+export async function getTotalArticles(
+  locale: Locale,
+  tags: string[] = [],
+  author: string = '',
+): Promise<number> {
+  const entry = await fetchGraphQL(
+    `query {
+        articleCollection(
+          locale:"${locale}",
+          order: date_DESC,
+          where: {
+            ${author ? `author: "${author}"` : ``}
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join('","')}"` : ``} ] } }
+          }
+          
+        ) {
+        total
+      }
+    }`,
+  );
+  return entry?.data?.articleCollection?.total;
+}
+
+function extractArticleTags(fetchResponse: any): Map<string, string> {
+  const tags = new Map();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    item.contentfulMetadata.tags?.forEach(
+      (tag: { name: string; id: string }) => {
+        if (!tags.get(tag.id)) {
+          tags.set(tag.id, tag.name);
+        }
+      },
+    );
+  });
+  return tags;
+}
+
+export async function getAllArticleTags(): Promise<Map<string, string>> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(limit: 1000) {
+        items {
+          contentfulMetadata {
+            tags {
+              id
+              name
+            }
+          } 
+        }
+      }
+    }`,
+  );
+  return extractArticleTags(entry);
 }
 
 export async function getArticle(
@@ -578,10 +623,100 @@ export async function getArticle(
       }, limit: 1) {
         items {
           ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+              links {
+                assets {
+                  block {
+                    sys {
+                      id
+                    }
+                    url
+                    description
+                    width
+                    height
+                  }
+                }
+              }
+            }
         }
       }
     }`,
     preview,
   );
   return extractArticle(entry);
+}
+
+function extractCdbdBooks(fetchResponse: any): any {
+  const books = new Set();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    let book = item.contentfulMetadata.tags
+      .find((tag: any) => tag.id.startsWith('book'))
+      ?.name.split('-');
+    book.shift();
+    books.add(book.join('-'));
+  });
+  return Array.from(books);
+}
+
+export async function getAllCdbdBooks(): Promise<Book[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          contentfulMetadata {
+            tags {
+              id
+              name
+            }
+          }
+        }
+      }
+    }`,
+  );
+  return extractCdbdBooks(entry);
+}
+
+export async function getAllCdbdSlugs(): Promise<{ slug: string }[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        order: date_DESC,
+        limit:1000, 
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          slug
+        }
+      }
+    }`,
+  );
+  return entry?.data?.articleCollection?.items;
+}
+
+function extractCdbdAuthors(fetchResponse: any): any {
+  const authors = new Set();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    authors.add(item.author?.split(' ').join('-').toLowerCase());
+  });
+  return Array.from(authors);
+}
+
+export async function getAllCdbdAuthors(): Promise<string[]> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(
+        where: {contentfulMetadata: { tags: { id_contains_all: [ "categoryCdbd" ] } } }
+      ) {
+        items {
+          author
+        }
+      }
+    }`,
+  );
+  return extractCdbdAuthors(entry);
 }

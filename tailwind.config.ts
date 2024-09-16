@@ -13,14 +13,16 @@ export default {
   theme: {
     extend: {
       animation: {
-        'slide-up': 'list-slide-up 8s infinite',
-        highlight: 'highlight-text 5s infinite',
+        'slide-up': 'list-slide-up 11s infinite',
+        highlight: 'highlight-text 4s infinite',
       },
       keyframes: {
         'list-slide-up': {
           '0%, 10%': { transform: 'translateY(0%)' },
-          '33%, 43%': { transform: 'translateY(-100%)' },
-          '66%, 76%': { transform: 'translateY(-200%)' },
+          '20%, 30%': { transform: 'translateY(-100%)' },
+          '40%, 50%': { transform: 'translateY(-200%)' },
+          '60%, 70%': { transform: 'translateY(-300%)' },
+          '80%, 90%': { transform: 'translateY(-400%)' },
         },
         'highlight-text': {
           from: {

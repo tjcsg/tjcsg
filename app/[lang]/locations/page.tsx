@@ -35,7 +35,14 @@ const joinUs = {
   en: (
     <>
       We welcome you to join us at one of our churches in Singapore. Not from
-      Singapore? Feel free to contact us or{' '}
+      Singapore? Feel free to{' '}
+      <Link
+        href="/contact"
+        className="text-button underline hover:text-button_hover"
+      >
+        contact us
+      </Link>{' '}
+      or{' '}
       <Link
         href={'https://tjc.org/find-a-church/'}
         className="text-button underline hover:text-button_hover"
@@ -47,7 +54,14 @@ const joinUs = {
   zh: (
     <>
       We welcome you to join us at one of our churches in Singapore. Not from
-      Singapore? Feel free to contact us or{' '}
+      Singapore? Feel free to{' '}
+      <Link
+        href="/contact"
+        className="text-button underline hover:text-button_hover"
+      >
+        contact us
+      </Link>{' '}
+      or{' '}
       <Link
         href={'https://tjc.org/find-a-church/'}
         className="text-button underline hover:text-button_hover"

@@ -1,4 +1,4 @@
-export default async function Container({
+export default function Container({
   background = 'bg-white',
   children,
 }: {

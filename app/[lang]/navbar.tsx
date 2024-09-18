@@ -31,6 +31,7 @@ const resources = [
 const text = {
   en: {
     about: 'About Us',
+    contact: 'Contact Us',
     worship: 'Worship',
     visitUs: 'Visit',
     resources: 'Resources',
@@ -39,6 +40,7 @@ const text = {
   },
   zh: {
     about: '​关于本会',
+    contact: '联络',
     worship: '崇拜',
     visitUs: 'Visit',
     resources: '其他资源',
@@ -98,6 +100,9 @@ export default function NavBar({ lang }: { lang: Locale }) {
             </Link>
             <Link href={`/${lang}/about`} className={`${desktopClasses}`}>
               {text[lang].about}
+            </Link>
+            <Link href={`/${lang}/contact`} className={`${desktopClasses}`}>
+              {text[lang].contact}
             </Link>
             {/* <Popover className="relative">
               <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -212,6 +217,13 @@ export default function NavBar({ lang }: { lang: Locale }) {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {text[lang].about}
+                </Link>
+                <Link
+                  href={`/${lang}/contact`}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold uppercase leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {text[lang].contact}
                 </Link>
                 {/* <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">

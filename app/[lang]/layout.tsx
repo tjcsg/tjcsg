@@ -50,10 +50,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'True Jesus Church Singapore',
+    title: 'True Jesus Church Singapore Landing Page',
     description:
       "We're True Jesus Church, a global Bible-based church. We welcome you to join God's loving family. Our goal is simple: transform lives and make disciples of Christ through preaching God's full truth of salvation.",
-    url: 'https://tjc.sg',
+    url: 'https://tjcsg.vercel.app',
     siteName: 'True Jesus Church Singapore',
     type: 'website',
   },
@@ -84,12 +84,16 @@ const text = {
     resource: 'Resources',
     legal: 'Legal',
     copyright: '© 2024 True Jesus Church Singapore. All Rights Reserved.',
+    footer:
+      "👋🏼 Hello, we're True Jesus Church, a global Bible-based church. We welcome you to join God's loving family.  📌 Our goal is simple: transform lives and make disciples of Christ through preaching God's full truth of salvation.",
   },
   zh: {
     name: '新加坡真耶稣教会',
     resource: '本会简介',
     legal: '法律',
     copyright: '版权所有 © 2024 新加坡真耶穌教会',
+    footer:
+      '本会是一个非宗派教会，设立在六十多个国家，横跨六大洲。真教会传扬的是真理，是由圣灵与神迹所共同证实的全备福音。我们所敬拜的神是真神，因而祂的教会是真教会。主耶稣称自己为真葡萄树。教会，作为祂的身体，因此称为真教会。（参考经文: 约壹五20; 约十五1, 5; 十七3）',
   },
 };
 
@@ -127,9 +131,7 @@ const legal = [
   },
 ];
 
-async function Footer({ lang }: { lang: Locale }) {
-  const contentfulText = await getWebContent(lang, false);
-
+function Footer({ lang }: { lang: Locale }) {
   return (
     <footer className="bg-lightblue pt-2">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -140,8 +142,8 @@ async function Footer({ lang }: { lang: Locale }) {
                 {text[lang].name}
               </span>
             </Link>
-            <p className="mb-2 pr-6 text-xs text-gray-500">
-              {contentfulText.footerText}
+            <p className="mb-2 pr-6 text-xs text-gray-600">
+              {text[lang].footer}
             </p>
           </div>
           <div className="grid basis-1/2 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6">
@@ -151,7 +153,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </h2>
               <ul className="font-medium text-gray-500">
                 {learnmore.map((item) => (
-                  <li key={item.en} className="mb-2 text-xs">
+                  <li key={item.en} className="mb-2 text-xs text-gray-600">
                     <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
@@ -165,7 +167,7 @@ async function Footer({ lang }: { lang: Locale }) {
               </h2>
               <ul className="font-medium text-gray-500">
                 {legal.map((item) => (
-                  <li key={item.en} className="mb-2 text-xs">
+                  <li key={item.en} className="mb-2 text-xs text-gray-600">
                     <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
@@ -177,7 +179,7 @@ async function Footer({ lang }: { lang: Locale }) {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8 " />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-xs text-gray-500 sm:text-center">
+          <span className="text-xs text-gray-600 sm:text-center">
             {text[lang].copyright}
           </span>
           <Socials

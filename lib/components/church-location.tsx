@@ -67,6 +67,7 @@ export default function ChurchLocation({
                 style={{ border: 0 }}
                 allowFullScreen={false}
                 loading="eager"
+                title={`Map showing the location of ${name}`}
                 referrerPolicy="no-referrer-when-downgrade"
                 className="inset-0 w-full md:absolute md:h-full"
               ></iframe>

@@ -31,7 +31,7 @@ function DateAndTime({
     <>
       <time
         dateTime={date}
-        className={`mt-2 font-semibold text-gray-500 ${contentSizes}`}
+        className={`mt-2 font-semibold text-gray-600 ${contentSizes}`}
       >
         {new Intl.DateTimeFormat(`${lang}-SG`, {
           timeZone: 'Singapore',
@@ -82,7 +82,7 @@ export default async function EventCard({
   return (
     <div
       key={event.slug}
-      className={`mx-auto flex w-full flex-col justify-start rounded-2xl border border-neutral-300 bg-neutral-100 pb-4 lg:flex-row lg:pb-0`}
+      className={`mx-auto flex w-full flex-col justify-start rounded-2xl border border-neutral-300 bg-neutral-50 pb-4 lg:flex-row lg:pb-0`}
     >
       <div className="relative aspect-[16/9] w-full lg:block lg:basis-3/4 lg:overflow-hidden lg:pt-[56.25] min-[1100px]:basis-7/12 xl:basis-1/2">
         <ContentfulImage

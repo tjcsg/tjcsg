@@ -18,12 +18,13 @@ export default function ArticleTag({
     return `/en/articles?${params.toString()}`;
   };
   return (
-    <p
-      key={tag.id}
-      className="relative inline rounded-full bg-gray-100 px-2 py-1 text-sm capitalize text-gray-600 hover:bg-gray-200"
-    >
-      {tagNameToText(tag.name)}
-      <Link className="absolute inset-0" href={createPageURL(tag.id)} />
-    </p>
+    <Link className="" href={createPageURL(tag.id)}>
+      <p
+        key={tag.id}
+        className=" inline rounded-full bg-gray-100 px-2 py-1 text-sm capitalize text-gray-600 hover:bg-gray-200"
+      >
+        {tagNameToText(tag.name)}
+      </p>
+    </Link>
   );
 }

@@ -97,32 +97,9 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
   worshipHowtoprayMedia {
     url
   }
-  socialsYoutubeTitle
-  socialsYoutubeText
-  socialsYoutubeIframe
-  socialsInstagramTitle
-  socialsInstagramText
-  socialsInstagramMedia {
-    url
-  }
-  socialsFacebookTitle
-  socialsFacebookText
-  socialsFacebookMedia {
-    url
-  }
   livestreamGlobalTitle
   livestreamGlobalText
   livestreamGlobalMedia {
-    url
-  }
-  globalTjciaTitle
-  globalTjciaText
-  globalTjciaMedia {
-    url
-  }
-  globalStudyTitle
-  globalStudyText
-  globalStudyMedia {
     url
   }
 `;
@@ -144,19 +121,6 @@ type WebContent = {
   worshipHowtoprayMedia: {
     url: string;
   };
-  socialsYoutubeTitle: string;
-  socialsYoutubeText: string;
-  socialsYoutubeIframe: string;
-  socialsInstagramTitle: string;
-  socialsInstagramText: string;
-  socialsInstagramMedia: {
-    url: string;
-  };
-  socialsFacebookTitle: string;
-  socialsFacebookText: string;
-  socialsFacebookMedia: {
-    url: string;
-  };
   livestreamGlobalTitle: string;
   livestreamGlobalText: string;
   livestreamGlobalMedia: {
@@ -167,11 +131,7 @@ type WebContent = {
   globalTjciaMedia: {
     url: string;
   };
-  globalStudyTitle: string;
-  globalStudyText: string;
-  globalStudyMedia: {
-    url: string;
-  };
+
 };
 
 const EVENTS_GRAPHQL_FIELDS = `

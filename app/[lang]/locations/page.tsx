@@ -74,7 +74,7 @@ const joinUs = {
 
 function ChurchLink({ lang, church }: { lang: Locale; church: Church }) {
   return (
-    <div className="relative mx-auto w-full bg-lightblue pb-4 pt-16 text-center text-sm">
+    <div className="relative mx-auto w-full bg-neutral-50 pb-4 pt-16 text-center text-sm">
       <Image
         src={pic[church]}
         alt={`Picture of ${details[lang][church].name}`}

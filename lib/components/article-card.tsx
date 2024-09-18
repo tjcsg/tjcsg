@@ -27,16 +27,19 @@ export default function ArticleCard({
       key={article.slug}
       className="mx-auto flex w-full flex-col items-start rounded-xl border-2 xs:w-3/4 sm:w-full"
     >
-      <div className="relative aspect-[16/9] w-full">
+      <Link
+        href={`/articles/${article.slug}`}
+        className="relative block aspect-[16/9] w-full"
+      >
         <ContentfulImage
           src={article.image.url}
-          alt=""
+          alt={`Featured image of ${article.title}`}
           width={1152}
           height={648}
           className="absolute inset-0 h-full w-full rounded-t-lg bg-gray-50 object-cover"
+          role="button"
         />
-        <Link href={`/articles/${article.slug}`} className="absolute inset-0" />
-      </div>
+      </Link>
       <div className="px-3 py-3">
         <time dateTime={article.date} className="mt-4 text-xs text-gray-500">
           {new Intl.DateTimeFormat(`${lang}-SG`, {

@@ -84,5 +84,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|android-chrome-96x96|apple-touch-icon|browserconfig.xml|favicon-16x16|favicon-32x32|mstile-150x150|safari-pinned-tab).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|android-chrome-96x96|apple-touch-icon|browserconfig.xml|favicon-16x16|favicon-32x32|mstile-150x150|safari-pinned-tab|robots|manifest).*)'],
 };

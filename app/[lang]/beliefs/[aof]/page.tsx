@@ -1,3 +1,4 @@
+import { openGraph } from '@/app/shared-metadata';
 import { Locale } from '@/i18n-config';
 import { ArticleEntry, getLatestArticles } from '@/lib/api';
 import { Aof, aofNoConst, aofDetails, aof } from '@/lib/articles-of-faith';
@@ -9,6 +10,7 @@ import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import { slugToContentfulTag } from '@/lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
 
 export const dynamic = 'force-static';
@@ -19,6 +21,7 @@ export async function generateStaticParams() {
 type Content = {
   featuredVideoUrl: string;
   pdfGDriveId: string;
+  imgUrl: string;
   children?: React.ReactNode;
 };
 
@@ -27,51 +30,61 @@ const pageContent: { [K in Aof]: Content } = {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=RuxX5Ftl71VP9ROF&amp;list=PL5WaeSEYxX4OnIQVCg3q-XHhB5nEnNOUT',
     pdfGDriveId: '1BlgkXnU1noZ1UlDEh9Xd9giFEW-vag_Q',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/jesus-christ.jpg',
   },
   bible: {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=_uY9ixwBsyVXaO7k&amp;list=PL5WaeSEYxX4OtvRtU6f6Kqxnsz1mlpKxf',
     pdfGDriveId: '1PyMMYRgq4BFgucUjWb491WAgRQFrRBL_',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/holy-bible.jpg',
   },
   'one-true-church': {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=8OhCt5e2078_yDDS&amp;list=PL5WaeSEYxX4NRfzVG25KPufewf6izt-px',
     pdfGDriveId: '1EGFy2bwV1yU8RvUotqMLjuEprSChVcDY',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/one-true-church.jpg',
   },
   baptism: {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=-OysQxRAgqueFggW&amp;list=PL5WaeSEYxX4O1wCz3EQVMHYgpKuQS6drS',
     pdfGDriveId: '1ukhViV2q5wS1pdhJi8vMg3Mv8HtrUJan',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/baptism.jpg',
   },
   'holy-spirit': {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=bTe1i4bG8asrU8od&amp;list=PL5WaeSEYxX4PvtVqZEV4jOAGCbSZFs3RQ',
     pdfGDriveId: '1akGCGKm1keexGibIZU0-reZQXxIvJyaE',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/holy-spirit.jpg',
   },
   footwashing: {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=iAT1R_oeaeWBUuKF&amp;list=PL5WaeSEYxX4MN3wH2N1BRU_d2HCHOi3ka',
     pdfGDriveId: '1H_x9gMT6rCL_axTkH3GtD4b1KEVIibw9',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/footwashing.jpg',
   },
   'holy-communion': {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=mCIWShgh8uCdS2Dn&amp;list=PL5WaeSEYxX4O71VoDFBkyLfVz366A4ujf',
     pdfGDriveId: '1yz9_7afZsDnCEftRXhmjFvYRYpdWOXRd',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/holy-communion.png',
   },
   sabbath: {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=GsZd23Vp5efFFHQi&amp;list=PL5WaeSEYxX4NotPW56Q4wpbc-vjBoFpOn',
     pdfGDriveId: '1XKpo3Yfvp7hoYYI4PbU4vWJ3mMBMck41',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/sabbath-day.jpg',
   },
   salvation: {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=mZrbSWh7B-aKzX6w&amp;list=PL5WaeSEYxX4M-AI56lNMdK4w84HQ-5DWv',
     pdfGDriveId: '1aDgUtsGzBr3y7nIIYKzemTt_1t61dU2i',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/salvation.jpg',
   },
   'second-coming': {
     featuredVideoUrl:
       'https://www.youtube.com/embed/videoseries?si=uuHyvr7mo6e3XWyM&amp;list=PL5WaeSEYxX4PN9hDQx_Jw7Fgl1FKWQWPG',
     pdfGDriveId: '1gIR6gRE3eAnUJ7DRBNbzYLMfsgfI2zrT',
+    imgUrl: 'https://tjcsg.vercel.app/img/aof/second-coming.jpg',
   },
 };
 
@@ -189,4 +202,25 @@ export default async function Page({
       </Container>
     </>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: { aof: Aof } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { aof } = params;
+  return {
+    title: aofDetails['en'][aof].name,
+    description: aofDetails['en'][aof].details.join(' '),
+    openGraph: {
+      ...openGraph,
+      title: `${aofDetails['en'][aof].name} | True Jesus Church`,
+      description: aofDetails['en'][aof].details.join(' '),
+      images: [
+        {
+          url: pageContent[aof].imgUrl,
+        },
+      ],
+    },
+  };
 }

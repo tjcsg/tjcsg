@@ -10,6 +10,8 @@ import { redirect } from 'next/navigation';
 import Pagination from '@/lib/components/pagination';
 import Header from '@/lib/components/header';
 import EventCard from '@/lib/components/event-card';
+import { openGraph } from '@/app/shared-metadata';
+import { Metadata } from 'next';
 
 const MAX_ITEMS_PER_PAGE = 6;
 
@@ -60,3 +62,11 @@ export default async function EventsPage({
     </Container>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Upcoming Events',
+  openGraph: {
+    ...openGraph,
+    title: 'Upcoming Events | True Jesus Church',
+  },
+};

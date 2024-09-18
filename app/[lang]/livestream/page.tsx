@@ -3,6 +3,8 @@ import { Locale } from '@/i18n-config';
 import PageHeader from '@/lib/components/page-header';
 import ChurchLivestream from '@/lib/components/church-livestream';
 import LivestreamList from './livestreams-list';
+import { openGraph } from '@/app/shared-metadata';
+import { Metadata } from 'next';
 
 const text = {
   en: {
@@ -32,3 +34,11 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Our Livestreams',
+  openGraph: {
+    ...openGraph,
+    title: 'Our Livestreams | True Jesus Church',
+  },
+};

@@ -55,7 +55,17 @@ export function middleware(request: NextRequest) {
       '/pdf/salvation.pdf',
       '/pdf/saving-grace-vol1.pdf',
       '/pdf/saving-grace-vol2.pdf',
-      '/pdf/second-coming.pdf'
+      '/pdf/second-coming.pdf',
+      '/img/aof/jesus-christ.jpg',
+      '/img/aof/holy-bible.jpg',
+      '/img/aof/one-true-church.jpg',
+      '/img/aof/baptism.jpg',
+      '/img/aof/holy-spirit.jpg',
+      '/img/aof/footwashing.jpg',
+      '/img/aof/holy-communion.png',
+      '/img/aof/salvation.jpg',
+      '/img/aof/second-coming.jpg',
+      '/img/aof/sabbath-day.jpg',
       // Your other files in `public`
     ].includes(pathname)
   )

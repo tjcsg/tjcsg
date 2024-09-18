@@ -6,18 +6,20 @@ import tjcMap from '@/public/tjcmap.png';
 import Container from '@/lib/components/container';
 import Image from 'next/image';
 import { Aof, aof, aofDetails } from '@/lib/articles-of-faith';
-import jesusChristPic from '@/public/beliefs/jesus-christ.jpg';
-import biblePic from '@/public/beliefs/holy-bible.jpg';
-import churchPic from '@/public/beliefs/one-true-church.jpg';
-import baptismPic from '@/public/beliefs/baptism.jpg';
-import holySpiritPic from '@/public/beliefs/holy-spirit.jpg';
-import footwashingPic from '@/public/beliefs/footwashing.jpg';
-import holyCommunionPic from '@/public/beliefs/holy-communion.png';
-import salvationPic from '@/public/beliefs/salvation.jpg';
-import secondComingPic from '@/public/beliefs/second-coming.jpg';
-import sabbathPic from '@/public/beliefs/sabbath-day.jpg';
+import jesusChristPic from '@/public/img/aof/jesus-christ.jpg';
+import biblePic from '@/public/img/aof/holy-bible.jpg';
+import churchPic from '@/public/img/aof/one-true-church.jpg';
+import baptismPic from '@/public/img/aof/baptism.jpg';
+import holySpiritPic from '@/public/img/aof/holy-spirit.jpg';
+import footwashingPic from '@/public/img/aof/footwashing.jpg';
+import holyCommunionPic from '@/public/img/aof/holy-communion.png';
+import salvationPic from '@/public/img/aof/salvation.jpg';
+import secondComingPic from '@/public/img/aof/second-coming.jpg';
+import sabbathPic from '@/public/img/aof/sabbath-day.jpg';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import FeaturedVideo from '@/lib/components/featured-video';
+import { Metadata } from 'next';
+import { openGraph } from '@/app/shared-metadata';
 
 const text = {
   en: {
@@ -121,7 +123,7 @@ async function BringingSalvationToAll({ lang }: { lang: Locale }) {
         <div className="py-12 xs:py-16 xl:py-44">
           <div className="relative">
             <p
-              className={`font-handwriting absolute -left-6 -top-6 rotate-[-7.12deg] text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12  lg:-top-20`}
+              className={`absolute -left-6 -top-6 rotate-[-7.12deg] font-handwriting text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12  lg:-top-20`}
             >
               {text[lang].ourMission}
             </p>
@@ -216,3 +218,11 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  openGraph: {
+    ...openGraph,
+    title: 'About Us | True Jesus Church',
+  },
+};

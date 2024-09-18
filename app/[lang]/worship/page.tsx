@@ -11,6 +11,8 @@ import ModernContentStrip from '@/lib/components/modern-content-strip';
 import Image from 'next/image';
 import ImageBanner from '@/lib/components/image-banner';
 import Link from 'next/link';
+import { openGraph } from '@/app/shared-metadata';
+import { Metadata } from 'next';
 
 const text = {
   en: {
@@ -132,3 +134,11 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Worship',
+  openGraph: {
+    ...openGraph,
+    title: 'Worship | True Jesus Church',
+  },
+};

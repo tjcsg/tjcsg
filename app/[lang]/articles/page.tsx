@@ -1,3 +1,4 @@
+import { openGraph } from '@/app/shared-metadata';
 import { Locale } from '@/i18n-config';
 import {
   getAllArticleTags,
@@ -10,6 +11,7 @@ import Header from '@/lib/components/header';
 import Pagination from '@/lib/components/pagination';
 import { tagNameToText } from '@/lib/utils';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -87,3 +89,11 @@ export default async function Page({
     </Container>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Articles',
+  openGraph: {
+    ...openGraph,
+    title: 'Articles | True Jesus Church',
+  },
+};

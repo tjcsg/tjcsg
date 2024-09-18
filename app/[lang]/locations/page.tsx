@@ -12,6 +12,8 @@ import tkPic from '@/public/locations/tk.jpg';
 import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
 import ImageBanner from '@/lib/components/image-banner';
+import { openGraph } from '@/app/shared-metadata';
+import { Metadata } from 'next';
 
 const pic = {
   adam: adamPic,
@@ -131,3 +133,15 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Our Locations',
+  description:
+    'Interested to find out more about our church and our beliefs? We warmly welcome you to come and visit any one of our four churches in Singapore!',
+  openGraph: {
+    ...openGraph,
+    title: 'Our Locations | True Jesus Church',
+    description:
+      'Interested to find out more about our church and our beliefs? We warmly welcome you to come and visit any one of our four churches in Singapore!',
+  },
+};

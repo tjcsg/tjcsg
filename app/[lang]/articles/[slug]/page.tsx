@@ -14,6 +14,9 @@ import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
 import { bibleBooks, Book } from '@/lib/bible-books';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { Metadata, ResolvingMetadata } from 'next';
+import { openGraph } from '@/app/shared-metadata';
+import { obtainTextContent } from '@/lib/utils';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -207,4 +210,39 @@ export default async function PostPage({
       )}
     </div>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { isEnabled } = draftMode();
+  const { slug } = params;
+  const article = await getArticle(slug, isEnabled);
+
+  return {
+    title: `${article.title}`,
+    description: `${
+      article.description !== null
+        ? article.description
+        : `${obtainTextContent(article.content).slice(0, 300)}...`
+    }`,
+    openGraph: {
+      ...openGraph,
+      title: `${article.title} | True Jesus Church`,
+      description: `${
+        article.description !== null
+          ? article.description
+          : `${obtainTextContent(article.content).slice(0, 300)}...`
+      }`,
+      images: [
+        {
+          url: article.image.url,
+          width: article.image.width,
+          height: article.image.height,
+          alt: article.image.description,
+        },
+      ],
+    },
+  };
 }

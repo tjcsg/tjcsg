@@ -3,9 +3,9 @@ import { Noto_Sans, Rock_Salt, Source_Sans_3 } from 'next/font/google';
 import { type Locale } from '../../i18n-config';
 import NavBar from './navbar';
 import Link from 'next/link';
-import { getWebContent } from '@/lib/api';
 import Socials from '@/lib/components/socials';
 import { Metadata } from 'next';
+import { openGraph } from '../shared-metadata';
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     'God',
     'Jesus Christ',
   ],
-  metadataBase: new URL('https://tjc.sg/'),
+  metadataBase: new URL('https://tjcsg.vercel.app/'),
   alternates: {
     canonical: '/',
     languages: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       // 'zh': '/zh',
     },
   },
-  manifest: 'https://tjc.sg/manifest.json',
+  manifest: 'https://tjcsg.vercel.app/manifest.json',
   category: 'christianity',
   robots: {
     index: true,
@@ -50,12 +50,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'True Jesus Church Singapore Landing Page',
-    description:
-      "We're True Jesus Church, a global Bible-based church. We welcome you to join God's loving family. Our goal is simple: transform lives and make disciples of Christ through preaching God's full truth of salvation.",
-    url: 'https://tjcsg.vercel.app',
-    siteName: 'True Jesus Church Singapore',
-    type: 'website',
+    ...openGraph,
+    title: 'Landing Page | True Jesus Church',
   },
 };
 

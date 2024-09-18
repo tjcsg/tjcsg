@@ -13,6 +13,8 @@ import adamPic from '@/public/locations/adam.jpg';
 import tkPic from '@/public/locations/tk.jpg';
 import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
+import { Metadata, ResolvingMetadata } from 'next';
+import { openGraph } from '@/app/shared-metadata';
 
 export async function generateStaticParams() {
   const allPosts = await getAllEventsSlug(false);
@@ -192,4 +194,54 @@ export default async function PostPage({
       </div>
     </div>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { isEnabled } = draftMode();
+  const { event } = await getEvent(params.slug, isEnabled);
+
+  return {
+    title: `${event.title}${event.title2 ? ` & ${event.title2}` : ''}`,
+    openGraph: {
+      ...openGraph,
+      title: `${event.title}${event.title2 ? ` & ${event.title2}` : ''} | True Jesus Church`,
+      images: [
+        {
+          url: event.poster.url,
+          width: event.poster.width,
+          height: event.poster.height,
+          alt: event.poster.description,
+        },
+      ],
+      description: `Curious to find out more? We warmly welcome you to join us on ${new Intl.DateTimeFormat(
+        `en-SG`,
+        {
+          timeZone: 'Singapore',
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        },
+      ).format(new Date(event.date))}${
+        event.date2
+          ? ` and ${new Intl.DateTimeFormat(`en-SG`, {
+              timeZone: 'Singapore',
+              weekday: 'short',
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true,
+            }).format(new Date(event.date2))}`
+          : ``
+      }.`,
+    },
+  };
 }

@@ -4,6 +4,8 @@ import CdbdList from './cdbd-list';
 import { getAllCdbdBooks } from '@/lib/api';
 import { Book, books } from '@/lib/bible-books';
 import BookSelector from './book-selector';
+import { openGraph } from '@/app/shared-metadata';
+import { Metadata } from 'next';
 
 const MAX_ITEMS_PER_PAGE = 8;
 
@@ -56,3 +58,15 @@ export default async function Page({
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Closer Day By Day',
+  description:
+    'Drawing closer to Jesus through His words. Come and study the Bible with us!',
+  openGraph: {
+    ...openGraph,
+    title: 'Closer Day By Day | True Jesus Church',
+    description:
+      'Drawing closer to Jesus through His words. Come and study the Bible with us!',
+  },
+};

@@ -1,6 +1,8 @@
+import { openGraph } from '@/app/shared-metadata';
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Header from '@/lib/components/header';
+import { Metadata } from 'next';
 
 const text = {
   en: { title: 'Declaration on Religious Harmony', home: 'Home' },
@@ -37,3 +39,11 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     </Container>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Declaration on Religious Harmony',
+  openGraph: {
+    ...openGraph,
+    title: 'Declaration on Religious Harmony | True Jesus Church',
+  },
+};

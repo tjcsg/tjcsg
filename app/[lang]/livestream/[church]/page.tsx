@@ -1,7 +1,9 @@
+import { openGraph } from '@/app/shared-metadata';
 import { Locale } from '@/i18n-config';
 import { details } from '@/lib/church-details';
 import Container from '@/lib/components/container';
 import Header from '@/lib/components/header';
+import { Metadata, ResolvingMetadata } from 'next';
 export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
@@ -89,4 +91,19 @@ export default function Page({
       />
     </>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: { church: 'adam' | 'tk' | 'sembawang' | 'serangoon' } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { church } = params;
+
+  return {
+    title: `Livestream for ${details['en'][church].nameChurch}`,
+    openGraph: {
+      ...openGraph,
+      title: `Livestream for ${details['en'][church].nameChurch} | True Jesus Church`,
+    },
+  };
 }

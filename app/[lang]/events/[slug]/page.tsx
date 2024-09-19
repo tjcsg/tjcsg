@@ -67,14 +67,14 @@ export default async function PostPage({
             className="w-full"
           />
         </div>
-        <div className="flex">
+        {event.ctaButtonText && (
           <LinkButton
-            text={text[params.lang].online}
-            href={`/${params.lang}/livestream/${event.church}`}
+            text={event.ctaButtonText}
+            href={event.ctaButtonLink}
             type="inverse"
-            className="flex-grow py-2 text-lg"
+            className="w-full py-2 text-lg capitalize"
           />
-        </div>
+        )}
         <div>
           <div className="my-6 flex flex-col text-lg">
             <time dateTime={event.date} className="mt-2 text-gray-500">

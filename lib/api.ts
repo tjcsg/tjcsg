@@ -143,6 +143,8 @@ const EVENTS_GRAPHQL_FIELDS = `
   date2
   duration2
   church
+  ctaButtonText
+  ctaButtonLink
   poster {
     url
     description
@@ -183,6 +185,8 @@ export type EventEntry = {
     height: number;
   };
   summary: MarkdownType;
+  ctaButtonText: string;
+  ctaButtonLink: string;
 };
 
 // Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000.

@@ -13,7 +13,7 @@ export default function LinkButton({
   className?: string;
 }) {
   return (
-    <Link href={href}>
+    <Link href={href} className="block w-full">
       <button
         className={`sm:text-md mt-6 block text-nowrap rounded-3xl border-2 border-button py-2 text-sm font-semibold shadow-sm  sm:leading-4
         ${

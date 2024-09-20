@@ -22,7 +22,7 @@ export default function ModernContentStrip({
             </p>
           ))}
         </div>
-        <div className="max-w-[65ch]">{otherContents}</div>
+        <div className="">{otherContents}</div>
       </div>
     </div>
   );

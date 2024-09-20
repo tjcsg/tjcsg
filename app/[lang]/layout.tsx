@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Socials from '@/lib/components/socials';
 import { Metadata } from 'next';
 import { openGraph } from '../shared-metadata';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -77,7 +78,7 @@ const rockSalt = Rock_Salt({
 const text = {
   en: {
     name: 'True Jesus Church Singapore',
-    resource: 'Resources',
+    explore: 'Explore',
     legal: 'Legal',
     copyright: '© 2024 True Jesus Church Singapore. All Rights Reserved.',
     footer:
@@ -85,7 +86,7 @@ const text = {
   },
   zh: {
     name: '新加坡真耶稣教会',
-    resource: '本会简介',
+    explore: 'Explore',
     legal: '法律',
     copyright: '版权所有 © 2024 新加坡真耶穌教会',
     footer:
@@ -134,22 +135,25 @@ function Footer({ lang }: { lang: Locale }) {
         <div className="md:flex md:justify-between">
           <div className="mb-6 basis-1/2 md:mb-0">
             <Link href={`/${lang}`} className="mb-2 flex items-center">
-              <span className="text-md self-center whitespace-nowrap font-semibold text-gray-900">
+              <span className="self-center whitespace-nowrap text-base font-semibold text-gray-900 hover:text-gray-500 xs:text-lg lg:text-xl">
                 {text[lang].name}
               </span>
             </Link>
-            <p className="mb-2 pr-6 text-xs text-gray-600">
+            <p className="mb-2 pr-6 text-xs text-gray-600 xs:text-sm lg:text-base">
               {text[lang].footer}
             </p>
           </div>
           <div className="grid basis-1/2 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6">
             <div>
-              <h2 className="mb-2 text-sm font-semibold text-gray-900">
-                {text[lang].resource}
+              <h2 className="mb-2 text-sm font-semibold text-gray-900 xs:text-base lg:text-lg">
+                {text[lang].explore}
               </h2>
               <ul className="font-medium text-gray-500">
                 {learnmore.map((item) => (
-                  <li key={item.en} className="mb-2 text-xs text-gray-600">
+                  <li
+                    key={item.en}
+                    className="mb-2 text-xs text-gray-600 xs:text-sm lg:text-base"
+                  >
                     <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
@@ -158,12 +162,15 @@ function Footer({ lang }: { lang: Locale }) {
               </ul>
             </div>
             <div>
-              <h2 className="mb-2 text-sm font-semibold text-gray-900">
+              <h2 className="mb-2 text-sm font-semibold text-gray-900 xs:text-base lg:text-lg">
                 {text[lang].legal}
               </h2>
               <ul className="font-medium text-gray-500">
                 {legal.map((item) => (
-                  <li key={item.en} className="mb-2 text-xs text-gray-600">
+                  <li
+                    key={item.en}
+                    className="mb-2 text-xs text-gray-600 xs:text-sm lg:text-base"
+                  >
                     <Link href={`${item.href}`} className="hover:underline">
                       {item[lang]}
                     </Link>
@@ -175,7 +182,7 @@ function Footer({ lang }: { lang: Locale }) {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8 " />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-xs text-gray-600 sm:text-center">
+          <span className="text-xs text-gray-600 xs:text-sm sm:text-center lg:text-base">
             {text[lang].copyright}
           </span>
           <Socials
@@ -201,13 +208,14 @@ export default function RootLayout({
       lang={params.lang}
       className={`${notoSans.variable} ${sourceSans.variable} ${rockSalt.variable} scroll-smooth`}
     >
+      <Script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></Script>
       <body>
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />
-          <main className="mb-auto block">
+          <main className="relative mb-auto block overflow-auto">
             <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">{children}</div>
+            <Footer lang={lang} />
           </main>
-          <Footer lang={lang} />
         </section>
       </body>
     </html>

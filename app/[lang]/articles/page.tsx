@@ -47,7 +47,10 @@ export default async function Page({
     <Container>
       <Header
         title={'Read Our Articles'}
-        breadcrumbs={[{ name: 'Home', href: '/' }]}
+        breadcrumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Articles', href: '/articles' },
+        ]}
         className="mb-10 mt-2"
       />
       {tags.length > 0 && (

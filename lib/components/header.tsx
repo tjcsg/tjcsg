@@ -16,59 +16,49 @@ export default function Header({
         <div>
           <nav aria-label="Back" className="sm:hidden">
             <Link
-              href={breadcrumbs[breadcrumbs.length - 1].href}
-              className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
+              href={breadcrumbs[breadcrumbs.length - 2].href}
+              className="flex items-center text-sm font-medium text-gray-500 underline hover:text-gray-700"
             >
               <ChevronLeftIcon
                 aria-hidden="true"
                 className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
               />
-              Back
+              {`Back to ${breadcrumbs[breadcrumbs.length - 2].name}`}
             </Link>
           </nav>
           <nav aria-label="Breadcrumb" className="hidden sm:flex">
-            {breadcrumbs.length == 1 && (
-              <Link
-                href={breadcrumbs[breadcrumbs.length - 1].href}
-                className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
-              >
-                <ChevronLeftIcon
-                  aria-hidden="true"
-                  className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
-                />
-                Back
-              </Link>
-            )}
-
-            <ol role="list" className="flex items-center space-x-4">
-              {breadcrumbs.length > 1 && (
+            <ol
+              role="list"
+              className="flex items-center space-x-1 xs:space-x-2"
+            >
+              {breadcrumbs.length >= 1 && (
                 <>
-                  <li>
-                    <div className="flex">
-                      <Link
-                        href={breadcrumbs[0].href}
-                        className="text-sm font-medium text-gray-500 hover:text-gray-700"
-                      >
-                        {breadcrumbs[0].name}
-                      </Link>
-                    </div>
-                  </li>
-                  {breadcrumbs.slice(1).map((crumb) => (
+                  {breadcrumbs.slice(0, -1).map((crumb) => (
                     <li key={crumb.name}>
-                      <div className="flex items-center">
+                      <div key={crumb.href} className="flex items-center">
+                        <Link
+                          href={crumb.href}
+                          className="mr-1 text-xs font-medium text-gray-500 underline hover:text-gray-700 xs:mr-4 xs:text-sm"
+                        >
+                          {crumb.name}
+                        </Link>
                         <ChevronRightIcon
                           aria-hidden="true"
                           className="h-5 w-5 flex-shrink-0 text-gray-400"
                         />
-                        <Link
-                          href={crumb.href}
-                          className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                        >
-                          {crumb.name}
-                        </Link>
                       </div>
                     </li>
                   ))}{' '}
+                  <li>
+                    <div className="flex overflow-hidden ">
+                      <Link
+                        href={breadcrumbs[breadcrumbs.length - 1].href}
+                        className="text-xs font-medium text-gray-500 hover:text-gray-700 xs:text-sm"
+                      >
+                        {breadcrumbs[breadcrumbs.length - 1].name}
+                      </Link>
+                    </div>
+                  </li>
                 </>
               )}
             </ol>

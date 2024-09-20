@@ -9,6 +9,9 @@ export default {
     './lib/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
+  daisyui: {
+    themes: ["light"]
+  },
   theme: {
     extend: {
       animation: {
@@ -53,5 +56,5 @@ export default {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [typography],
+  plugins: [typography, require('daisyui')],
 } satisfies Config;

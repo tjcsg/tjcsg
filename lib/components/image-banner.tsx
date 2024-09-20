@@ -11,7 +11,7 @@ export default function ImageBanner({
     <Image
       src={src}
       alt={alt}
-      className="mb-6 h-40 object-cover sm:h-52 lg:h-64 xl:h-72"
+      className="h-40 object-cover sm:h-52 lg:h-64 xl:h-72"
     />
   );
 }

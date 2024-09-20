@@ -5,7 +5,6 @@ import { booksNoConst } from '@/lib/bible-books';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../../cdbd-list';
 import { getAllCdbdAuthors } from '@/lib/api';
-export const dynamic = 'force-static';
 
 const MAX_ITEMS_PER_PAGE = 8;
 

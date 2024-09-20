@@ -17,19 +17,38 @@ const text = {
   },
 };
 
-export default async function FeaturedArticles({ lang }: { lang: Locale }) {
+export default async function FeaturedArticles({
+  lang,
+  titleClasses = 'text-3xl font-bold tracking-tight sm:text-4xl',
+  paragraphClasses = 'text-lg',
+}: {
+  lang: Locale;
+  titleClasses?: string;
+  paragraphClasses?: string;
+}) {
   const articles = await getLatestArticles(lang, 6);
   return (
     <Container>
       <div className="mx-auto max-w-2xl md:mx-0">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          {text[lang].title}
-        </h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
+        <h2 className={`text-gray-900 ${titleClasses}`}>{text[lang].title}</h2>
+        <p className={`mt-2 text-gray-600 ${paragraphClasses}`}>
           {text[lang].subtitle}
         </p>
       </div>
-      <div className="mx-auto mt-4 grid max-w-screen-xl grid-cols-1 gap-8 border-t border-gray-200 pt-12 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Small - 1 column by 3 rows */}
+      <div className="mx-auto mt-4 grid max-w-screen-xl grid-cols-1 gap-8   pt-10 sm:hidden">
+        {articles.slice(0, 3).map((article) => (
+          <ArticleCard key={article.slug} lang={lang} article={article} />
+        ))}
+      </div>
+      {/* Medium screen - 2 columns by 2 rows */}
+      <div className="mx-auto mt-4 hidden max-w-screen-xl gap-8   pt-10 sm:grid sm:grid-cols-2 lg:hidden">
+        {articles.slice(0, 4).map((article) => (
+          <ArticleCard key={article.slug} lang={lang} article={article} />
+        ))}
+      </div>
+      {/* Full screen - 3 columns by 2 rows */}
+      <div className="mx-auto mt-4 hidden max-w-screen-xl grid-cols-1 gap-8   pt-10 lg:grid lg:grid-cols-3">
         {articles.map((article) => (
           <ArticleCard key={article.slug} lang={lang} article={article} />
         ))}

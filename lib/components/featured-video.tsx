@@ -1,12 +1,13 @@
 export default async function FeaturedVideo({
   url,
-  maxWidth = '2xl',
+  maxWidth = 'xl',
 }: {
   url: string;
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }) {
   return (
     <div className="bg-black">
+      {/* <div className={`max-w- mx-auto block w-full max-w-screen-2xl`}> */}
       <div className={`max-w- mx-auto block w-full max-w-screen-${maxWidth}`}>
         <div className="relative w-full overflow-hidden pt-[56.25%]">
           <iframe

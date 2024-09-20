@@ -59,10 +59,10 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
-          // { name: 'Home', href: '/' },
-          { name: 'All Articles', href: '/articles' },
-          { name: 'Closer Day by Day', href: '/cdbd' },
-          { name: bibleBooks[book][lang], href: `/cdbd/${book}` },
+          { name: 'Home', href: '/' },
+          { name: 'Articles', href: '/articles' },
+          // { name: 'Closer Day by Day', href: '/cdbd' },
+          { name: article.title, href: `/articles/${article.slug}` },
         ]}
       />
     );
@@ -73,8 +73,9 @@ async function ArticleHead({
       <Header
         title={article.title}
         breadcrumbs={[
-          // { name: 'Home', href: '/' },
+          { name: 'Home', href: '/' },
           { name: 'Articles', href: '/articles' },
+          { name: article.title, href: `/articles/${article.slug}` },
         ]}
       />
     </>
@@ -143,72 +144,83 @@ export default async function PostPage({
   );
 
   return (
-    <div className="container mx-auto mb-8 mt-6 max-w-3xl px-6 sm:px-12">
-      <ArticleHead isCdbd={isCdbd} article={article} lang={lang} />
+    <>
+      {/* <ArticleHead isCdbd={isCdbd} article={article} lang={lang}/> */}
+      <div className="container mx-auto mb-8 mt-8 max-w-3xl px-6 sm:px-12">
+        <Header
+          title={article.title}
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'Articles', href: '/articles' },
+            // { name: 'Closer Day by Day', href: '/cdbd' },
+            { name: article.title, href: `/articles/${article.slug}` },
+          ]}
+          className=""
+        />
+        <article>
+          {article.description && (
+            <p className="text-md text-gray-500">{article.description}</p>
+          )}
+          {article.author && (
+            <div className="text-md pt-2 italic text-gray-500">
+              <p className="inline">{`Written by `}</p>
+              {isCdbd ? (
+                <Link
+                  href={`/cdbd/author/${article.author.toLowerCase().split(' ').join('-')}`}
+                  className="underline hover:text-gray-700"
+                >
+                  <p className="inline capitalize">{article.author}</p>
+                </Link>
+              ) : (
+                <p className="inline capitalize">{article.author}</p>
+              )}
+            </div>
+          )}
 
-      <article>
-        {article.description && (
-          <p className="text-md text-gray-500">{article.description}</p>
-        )}
-        {article.author && (
-          <div className="text-md pt-2 italic text-gray-500">
-            <p className="inline">{`Written by `}</p>
-            {isCdbd ? (
-              <Link
-                href={`/cdbd/author/${article.author.toLowerCase().split(' ').join('-')}`}
-                className="underline hover:text-gray-700"
-              >
-                <p className="inline">{article.author}</p>
+          <time
+            dateTime={article.date}
+            className="text-md mt-3 italic text-gray-500"
+          >
+            {new Intl.DateTimeFormat(`${lang}-SG`, {
+              timeZone: 'Singapore',
+              weekday: 'short',
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+              hour12: true,
+            }).format(new Date(article.date))}
+          </time>
+          <ContentfulImage
+            src={article.image.url}
+            height={article.image.height}
+            width={article.image.width}
+            alt={article.image.description}
+            className="w-full py-6"
+          />
+
+          <div className="prose mb-3 max-w-none">
+            <Markdown content={article.content} />
+          </div>
+        </article>
+
+        <ArticleFoot isCdbd={isCdbd} article={article} lang={lang} />
+
+        {relatedArticles.length > 0 && (
+          <div>
+            <h3 className="mt-8 text-nowrap text-lg font-semibold">
+              {text[lang].seeAlso}
+            </h3>
+            {relatedArticles.map((relatedArticle) => (
+              <Link key={relatedArticle.slug} href={relatedArticle.slug}>
+                <p className="mt-2 hover:text-button hover:underline">
+                  {relatedArticle.title}
+                </p>
               </Link>
-            ) : (
-              <p className="inline">{article.author}</p>
-            )}
+            ))}
           </div>
         )}
-
-        <time
-          dateTime={article.date}
-          className="text-md mt-3 italic text-gray-500"
-        >
-          {new Intl.DateTimeFormat(`${lang}-SG`, {
-            timeZone: 'Singapore',
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour12: true,
-          }).format(new Date(article.date))}
-        </time>
-        <ContentfulImage
-          src={article.image.url}
-          height={article.image.height}
-          width={article.image.width}
-          alt={article.image.description}
-          className="w-full py-6"
-        />
-
-        <div className="prose mb-3 max-w-none">
-          <Markdown content={article.content} />
-        </div>
-      </article>
-
-      <ArticleFoot isCdbd={isCdbd} article={article} lang={lang} />
-
-      {relatedArticles.length > 0 && (
-        <div>
-          <h3 className="mt-8 text-nowrap text-lg font-semibold">
-            {text[lang].seeAlso}
-          </h3>
-          {relatedArticles.map((relatedArticle) => (
-            <Link key={relatedArticle.slug} href={relatedArticle.slug}>
-              <p className="mt-2 hover:text-button hover:underline">
-                {relatedArticle.title}
-              </p>
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 

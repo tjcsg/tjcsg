@@ -55,7 +55,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
   const desktopClasses = `text-sm font-semibold uppercase leading-6 text-gray-900 hover:text-gray-600`;
 
   return (
-    <header className="bg-white">
+    <header className="sticky top-0 z-40 bg-white">
       <div className=" w-full shadow-md">
         <nav
           aria-label="Global"
@@ -66,7 +66,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
               <span className="sr-only">True Jesus Church Singapore</span>
               <Image
                 src={sitelogo}
-                className="h-8 w-auto"
+                className="h-7 w-auto xs:h-8 lg:h-9"
                 alt="True Jesus Church logo"
               />
             </Link>
@@ -95,9 +95,9 @@ export default function NavBar({ lang }: { lang: Locale }) {
             <Link href={`/${lang}/articles`} className={`${desktopClasses}`}>
               {text[lang].articles}
             </Link>
-            <Link href={`/${lang}/beliefs`} className={`${desktopClasses}`}>
+            {/* <Link href={`/${lang}/beliefs`} className={`${desktopClasses}`}>
               {text[lang].beliefs}
-            </Link>
+            </Link> */}
             <Link href={`/${lang}/about`} className={`${desktopClasses}`}>
               {text[lang].about}
             </Link>
@@ -155,8 +155,8 @@ export default function NavBar({ lang }: { lang: Locale }) {
         onClose={setMobileMenuOpen}
         className="lg:hidden"
       >
-        <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-0 z-50" />
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link
               href={`/${lang}`}
@@ -166,7 +166,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
               <span className="sr-only">True Jesus Church Singapore</span>
               <Image
                 src={sitelogo}
-                className="h-8 w-auto sm:hidden"
+                className="h-7 w-auto xs:h-8 sm:hidden"
                 alt="True Jesus Church logo"
               />
             </Link>
@@ -204,13 +204,13 @@ export default function NavBar({ lang }: { lang: Locale }) {
                 >
                   {text[lang].articles}
                 </Link>
-                <Link
+                {/* <Link
                   href={`/${lang}/beliefs`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold uppercase leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {text[lang].beliefs}
-                </Link>
+                </Link> */}
                 <Link
                   href={`/${lang}/about`}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold uppercase leading-7 text-gray-900 hover:bg-gray-50"

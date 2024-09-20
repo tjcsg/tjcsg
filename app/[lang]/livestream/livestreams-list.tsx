@@ -15,14 +15,17 @@ const text = {
 export default async function LivestreamList({
   lang,
   background,
+  titleClasses = 'text-2xl font-bold',
 }: {
   lang: Locale;
   background: string;
+  titleClasses?: string;
 }) {
   return (
     <div className={`${background} px-8 pb-16 pt-12`}>
       <div className={`mx-auto grid max-w-7xl`}>
-        <Header title={`${text[lang].livestream}`} />
+        {/* <Header title={`${text[lang].livestream}`} /> */}
+        <h1 className={titleClasses}>{text[lang].livestream}</h1>
         <div className="grid grid-cols-1 pt-6 md:grid-cols-2">
           <ChurchLivestream
             name={details[lang]['adam'].name}

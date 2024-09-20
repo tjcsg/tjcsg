@@ -7,7 +7,6 @@ import CdbdList from '../cdbd-list';
 import { slugToContentfulTag } from '@/lib/utils';
 import { getAllCdbdBooks } from '@/lib/api';
 import BookSelector from '../book-selector';
-export const dynamic = 'force-static';
 
 const MAX_ITEMS_PER_PAGE = 8;
 

@@ -16,7 +16,7 @@ const text = {
 function OlderSermons({ lang }: { lang: Locale }) {
   return (
     <Container>
-      <h1 className="mb-8 text-3xl font-bold">
+      <h1 className="mb-8 text-2xl font-bold">
         {text[lang].watchOtherSermons}
       </h1>
       <YoutubeList
@@ -39,7 +39,12 @@ export default function Layout({
     <>
       {children}
       <OlderSermons lang={lang} />
-      <SpecialEvents lang={lang} background="bg-white" />
+      <SpecialEvents
+        lang={lang}
+        background="bg-stone-50"
+        titleClasses="text-2xl font-bold capitalize"
+        paragraphClasses="text-base md:text-lg lg:text-xl"
+      />
       <GlobalLivestream lang={lang} background="bg-stone-50" />
     </>
   );

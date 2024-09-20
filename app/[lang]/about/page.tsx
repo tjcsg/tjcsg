@@ -94,6 +94,7 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
           title={text[lang].whoWeAre}
           contents={[text[lang].about_1, text[lang].about_2]}
           paragraphClasses="text-lg xs:text-xl sm:text-2xl xl:text-3xl"
+          labelClasses="text-2xl font-bold capitalize mb-4 lg:text-3xl"
           otherContents={
             <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
               <InfoBox
@@ -166,7 +167,7 @@ async function BasicBeliefs({ lang }: { lang: Locale }) {
       <Container>
         <div className="grid max-w-screen-xl grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           <div>
-            <label className="text-md uppercase xl:text-lg">
+            <label className="mb-4 text-2xl font-bold capitalize xl:text-3xl">
               {text[lang].whatWeBelieve}
             </label>
           </div>

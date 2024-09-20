@@ -99,7 +99,9 @@ function RelatedArticles({
     <>
       {articles.length > 0 && (
         <div className="my-16">
-          <h1 className="mb-8 text-xl font-bold">Related articles</h1>
+          <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
+            Related articles
+          </h1>
           <div className="grid max-w-screen-xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {articles &&
               articles.map((article) => (
@@ -120,6 +122,7 @@ function AOFStatement({ lang, aof }: { lang: Locale; aof: Aof }) {
           title={'Article of Faith'}
           contents={aofDetails[lang][aof].details}
           paragraphClasses="text-md xs:text-lg sm:text-xl mb-4"
+          labelClasses="text-2xl font-bold capitalize mb-4 lg:text-3xl"
         />
       </div>
     </Container>
@@ -185,7 +188,9 @@ export default async function Page({
           title={aofDetails[lang][aof].name}
           breadcrumbs={[
             { name: 'Home', href: '/' },
-            { name: 'Our Beliefs', href: '/beliefs' },
+            { name: 'About Us', href: '/about' },
+            { name: 'What We Believe', href: '/beliefs' },
+            { name: aofDetails[lang][aof].name, href: `/beliefs/${aof}` },
           ]}
         />
       </Container>

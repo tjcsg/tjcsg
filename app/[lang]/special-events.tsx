@@ -6,7 +6,7 @@ import EventCard from '@/lib/components/event-card';
 
 const text = {
   en: {
-    title: 'Special Events',
+    title: 'Upcoming Events',
     subtitle:
       'Our special services are a great starting point for you to dive into specific topics from the Bible',
     viewall: 'View all events',
@@ -22,20 +22,22 @@ const text = {
 
 export default async function SpecialEvents({
   lang,
-  background,
+  background = 'bg-white',
+  titleClasses = 'text-3xl font-bold tracking-tight md:text-4xl ',
+  paragraphClasses = 'text-lg md:text-xl',
 }: {
   lang: Locale;
-  background: string;
+  background?: string;
+  titleClasses?: string;
+  paragraphClasses?: string;
 }) {
   const allEvents = await getAllEvents(lang, 2);
 
   return (
     <Container background={`${background}`}>
       <div className="mb-8 lg:mb-16">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
-          {text[lang].title}
-        </h2>
-        <p className="mt-2 text-pretty text-lg text-gray-600 md:text-xl">
+        <h2 className={`text-gray-900 ${titleClasses}`}>{text[lang].title}</h2>
+        <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
           {text[lang].subtitle}
         </p>
         <p className="mt-2">

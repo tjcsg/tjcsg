@@ -9,19 +9,23 @@ import LivestreamList from '../livestream/livestreams-list';
 import YoutubeList from '@/lib/components/youtube-list';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import Image from 'next/image';
+import adamCongregation from '@/public/adam_congregation.jpeg';
 import ImageBanner from '@/lib/components/image-banner';
 import Link from 'next/link';
 import { openGraph } from '@/app/shared-metadata';
 import { Metadata } from 'next';
+import LinkButton from '@/lib/components/link-button';
 
 const text = {
   en: {
     title: 'Worship',
     eyebrow: 'Worship with us',
+    comeVisit: 'Come and visit us',
     watchFeaturedSermon: 'Watch our sermon of the day',
     watchOtherSermons: 'Watch other sermons',
     howToPray: 'How To Pray',
     howToPrayContent: [
+      'Prayer is a crucial part of our worship, allowing us to talk to our Heavenly Father. He is everpresent, and you can pray to Him anywhere.',
       '1) Kneel and close your eyes',
       '2) Begin by saying, "In the name of the Lord Jesus I pray."',
       '3) Praise the Lord by saying, "Hallelujah!"',
@@ -32,6 +36,7 @@ const text = {
   zh: {
     title: '线上崇拜',
     eyebrow: '与我们一起崇拜',
+    comeVisit: 'Come and visit us',
     watchFeaturedSermon: 'Watch our sermon of the day',
     watchOtherSermons: 'Watch other sermons',
     howToPray: 'How To Pray',
@@ -53,11 +58,11 @@ const headerButton = {
 
 function FeaturedSermon({ lang }: { lang: Locale }) {
   return (
-    <>
-      <h1 className="mb-8 text-2xl font-bold">
+    <div className="mt-16 lg:mt-16">
+      <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
         {text[lang].watchFeaturedSermon}
       </h1>
-      <div className={`max-w- mx-auto block w-full max-w-screen-lg`}>
+      <div className={`mx-auto block w-full max-w-screen-lg`}>
         <div className="relative w-full overflow-hidden pt-[56.25%]">
           <iframe
             src={`https://www.youtube.com/embed?listType=playlist&list=PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH&index=1&modestbranding=1&rel=0`}
@@ -69,14 +74,14 @@ function FeaturedSermon({ lang }: { lang: Locale }) {
           ></iframe>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 function OlderSermons({ lang }: { lang: Locale }) {
   return (
     <div className="mt-16 lg:mt-16">
-      <h1 className="mb-8 text-2xl font-bold">
+      <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
         {text[lang].watchOtherSermons}
       </h1>
       <YoutubeList
@@ -89,13 +94,42 @@ function OlderSermons({ lang }: { lang: Locale }) {
 
 async function HowToPray({ lang }: { lang: Locale }) {
   return (
-    <div className="my-16">
+    <div className="my-8 bg-white px-8 py-4 md:py-8">
       <ModernContentStrip
         title={text[lang].howToPray}
         contents={text[lang].howToPrayContent}
-        labelClasses="capitalize text-2xl font-bold mb-8"
+        labelClasses="capitalize text-2xl font-bold mb-8 xl:text-3xl"
         paragraphClasses="text-base lg:text-lg lg:max-w-none"
       />
+    </div>
+  );
+}
+
+function WorshipInPerson({ lang }: { lang: Locale }) {
+  return (
+    <div className="mt-8">
+      <h1 className="mb-2 text-2xl font-bold capitalize xl:text-3xl">
+        {text[lang].comeVisit}
+      </h1>
+      <div className="flex w-full flex-col md:flex-row">
+        <div>
+          <p className="mb-4 text-pretty leading-relaxed text-gray-800 md:px-0 md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed">
+            The best way to worship with us is to come and join us for an
+            in-person church service.
+          </p>
+          <div className="w-fit">
+            <LinkButton
+              text={headerButton[lang]}
+              href={headerButton.href}
+              type={'inverse'}
+              className={`mb-8 mt-6 w-full px-8 py-2 lg:text-lg`}
+            />
+          </div>
+        </div>
+        <div className="mx-auto w-full max-w-xl md:px-8">
+          <Image src={adamCongregation} alt={''} className="object-cover" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -108,29 +142,34 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
         src={adamChapel}
         alt={'Picture of the chapel at Adam Road church'}
       />
-      {/* <PageHeader lang={lang} text={text} link={headerButton} /> */}
+      {/* <PageHeader lang={lang} text={text} /> */}
       <Container>
         <Header
           title={text[lang].title}
-          breadcrumbs={[{ name: 'Home', href: '/' }]}
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'Worship', href: '/worship' },
+          ]}
         />
-        <p className="pb-12 pt-4 text-gray-800 md:text-lg lg:pb-16">
-          The best way to worship with us is to{' '}
-          <Link
-            href={'/locations'}
-            className="text-button underline hover:text-button_hover"
-          >
-            come and join us for an in-person church service
-          </Link>
-          .
-        </p>
+        <WorshipInPerson lang={lang} />
+
         <FeaturedSermon lang={lang} />
         <OlderSermons lang={lang} />
+      </Container>
+      <Container background={"bg-[url('/marble.png')]"}>
         <HowToPray lang={lang} />
       </Container>
-      <SpecialEvents lang={lang} background="bg-stone-50" />
-      <LivestreamList lang={lang} background={"bg-[url('/marble.png')]"} />
-      <GlobalLivestream lang={lang} background="bg-stone-50" />
+      <SpecialEvents
+        lang={lang}
+        titleClasses="text-2xl font-bold capitalize xl:text-3xl"
+        paragraphClasses="text-base md:text-lg lg:text-xl"
+      />
+      <LivestreamList
+        lang={lang}
+        background={"bg-[url('/marble.png')]"}
+        titleClasses="text-2xl font-bold capitalize xl:text-3xl"
+      />
+      <GlobalLivestream lang={lang} background="bg-white" />
     </>
   );
 }

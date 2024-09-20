@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Socials({
   size,
-  style,
+  style = 'mt-4 flex sm:mt-0 sm:justify-center md:pr-12 lg:pr-24',
   colour = 'text-gray-500',
 }: {
   size: Number;

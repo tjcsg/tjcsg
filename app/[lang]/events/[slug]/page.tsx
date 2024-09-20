@@ -142,11 +142,13 @@ export default async function PostPage({
             {details[lang][event.church].address}
           </p>
           <div className="flex flex-col md:flex-row xl:flex-col">
-            <Image
-              src={pic[details[lang][event.church].shortform]}
-              className="w-full"
-              alt={`A picture of ${details[lang][event.church].name}'s exterior`}
-            />
+            <div className="min-h-72 w-full">
+              <Image
+                src={pic[details[lang][event.church].shortform]}
+                className="h-full w-full object-cover"
+                alt={`A picture of ${details[lang][event.church].name}'s exterior`}
+              />
+            </div>
             <iframe
               src={details[lang][event.church].map_src}
               style={{ border: 0 }}

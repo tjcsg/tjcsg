@@ -5,7 +5,7 @@ import tjcMap from '@/public/tjcmap.png';
 import Image from 'next/image';
 import LinkButton from '@/lib/components/link-button';
 import tkPicOverlay from '@/public/landingpage_overlap.svg';
-import prayerPic from '@/public/landingpage_prayer.png';
+import prayerPic from '@/public/landingpage_prayer.jpeg';
 import biblePic from '@/public/landingpage_bible2.png';
 import biblePic2 from '@/public/landingpage_bible.png';
 import FeaturedArticles from './featured-articles';
@@ -20,7 +20,7 @@ const text = {
       "We love the Bible, and we're here to help you transform your life with God's words.",
     visitUs: 'Visit us',
     findAChurch: 'Find a church',
-    aboutUs: 'Who we are',
+    aboutUs: 'About us',
     worship: 'Worship',
     truthWill: 'The truth will',
     truthWillScrollingTexts: [
@@ -46,7 +46,7 @@ const text = {
       "We love the Bible, and we're here to help you transform your life with God's words.",
     visitUs: 'Visit us',
     findAChurch: 'Find a church',
-    aboutUs: '搜寻教会地址',
+    aboutUs: 'About us',
     worship: 'Worship',
     truthWill: 'The truth will',
     truthWillScrollingTexts: [
@@ -75,7 +75,7 @@ async function Hero({ lang }: { lang: Locale }) {
         <main className="w-full xs:relative">
           <div className="mx-auto w-full max-w-7xl py-8 text-center xs:text-left md:py-24 md:pb-20 md:pt-16">
             <div className="px-6 sm:w-3/4 sm:px-8 sm:pr-12 lg:w-2/3 xl:pr-16">
-              <h1 className="relative z-10 text-pretty text-4xl font-black uppercase leading-tight tracking-tight text-gray-900 sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight">
+              <h1 className="relative z-10 text-pretty text-4xl font-bold uppercase leading-tight tracking-normal text-gray-900 sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight">
                 {text[lang].welcome}
               </h1>
               <p className="relative z-10 mx-auto mt-4 text-base text-gray-700 xs:mx-0 xs:w-2/3 xs:text-lg sm:mt-8 md:text-xl lg:mt-8 lg:text-2xl">
@@ -87,7 +87,7 @@ async function Hero({ lang }: { lang: Locale }) {
                     text={text[lang].visitUs}
                     href={`${lang}/locations`}
                     type={'default'}
-                    className="text-md w-full px-6 uppercase md:py-2 md:text-lg"
+                    className="text-md mt-4 w-full px-6 uppercase md:py-2 md:text-lg"
                   />
                 </div>
                 <div>
@@ -95,7 +95,7 @@ async function Hero({ lang }: { lang: Locale }) {
                     text={text[lang].aboutUs}
                     href={`${lang}/about`}
                     type={'inverse'}
-                    className="mt-1 w-full px-6 uppercase md:text-lg lg:py-2"
+                    className="mt-4 w-full px-6 uppercase md:text-lg lg:py-2"
                   />
                 </div>
               </div>
@@ -132,12 +132,14 @@ async function TruthTransforms({ lang }: { lang: Locale }) {
           </li>
         ))}
       </ol>
-      <LinkButton
-        text={text[lang].whatWeBelieve}
-        href={`${lang}/beliefs`}
-        type={'inverse'}
-        className="mx-auto mt-8 w-fit px-4 py-1 uppercase sm:px-6 md:text-lg lg:mt-12"
-      />
+      <div className="mx-auto w-fit">
+        <LinkButton
+          text={text[lang].whatWeBelieve}
+          href={`${lang}/beliefs`}
+          type={'inverse'}
+          className="mt-8 w-full px-4 py-1 uppercase sm:px-6 md:text-lg lg:mt-12"
+        />
+      </div>
     </div>
   );
 }
@@ -171,7 +173,7 @@ async function JoinGlobalFamily({ lang }: { lang: Locale }) {
   return (
     <div className="block py-32 sm:pt-40">
       <Container>
-        <h1 className="mb-8 w-full text-3xl font-black uppercase tracking-tight text-gray-900 xs:text-4xl md:text-5xl ">
+        <h1 className="mb-8 w-full text-center text-3xl font-bold uppercase tracking-normal text-gray-900 xs:text-4xl md:text-5xl lg:text-left ">
           {text[lang].mapJoinFamily}
         </h1>
       </Container>
@@ -195,7 +197,7 @@ async function JoinGlobalFamily({ lang }: { lang: Locale }) {
         text={text[lang].learnMore}
         href={`${lang}/about`}
         type={'inverse'}
-        className="mx-auto w-fit px-4 py-1 uppercase sm:px-6 md:text-lg"
+        className="mx-auto mt-6 w-fit px-4 py-1 uppercase sm:px-6 md:text-lg"
       />
     </div>
   );
@@ -210,7 +212,7 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
         <div className="flex justify-center lg:block">
           <div>
             <div className="relative">
-              <h1 className="w-full text-center text-3xl font-black uppercase tracking-tight text-gray-900 xs:text-4xl md:text-5xl lg:mx-0 lg:text-left">
+              <h1 className="w-full text-center text-3xl font-bold uppercase tracking-normal text-gray-900 xs:text-4xl md:text-5xl lg:mx-0 lg:text-left">
                 {text[lang].worshipTrueGod}
               </h1>
               <p
@@ -237,7 +239,7 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
                   text={text[lang].worship}
                   href={`${lang}/worship`}
                   type={'inverse'}
-                  className=" w-full px-6 text-base uppercase md:py-2 md:text-lg"
+                  className=" mt-4 w-full px-6 text-base uppercase md:py-2 md:text-lg"
                 />
               </div>
             </div>
@@ -268,13 +270,15 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
 function LatestYoutubeVideos({ lang }: { lang: Locale }) {
   return (
     <Container>
-      <h1 className="mb-10 text-2xl font-bold capitalize tracking-tight text-gray-900 sm:text-3xl">
-        {text[lang].watchSermons}
-      </h1>
-      <YoutubeList
-        playlist={'PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH'}
-        index={[1, 2, 3, 4, 5]}
-      />
+      <div className="my-8">
+        <h1 className="mb-10 text-2xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl">
+          {text[lang].watchSermons}
+        </h1>
+        <YoutubeList
+          playlist={'PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH'}
+          index={[1, 2, 3, 4, 5]}
+        />
+      </div>
     </Container>
   );
 }
@@ -288,8 +292,16 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <WorshipTrueGod lang={lang} />
       {/* <ReceiveCompleteGospel lang={lang} /> */}
       <JoinGlobalFamily lang={lang} />
-      <SpecialEvents lang={lang} background="bg-white" />
-      <FeaturedArticles lang={lang} />
+      <SpecialEvents
+        lang={lang}
+        titleClasses="text-3xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl"
+        paragraphClasses="text-base md:text-lg lg:text-xl"
+      />
+      <FeaturedArticles
+        lang={lang}
+        titleClasses="text-3xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl"
+        paragraphClasses="text-base md:text-lg lg:text-xl"
+      />
       <LatestYoutubeVideos lang={lang} />
       <InstagramEmbed />
     </>

@@ -57,7 +57,7 @@ export default function ChurchLivestream({
             text={text[lang].card_button}
             href={`/${lang}/${href}`}
             type={'default'}
-            className={`absolute left-1/2 -translate-x-1/2 -translate-y-full px-10 py-2 text-base lg:py-1 lg:text-lg`}
+            className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 px-10 py-2 text-base lg:py-1 lg:text-lg`}
           />
           <div className="flex flex-col px-4 py-6 xs:px-8 md:px-4 md:py-6">
             {timings.map((timing) => (

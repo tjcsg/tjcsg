@@ -64,10 +64,22 @@ export function Markdown({ content }: { content: EventEntry['summary'] }) {
           if (isSiteLink) {
             const url = new URL(urlString);
             const relative = url.pathname + url.search;
-            return <Link href={relative}>{children}</Link>;
+            return (
+              <Link
+                href={relative}
+                className="text-button hover:text-button_hover"
+              >
+                {children}
+              </Link>
+            );
           } else {
             return (
-              <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
+              <a
+                href={node.data.uri}
+                className="text-button hover:text-button_hover"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {children}
               </a>
             );

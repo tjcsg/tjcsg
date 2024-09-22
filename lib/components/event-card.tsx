@@ -15,8 +15,9 @@ const text = {
   },
 };
 
-const contentSizes = 'text-sm xs:text-base sm:text-xs md:text-base lg:text-lg';
-const titleSizes = 'text-lg xs:text-xl sm:text-lg md:text-2xl lg:text-3xl';
+const contentSizes = 'text-base';
+const titleSizes =
+  'text-xl xs:text-2xl md:text-2xl lg:text-3xl leading-tight xs:leading-tight md:leading-tight lg:leading-tight';
 
 function DateAndTime({
   date,
@@ -31,7 +32,7 @@ function DateAndTime({
     <>
       <time
         dateTime={date}
-        className={`mt-2 font-semibold text-gray-600 ${contentSizes}`}
+        className={`font-semibold text-gray-600 ${contentSizes}`}
       >
         {new Intl.DateTimeFormat(`${lang}-SG`, {
           timeZone: 'Singapore',
@@ -63,7 +64,7 @@ function DateAndTime({
 function Title({ title, slug }: { title: string; slug: string }) {
   return (
     <h3
-      className={`mt-2 font-semibold text-gray-900 hover:text-gray-600 ${titleSizes}`}
+      className={`mt-3 font-bold text-gray-900 hover:text-gray-600 ${titleSizes}`}
     >
       <Link href={`/events/${slug}`}>{title}</Link>
     </h3>
@@ -125,7 +126,7 @@ export default async function EventCard({
           </div>
           <Link
             href={`/events/${event.slug}`}
-            className={`relative z-10 mt-3 font-medium text-button underline hover:text-button_hover ${contentSizes}`}
+            className={`relative z-10 mt-3 font-medium capitalize text-button underline hover:text-button_hover ${contentSizes}`}
           >
             {text[lang].cta}
           </Link>

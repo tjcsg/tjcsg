@@ -131,7 +131,6 @@ type WebContent = {
   globalTjciaMedia: {
     url: string;
   };
-
 };
 
 const EVENTS_GRAPHQL_FIELDS = `
@@ -517,6 +516,36 @@ export async function getLatestArticles(
       }
     }`,
   );
+  return extractArticleEntries(entry);
+}
+export async function getRelatedArticles(
+  locale: Locale,
+  currSlug: string,
+  limit: number = 100,
+  currTags: string[] = [],
+): Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+        articleCollection(
+          limit: ${limit},
+          locale:"${locale}",
+          order: date_DESC
+          where: {
+            contentfulMetadata: { tags: { id_contains_some: [ ${currTags.length > 0 ? `"${currTags.join('","')}"` : ``} ] } },
+            slug_not: "${currSlug}"
+          }
+          
+        ) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+            }
+        }
+      }
+    }`,
+  );
+
   return extractArticleEntries(entry);
 }
 

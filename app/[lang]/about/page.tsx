@@ -20,6 +20,7 @@ import ModernContentStrip from '@/lib/components/modern-content-strip';
 import FeaturedVideo from '@/lib/components/featured-video';
 import { Metadata } from 'next';
 import { openGraph } from '@/app/shared-metadata';
+import Breadcrumb from '@/lib/components/breadcrumb';
 
 const text = {
   en: {
@@ -86,7 +87,13 @@ function InfoBox({
   );
 }
 
-async function WhoWeAre({ lang }: { lang: Locale }) {
+async function WhoWeAre({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <Container>
       <div className="mt-8 flex w-full justify-stretch lg:mt-16">
@@ -94,7 +101,7 @@ async function WhoWeAre({ lang }: { lang: Locale }) {
           title={text[lang].whoWeAre}
           contents={[text[lang].about_1, text[lang].about_2]}
           paragraphClasses="text-lg xs:text-xl sm:text-2xl xl:text-3xl"
-          labelClasses="text-2xl font-bold capitalize mb-4 lg:text-3xl"
+          labelClasses={`mb-4 ${titleClasses}`}
           otherContents={
             <div className="mt-10 flex justify-around sm:gap-16 xl:mt-20 xl:justify-start xl:gap-24">
               <InfoBox
@@ -161,13 +168,19 @@ async function TJCGlobalMap({ lang }: { lang: Locale }) {
   );
 }
 
-async function BasicBeliefs({ lang }: { lang: Locale }) {
+async function BasicBeliefs({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <div id="beliefs">
       <Container>
         <div className="grid max-w-screen-xl grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           <div>
-            <label className="mb-4 text-2xl font-bold capitalize xl:text-3xl">
+            <label className={`mb-4 ${titleClasses}`}>
               {text[lang].whatWeBelieve}
             </label>
           </div>
@@ -205,17 +218,26 @@ async function BasicBeliefs({ lang }: { lang: Locale }) {
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   const contentfulText = await getWebContent(lang, false);
+  const titleClasses = 'mb-4 text-2xl font-bold capitalize xl:text-3xl';
 
   return (
     <>
+      <Container>
+        <Breadcrumb
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'Who We Are', href: '/about' },
+          ]}
+        />
+      </Container>
       <FeaturedVideo
         url={`${contentfulText.aboutWhoweareIframe}?playlist=1_6TnUEDym4`}
       />
-      <WhoWeAre lang={lang} />
+      <WhoWeAre lang={lang} titleClasses={titleClasses} />
       <BringingSalvationToAll lang={lang} />
       <TJCGlobalMap lang={lang} />
-      <BasicBeliefs lang={lang} />
-      <WhyTrueJesusChurch lang={lang} />
+      <BasicBeliefs lang={lang} titleClasses={titleClasses} />
+      <WhyTrueJesusChurch lang={lang} titleClasses={titleClasses} />
     </>
   );
 }

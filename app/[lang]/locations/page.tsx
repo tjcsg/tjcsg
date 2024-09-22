@@ -76,19 +76,17 @@ const joinUs = {
 
 function ChurchLink({ lang, church }: { lang: Locale; church: Church }) {
   return (
-    <div className="relative mx-auto w-full bg-neutral-50 pb-4 pt-16 text-center text-sm">
+    <div className="relative mx-auto w-full bg-neutral-50 pb-4 pt-16 text-center">
       <Image
         src={pic[church]}
         alt={`Picture of ${details[lang][church].name}`}
-        className="absolute -top-1/4 left-0 right-0 mx-auto h-24 w-24 rounded-full"
+        className="absolute -top-1/4 left-0 right-0 mx-auto h-24 w-24 rounded-full object-cover"
       />
-      <p className="font-bold sm:text-base md:text-sm lg:text-base">
-        {details[lang][church].nameChurch}
-      </p>
-      <p className="py-1 text-xs text-gray-600 sm:text-sm md:text-xs lg:text-sm">{`Nearest MRT - ${details[lang][church].nearestMrt}`}</p>
+      <p className="text-base font-bold">{details[lang][church].nameChurch}</p>
+      <p className="py-1 text-base text-gray-600 lg:text-sm">{`Nearest MRT - ${details[lang][church].nearestMrt}`}</p>
       <Link
         href={`/locations#${church}`}
-        className="text-sm font-semibold text-button underline"
+        className="font-semibold text-button underline"
       >
         Locate us
       </Link>
@@ -106,7 +104,14 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
         src={adamFlowers}
         alt={'Picture of flowers at Adam road church'}
       />
-      <PageHeader lang={lang} text={text} />
+      <PageHeader
+        lang={lang}
+        text={text}
+        breadcrumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+        ]}
+      />
       <Container>
         <p className="mx-auto -mt-8 mb-20 max-w-lg text-pretty text-center text-gray-600 sm:-mt-12 sm:text-lg md:-mt-14 md:max-w-xl">
           {joinUs[lang]}
@@ -126,7 +131,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
             address={details[lang][church].address}
             timings={details[lang][church].timings}
             map_src={details[lang][church].map_src}
-            background="bg-stone-50"
+            background="even:bg-white odd:bg-stone-50"
           />
         ))}
       </div>

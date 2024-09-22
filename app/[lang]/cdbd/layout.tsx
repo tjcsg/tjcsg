@@ -30,7 +30,14 @@ export default async function Layout({
   const { schedule } = await getCDBDSchedule(false);
   return (
     <>
-      <PageHeader lang={lang} text={text} />
+      <PageHeader
+        lang={lang}
+        text={text}
+        breadcrumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Closer Day By Day', href: '/cdbd' },
+        ]}
+      />
       <div className={`flex items-center justify-center px-6 sm:px-12`}>
         <div className="block w-full max-w-screen-lg">
           <CdbdSchedule

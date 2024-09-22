@@ -18,8 +18,6 @@ type ChurchDetails = {
   sembawang: Details;
 };
 
-
-
 export const details: { en: ChurchDetails; zh: ChurchDetails } = {
   en: {
     adam: {

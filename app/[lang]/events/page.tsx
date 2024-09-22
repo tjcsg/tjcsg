@@ -46,7 +46,10 @@ export default async function EventsPage({
       <div className="sm:px-5">
         <Header
           title={'All Special Events'}
-          breadcrumbs={[{ name: 'Home', href: '/' }]}
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'All Events', href: '/events' },
+          ]}
           className="mb-10"
         />
       </div>

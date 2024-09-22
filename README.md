@@ -50,7 +50,6 @@ The `CONTENTFUL_*` variables should be obtained from contentful. `TWITCH_PARENT`
 
 `NEXT_PUBLIC_WEB3_ACCESS_KEY` should be your web3forms access key pointing to your email address to receive emails via the contact form.
 
-
 # A statically generated blog example using Next.js and Contentful
 
 This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Contentful](https://www.contentful.com/) as the data source.

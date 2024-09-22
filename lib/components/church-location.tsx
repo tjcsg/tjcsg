@@ -29,12 +29,17 @@ export default function ChurchLocation({
   background: string;
 }) {
   return (
-    <div id={shortname}>
-      <Container background={background}>
+    <div
+      id={shortname}
+      className={`${background} xs:pb-6 xs:pt-2 md:pb-12 md:pt-6 xl:pb-16 xl:pt-10`}
+    >
+      <Container>
         <div className="mx-auto max-w-lg md:max-w-screen-lg">
           <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
-            <h1 className="text-xl font-semibold sm:text-2xl">{name}</h1>
-            <p className="text-base text-gray-500 md:text-lg lg:self-end lg:pl-4">
+            <h1 className="text-xl font-bold xs:text-2xl md:text-3xl">
+              {name}
+            </h1>
+            <p className="text-lg font-medium text-gray-500 md:text-xl lg:self-end lg:pl-4 xl:text-2xl">
               {address}
             </p>
           </div>

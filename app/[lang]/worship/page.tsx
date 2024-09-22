@@ -56,10 +56,16 @@ const headerButton = {
   zh: '参加实体崇拜聚会',
 };
 
-function FeaturedSermon({ lang }: { lang: Locale }) {
+function FeaturedSermon({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
-    <div className="mt-16 lg:mt-16">
-      <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
+    <div className="mt-12 md:mt-16">
+      <h1 className={`mb-4  xs:mb-8 ${titleClasses}`}>
         {text[lang].watchFeaturedSermon}
       </h1>
       <div className={`mx-auto block w-full max-w-screen-lg`}>
@@ -78,10 +84,16 @@ function FeaturedSermon({ lang }: { lang: Locale }) {
   );
 }
 
-function OlderSermons({ lang }: { lang: Locale }) {
+function OlderSermons({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
-    <div className="mt-16 lg:mt-16">
-      <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
+    <div className="mt-12 pb-8 md:mt-16">
+      <h1 className={`mb-3  xs:mb-8 ${titleClasses}`}>
         {text[lang].watchOtherSermons}
       </h1>
       <YoutubeList
@@ -92,25 +104,35 @@ function OlderSermons({ lang }: { lang: Locale }) {
   );
 }
 
-async function HowToPray({ lang }: { lang: Locale }) {
+async function HowToPray({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
-    <div className="my-8 bg-white px-8 py-4 md:py-8">
+    <div className="my-8 bg-white px-8 py-10 md:py-16">
       <ModernContentStrip
         title={text[lang].howToPray}
         contents={text[lang].howToPrayContent}
-        labelClasses="capitalize text-2xl font-bold mb-8 xl:text-3xl"
+        labelClasses={` mb-8 ${titleClasses}`}
         paragraphClasses="text-base lg:text-lg lg:max-w-none"
       />
     </div>
   );
 }
 
-function WorshipInPerson({ lang }: { lang: Locale }) {
+function WorshipInPerson({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: String;
+}) {
   return (
     <div className="mt-8">
-      <h1 className="mb-2 text-2xl font-bold capitalize xl:text-3xl">
-        {text[lang].comeVisit}
-      </h1>
+      <h1 className={`mb-2 ${titleClasses}`}>{text[lang].comeVisit}</h1>
       <div className="flex w-full flex-col md:flex-row">
         <div>
           <p className="mb-4 text-pretty leading-relaxed text-gray-800 md:px-0 md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed">
@@ -136,6 +158,7 @@ function WorshipInPerson({ lang }: { lang: Locale }) {
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
+  const titleClasses = 'text-2xl font-bold capitalize sm:text-3xl';
   return (
     <>
       <ImageBanner
@@ -151,25 +174,29 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
             { name: 'Worship', href: '/worship' },
           ]}
         />
-        <WorshipInPerson lang={lang} />
 
-        <FeaturedSermon lang={lang} />
-        <OlderSermons lang={lang} />
+        <FeaturedSermon lang={lang} titleClasses={titleClasses} />
+        <OlderSermons lang={lang} titleClasses={titleClasses} />
+        <WorshipInPerson lang={lang} titleClasses={titleClasses} />
       </Container>
       <Container background={"bg-[url('/marble.png')]"}>
-        <HowToPray lang={lang} />
+        <HowToPray lang={lang} titleClasses={titleClasses} />
       </Container>
       <SpecialEvents
         lang={lang}
-        titleClasses="text-2xl font-bold capitalize xl:text-3xl"
+        titleClasses={titleClasses}
         paragraphClasses="text-base md:text-lg lg:text-xl"
       />
       <LivestreamList
         lang={lang}
         background={"bg-[url('/marble.png')]"}
-        titleClasses="text-2xl font-bold capitalize xl:text-3xl"
+        titleClasses={titleClasses}
       />
-      <GlobalLivestream lang={lang} background="bg-white" />
+      <GlobalLivestream
+        lang={lang}
+        background="bg-white"
+        titleClasses={titleClasses}
+      />
     </>
   );
 }

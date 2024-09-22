@@ -7,6 +7,7 @@ import Socials from '@/lib/components/socials';
 import { Metadata } from 'next';
 import { openGraph } from '../shared-metadata';
 import Script from 'next/script';
+import ContactForm from '@/lib/components/contact-form';
 
 export const metadata: Metadata = {
   title: {
@@ -213,7 +214,7 @@ export default function RootLayout({
         <section className="flex h-screen min-h-screen flex-col">
           <NavBar lang={lang} />
           <main className="relative mb-auto block overflow-auto">
-            <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">{children}</div>
+            <div className="mb-8 md:mb-12 lg:mb-16">{children}</div>
             <Footer lang={lang} />
           </main>
         </section>

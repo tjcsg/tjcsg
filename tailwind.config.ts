@@ -10,7 +10,7 @@ export default {
   ],
   darkMode: 'class',
   daisyui: {
-    themes: ["light"]
+    themes: ['light'],
   },
   theme: {
     extend: {
@@ -44,7 +44,7 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-source_sans)'],
-        handwriting: ['var(--font-rock_salt)']
+        handwriting: ['var(--font-rock_salt)'],
       },
       colors: {
         button: '#007DA4',

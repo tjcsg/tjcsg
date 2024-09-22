@@ -16,7 +16,10 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
     <Container>
       <Header
         title={text[lang].title}
-        breadcrumbs={[{ name: text[lang].home, href: '/' }]}
+        breadcrumbs={[
+          { name: text[lang].home, href: '/' },
+          { name: text[lang].title, href: '/declaration' },
+        ]}
         className="pb-6"
       />
       <p>

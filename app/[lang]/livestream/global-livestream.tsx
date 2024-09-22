@@ -15,17 +15,16 @@ const links = [
 export default async function GlobalLivestream({
   lang,
   background,
+  titleClasses,
 }: {
   lang: Locale;
   background: string;
-  isReversed?: boolean;
+  titleClasses?: string;
 }) {
   const contentfulText = await getWebContent(lang, false);
   return (
     <Container background={background}>
-      <h1
-        className={`mb-4 mt-12 text-2xl font-bold capitalize text-gray-900 xl:text-3xl`}
-      >
+      <h1 className={`mb-4 mt-4  text-gray-900 md:mt-8 ${titleClasses}`}>
         {contentfulText.livestreamGlobalTitle}
       </h1>
       <div className={`flex flex-col md:flex-row md:justify-end`}>

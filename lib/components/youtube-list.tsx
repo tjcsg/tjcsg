@@ -12,7 +12,7 @@ export default function YoutubeList({
 }) {
   return (
     <div
-      className={`carousel carousel-center w-full gap-x-5 bg-neutral-100 px-2 py-4`}
+      className={`carousel carousel-center w-full gap-x-5 bg-neutral-100 py-4`}
     >
       {index.map((i, pos) => (
         <div

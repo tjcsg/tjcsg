@@ -7,6 +7,8 @@ import {
   getAllArticlesSlug,
   getAllCdbdSlugs,
   getArticle,
+  getLatestArticles,
+  getRelatedArticles,
 } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
@@ -17,6 +19,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Metadata, ResolvingMetadata } from 'next';
 import { openGraph } from '@/app/shared-metadata';
 import { obtainTextContent } from '@/lib/utils';
+import ContactForm from '@/lib/components/contact-form';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -40,47 +43,6 @@ const text = {
     next: 'Older',
   },
 };
-
-async function ArticleHead({
-  isCdbd,
-  article,
-  lang,
-}: {
-  isCdbd: boolean;
-  article: ArticleEntry;
-  lang: Locale;
-}) {
-  if (isCdbd) {
-    const book = article.contentfulMetadata.tags
-      .find((tag) => tag.id.startsWith('book'))
-      ?.name.split('-')[1] as Book;
-
-    return (
-      <Header
-        title={article.title}
-        breadcrumbs={[
-          { name: 'Home', href: '/' },
-          { name: 'Articles', href: '/articles' },
-          // { name: 'Closer Day by Day', href: '/cdbd' },
-          { name: article.title, href: `/articles/${article.slug}` },
-        ]}
-      />
-    );
-  }
-
-  return (
-    <>
-      <Header
-        title={article.title}
-        breadcrumbs={[
-          { name: 'Home', href: '/' },
-          { name: 'Articles', href: '/articles' },
-          { name: article.title, href: `/articles/${article.slug}` },
-        ]}
-      />
-    </>
-  );
-}
 
 async function ArticleFoot({
   isCdbd,
@@ -138,21 +100,29 @@ export default async function PostPage({
   if (!article) {
     notFound();
   }
-  const relatedArticles = article.relatedArticlesCollection?.items;
+
+  const relArticles = await getRelatedArticles(
+    lang,
+    article.slug,
+    3,
+    article.contentfulMetadata.tags.map((tag) => tag.id),
+  );
+
+  const relatedArticles =
+    article.relatedArticlesCollection?.items.concat(relArticles);
+
   let isCdbd = article.contentfulMetadata.tags.some(
     (tag) => tag.id === 'categoryCdbd',
   );
 
   return (
     <>
-      {/* <ArticleHead isCdbd={isCdbd} article={article} lang={lang}/> */}
       <div className="container mx-auto mb-8 mt-8 max-w-3xl px-6 sm:px-12">
         <Header
           title={article.title}
           breadcrumbs={[
             { name: 'Home', href: '/' },
             { name: 'Articles', href: '/articles' },
-            // { name: 'Closer Day by Day', href: '/cdbd' },
             { name: article.title, href: `/articles/${article.slug}` },
           ]}
           className=""

@@ -25,7 +25,7 @@ export default function ArticleCard({
   return (
     <article
       key={article.slug}
-      className="mx-auto flex w-full flex-col items-start rounded-xl border-2 xs:w-3/4 sm:w-full"
+      className="mx-auto flex w-full flex-col items-start xs:w-3/4 sm:w-full"
     >
       <Link
         href={`/articles/${article.slug}`}
@@ -36,12 +36,12 @@ export default function ArticleCard({
           alt={`Featured image of ${article.title}`}
           width={1152}
           height={648}
-          className="absolute inset-0 h-full w-full rounded-t-lg bg-gray-50 object-cover"
+          className="absolute inset-0 h-full w-full rounded-t-xl border-x-2 border-t-2 bg-gray-50 object-cover"
           role="button"
         />
       </Link>
-      <div className="px-3 py-3">
-        <time dateTime={article.date} className="mt-4 text-xs text-gray-500">
+      <div className="w-full flex-1 rounded-b-xl border-x-2 border-b-2 px-3 py-3">
+        <time dateTime={article.date} className="mt-4 text-sm text-gray-500">
           {new Intl.DateTimeFormat(`${lang}-SG`, {
             timeZone: 'Singapore',
             weekday: 'short',
@@ -61,13 +61,13 @@ export default function ArticleCard({
               <ArticleTag key={tag.id} tag={tag} />
             ))}
           </div>
-          <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">
+          <p className="mt-3 line-clamp-2 text-base leading-6 text-gray-600">
             {article.description !== null
               ? article.description
               : obtainTextContent(article.content)}
           </p>
           <Link href={`/articles/${article.slug}`} className="">
-            <p className="mt-3 text-sm font-medium text-button underline hover:text-button_hover">
+            <p className="mt-3 font-medium text-button underline hover:text-button_hover">
               {text[lang].cta}
             </p>
           </Link>

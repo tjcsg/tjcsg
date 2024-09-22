@@ -26,16 +26,16 @@ const text = {
 export default async function WhyTrueJesusChurch({
   lang,
   background = 'bg-white',
+  titleClasses,
 }: {
   lang: Locale;
   background?: string;
+  titleClasses: string;
 }) {
   return (
     <Container background={`${background}`}>
       <div className="pt-8">
-        <h2 className="mb-8 text-xl font-bold capitalize lg:text-2xl">
-          {text[lang].title}
-        </h2>
+        <h2 className={`mb-8 ${titleClasses}`}>{text[lang].title}</h2>
         <div className={`w-full text-pretty text-base xs:text-lg md:text-xl`}>
           {text[lang].contents.map((content, i) => (
             <p key={i} className={`pb-5`}>

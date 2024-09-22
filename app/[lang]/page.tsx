@@ -239,7 +239,7 @@ async function WorshipTrueGod({ lang }: { lang: Locale }) {
                   text={text[lang].worship}
                   href={`${lang}/worship`}
                   type={'inverse'}
-                  className=" mt-4 w-full px-6 text-base uppercase md:py-2 md:text-lg"
+                  className=" mt-4 w-full px-6 text-base uppercase sm:mt-0 md:py-2 md:text-lg"
                 />
               </div>
             </div>
@@ -271,7 +271,7 @@ function LatestYoutubeVideos({ lang }: { lang: Locale }) {
   return (
     <Container>
       <div className="my-8">
-        <h1 className="mb-10 text-2xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl">
+        <h1 className="mb-10 text-4xl font-bold uppercase tracking-normal text-gray-900 sm:text-5xl">
           {text[lang].watchSermons}
         </h1>
         <YoutubeList
@@ -291,15 +291,15 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <TruthTransforms lang={lang} />
       <WorshipTrueGod lang={lang} />
       {/* <ReceiveCompleteGospel lang={lang} /> */}
-      <JoinGlobalFamily lang={lang} />
+      {/* <JoinGlobalFamily lang={lang} /> */}
       <SpecialEvents
         lang={lang}
-        titleClasses="text-3xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl"
+        titleClasses="text-4xl font-bold uppercase tracking-normal text-gray-900 sm:text-5xl"
         paragraphClasses="text-base md:text-lg lg:text-xl"
       />
       <FeaturedArticles
         lang={lang}
-        titleClasses="text-3xl font-bold uppercase tracking-normal text-gray-900 sm:text-4xl"
+        titleClasses="text-4xl font-bold uppercase tracking-normal text-gray-900 sm:text-5xl"
         paragraphClasses="text-base md:text-lg lg:text-xl"
       />
       <LatestYoutubeVideos lang={lang} />

@@ -67,9 +67,13 @@ export default function Page({
         title={`${details[lang][church].name} Livestreams`}
         breadcrumbs={[
           { name: 'Home', href: '/' },
-          { name: 'Worship', href: '/worship' },
+          { name: 'Livestream', href: '/worship#livestream' },
+          {
+            name: `${details[lang][church].name} Livestreams`,
+            href: `/worship/${church}`,
+          },
         ]}
-        className="px-6 pb-6 sm:px-12"
+        className="px-6 py-6 sm:px-12"
       />
       <div className="block bg-stone-50">
         <div className="mx-auto px-6 py-10 sm:px-12 md:max-w-4xl">

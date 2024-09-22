@@ -188,7 +188,6 @@ export default async function Page({
           title={aofDetails[lang][aof].name}
           breadcrumbs={[
             { name: 'Home', href: '/' },
-            { name: 'About Us', href: '/about' },
             { name: 'What We Believe', href: '/beliefs' },
             { name: aofDetails[lang][aof].name, href: `/beliefs/${aof}` },
           ]}

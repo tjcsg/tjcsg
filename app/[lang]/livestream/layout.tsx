@@ -45,7 +45,11 @@ export default function Layout({
         titleClasses="text-2xl font-bold capitalize"
         paragraphClasses="text-base md:text-lg lg:text-xl"
       />
-      <GlobalLivestream lang={lang} background="bg-stone-50" />
+      <GlobalLivestream
+        lang={lang}
+        titleClasses="text-2xl font-bold capitalize"
+        background="bg-white"
+      />
     </>
   );
 }

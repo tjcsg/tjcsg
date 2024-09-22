@@ -36,19 +36,19 @@ export default async function FeaturedArticles({
         </p>
       </div>
       {/* Small - 1 column by 3 rows */}
-      <div className="mx-auto mt-4 grid max-w-screen-xl grid-cols-1 gap-8   pt-10 sm:hidden">
+      <div className="mx-auto mt-4 grid max-w-screen-xl grid-cols-1 gap-4   pt-10 sm:hidden">
         {articles.slice(0, 3).map((article) => (
           <ArticleCard key={article.slug} lang={lang} article={article} />
         ))}
       </div>
       {/* Medium screen - 2 columns by 2 rows */}
-      <div className="mx-auto mt-4 hidden max-w-screen-xl gap-8   pt-10 sm:grid sm:grid-cols-2 lg:hidden">
+      <div className="mx-auto mt-4 hidden max-w-screen-xl gap-4   pt-10 sm:grid sm:grid-cols-2 lg:hidden">
         {articles.slice(0, 4).map((article) => (
           <ArticleCard key={article.slug} lang={lang} article={article} />
         ))}
       </div>
       {/* Full screen - 3 columns by 2 rows */}
-      <div className="mx-auto mt-4 hidden max-w-screen-xl grid-cols-1 gap-8   pt-10 lg:grid lg:grid-cols-3">
+      <div className="mx-auto mt-4 hidden max-w-screen-xl grid-cols-1 gap-4   pt-10 lg:grid lg:grid-cols-3">
         {articles.map((article) => (
           <ArticleCard key={article.slug} lang={lang} article={article} />
         ))}

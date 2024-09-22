@@ -22,7 +22,7 @@ export default async function LivestreamList({
   titleClasses?: string;
 }) {
   return (
-    <div className={`${background} px-8 pb-16 pt-12`}>
+    <div className={`${background} px-8 pb-16 pt-12`} id="livestream">
       <div className={`mx-auto grid max-w-7xl`}>
         {/* <Header title={`${text[lang].livestream}`} /> */}
         <h1 className={titleClasses}>{text[lang].livestream}</h1>

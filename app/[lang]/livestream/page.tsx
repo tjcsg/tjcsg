@@ -29,7 +29,15 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
   return (
     <>
-      <PageHeader lang={lang} text={text} link={headerButton} />
+      <PageHeader
+        lang={lang}
+        text={text}
+        link={headerButton}
+        breadcrumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Livestreams', href: '/livestream' },
+        ]}
+      />
       <LivestreamList lang={lang} background={"bg-[url('/marble.png')]"} />
     </>
   );

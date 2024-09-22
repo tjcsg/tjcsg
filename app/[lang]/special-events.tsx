@@ -34,7 +34,7 @@ export default async function SpecialEvents({
   const allEvents = await getAllEvents(lang, 2);
 
   return (
-    <Container background={`${background}`}>
+    <Container background={`${background} py-8 lg:py-10`}>
       <div className="mb-8 lg:mb-16">
         <h2 className={`text-gray-900 ${titleClasses}`}>{text[lang].title}</h2>
         <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
@@ -43,14 +43,14 @@ export default async function SpecialEvents({
         <p className="mt-2">
           <Link
             href="/events"
-            className="text-xl leading-8 text-button underline hover:text-button_hover"
+            className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
           >
             {text[lang].viewall}
           </Link>
         </p>
       </div>
 
-      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-8 lg:w-full lg:grid-cols-1 lg:gap-y-16">
+      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-4 lg:w-full lg:grid-cols-1 lg:gap-y-12">
         {allEvents &&
           allEvents.map((event) => (
             <EventCard key={event.slug} lang={'en'} event={event} />

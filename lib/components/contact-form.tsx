@@ -6,12 +6,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-const CONTACT_DETAILS = {
-  link: '+6564670149',
-  readable: '+65 6467 0149',
-  email: 'contact@tjc.org.sg',
-};
-
 const text = {
   en: {
     successHeader: 'Form Submitted Successfully',
@@ -112,9 +106,9 @@ export default function ContactForm({ lang }: { lang: Locale }) {
   };
 
   return (
-    <Container background="bg-[url('/marble.png')]">
+    <Container background="bg-neutral-100">
       <div className="gap-4 md:flex">
-        <div className="mx-3 min-h-80 flex-1 place-content-center bg-white p-4 shadow-md">
+        <div className="mx-3 min-h-80 flex-1 place-content-center rounded-lg bg-white p-4 shadow-md">
           {submitSuccess ? (
             <SuccessContent lang={lang} />
           ) : (
@@ -184,31 +178,6 @@ export default function ContactForm({ lang }: { lang: Locale }) {
               </div>
             </form>
           )}
-        </div>
-
-        <div className="m-4 flex-1">
-          <p className="mb-3">
-            Curious to learn more about the Bible or its gospel of salvation?
-            Have any inquiries? We are happy to mail you free leaflets, arrange
-            Bible studies with you, and answer your questions.
-          </p>
-          <p>
-            You can also call us at{' '}
-            <a
-              href={`tel:${CONTACT_DETAILS.link}`}
-              className="text-button underline hover:text-button_hover"
-            >
-              {CONTACT_DETAILS.readable}
-            </a>{' '}
-            (Mon-Fri, 8am-5pm) or drop us an email at{' '}
-            <a
-              href={`mailto:${CONTACT_DETAILS.email}`}
-              className="text-button underline hover:text-button_hover"
-            >
-              {CONTACT_DETAILS.email}
-            </a>
-            .
-          </p>
         </div>
       </div>
     </Container>

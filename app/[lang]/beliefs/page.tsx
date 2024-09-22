@@ -7,6 +7,8 @@ import Header from '@/lib/components/header';
 import ModernContentStrip from '@/lib/components/modern-content-strip';
 import YoutubeList from '@/lib/components/youtube-list';
 import { Metadata } from 'next';
+import bibleCoffee from '@/public/bible_coffee.jpg';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const text = {
@@ -20,6 +22,9 @@ const text = {
     ourAof: 'Our Articles Of Faith',
     findOutMore: 'Find Out More',
     withUsYouCan: 'With us, you can',
+    joinUs:
+      'Here in the True Jesus Church, we preach the truth that is taught in the Bible and upheld by the Apostolic church. We welcome you to study the truth for yourself, or even better, to',
+    joinUsCta: 'come and visit us',
   },
   zh: {
     watchAofSermons: 'Sermons introducing our beliefs',
@@ -31,38 +36,10 @@ const text = {
     ourAof: 'Our Articles Of Faith',
     findOutMore: 'Find Out More',
     withUsYouCan: 'With us, you can',
+    joinUs:
+      'Here in the True Jesus Church, we preach the truth that is taught in the Bible and upheld by the Apostolic church. We welcome you to study the truth for yourself, or even better, to',
+    joinUsCta: 'come and visit us',
   },
-};
-
-const trueGospelCta = {
-  en: (
-    <p className="text-pretty text-black md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed">
-      Here in the True Jesus Church, we preach the truth that is taught in the
-      Bible and upheld by the Apostolic church. We welcome you to study the
-      truth for yourself, or even better, to{' '}
-      <Link
-        href={'/locations'}
-        className="text-button underline hover:text-button_hover"
-      >
-        come and visit us
-      </Link>
-      .
-    </p>
-  ),
-  zh: (
-    <p className="text-pretty text-black md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed">
-      Here in the True Jesus Church, we preach the truth that is taught in the
-      Bible and upheld by the Apostolic church. We welcome you to study the
-      truth for yourself, or even better, to{' '}
-      <Link
-        href={'/locations'}
-        className="text-button underline hover:text-button_hover"
-      >
-        come and visit us
-      </Link>
-      .
-    </p>
-  ),
 };
 
 const publications = {
@@ -127,12 +104,16 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
   );
 }
 
-function AofSermons({ lang }: { lang: Locale }) {
+function AofSermons({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <div className="mb-20 mt-16">
-      <h1 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
-        {text[lang].watchAofSermons}
-      </h1>
+      <h1 className={`mb-8 ${titleClasses}`}>{text[lang].watchAofSermons}</h1>
       <YoutubeList
         playlist={'PLvc6U8OPfT_mUfBv_KHKCT7nb_l_q1UXh'}
         index={[1, 2, 3, 4, 5]}
@@ -141,35 +122,59 @@ function AofSermons({ lang }: { lang: Locale }) {
   );
 }
 
-function TrueGospel({ lang }: { lang: Locale }) {
+function TrueGospel({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <div className="pb-4 pt-8">
-      <h2 className="mb-8 text-2xl font-bold capitalize xl:text-3xl">
-        {text[lang].trueGospel}
-      </h2>
-      <div
-        className={`w-full text-pretty text-base md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed`}
-      >
-        {text[lang].trueGospelContents.map((content, i) => (
-          <p key={i} className={`pb-5`}>
-            {content}
+      <h2 className={`mb-8 ${titleClasses}`}>{text[lang].trueGospel}</h2>
+      <div className="flex flex-col md:flex-row">
+        <div
+          className={`w-full text-pretty text-base leading-relaxed sm:text-lg  sm:leading-relaxed`}
+        >
+          {text[lang].trueGospelContents.map((content, i) => (
+            <p key={i} className={`pb-5`}>
+              {content}
+            </p>
+          ))}
+          <p className="text-pretty leading-relaxed sm:text-lg sm:leading-relaxed">
+            {text[lang].joinUs}{' '}
+            <Link
+              href={'/locations'}
+              className="text-button underline hover:text-button_hover"
+            >
+              {text[lang].joinUsCta}
+            </Link>
+            .
           </p>
-        ))}
-        {trueGospelCta[lang]}
+        </div>
+        <div className="mx-auto w-11/12 pt-8 xs:w-5/6 sm:w-3/4 md:ml-8 md:w-4/5 md:pt-0">
+          <Image src={bibleCoffee} alt={'A picture of a bible on a table'} />
+        </div>
       </div>
     </div>
   );
 }
 
-function AofPublications({ lang }: { lang: Locale }) {
+function AofPublications({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <div className="mt-6 md:mt-12">
       <ModernContentStrip
         title={'Our Publications'}
         contents={[]}
-        labelClasses="capitalize font-bold text-2xl xl:text-3xl mb-8 md:mr-10"
+        labelClasses={`${titleClasses} mb-4 md:mr-10`}
         otherContents={publications[lang].map((pub) => (
-          <div className="mb-4" key={pub.href}>
+          <div className="mt-4" key={pub.href}>
             <Link
               href={pub.href}
               target="_blank"
@@ -188,25 +193,29 @@ function AofPublications({ lang }: { lang: Locale }) {
   );
 }
 
-async function OurBeliefs({ lang }: { lang: Locale }) {
+async function OurBeliefs({
+  lang,
+  titleClasses,
+}: {
+  lang: Locale;
+  titleClasses: string;
+}) {
   return (
     <div className="mt-8 md:mt-12">
-      <h2 className="text-2xl font-bold capitalize xl:text-3xl">
-        {text[lang].ourAof}
-      </h2>
+      <h2 className={titleClasses}>{text[lang].ourAof}</h2>
       {aof.map((aof) => (
         <div key={aof} className="mt-8 md:mt-12">
           <ModernContentStrip
             title={aofDetails[lang][aof].name}
-            paragraphClasses="text-base md:text-lg md:leading-relaxed max-w-none md:max-w-[65ch]"
-            labelClasses="capitalize mb-3 font-medium md:text-lg"
+            paragraphClasses="text-base sm:text-lg sm:leading-relaxed max-w-none sm:max-w-[65ch]"
+            labelClasses="capitalize mb-3 font-semibold text-lg md:text-xl"
             contents={[aofDetails[lang][aof].details.join(' ')]}
             otherContents={
-              <div className="mt-2 block">
+              <div className="mt-1 block">
                 <Link
                   key={aof}
                   href={`/beliefs/${aof}`}
-                  className="text-base text-button underline hover:text-button_hover md:text-lg md:leading-relaxed"
+                  className="text-base text-button underline hover:text-button_hover sm:text-lg sm:leading-relaxed"
                 >
                   {text[lang].findOutMore}
                 </Link>
@@ -235,6 +244,8 @@ export default function Page({ params }: { params: { lang: Locale } }) {
       verseLocation: 'Ephesians 4:4-5 NKJV',
     },
   ];
+
+  const titleClasses = 'text-2xl font-bold capitalize xl:text-3xl';
   return (
     <>
       <Container>
@@ -242,7 +253,6 @@ export default function Page({ params }: { params: { lang: Locale } }) {
           title={'What We Believe'}
           breadcrumbs={[
             { name: 'Home', href: '/' },
-            { name: 'About Us', href: '/about' },
             { name: 'What We Believe', href: '/beliefs' },
           ]}
           className="mb-10 mt-2"
@@ -250,24 +260,20 @@ export default function Page({ params }: { params: { lang: Locale } }) {
       </Container>
       <ReceiveCompleteGospel lang={lang} />
       <Container>
-        <div className="mx-auto max-w-4xl pb-10">
-          {/* <Header
-            title={'Our Beliefs'}
-            breadcrumbs={[{ name: 'Home', href: '/' }]}
-          /> */}
-          <TrueGospel lang={lang} />
+        <div className="mx-auto max-w-5xl">
+          <TrueGospel lang={lang} titleClasses={titleClasses} />
           <FeaturedVerses
             verses={verses1}
             className="my-16 sm:my-24 md:my-28 lg:my-32"
           />
-          <OurBeliefs lang={lang} />
+          <OurBeliefs lang={lang} titleClasses={titleClasses} />
           <FeaturedVerses
             verses={verses2}
             className="my-16 sm:my-24 md:my-28 lg:my-32"
           />
-          <AofSermons lang={lang} />
+          <AofSermons lang={lang} titleClasses={titleClasses} />
 
-          <AofPublications lang={lang} />
+          <AofPublications lang={lang} titleClasses={titleClasses} />
         </div>
       </Container>
     </>

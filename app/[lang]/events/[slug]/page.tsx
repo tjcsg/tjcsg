@@ -15,6 +15,7 @@ import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
 import { Metadata, ResolvingMetadata } from 'next';
 import { openGraph } from '@/app/shared-metadata';
+import Breadcrumb from '@/lib/components/breadcrumb';
 
 export async function generateStaticParams() {
   const allPosts = await getAllEventsSlug(false);
@@ -57,7 +58,16 @@ export default async function PostPage({
   return (
     <div className="mx-auto flex max-w-screen-xl flex-col px-5 py-5 md:pb-12 xl:flex-row xl:gap-16">
       <article className="mx-auto mb-2 mt-4 max-w-2xl basis-2/3 sm:mb-8 sm:mt-8 xl:mr-0">
-        <h1 className="mb-4 text-4xl font-extrabold">{text[lang].title}</h1>
+        <Breadcrumb
+          breadcrumbs={[
+            { name: 'Home', href: '/' },
+            { name: 'All Events', href: '/events' },
+            { name: event.title, href: `/events/${event.slug}` },
+          ]}
+        />
+        <h1 className="mb-4 mt-2 text-4xl font-extrabold">
+          {text[lang].title}
+        </h1>
         <div className="py-3">
           <ContentfulImage
             src={event.poster.url}
@@ -191,7 +201,7 @@ export default async function PostPage({
         </div>
         <div className="mt-8">
           <h2 className="mb-4 text-lg font-bold">Follow us on social media</h2>
-          <Socials size={8} colour={'text-gray-600'} />
+          <Socials size={6} colour={'text-gray-600'} />
         </div>
       </div>
     </div>

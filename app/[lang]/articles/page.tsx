@@ -80,7 +80,7 @@ export default async function Page({
         })}
       </div>
 
-      <div className="grid max-w-screen-xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid max-w-screen-xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {allArticles &&
           allArticles.map((article) => (
             <ArticleCard key={article.slug} lang={lang} article={article} />

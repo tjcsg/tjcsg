@@ -11,7 +11,7 @@ const text = {
     cta: 'Find out more',
   },
   zh: {
-    cta: '欲知更多详情',
+    cta: '了解更多',
   },
 };
 
@@ -125,7 +125,7 @@ export default async function EventCard({
             </p>
           </div>
           <Link
-            href={`/events/${event.slug}`}
+            href={`/${lang}/events/${event.slug}`}
             className={`relative z-10 mt-3 font-medium capitalize text-button underline hover:text-button_hover ${contentSizes}`}
           >
             {text[lang].cta}

@@ -14,7 +14,7 @@ const text = {
     all: 'All Devotionals',
   },
   zh: {
-    all: 'All Devotionals',
+    all: '所有每日读经的灵修文章',
   },
 };
 

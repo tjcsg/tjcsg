@@ -36,11 +36,17 @@ const text = {
     seeAlso: 'See Also',
     previous: 'Newer',
     next: 'Older',
+    home: 'Home',
+    articles: 'Articles',
+    writtenBy: 'Written by ',
   },
   zh: {
-    seeAlso: 'See Also',
-    previous: 'Newer',
-    next: 'Older',
+    seeAlso: '相关内容',
+    previous: '较新',
+    next: '较早',
+    home: '主页',
+    articles: '所有文章',
+    writtenBy: '作者：',
   },
 };
 
@@ -63,7 +69,7 @@ async function ArticleFoot({
       <div className="text-md mt-6 flex justify-between text-button underline">
         {index > 0 ? (
           <Link
-            href={`/articles/${cdbdSlugs[index - 1].slug}`}
+            href={`/${lang}/articles/${cdbdSlugs[index - 1].slug}`}
             className="flex hover:text-button_hover"
           >
             <ChevronLeftIcon aria-hidden="true" className="block w-6" />
@@ -74,7 +80,7 @@ async function ArticleFoot({
         )}
         {index < cdbdSlugs.length - 1 && (
           <Link
-            href={`/articles/${cdbdSlugs[index + 1].slug}`}
+            href={`/${lang}/articles/${cdbdSlugs[index + 1].slug}`}
             className="flex hover:text-button_hover"
           >
             {text[lang].next}
@@ -95,7 +101,7 @@ export default async function PostPage({
 }) {
   const { isEnabled } = draftMode();
   const { slug, lang } = params;
-  const article = await getArticle(slug, isEnabled);
+  const article = await getArticle(slug, lang, isEnabled);
 
   if (!article) {
     notFound();
@@ -121,9 +127,9 @@ export default async function PostPage({
         <Header
           title={article.title}
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'Articles', href: '/articles' },
-            { name: article.title, href: `/articles/${article.slug}` },
+            { name: text[lang].home, href: `/${lang}` },
+            { name: text[lang].articles, href: `/${lang}/articles` },
+            { name: article.title, href: `${lang}/articles/${article.slug}` },
           ]}
           className=""
         />
@@ -133,10 +139,10 @@ export default async function PostPage({
           )}
           {article.author && (
             <div className="text-md pt-2 italic text-gray-500">
-              <p className="inline">{`Written by `}</p>
+              <p className="inline">{text[lang].writtenBy}</p>
               {isCdbd ? (
                 <Link
-                  href={`/cdbd/author/${article.author.toLowerCase().split(' ').join('-')}`}
+                  href={`/${lang}/cdbd/author/${article.author.toLowerCase().split(' ').join('-')}`}
                   className="underline hover:text-gray-700"
                 >
                   <p className="inline capitalize">{article.author}</p>
@@ -181,11 +187,14 @@ export default async function PostPage({
               {text[lang].seeAlso}
             </h3>
             {relatedArticles.map((relatedArticle) => (
-              <Link key={relatedArticle.slug} href={relatedArticle.slug}>
-                <p className="mt-2 hover:text-button hover:underline">
+              <div key={relatedArticle.slug} className="mt-2 block">
+                <Link
+                  href={relatedArticle.slug}
+                  className=" font-medium text-gray-700 underline hover:text-button"
+                >
                   {relatedArticle.title}
-                </p>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         )}
@@ -195,12 +204,12 @@ export default async function PostPage({
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string } },
+  { params }: { params: { slug: string; lang: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { isEnabled } = draftMode();
-  const { slug } = params;
-  const article = await getArticle(slug, isEnabled);
+  const { slug, lang } = params;
+  const article = await getArticle(slug, lang, isEnabled);
 
   return {
     title: `${article.title}`,

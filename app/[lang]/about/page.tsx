@@ -24,7 +24,7 @@ import Breadcrumb from '@/lib/components/breadcrumb';
 
 const text = {
   en: {
-    whoWeAre: 'Who we are',
+    whoWeAre: 'Who We Are',
     about_1:
       "We're the True Jesus Church, a global, non-denominational church built upon the teachings of Jesus and His apostles.",
     about_2:
@@ -33,25 +33,26 @@ const text = {
     yearSingapore: 'The year we began preaching in Singapore',
     countriesWithTJC: 'Countries with our presence',
     ourMission: 'Our Mission:',
-    preachToAll: ' Preach The True Gospel To Every Soul In Every Nation',
+    preachToAll: 'Preach The True Gospel To Every Soul In Every Nation',
     mapLegend: 'Countries with True Jesus Church',
     whatWeBelieve: 'What we believe',
     learnMore: 'Learn more',
+    home: 'Home',
   },
   zh: {
-    whoWeAre: 'Who we are',
+    whoWeAre: '本会简介',
     about_1:
-      "We're the True Jesus Church, a global, non-denominational church built upon the teachings of Jesus and His apostles.",
-    about_2:
-      'Founded by the Holy Spirit, our mission is to spread the complete gospel of salvation to the ends of the earth.',
-    yearEstablished: 'The year our church was established',
-    yearSingapore: 'The year we began preaching in Singapore',
-    countriesWithTJC: 'Countries with our presence',
-    ourMission: 'Our Mission:',
-    preachToAll: ' Preach The True Gospel To Every Soul In Every Nation',
-    mapLegend: 'Countries with True Jesus Church',
-    whatWeBelieve: 'What we believe',
-    learnMore: 'Learn more',
+      '我们是真耶稣教会，一间建立在耶稣与使徒们的教导上的全球性非宗派教会。',
+    about_2: '藉由圣灵创立，我们的使命是把全备的救恩真理传向地极/世界尽头。',
+    yearEstablished: '我们教会成立的年份',
+    yearSingapore: '我们在新加坡开始传道的年份',
+    countriesWithTJC: '真耶稣教会所在的国家',
+    ourMission: '我们的使命：',
+    preachToAll: '向每一个国家的每一个灵魂传扬真福音',
+    mapLegend: '真耶稣教会所在的国家',
+    whatWeBelieve: '基本信仰',
+    learnMore: '了解更多',
+    home: '主页',
   },
 };
 
@@ -131,7 +132,7 @@ async function BringingSalvationToAll({ lang }: { lang: Locale }) {
         <div className="py-12 xs:py-16 xl:py-44">
           <div className="relative">
             <p
-              className={`absolute -left-6 -top-6 rotate-[-7.12deg] font-handwriting text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12  lg:-top-20`}
+              className={`absolute -left-6 -top-6 rotate-[-7.12deg] ${lang === 'zh' ? 'font-zhHandwriting' : 'font-handwriting'} text-lg text-gray-800 xs:-left-4 xs:-top-8 xs:text-xl sm:-left-12 sm:-top-12 sm:text-3xl md:-left-16 md:-top-16 md:text-4xl lg:-left-12  lg:-top-20`}
             >
               {text[lang].ourMission}
             </p>
@@ -198,12 +199,15 @@ async function BasicBeliefs({
                 <p className="absolute bottom-[8%] left-[10%] max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
                   {aofDetails[lang][aof].name}
                 </p>
-                <Link className="absolute inset-0" href={`/beliefs/${aof}`} />
+                <Link
+                  className="absolute inset-0"
+                  href={`/${lang}/beliefs/${aof}`}
+                />
               </div>
             </div>
           ))}
           <div className="self-center justify-self-center pb-[10%] text-xl xs:text-2xl">
-            <Link href="/beliefs">
+            <Link href={`/${lang}/beliefs`}>
               <label className="text-button underline hover:text-button_hover">
                 {text[lang].learnMore}
               </label>
@@ -225,8 +229,8 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
       <Container>
         <Breadcrumb
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'Who We Are', href: '/about' },
+            { name: text[lang].home, href: '/' },
+            { name: text[lang].whoWeAre, href: '/about' },
           ]}
         />
       </Container>

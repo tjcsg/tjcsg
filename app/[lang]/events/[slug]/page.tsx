@@ -37,11 +37,31 @@ const text = {
     title: 'Join us for our special service!',
     physical: 'Attend in-person service',
     online: 'Watch Livestream',
+    home: 'Home',
+    allEvents: 'All Events',
+    whoWeAre: 'Who Are We',
+    whoWeAreText:
+      "We're the True Jesus Church, a global, non-denominational church built upon the teachings of Jesus and His apostles. Founded by the Holy Spirit, our mission is to spread the complete gospel of salvation to the ends of the earth.",
+    learnMore: 'Learn more about us',
+    worshipText:
+      'We have four places of worship, and we gather for Sabbath and night worship services. We welcome you to join us for any of our in-person services!',
+    worshipWithUs: 'Worship with us',
+    location: 'Location',
   },
   zh: {
-    title: 'Join us for our special service!',
+    title: '欢迎您来参加我们的特别聚会!',
     physical: '参加实体崇拜聚会',
     online: '参加线上崇拜聚会',
+    home: '主页',
+    allEvents: '所有特别聚会',
+    whoWeAre: '关于本会',
+    whoWeAreText:
+      '我们是真耶稣教会，一间建立在耶稣与使徒们的教导上的全球性非宗派教会。藉由圣灵创立，我们的使命是把全备的救恩真理传向地极/世界尽头。',
+    learnMore: '关于本会',
+    worshipText:
+      'We have four places of worship, and we gather for Sabbath and night worship services. We welcome you to join us for any of our in-person services!',
+    worshipWithUs: '参与崇拜聚会',
+    location: '教会地点',
   },
 };
 
@@ -51,8 +71,8 @@ export default async function PostPage({
   params: { lang: Locale; slug: string };
 }) {
   const { isEnabled } = draftMode();
-  const { event } = await getEvent(params.slug, isEnabled);
   const { lang, slug } = params;
+  const { event } = await getEvent(params.slug, isEnabled, lang);
   const date: any = event.date;
 
   return (
@@ -60,9 +80,9 @@ export default async function PostPage({
       <article className="mx-auto mb-2 mt-4 max-w-2xl basis-2/3 sm:mb-8 sm:mt-8 xl:mr-0">
         <Breadcrumb
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'All Events', href: '/events' },
-            { name: event.title, href: `/events/${event.slug}` },
+            { name: text[lang].home, href: `/${lang}` },
+            { name: text[lang].allEvents, href: `/${lang}/events` },
+            { name: event.title, href: `/${lang}/events/${event.slug}` },
           ]}
         />
         <h1 className="mb-4 mt-2 text-4xl font-extrabold">
@@ -144,7 +164,9 @@ export default async function PostPage({
       </article>
       <div className="mx-auto max-w-2xl basis-1/3 xl:ml-0">
         <div className="mt-8">
-          <h1 className="mb-6 text-4xl font-bold xl:hidden">Location</h1>
+          <h1 className="mb-6 text-4xl font-bold xl:hidden">
+            {text[lang].location}
+          </h1>
           <h1 className="mb-4 text-2xl font-bold">
             {details[lang][event.church].name}
           </h1>
@@ -170,20 +192,19 @@ export default async function PostPage({
           </div>
         </div>
         <div className="mt-8">
-          <h1 className="mb-6 text-4xl font-bold xl:text-2xl">Who Are We</h1>
+          <h1 className="mb-6 text-4xl font-bold xl:text-2xl">
+            {text[lang].whoWeAre}
+          </h1>
           <p className="mb-2 leading-7 text-gray-700">
-            We’re the True Jesus Church, a global, non-denominational church
-            built upon the teachings of Jesus and His apostles. Founded by the
-            Holy Spirit, our mission is to spread the complete gospel of
-            salvation to the ends of the earth.
+            {text[lang].whoWeAreText}
           </p>
           <Link
             className={
               'text-nowrap font-medium text-button underline decoration-2 hover:text-button_hover sm:leading-4'
             }
-            href={'/about'}
+            href={`/${lang}/about`}
           >
-            {'Learn more about us'}
+            {text[lang].learnMore}
           </Link>
           <p className="mb-2 mt-6 leading-7 text-gray-700">
             We have four places of worship, and we gather for Sabbath and night
@@ -194,9 +215,9 @@ export default async function PostPage({
             className={
               'text-nowrap font-medium text-button underline decoration-2 hover:text-button_hover sm:leading-4'
             }
-            href={'/locations'}
+            href={`/${lang}/locations`}
           >
-            {'Worship with us'}
+            {text[lang].worshipWithUs}
           </Link>
         </div>
         <div className="mt-8">
@@ -209,11 +230,12 @@ export default async function PostPage({
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string } },
+  { params }: { params: { slug: string; lang: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { isEnabled } = draftMode();
-  const { event } = await getEvent(params.slug, isEnabled);
+  const { lang } = params;
+  const { event } = await getEvent(params.slug, isEnabled, lang);
 
   return {
     title: `${event.title}${event.title2 ? ` & ${event.title2}` : ''}`,

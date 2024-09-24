@@ -13,6 +13,8 @@ import Link from 'next/link';
 
 const text = {
   en: {
+    whatWeBelieve: 'What We Believe',
+    home: 'Home',
     watchAofSermons: 'Sermons introducing our beliefs',
     trueGospel: 'True Gospel',
     trueGospelContents: [
@@ -25,20 +27,24 @@ const text = {
     joinUs:
       'Here in the True Jesus Church, we preach the truth that is taught in the Bible and upheld by the Apostolic church. We welcome you to study the truth for yourself, or even better, to',
     joinUsCta: 'come and visit us',
+    ourPublications: 'Our Publications',
   },
   zh: {
-    watchAofSermons: 'Sermons introducing our beliefs',
-    trueGospel: 'True Gospel',
+    whatWeBelieve: '基本信仰',
+    home: '主页',
+    watchAofSermons: '介绍我们信仰的证道',
+    trueGospel: '全备的福音',
     trueGospelContents: [
-      'There are so many Christian denominations and churches in the world. Are all churches the same? Which church should one go to?',
-      'The Bible emphasises that there is such a thing as true and false gospels. The Bible is clear that only the church teaching the true gospel may be saved.',
+      '在这个世界上有那么多的基督教派。是否所有的教会都是一样的呢？应该去哪一间教会呢？',
+      '圣经强调了真假福音的存在，并且明确地指出只有传讲真福音的教会才能得救。',
     ],
-    ourAof: 'Our Articles Of Faith',
-    findOutMore: 'Find Out More',
-    withUsYouCan: 'With us, you can',
+    ourAof: '本会的十大信条',
+    findOutMore: '了解更多',
+    withUsYouCan: '与我们在一起，',
     joinUs:
-      'Here in the True Jesus Church, we preach the truth that is taught in the Bible and upheld by the Apostolic church. We welcome you to study the truth for yourself, or even better, to',
-    joinUsCta: 'come and visit us',
+      '在真耶稣教会这里，我们传讲圣经里的真理，持守使徒教会的教义。我们欢迎您亲自查考真理，如若更好',
+    joinUsCta: '亲临我们的教会拜访',
+    ourPublications: '我们的出版物',
   },
 };
 
@@ -85,20 +91,27 @@ async function ReceiveCompleteGospel({ lang }: { lang: Locale }) {
       <div className=" pb-16 pt-16 md:pb-28 md:pt-24">
         <div className="relative mx-auto w-full">
           <p
-            className={`absolute -top-10 rotate-[-7.12deg] font-handwriting text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl`}
+            className={`absolute -top-10 rotate-[-7.12deg] ${lang === 'zh' ? 'font-zhHandwriting' : 'font-handwriting'} text-gray-800 xs:-top-12 xs:text-2xl sm:-top-14 sm:left-[5%] sm:text-3xl md:text-4xl xl:text-5xl`}
           >
             {' '}
             {text[lang].withUsYouCan}
           </p>
         </div>
-        {/* prettier-ignore */}
-        <p className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-          Receive the <span className="animate-highlight whitespace-pre-line inline bg-no-repeat transition-all ease-in delay-500 bg-left bg-[length:0%_95%] bg-gradient-to-r from-[#294ac39e] to-[#007da444]">{`True
-          & Complete`}</span> Gospel
-        </p>
-        {/* <pre className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-          {text[lang].receiveCompleteGospel}
-        </pre> */}
+        {lang === 'en' ? (
+          <p className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+            Receive the{' '}
+            <span className="inline animate-highlight whitespace-pre-line bg-gradient-to-r from-[#294ac39e] to-[#007da444] bg-[length:0%_95%] bg-left bg-no-repeat transition-all delay-500 ease-in">{`True
+          & Complete`}</span>{' '}
+            Gospel
+          </p>
+        ) : (
+          <p className="text-center font-sans text-3xl font-extrabold uppercase tracking-wide text-black xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+            您可以领受
+            <span className="inline animate-highlight whitespace-pre-line bg-gradient-to-r from-[#294ac39e] to-[#007da444] bg-[length:0%_95%] bg-left bg-no-repeat transition-all delay-500 ease-in">{`真实
+          与完全`}</span>
+            的福音
+          </p>
+        )}
       </div>
     </Container>
   );
@@ -132,7 +145,7 @@ function TrueGospel({
   return (
     <div className="pb-4 pt-8">
       <h2 className={`mb-8 ${titleClasses}`}>{text[lang].trueGospel}</h2>
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col gap-8 lg:flex-row">
         <div
           className={`w-full text-pretty text-base leading-relaxed sm:text-lg  sm:leading-relaxed`}
         >
@@ -144,15 +157,15 @@ function TrueGospel({
           <p className="text-pretty leading-relaxed sm:text-lg sm:leading-relaxed">
             {text[lang].joinUs}{' '}
             <Link
-              href={'/locations'}
+              href={`/${lang}/locations`}
               className="text-button underline hover:text-button_hover"
             >
               {text[lang].joinUsCta}
             </Link>
-            .
+            {lang === 'zh' ? '。' : '.'}
           </p>
         </div>
-        <div className="mx-auto w-11/12 pt-8 xs:w-5/6 sm:w-3/4 md:ml-8 md:w-4/5 md:pt-0">
+        <div className="mx-auto w-11/12 xs:w-5/6 sm:w-3/4 lg:w-4/5 ">
           <Image src={bibleCoffee} alt={'A picture of a bible on a table'} />
         </div>
       </div>
@@ -170,11 +183,11 @@ function AofPublications({
   return (
     <div className="mt-6 md:mt-12">
       <ModernContentStrip
-        title={'Our Publications'}
+        title={text[lang].ourPublications}
         contents={[]}
         labelClasses={`${titleClasses} mb-4 md:mr-10`}
         otherContents={publications[lang].map((pub) => (
-          <div className="mt-4" key={pub.href}>
+          <div className="mb-4" key={pub.href}>
             <Link
               href={pub.href}
               target="_blank"
@@ -207,14 +220,14 @@ async function OurBeliefs({
         <div key={aof} className="mt-8 md:mt-12">
           <ModernContentStrip
             title={aofDetails[lang][aof].name}
-            paragraphClasses="text-base sm:text-lg sm:leading-relaxed max-w-none sm:max-w-[65ch]"
+            paragraphClasses="text-base sm:text-lg sm:leading-relaxed max-w-none sm:min-w-[61ch] sm:max-w-[65ch]"
             labelClasses="capitalize mb-3 font-semibold text-lg md:text-xl"
             contents={[aofDetails[lang][aof].details.join(' ')]}
             otherContents={
               <div className="mt-1 block">
                 <Link
                   key={aof}
-                  href={`/beliefs/${aof}`}
+                  href={`/${lang}/beliefs/${aof}`}
                   className="text-base text-button underline hover:text-button_hover sm:text-lg sm:leading-relaxed"
                 >
                   {text[lang].findOutMore}
@@ -230,30 +243,48 @@ async function OurBeliefs({
 
 export default function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
-  const verses1 = [
-    {
-      verse:
-        "Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven, but he who does the will of My Father in heaven.",
-      verseLocation: 'Matthew 7:21 NKJV',
-    },
-  ];
-  const verses2 = [
-    {
-      verse:
-        'There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism;',
-      verseLocation: 'Ephesians 4:4-5 NKJV',
-    },
-  ];
+  const verses1 = {
+    en: [
+      {
+        verse:
+          "Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven, but he who does the will of My Father in heaven.",
+        verseLocation: 'Matthew 7:21 NKJV',
+      },
+    ],
+    zh: [
+      {
+        verse:
+          '凡称呼我『主啊，主啊』的人不能都进天国；惟独遵行我天父旨意的人才能进去。',
+        verseLocation: '马太福音 七 21',
+      },
+    ],
+  };
+  const verses2 = {
+    en: [
+      {
+        verse:
+          'There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism;',
+        verseLocation: 'Ephesians 4:4-5 NKJV',
+      },
+    ],
+    zh: [
+      {
+        verse:
+          '身体只有一个，圣灵只有一个，正如你们蒙召同有一个指望。 一主，一信，一洗',
+        verseLocation: '以弗所书 四 4-5',
+      },
+    ],
+  };
 
   const titleClasses = 'text-2xl font-bold capitalize xl:text-3xl';
   return (
     <>
       <Container>
         <Header
-          title={'What We Believe'}
+          title={text[lang].whatWeBelieve}
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'What We Believe', href: '/beliefs' },
+            { name: text[lang].home, href: '/' },
+            { name: text[lang].whatWeBelieve, href: '/beliefs' },
           ]}
           className="mb-10 mt-2"
         />
@@ -263,12 +294,12 @@ export default function Page({ params }: { params: { lang: Locale } }) {
         <div className="mx-auto max-w-5xl">
           <TrueGospel lang={lang} titleClasses={titleClasses} />
           <FeaturedVerses
-            verses={verses1}
+            verses={verses1[lang]}
             className="my-16 sm:my-24 md:my-28 lg:my-32"
           />
           <OurBeliefs lang={lang} titleClasses={titleClasses} />
           <FeaturedVerses
-            verses={verses2}
+            verses={verses2[lang]}
             className="my-16 sm:my-24 md:my-28 lg:my-32"
           />
           <AofSermons lang={lang} titleClasses={titleClasses} />

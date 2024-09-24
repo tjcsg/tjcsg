@@ -393,12 +393,12 @@ export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {
   return extractPostEntries(entries);
 }
 
-export async function getEvent(slug: string, preview: boolean) {
+export async function getEvent(slug: string, preview: boolean, locale: string) {
   const entry = await fetchGraphQL(
     `query {
       eventsCollection(where: { slug: "${slug}" }, preview: ${
         preview ? 'true' : 'false'
-      }, limit: 1) {
+      }, limit: 1, locale:"${locale}") {
         items {
           ${EVENTS_GRAPHQL_FIELDS}
         }
@@ -607,11 +607,12 @@ export async function getAllArticleTags(): Promise<Map<string, string>> {
 
 export async function getArticle(
   slug: string,
+  locale: Locale,
   preview: boolean,
 ): Promise<ArticleEntry> {
   const entry = await fetchGraphQL(
     `query {
-      articleCollection(where: { slug: "${slug}" }, preview: ${
+      articleCollection(where: { slug: "${slug}" }, locale: "${locale}", preview: ${
         preview ? 'true' : 'false'
       }, limit: 1) {
         items {

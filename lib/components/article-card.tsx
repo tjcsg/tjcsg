@@ -10,7 +10,7 @@ const text = {
     cta: 'Read article',
   },
   zh: {
-    cta: 'Read article',
+    cta: '阅读文章',
   },
 };
 
@@ -66,7 +66,7 @@ export default function ArticleCard({
               ? article.description
               : obtainTextContent(article.content)}
           </p>
-          <Link href={`/articles/${article.slug}`} className="">
+          <Link href={`/${lang}/articles/${article.slug}`} className="">
             <p className="mt-3 font-medium text-button underline hover:text-button_hover">
               {text[lang].cta}
             </p>

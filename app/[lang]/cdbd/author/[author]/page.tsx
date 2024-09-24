@@ -1,10 +1,8 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
-import { booksNoConst } from '@/lib/bible-books';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../../cdbd-list';
-import { getAllCdbdAuthors } from '@/lib/api';
 
 const MAX_ITEMS_PER_PAGE = 8;
 
@@ -20,11 +18,6 @@ const text = {
     cta: 'Read More',
   },
 };
-
-export async function generateStaticParams() {
-  const authors = await getAllCdbdAuthors();
-  return authors;
-}
 
 export default async function Page({
   params,
@@ -45,7 +38,7 @@ export default async function Page({
       <div className="block w-full max-w-screen-lg">
         <nav aria-label="Back" className="mb-4">
           <Link
-            href={'/cdbd'}
+            href={`/${lang}/cdbd`}
             className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
           >
             <ChevronLeftIcon

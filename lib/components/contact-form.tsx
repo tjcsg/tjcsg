@@ -16,23 +16,28 @@ const text = {
       'Something went wrong. Please try again or contact us directly with our email/phone number. Sorry!',
     form: {
       nameField: 'Name',
+      namePlaceholder: 'Your name',
       contactField: 'Contact',
+      contactPlaceholder: 'Email/phone',
       messageField: 'Message',
+      messagePlaceholder: 'Enter message',
       submitButton: 'Submit Form',
     },
   },
   zh: {
-    successHeader: 'Form Submitted Successfully',
-    successText:
-      'Thank you for reaching out, we will try to get back to you as soon as possible.',
-    backText: 'Go back',
+    successHeader: '表单提交成功',
+    successText: '感谢您的联系，我们会尽快回复您。',
+    backText: '返回',
     error:
-      'Something went wrong. Please try again or contact us directly with our email/phone number. Sorry!',
+      '出了点问题。请重试，或通过我们的电子邮件/电话号码直接联系我们。抱歉！',
     form: {
-      nameField: 'Name',
-      contactField: 'Contact',
-      messageField: 'Message',
-      submitButton: 'Submit Form',
+      nameField: '姓名',
+      namePlaceholder: '你的姓名',
+      contactField: '联系方式',
+      contactPlaceholder: '电子邮件地址/电话号码',
+      messageField: '留言',
+      messagePlaceholder: '输入留言',
+      submitButton: '提交表单',
     },
   },
 };
@@ -128,7 +133,7 @@ export default function ContactForm({ lang }: { lang: Locale }) {
                     type="text"
                     name="name"
                     required
-                    placeholder="Your name"
+                    placeholder={text[lang].form.namePlaceholder}
                     className="w-full appearance-none rounded border px-3 py-2 shadow"
                   />
                 </div>
@@ -140,7 +145,7 @@ export default function ContactForm({ lang }: { lang: Locale }) {
                     type="text"
                     name="contact"
                     required
-                    placeholder="email/phone"
+                    placeholder={text[lang].form.contactPlaceholder}
                     className="w-full appearance-none rounded border px-3 py-2 shadow"
                   />
                 </div>
@@ -152,7 +157,7 @@ export default function ContactForm({ lang }: { lang: Locale }) {
                 <textarea
                   name="message"
                   required
-                  placeholder="Enter Message"
+                  placeholder={text[lang].form.messagePlaceholder}
                   className="w-full appearance-none rounded border px-3 py-2 shadow"
                   rows={4}
                 ></textarea>

@@ -6,10 +6,10 @@ import Container from '@/lib/components/container';
 
 const text = {
   en: {
-    watchOtherSermons: 'Watch sermon recordings',
+    watchOtherSermons: 'Watch Sermon Recordings',
   },
   zh: {
-    watchOtherSermons: 'Watch sermon recordings',
+    watchOtherSermons: '观看视频证道',
   },
 };
 

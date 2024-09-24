@@ -1,14 +1,13 @@
 import { Locale } from '@/i18n-config';
 import { details } from '@/lib/church-details';
 import ChurchLivestream from '@/lib/components/church-livestream';
-import Header from '@/lib/components/header';
 
 const text = {
   en: {
     livestream: 'Livestream',
   },
   zh: {
-    livestream: '直播',
+    livestream: '线上直播聚会',
   },
 };
 

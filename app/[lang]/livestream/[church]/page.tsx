@@ -10,23 +10,42 @@ export async function generateStaticParams() {
   return ['tk', 'adam', 'serangoon', 'sembawang'];
 }
 
+const text = {
+  en: {
+    home: 'Home',
+    livestream: 'Livestream',
+    serviceTimings: 'Service Timings',
+    welcomeInPerson: 'We welcome you to worship with us in-person',
+  },
+  zh: {
+    home: '主頁',
+    livestream: '线上直播',
+    serviceTimings: '聚会时间',
+    welcomeInPerson: '欢迎您来参加本会的实体聚会',
+  },
+};
+
 function ChurchLivestream({
   timings,
   background,
   map_src,
+  lang,
 }: {
   timings: { day: string; time: string }[];
   background: string;
   map_src: string;
+  lang: Locale;
 }) {
   return (
     <Container background={background}>
       <div className="mx-auto sm:max-w-4xl md:px-2 lg:px-12">
         <div className="flex flex-col sm:flex-row">
           <div className="basis-3/5 bg-lightblue px-4 py-4 xs:px-12 sm:px-2 md:px-8">
-            <h1 className="pt-4 text-3xl  font-semibold">Service Timings</h1>
+            <h1 className="pt-4 text-3xl  font-semibold">
+              {text[lang].serviceTimings}
+            </h1>
             <p className="pt-4 text-sm xs:text-base sm:text-sm md:text-base">
-              We welcome you to worship with us in-person.
+              {text[lang].welcomeInPerson}
             </p>
             <div className="flex flex-col py-2 md:py-6">
               {timings.map((timing) => (
@@ -64,13 +83,13 @@ export default function Page({
   return (
     <>
       <Header
-        title={`${details[lang][church].name} Livestreams`}
+        title={`${details[lang][church].name} ${text[lang].livestream}`}
         breadcrumbs={[
-          { name: 'Home', href: '/' },
-          { name: 'Livestream', href: '/worship#livestream' },
+          { name: text[lang].home, href: `/${lang}` },
+          { name: text[lang].livestream, href: `/${lang}/livestream` },
           {
-            name: `${details[lang][church].name} Livestreams`,
-            href: `/worship/${church}`,
+            name: `${details[lang][church].name} ${text[lang].livestream}`,
+            href: `$/{lang}/worship/${church}`,
           },
         ]}
         className="px-6 py-6 sm:px-12"
@@ -92,6 +111,7 @@ export default function Page({
         timings={details[lang][church].timings}
         background={"bg-[url('/marble.png')] "}
         map_src={details[lang][church].map_src}
+        lang={lang}
       />
     </>
   );

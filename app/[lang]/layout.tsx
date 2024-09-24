@@ -1,5 +1,6 @@
 import './globals.css';
-import { Noto_Sans, Rock_Salt, Source_Sans_3 } from 'next/font/google';
+import { Rock_Salt, Source_Sans_3, ZCOOL_KuaiLe } from 'next/font/google';
+import localFont from 'next/font/local';
 import { type Locale } from '../../i18n-config';
 import NavBar from './navbar';
 import Link from 'next/link';
@@ -7,7 +8,8 @@ import Socials from '@/lib/components/socials';
 import { Metadata } from 'next';
 import { openGraph } from '../shared-metadata';
 import Script from 'next/script';
-import ContactForm from '@/lib/components/contact-form';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     'God',
     'Jesus Christ',
   ],
-  metadataBase: new URL('https://tjcsg.vercel.app/'),
+  metadataBase: new URL('https://tjc.sg/'),
   alternates: {
     canonical: '/',
     languages: {
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
       // 'zh': '/zh',
     },
   },
-  manifest: 'https://tjcsg.vercel.app/manifest.json',
+  manifest: 'https://tjc.sg/manifest.json',
   category: 'christianity',
   robots: {
     index: true,
@@ -57,16 +59,22 @@ export const metadata: Metadata = {
   },
 };
 
-const notoSans = Noto_Sans({
-  variable: '--font-noto_sans',
-  subsets: ['latin'],
+const sourceHansSans = localFont({
+  src: './SourceHanSansHWSC-VF.otf.woff2',
   display: 'swap',
+  variable: '--font-source_hans_sans',
 });
 
 const sourceSans = Source_Sans_3({
   variable: '--font-source_sans',
   subsets: ['latin'],
   display: 'swap',
+});
+const zCOOL_KuaiLe = ZCOOL_KuaiLe({
+  variable: '--font-zcool_kuaile',
+  display: 'swap',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 const rockSalt = Rock_Salt({
@@ -87,18 +95,18 @@ const text = {
   },
   zh: {
     name: '新加坡真耶稣教会',
-    explore: 'Explore',
+    explore: '寻找',
     legal: '法律',
     copyright: '版权所有 © 2024 新加坡真耶穌教会',
     footer:
-      '本会是一个非宗派教会，设立在六十多个国家，横跨六大洲。真教会传扬的是真理，是由圣灵与神迹所共同证实的全备福音。我们所敬拜的神是真神，因而祂的教会是真教会。主耶稣称自己为真葡萄树。教会，作为祂的身体，因此称为真教会。（参考经文: 约壹五20; 约十五1, 5; 十七3）',
+      '👋🏼 您好，我们是真耶稣教会，一间全球性的以圣经为根基的教会。我们欢迎您加入充满爱的神的大家庭。📌 我们的目标很简单：通过传扬神救恩的完整真理，改变生命并使人成为基督的门徒。',
   },
 };
 
 const learnmore = [
   {
     en: 'TJC International Assembly',
-    zh: 'TJC International Assembly',
+    zh: '真耶稣教会联总',
     href: 'https://tjc.org/',
   },
   { en: 'Our Stories', zh: '本会的故事', href: 'https://tjc.org/our-stories/' },
@@ -116,15 +124,15 @@ const learnmore = [
 ];
 
 const legal = [
-  { en: 'Terms & Conditions', zh: '条规和隐私权方针', href: '#' },
+  { en: 'Terms & Conditions', zh: '条款与条件', href: '#' },
   {
     en: 'Declaration on Religious Harmony',
-    zh: '宗教和谐宣言',
+    zh: '宗教和谐声明',
     href: '/declaration',
   },
   {
     en: 'Personal Data Protection Policy',
-    zh: '个人资料保护法令',
+    zh: '个人资料保护政策',
     href: 'https://github.com/tjcscb/pdpp',
   },
 ];
@@ -207,14 +215,18 @@ export default function RootLayout({
   return (
     <html
       lang={params.lang}
-      className={`${notoSans.variable} ${sourceSans.variable} ${rockSalt.variable} scroll-smooth`}
+      className={`${lang === 'en' ? `${sourceSans.variable} ${rockSalt.variable}` : `${sourceHansSans.variable} ${zCOOL_KuaiLe.variable}`} scroll-smooth`}
     >
       <Script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></Script>
       <body>
-        <section className="flex h-screen min-h-screen flex-col">
+        <section className="flex h-[calc(100dvh)] min-h-[calc(100dvh)] flex-col">
           <NavBar lang={lang} />
           <main className="relative mb-auto block overflow-auto">
-            <div className="mb-8 md:mb-12 lg:mb-16">{children}</div>
+            <div className="mb-8 md:mb-12 lg:mb-16">
+              {children}
+              <SpeedInsights />
+              <Analytics />
+            </div>
             <Footer lang={lang} />
           </main>
         </section>

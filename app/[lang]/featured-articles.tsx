@@ -11,9 +11,9 @@ const text = {
     viewAll: 'View all articles',
   },
   zh: {
-    title: '特别聚会',
-    subtitle: '欢迎您参加我们的特别聚会！',
-    viewAll: 'View all articles',
+    title: '最新文章',
+    subtitle: '阅读本会最新的文章',
+    viewAll: '查看所有文章',
   },
 };
 

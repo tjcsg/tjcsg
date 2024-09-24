@@ -43,8 +43,9 @@ export default {
         ...defaultTheme.screens,
       },
       fontFamily: {
-        sans: ['var(--font-source_sans)'],
+        sans: [ 'var(--font-source_sans)', '"var(--font-source_hans_sans)"'],
         handwriting: ['var(--font-rock_salt)'],
+        zhHandwriting: ['var(--font-zcool_kuaile)']
       },
       colors: {
         button: '#007DA4',

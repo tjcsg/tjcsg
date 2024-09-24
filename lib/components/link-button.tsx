@@ -15,7 +15,7 @@ export default function LinkButton({
   return (
     <Link href={href}>
       <button
-        className={`sm:text-md block text-nowrap rounded-3xl border-2 border-button py-2 text-sm font-semibold shadow-sm  sm:leading-4
+        className={`sm:text-md block text-nowrap rounded-3xl border-2 border-button py-2 font-semibold shadow-sm  sm:leading-4
         ${
           type === 'default'
             ? 'bg-button text-white hover:border-button_hover hover:bg-button_hover'

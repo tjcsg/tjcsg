@@ -1,11 +1,6 @@
-import Link from 'next/link';
 import { getAllEvents, getTotalEvents } from '@/lib/api';
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
-import ContentfulImage from '@/lib/contentful-image';
-import EventStatus from '@/lib/components/event-status';
-import { details } from '@/lib/church-details';
-import { MapPinIcon } from '@heroicons/react/20/solid';
 import { redirect } from 'next/navigation';
 import Pagination from '@/lib/components/pagination';
 import Header from '@/lib/components/header';
@@ -14,6 +9,19 @@ import { openGraph } from '@/app/shared-metadata';
 import { Metadata } from 'next';
 
 const MAX_ITEMS_PER_PAGE = 6;
+
+const text = {
+  en: {
+    home: 'Home',
+    allEvents: 'All Events',
+    allSpecialEvents: 'All Special Events',
+  },
+  zh: {
+    home: '主页',
+    allEvents: '所有的特别聚会',
+    allSpecialEvents: '所有的特别聚会',
+  },
+};
 
 export default async function EventsPage({
   params,
@@ -45,10 +53,10 @@ export default async function EventsPage({
     <Container>
       <div className="sm:px-5">
         <Header
-          title={'All Special Events'}
+          title={text[lang].allSpecialEvents}
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'All Events', href: '/events' },
+            { name: text[lang].home, href: '/' },
+            { name: text[lang].allSpecialEvents, href: '/events' },
           ]}
           className="mb-10"
         />
@@ -56,7 +64,7 @@ export default async function EventsPage({
       <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-8 lg:w-full lg:grid-cols-1 lg:gap-y-16">
         {allEvents &&
           allEvents.map((event) => (
-            <EventCard key={event.slug} lang={'en'} event={event} />
+            <EventCard key={event.slug} lang={lang} event={event} />
           ))}
       </div>
       <div className="mt-10 flex w-full justify-center lg:mt-16">

@@ -8,8 +8,8 @@ const text = {
     ended: 'Ended',
   },
   zh: {
-    upcoming: '未来',
-    ended: '结束',
+    upcoming: '即将到来',
+    ended: '已结束',
   },
 };
 

@@ -17,6 +17,17 @@ import { redirect } from 'next/navigation';
 
 const MAX_ITEMS_PER_PAGE = 12;
 
+const text = {
+  en: {
+    home: 'Home',
+    articles: 'All Articles',
+  },
+  zh: {
+    home: '主页',
+    articles: '所有文字资源',
+  },
+};
+
 export default async function Page({
   params,
   searchParams,
@@ -46,16 +57,16 @@ export default async function Page({
   return (
     <Container>
       <Header
-        title={'Read Our Articles'}
+        title={text[lang].articles}
         breadcrumbs={[
-          { name: 'Home', href: '/' },
-          { name: 'Articles', href: '/articles' },
+          { name: text[lang].home, href: '/' },
+          { name: text[lang].articles, href: '/articles' },
         ]}
         className="mb-10 mt-2"
       />
       {tags.length > 0 && (
         <Link
-          href={'/articles'}
+          href={`/${lang}/articles`}
           className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
         >
           <ChevronLeftIcon

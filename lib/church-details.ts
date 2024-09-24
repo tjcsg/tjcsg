@@ -91,8 +91,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       nameChurch: '亚当路教会',
       shortform: 'adam',
       nearestMrt: 'Botanic Gardens',
-      address:
-        '17D Adam Road, Singapore 289890.（最靠近的地铁站： 植物园，陈嘉庚）',
+      address: '17D Adam Road, Singapore 289890',
       timings: [
         { day: '周三', time: '晚上 7:30 - 晚上 8:45' },
         { day: '周五', time: '晚上 7:30 - 晚上 8:45' },
@@ -108,8 +107,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       nameChurch: '直落古楼教会',
       shortform: 'tk',
       nearestMrt: 'Eunos',
-      address:
-        '32 Lorong H, Telok Kurau, Singapore 426020.（最靠近的地铁站：友诺士）',
+      address: '32 Lorong H, Telok Kurau, Singapore 426020',
       timings: [
         { day: '周二', time: '晚上 7:30 - 晚上 8:45' },
         { day: '周五', time: '晚上 7:30 - 晚上 8:45' },
@@ -125,8 +123,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       nameChurch: '三巴旺教会',
       shortform: 'sembawang',
       nearestMrt: 'Admiralty',
-      address:
-        'Woodlands 11, Unit #04-19, 11 Woodlands Close, Singapore 737853. (Nearest MRT – Admiralty)',
+      address:'11 Woodlands Close, Unit #04-19, Singapore 737853',
       timings: [
         { day: '周三', time: '晚上 7:45 - 晚上 9:00' },
         { day: '周五', time: '晚上 7:45 - 晚上 9:00' },
@@ -143,7 +140,7 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       shortform: 'serangoon',
       nearestMrt: 'Hougang',
       address:
-        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859. (Nearest MRT – Hougang))',
+        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
       timings: [
         { day: '周二', time: '晚上 7:45 - 晚上 9:00' },
         { day: '周五', time: '晚上 7:45 - 晚上 9:00' },

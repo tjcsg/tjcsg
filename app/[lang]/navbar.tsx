@@ -23,7 +23,7 @@ import sitelogo from '@/public/site-logo.png';
 const navbar = [
   {
     en: 'Visit',
-    zh: 'Visit',
+    zh: '拜访',
     href: '/locations',
     subcat: [],
     emphasis: true,
@@ -35,63 +35,63 @@ const navbar = [
     subcat: [
       {
         en: 'Who We Are',
-        zh: '',
+        zh: '本会简介',
         href: '/about',
       },
       {
         en: 'What We Believe',
-        zh: '',
+        zh: '基本信仰',
         href: '/beliefs',
       },
     ],
   },
   {
     en: 'Worship',
-    zh: '崇拜',
+    zh: '崇拜聚会',
     href: '',
     subcat: [
       {
-        en: 'In-Person Services',
-        zh: '',
-        href: '/locations',
+        en: 'Livestream',
+        zh: '线上直播聚会',
+        href: '/livestream',
       },
       {
         en: 'Watch Sermons',
-        zh: '',
+        zh: '证道分享',
         href: '/worship',
       },
       {
-        en: 'Livestream',
-        zh: '',
-        href: '/worship#livestream',
+        en: 'In-Person Services',
+        zh: '实体聚会',
+        href: '/locations',
       },
       {
         en: 'All Events',
-        zh: '',
+        zh: '所有特别聚会',
         href: '/events',
       },
     ],
   },
   {
     en: 'Library',
-    zh: 'Library',
+    zh: '文字资源',
     href: '',
     subcat: [
       {
         en: 'CDBD (Bible Reading)',
-        zh: 'CDBD (Bible Reading)',
+        zh: 'CDBD（每日读经）',
         href: '/cdbd',
       },
       {
         en: 'All Articles',
-        zh: 'All Articles',
+        zh: '所有文字资源',
         href: '/articles',
       },
     ],
   },
   {
     en: 'Contact Us',
-    zh: 'Contact Us',
+    zh: '联系我们',
     href: '/contact',
     subcat: [],
   },

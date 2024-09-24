@@ -14,9 +14,9 @@ const text = {
   },
   zh: {
     title: '特别聚会',
-    subtitle: '欢迎您参加我们的特别聚会！',
-    viewall: 'View all events',
-    cta: '欲知更多详情',
+    subtitle: '我们的特别聚会是您深入了解圣经中一些特定主题的绝佳起点',
+    viewall: '查看所有的特别聚会',
+    cta: '了解更多',
   },
 };
 
@@ -42,7 +42,7 @@ export default async function SpecialEvents({
         </p>
         <p className="mt-2">
           <Link
-            href="/events"
+            href={`/${lang}/events`}
             className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
           >
             {text[lang].viewall}
@@ -53,7 +53,7 @@ export default async function SpecialEvents({
       <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-4 lg:w-full lg:grid-cols-1 lg:gap-y-12">
         {allEvents &&
           allEvents.map((event) => (
-            <EventCard key={event.slug} lang={'en'} event={event} />
+            <EventCard key={event.slug} lang={lang} event={event} />
           ))}
       </div>
     </Container>

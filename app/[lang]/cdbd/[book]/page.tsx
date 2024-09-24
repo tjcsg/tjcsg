@@ -1,7 +1,7 @@
 import { Locale } from '@/i18n-config';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
-import { bibleBooks, Book, books, booksNoConst } from '@/lib/bible-books';
+import { bibleBooks, Book, books } from '@/lib/bible-books';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import CdbdList from '../cdbd-list';
 import { slugToContentfulTag } from '@/lib/utils';
@@ -17,15 +17,11 @@ const text = {
     cta: 'Read More',
   },
   zh: {
-    back: 'Back to all CDBD Devotionals',
-    all: 'All Devotionals for',
-    cta: 'Read More',
+    back: '返回查看所有的每日读经文章',
+    all: '的灵修文章',
+    cta: '阅读文章',
   },
 };
-
-export async function generateStaticParams() {
-  return booksNoConst;
-}
 
 export default async function Page({
   params,
@@ -52,7 +48,7 @@ export default async function Page({
       <div className="max-w-screen-lg">
         <nav aria-label="Back" className="mb-4">
           <Link
-            href={'/cdbd'}
+            href={`/${lang}/cdbd`}
             className="text-md flex items-center font-medium text-gray-500 hover:text-gray-700"
           >
             <ChevronLeftIcon
@@ -64,17 +60,19 @@ export default async function Page({
         </nav>
 
         <h1 className="mb-8 text-3xl font-bold">
-          {`${text[lang].all} ${bibleBooks[book][lang]}`}
+          {lang === 'en'
+            ? `${text[lang].all} ${bibleBooks[book][lang]}`
+            : `${bibleBooks[book][lang]}${text[lang].all}`}
         </h1>
         <div className="mb-8">
-          <BookSelector cdbdBooks={cdbdBooks} lang={lang} />
+          <BookSelector cdbdBooks={cdbdBooks} lang={lang} currentBook={book} />
         </div>
         <CdbdList
           lang={lang}
           currentPage={currentPage}
           maxItemsPerPage={MAX_ITEMS_PER_PAGE}
           tags={['categoryCdbd', `book${slugToContentfulTag(book)}`]}
-          redirectUrl={`/cdbd/${book}`}
+          redirectUrl={`${lang}/cdbd/${book}`}
         />
       </div>
     </Container>

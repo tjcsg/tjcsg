@@ -12,7 +12,7 @@ const text = {
     cta: 'Read More',
   },
   zh: {
-    cta: 'Read More',
+    cta: '阅读文章',
   },
 };
 
@@ -80,12 +80,12 @@ export default async function CdbdList({
                   }).format(new Date(article.date))}
                 </time>
                 <Link
-                  href={`/cdbd/${book}`}
+                  href={`/${lang}/cdbd/${book}`}
                   className="ml-4 mt-2 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 hover:bg-gray-200"
                 >
                   {bibleBooks[book][lang]}
                 </Link>
-                <Link href={`/articles/${article.slug}`}>
+                <Link href={`/${lang}/articles/${article.slug}`}>
                   <h1 className="mb-2 mt-2 text-xl font-bold">
                     {article.title}
                   </h1>
@@ -96,7 +96,7 @@ export default async function CdbdList({
                     : obtainTextContent(article.content)}
                 </p>
                 <Link
-                  href={`/articles/${article.slug}`}
+                  href={`/${lang}/articles/${article.slug}`}
                   className="mt-6 text-sm font-medium text-button underline hover:text-button_hover"
                 >
                   {text[lang].cta}

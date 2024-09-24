@@ -7,7 +7,7 @@ import ContentfulImage from '@/lib/contentful-image';
 const links = [
   {
     en: 'View Global Livestream',
-    zh: 'View Global Livestream',
+    zh: '查看全球直播',
     href: 'https://tjc.org/livestream/',
   },
 ];
@@ -27,7 +27,7 @@ export default async function GlobalLivestream({
       <h1 className={`mb-4 mt-4  text-gray-900 md:mt-8 ${titleClasses}`}>
         {contentfulText.livestreamGlobalTitle}
       </h1>
-      <div className={`flex flex-col md:flex-row md:justify-end`}>
+      <div className={`flex flex-col md:flex-row md:justify-between`}>
         <div className={`mb-8 block`}>
           <p
             className={`mt-2 leading-relaxed text-gray-600 md:text-lg md:leading-relaxed lg:mb-8 lg:text-xl lg:leading-relaxed`}

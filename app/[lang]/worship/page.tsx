@@ -21,6 +21,8 @@ const text = {
     title: 'Worship',
     eyebrow: 'Worship with us',
     comeVisit: 'Come and visit us',
+    comeVisitContent:
+      'The best way to worship with us is to come and join us for an in-person church service.',
     watchFeaturedSermon: 'Watch our sermon of the day',
     watchOtherSermons: 'Watch other sermons',
     howToPray: 'How To Pray',
@@ -32,21 +34,28 @@ const text = {
       '4) Spend time to speak with God from your heart and ask Him to fill you with the Holy Spirit',
       '5) End the prayer by saying, "Amen."',
     ],
+    home: 'Home',
+    worship: 'Worship',
   },
   zh: {
-    title: '线上崇拜',
+    title: '崇拜聚会',
     eyebrow: '与我们一起崇拜',
-    comeVisit: 'Come and visit us',
-    watchFeaturedSermon: 'Watch our sermon of the day',
-    watchOtherSermons: 'Watch other sermons',
-    howToPray: 'How To Pray',
+    comeVisit: '拜访本会',
+    comeVisitContent:
+      'The best way to worship with us is to come and join us for an in-person church service.',
+    watchFeaturedSermon: '观看我们今日的证道',
+    watchOtherSermons: '观看其他的证道',
+    howToPray: '如何祷告',
     howToPrayContent: [
-      '1) Kneel and close your eyes',
-      '2) Begin by saying, "In the name of the Lord Jesus I pray."',
-      '3) Praise the Lord by saying, "Hallelujah!"',
-      '4) Spend time to speak with God from your heart and ask Him to fill you with the Holy Spirit',
-      '5) End the prayer by saying, "Amen."',
+      '祷告是我们崇拜的重要部分，让我们能够与天父沟通。祂无所不在，你可以在任何地方向祂祈祷。',
+      '1) 跪下，闭上眼睛',
+      '2) 祷告开始，说：“奉主耶稣圣名祷告”',
+      '3) 赞美主耶稣，说：”哈利路亚”',
+      '4) 从心里与神交谈，求神的圣灵充满你',
+      '5) 祷告结束，说：“阿们”',
     ],
+    home: '主页',
+    worship: '崇拜聚会',
   },
 };
 
@@ -136,8 +145,7 @@ function WorshipInPerson({
       <div className="flex w-full flex-col md:flex-row">
         <div>
           <p className="mb-4 text-pretty leading-relaxed text-gray-800 md:px-0 md:text-lg md:leading-relaxed lg:text-xl lg:leading-relaxed">
-            The best way to worship with us is to come and join us for an
-            in-person church service.
+            {text[lang].comeVisitContent}
           </p>
           <div className="w-fit">
             <LinkButton
@@ -170,8 +178,8 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
         <Header
           title={text[lang].title}
           breadcrumbs={[
-            { name: 'Home', href: '/' },
-            { name: 'Worship', href: '/worship' },
+            { name: text[lang].home, href: '/' },
+            { name: text[lang].worship, href: '/worship' },
           ]}
         />
 

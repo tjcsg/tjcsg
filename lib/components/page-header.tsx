@@ -44,7 +44,7 @@ export default async function PageHeader({
             text={link[lang]}
             href={link.href}
             type={'inverse'}
-            className=" mx-auto px-10 py-2"
+            className=" mx-auto mt-4 px-10 py-2"
           />
         )}
       </div>

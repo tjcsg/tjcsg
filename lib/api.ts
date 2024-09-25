@@ -1,6 +1,7 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
 import { Book, books } from './bible-books';
+import { Church } from './church-details';
 
 export type MarkdownType = {
   json: any;
@@ -375,6 +376,38 @@ export async function getAllEvents(
     }`,
   );
   return extractPostEntries(entries);
+}
+
+export async function getLatestEventFromChurch(
+  locale: Locale,
+  church: Church
+): Promise<any> {
+  const entries = await fetchGraphQL(
+    `query {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: 1,
+        where: { church: "${church}" }
+      ) {
+        items {
+          slug
+          title
+          title2
+          date
+          duration
+          date2
+          duration2
+          church
+          poster {
+            url
+            description
+          }
+        }
+      }
+    }`,
+  );
+  return extractPost(entries);
 }
 
 export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {

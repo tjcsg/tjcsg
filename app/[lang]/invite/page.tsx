@@ -3,5 +3,5 @@ import { redirect } from 'next/navigation';
 
 export default function Page({ params }: { params: { lang: Locale } }) {
   const { lang } = params;
-  redirect(`/${lang}`);
+  redirect(`/${lang}/events`);
 }

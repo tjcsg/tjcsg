@@ -191,16 +191,17 @@ async function BasicBeliefs({
                 <Image
                   src={pic[aof]}
                   alt={''}
-                  className="absolute inset-0 rounded-ee-3xl rounded-ss-3xl object-fill"
+                  className="absolute inset-0 h-full w-full rounded-ee-3xl rounded-ss-3xl object-cover"
                 />
+                <div className="absolute inset-0 bottom-0 z-10 rounded-ee-3xl  rounded-ss-3xl bg-gradient-to-t from-black via-transparent opacity-70" />
                 <p className="absolute left-[10%] top-[10%] text-3xl font-light text-white xs:text-4xl">
                   {i == 9 ? i + 1 : `0${i + 1}`}
                 </p>
-                <p className="absolute bottom-[8%] left-[10%] max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
+                <p className="absolute bottom-[8%] left-[10%] z-20 max-w-28 text-xl font-normal leading-7 text-white xs:max-w-40 xs:text-2xl sm:max-w-36 sm:text-xl md:max-w-48 md:text-2xl lg:max-w-36 xl:max-w-48 xl:text-3xl">
                   {aofDetails[lang][aof].name}
                 </p>
                 <Link
-                  className="absolute inset-0"
+                  className="absolute inset-0 z-20"
                   href={`/${lang}/beliefs/${aof}`}
                 />
               </div>

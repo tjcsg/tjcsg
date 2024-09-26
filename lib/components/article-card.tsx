@@ -28,7 +28,7 @@ export default function ArticleCard({
       className="mx-auto flex w-full flex-col items-start xs:w-3/4 sm:w-full"
     >
       <Link
-        href={`/articles/${article.slug}`}
+        href={`/${lang}/articles/${article.slug}`}
         className="relative block aspect-[16/9] w-full"
       >
         <ContentfulImage
@@ -54,11 +54,13 @@ export default function ArticleCard({
 
         <div className="flex flex-col items-start justify-start">
           <h3 className="mt-1 text-lg font-semibold leading-6 text-gray-900 hover:text-gray-600">
-            <Link href={`/articles/${article.slug}`}>{article.title}</Link>
+            <Link href={`/${lang}/articles/${article.slug}`}>
+              {article.title}
+            </Link>
           </h3>
           <div className="mt-2 flex gap-2">
             {tags.map((tag) => (
-              <ArticleTag key={tag.id} tag={tag} />
+              <ArticleTag lang={lang} key={tag.id} tag={tag} />
             ))}
           </div>
           <p className="mt-3 line-clamp-2 text-base leading-6 text-gray-600">

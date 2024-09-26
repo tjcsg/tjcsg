@@ -43,7 +43,7 @@ export default {
         ...defaultTheme.screens,
       },
       fontFamily: {
-        sans: [ 'var(--font-source_sans)', '"var(--font-source_hans_sans)"'],
+        sans: [ 'var(--font-source_sans)', 'var(--font-noto_sans_SC)'],
         handwriting: ['var(--font-rock_salt)'],
         zhHandwriting: ['var(--font-zcool_kuaile)']
       },

@@ -1,5 +1,10 @@
 import './globals.css';
-import { Rock_Salt, Source_Sans_3, ZCOOL_KuaiLe } from 'next/font/google';
+import {
+  Rock_Salt,
+  Source_Sans_3,
+  ZCOOL_KuaiLe,
+  Noto_Sans_SC,
+} from 'next/font/google';
 import localFont from 'next/font/local';
 import { type Locale } from '../../i18n-config';
 import NavBar from './navbar';
@@ -32,7 +37,7 @@ export const metadata: Metadata = {
     canonical: '/',
     languages: {
       en: '/en',
-      // 'zh': '/zh',
+      zh: '/zh',
     },
   },
   manifest: 'https://tjc.sg/manifest.json',
@@ -59,10 +64,10 @@ export const metadata: Metadata = {
   },
 };
 
-const sourceHansSans = localFont({
-  src: './SourceHanSansHWSC-VF.otf.woff2',
+const notoSansSC = Noto_Sans_SC({
+  variable: '--font-noto_sans_SC',
+  subsets: ['latin'],
   display: 'swap',
-  variable: '--font-source_hans_sans',
 });
 
 const sourceSans = Source_Sans_3({
@@ -215,7 +220,7 @@ export default function RootLayout({
   return (
     <html
       lang={params.lang}
-      className={`${lang === 'en' ? `${sourceSans.variable} ${rockSalt.variable}` : `${sourceHansSans.variable} ${zCOOL_KuaiLe.variable}`} scroll-smooth`}
+      className={`scroll-smooth ${sourceSans.variable} ${rockSalt.variable} ${notoSansSC.variable} ${zCOOL_KuaiLe.variable}`}
     >
       <Script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></Script>
       <body>

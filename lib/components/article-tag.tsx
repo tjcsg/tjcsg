@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import { tagNameToText } from '@/lib/utils';
 import { useSearchParams } from 'next/navigation';
+import { Locale } from '@/i18n-config';
 
 export default function ArticleTag({
   tag,
+  lang,
 }: {
   tag: { name: string; id: string };
+  lang: Locale;
 }) {
   const searchParams = useSearchParams();
 
@@ -15,7 +18,7 @@ export default function ArticleTag({
     const params = new URLSearchParams(searchParams);
     params.set('tags', tag);
     params.set('page', '1');
-    return `/en/articles?${params.toString()}`;
+    return `/${lang}/articles?${params.toString()}`;
   };
   return (
     <Link className="" href={createPageURL(tag.id)}>

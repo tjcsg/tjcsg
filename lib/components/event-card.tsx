@@ -11,9 +11,13 @@ const text = {
     cta: 'Find out more',
   },
   zh: {
-    cta: '欲知更多详情',
+    cta: '了解更多',
   },
 };
+
+const contentSizes = 'text-base';
+const titleSizes =
+  'text-xl xs:text-2xl md:text-2xl lg:text-3xl leading-tight xs:leading-tight md:leading-tight lg:leading-tight';
 
 function DateAndTime({
   date,
@@ -28,7 +32,7 @@ function DateAndTime({
     <>
       <time
         dateTime={date}
-        className="text-md mt-2 font-semibold text-gray-500 sm:text-lg"
+        className={`font-semibold text-gray-600 ${contentSizes}`}
       >
         {new Intl.DateTimeFormat(`${lang}-SG`, {
           timeZone: 'Singapore',
@@ -59,7 +63,9 @@ function DateAndTime({
 
 function Title({ title, slug }: { title: string; slug: string }) {
   return (
-    <h3 className="mt-2 text-2xl font-semibold text-gray-900 hover:text-gray-600 sm:text-3xl">
+    <h3
+      className={`mt-3 font-bold text-gray-900 hover:text-gray-600 ${titleSizes}`}
+    >
       <Link href={`/events/${slug}`}>{title}</Link>
     </h3>
   );
@@ -73,10 +79,11 @@ export default async function EventCard({
   event: EventEntry;
 }) {
   const church = event.church as 'adam' | 'tk' | 'sembawang' | 'serangoon';
+
   return (
     <div
       key={event.slug}
-      className={`mx-auto flex w-full flex-col justify-start rounded-2xl border border-neutral-300 bg-neutral-100 pb-4 lg:flex-row lg:pb-0`}
+      className={`mx-auto flex w-full flex-col justify-start rounded-2xl border border-neutral-300 bg-neutral-50 pb-4 lg:flex-row lg:pb-0`}
     >
       <div className="relative aspect-[16/9] w-full lg:block lg:basis-3/4 lg:overflow-hidden lg:pt-[56.25] min-[1100px]:basis-7/12 xl:basis-1/2">
         <ContentfulImage
@@ -90,9 +97,9 @@ export default async function EventCard({
       </div>
 
       <div
-        className={` px-4 py-2 sm:py-4 lg:min-h-[260px] lg:w-2/3 lg:px-8 lg:py-2 min-[1100px]:py-4 ${event.title2 ? `` : `lg:mt-6`}`}
+        className={` px-4 py-2 sm:py-2 md:py-4 lg:min-h-[260px] lg:w-2/3 lg:px-8 lg:py-2 min-[1100px]:py-4 ${event.title2 ? `` : `lg:mt-6`}`}
       >
-        <div className="flex flex-col items-start justify-start text-xs">
+        <div className="flex flex-col items-start justify-start">
           <Title title={event.title} slug={event.slug} />
           <DateAndTime
             date={event.date}
@@ -109,13 +116,17 @@ export default async function EventCard({
             />
           )}
 
-          <div className="text-md mt-3 font-medium text-gray-600 sm:text-lg">
+          <div className={`mt-3 font-medium text-gray-600 ${contentSizes}`}>
             <MapPinIcon className="mb-1 mr-2 inline w-4" />
-            <p className=" mt-2 inline">{details[lang][church].address}</p>
+            <p className=" mt-2 inline underline hover:text-gray-400">
+              <Link href={`/locations#${details[lang][church].shortform}`}>
+                {details[lang][church].address}
+              </Link>
+            </p>
           </div>
           <Link
-            href={`/events/${event.slug}`}
-            className="text-md relative z-10 mt-3 font-medium text-button underline hover:text-button_hover sm:text-lg"
+            href={`/${lang}/events/${event.slug}`}
+            className={`relative z-10 mt-3 font-medium capitalize text-button underline hover:text-button_hover ${contentSizes}`}
           >
             {text[lang].cta}
           </Link>

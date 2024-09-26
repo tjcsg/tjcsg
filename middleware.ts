@@ -31,21 +31,41 @@ export function middleware(request: NextRequest) {
   // If you have one
   if (
     [
-      '/carousel/1.jpg',
-      '/carousel/2.jpeg',
-      '/carousel/3.jpg',
-      '/carousel/4.jpeg',
-      '/carousel/5.jpg',
       '/favicon.ico',
-      '/locations/adam.jpg',
-      '/locations/sembawang.jpg',
-      '/locations/serangoon.jpg',
-      '/locations/tk.jpg',
+      '/android-chrome-96x96.png',
+      '/apple-touch-icon.png',
+      '/browserconfig.xml',
+      '/favicon-16x16.png',
+      '/favicon-32x32.png',
+      '/mstile-150x150.png',
+      '/safari-pinned-tab.svg',
       '/site-logo.png',
-      '/global_livestream.png',
-      '/landingpage.jpg',
-      '/landingpage_landscape.jpg',
       '/marble.png',
+      '/pdf/baptism.pdf',
+      '/pdf/bible.pdf',
+      '/pdf/one-true-church.pdf',
+      '/pdf/essential-biblical-doctrines.pdf',
+      '/pdf/footwashing.pdf',
+      '/pdf/holy-communion.pdf',
+      '/pdf/holy-spirit.pdf',
+      '/pdf/intro-to-TJC-basic-beliefs.pdf',
+      '/pdf/jesus-christ.pdf',
+      '/pdf/QnA.pdf',
+      '/pdf/sabbath.pdf',
+      '/pdf/salvation.pdf',
+      '/pdf/saving-grace-vol1.pdf',
+      '/pdf/saving-grace-vol2.pdf',
+      '/pdf/second-coming.pdf',
+      '/img/aof/jesus-christ.jpg',
+      '/img/aof/holy-bible.jpg',
+      '/img/aof/one-true-church.jpg',
+      '/img/aof/baptism.jpg',
+      '/img/aof/holy-spirit.jpg',
+      '/img/aof/footwashing.jpg',
+      '/img/aof/holy-communion.png',
+      '/img/aof/salvation.jpg',
+      '/img/aof/second-coming.jpg',
+      '/img/aof/sabbath-day.jpg',
       // Your other files in `public`
     ].includes(pathname)
   )
@@ -74,5 +94,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|android-chrome-96x96|apple-touch-icon|browserconfig.xml|favicon-16x16|favicon-32x32|mstile-150x150|safari-pinned-tab|robots|manifest).*)',
+  ],
 };

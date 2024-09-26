@@ -1,6 +1,31 @@
+import YoutubeList from '@/lib/components/youtube-list';
 import SpecialEvents from '../special-events';
 import GlobalLivestream from './global-livestream';
 import { Locale } from '@/i18n-config';
+import Container from '@/lib/components/container';
+
+const text = {
+  en: {
+    watchOtherSermons: 'Watch Sermon Recordings',
+  },
+  zh: {
+    watchOtherSermons: '观看视频证道',
+  },
+};
+
+function OlderSermons({ lang }: { lang: Locale }) {
+  return (
+    <Container>
+      <h1 className="mb-8 text-2xl font-bold">
+        {text[lang].watchOtherSermons}
+      </h1>
+      <YoutubeList
+        playlist={'PLvc6U8OPfT_lqdkfc_udv3hdE_9KR7bwH'}
+        index={[1, 2, 3, 4, 5]}
+      />
+    </Container>
+  );
+}
 
 export default function Layout({
   children,
@@ -13,8 +38,18 @@ export default function Layout({
   return (
     <>
       {children}
-      <SpecialEvents lang={lang} background="bg-white" />
-      <GlobalLivestream lang={lang} background="bg-stone-50" />
+      <OlderSermons lang={lang} />
+      <SpecialEvents
+        lang={lang}
+        background="bg-stone-50"
+        titleClasses="text-2xl font-bold capitalize"
+        paragraphClasses="text-base md:text-lg lg:text-xl"
+      />
+      <GlobalLivestream
+        lang={lang}
+        titleClasses="text-2xl font-bold capitalize"
+        background="bg-white"
+      />
     </>
   );
 }

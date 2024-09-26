@@ -4,6 +4,7 @@ import adamPic from '@/public/locations/adam.jpg';
 import tkPic from '@/public/locations/tk.jpg';
 import sembawangPic from '@/public/locations/sembawang.jpg';
 import serangoonPic from '@/public/locations/serangoon.jpg';
+import { Church } from '@/lib/church-details';
 
 const pic = {
   adam: adamPic,
@@ -21,51 +22,64 @@ export default function ChurchLocation({
   background,
 }: {
   name: string;
-  shortname: 'adam' | 'tk' | 'serangoon' | 'sembawang';
+  shortname: Church;
   address: string;
   timings: { day: string; time: string }[];
   map_src: string;
   background: string;
 }) {
   return (
-    <Container background={background}>
-      <div className="block">
-        <div className="mb-4 flex-col sm:flex-row">
-          <h1 className="text-lg font-semibold lg:text-2xl">{`True Jesus Church (${name})`}</h1>
-          <p className="lg:text-md text-sm text-gray-500">{address}</p>
-        </div>
-        <div className="sm:flex">
-          <div className="mb-8 bg-lightblue sm:max-w-md">
-            <Image
-              src={pic[shortname]}
-              className="w-full"
-              alt={`A picture of ${name}'s exterior`}
-            />
-            <table className="table-sm mt-1">
-              <tbody>
-                {timings.map((timing) => (
-                  <tr key={timing.day}>
-                    <td className="sm:text-md text-sm font-semibold">
-                      {timing.day}
-                    </td>
-                    <td className="text-sm">{timing.time}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div
+      id={shortname}
+      className={`${background} xs:pb-6 xs:pt-2 md:pb-12 md:pt-6 xl:pb-16 xl:pt-10`}
+    >
+      <Container>
+        <div className="mx-auto max-w-lg md:max-w-screen-lg">
+          <div className="mb-4 flex flex-col lg:mb-8 lg:flex-row">
+            <h1 className="text-xl font-bold xs:text-2xl md:text-3xl">
+              {name}
+            </h1>
+            <p className="text-lg font-medium text-gray-500 md:text-xl lg:self-end lg:pl-4 xl:text-2xl">
+              {address}
+            </p>
           </div>
-          <iframe
-            src={map_src}
-            width="600"
-            height="350"
-            style={{ border: 0 }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full sm:max-w-md"
-          ></iframe>
+
+          <div className="flex flex-col gap-6 md:flex-row md:gap-2 lg:gap-8">
+            <div className=" bg-lightblue md:mb-0 md:basis-1/2">
+              <Image
+                src={pic[shortname]}
+                className="w-full"
+                alt={`A picture of ${name}'s exterior`}
+              />
+              <div className="flex flex-col px-4 py-6 xs:px-8 md:px-4 md:py-6">
+                {timings.map((timing) => (
+                  <div key={timing.day} className="flex flex-row pt-2">
+                    <p className="basis-1/2 text-sm font-semibold xs:text-base md:basis-5/12 lg:text-lg xl:text-xl">
+                      {timing.day}
+                    </p>
+                    <p className="text-sm xs:text-base md:pl-3 lg:text-lg xl:text-xl">
+                      {timing.time}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="md:relative md:basis-1/2">
+              <iframe
+                src={map_src}
+                width="600"
+                height="350"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="eager"
+                title={`Map showing the location of ${name}`}
+                referrerPolicy="no-referrer-when-downgrade"
+                className="inset-0 w-full md:absolute md:h-full"
+              ></iframe>
+            </div>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }

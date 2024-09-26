@@ -42,12 +42,12 @@ export default function ChurchLivestream({
 }) {
   return (
     <Container background={background}>
-      <div className="block">
-        <h1 className="mb-4 text-lg font-semibold lg:text-2xl">
+      <div className="mx-auto sm:max-w-md  md:max-w-none">
+        <h1 className="mb-4 text-xl font-semibold sm:text-2xl md:text-xl lg:mb-6 lg:text-2xl">
           {name} {text[lang].livestream}
         </h1>
 
-        <div className="relative mx-auto mb-8 bg-lightblue sm:max-w-md">
+        <div className="relative mb-8 bg-lightblue">
           <Image
             src={pic[shortname]}
             className="w-full"
@@ -57,20 +57,20 @@ export default function ChurchLivestream({
             text={text[lang].card_button}
             href={`/${lang}/${href}`}
             type={'default'}
-            className={`text-md absolute left-1/2 -translate-x-1/2 -translate-y-full px-10 py-2`}
+            className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 px-10 py-2 text-base lg:py-1 lg:text-lg`}
           />
-          <table className="table-sm mt-6">
-            <tbody>
-              {timings.map((timing) => (
-                <tr key={timing.day}>
-                  <td className="sm:text-md text-sm font-semibold">
-                    {timing.day}
-                  </td>
-                  <td className="text-sm">{timing.time}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="flex flex-col px-4 py-6 xs:px-8 md:px-4 md:py-6">
+            {timings.map((timing) => (
+              <div key={timing.day} className="flex flex-row pt-2">
+                <p className="lg:text-md basis-1/2 text-xs font-semibold xs:text-sm sm:text-base md:basis-5/12 md:text-sm lg:text-base xl:text-lg">
+                  {timing.day}
+                </p>
+                <p className="lg:text-md text-xs xs:text-sm sm:text-base md:pl-3 md:text-sm lg:text-base xl:text-lg">
+                  {timing.time}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Container>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import Link from 'next/link';
 import ContentfulImage from './contentful-image';
 import type { EventEntry } from './api';
@@ -64,16 +64,31 @@ export function Markdown({ content }: { content: EventEntry['summary'] }) {
           if (isSiteLink) {
             const url = new URL(urlString);
             const relative = url.pathname + url.search;
-            return <Link href={relative}>{children}</Link>;
+            return (
+              <Link
+                href={relative}
+                className="text-button hover:text-button_hover"
+              >
+                {children}
+              </Link>
+            );
           } else {
             return (
-              <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
+              <a
+                href={node.data.uri}
+                className="text-button hover:text-button_hover"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {children}
               </a>
             );
           }
         }
       },
+    },
+    renderMark: {
+      [MARKS.BOLD]: (text) => <span className="font-bold">{text}</span>,
     },
     renderText: (text) =>
       text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),

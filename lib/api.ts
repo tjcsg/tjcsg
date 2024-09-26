@@ -1,6 +1,7 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
 import { Book, books } from './bible-books';
+import { Church } from './church-details';
 
 export type MarkdownType = {
   json: any;
@@ -97,32 +98,9 @@ const WEBCONTENT_GRAPHQL_FIELDS = `
   worshipHowtoprayMedia {
     url
   }
-  socialsYoutubeTitle
-  socialsYoutubeText
-  socialsYoutubeIframe
-  socialsInstagramTitle
-  socialsInstagramText
-  socialsInstagramMedia {
-    url
-  }
-  socialsFacebookTitle
-  socialsFacebookText
-  socialsFacebookMedia {
-    url
-  }
   livestreamGlobalTitle
   livestreamGlobalText
   livestreamGlobalMedia {
-    url
-  }
-  globalTjciaTitle
-  globalTjciaText
-  globalTjciaMedia {
-    url
-  }
-  globalStudyTitle
-  globalStudyText
-  globalStudyMedia {
     url
   }
 `;
@@ -144,19 +122,6 @@ type WebContent = {
   worshipHowtoprayMedia: {
     url: string;
   };
-  socialsYoutubeTitle: string;
-  socialsYoutubeText: string;
-  socialsYoutubeIframe: string;
-  socialsInstagramTitle: string;
-  socialsInstagramText: string;
-  socialsInstagramMedia: {
-    url: string;
-  };
-  socialsFacebookTitle: string;
-  socialsFacebookText: string;
-  socialsFacebookMedia: {
-    url: string;
-  };
   livestreamGlobalTitle: string;
   livestreamGlobalText: string;
   livestreamGlobalMedia: {
@@ -165,11 +130,6 @@ type WebContent = {
   globalTjciaTitle: string;
   globalTjciaText: string;
   globalTjciaMedia: {
-    url: string;
-  };
-  globalStudyTitle: string;
-  globalStudyText: string;
-  globalStudyMedia: {
     url: string;
   };
 };
@@ -183,6 +143,8 @@ const EVENTS_GRAPHQL_FIELDS = `
   date2
   duration2
   church
+  ctaButtonText
+  ctaButtonLink
   poster {
     url
     description
@@ -223,6 +185,8 @@ export type EventEntry = {
     height: number;
   };
   summary: MarkdownType;
+  ctaButtonText: string;
+  ctaButtonLink: string;
 };
 
 // Need to separate out "content" because of the query complexity limit of 11000, and "content.links" has a complexity of 1000.
@@ -381,8 +345,9 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   return extractPost(entry);
 }
 
-export async function getAllEvents(
+export async function getAllUpcomingEvents(
   locale: Locale,
+  date: string,
   limit: number = 100,
   skip: number = 0,
 ): Promise<any[]> {
@@ -392,7 +357,8 @@ export async function getAllEvents(
         locale: "${locale}",
         order: date_DESC,
         limit: ${limit},
-        skip: ${skip}
+        skip: ${skip},
+        where:{ OR: [{date_gt: "${date}"},{date2_gt:"${date}"} ]}
       ) {
         items {
           slug
@@ -414,6 +380,74 @@ export async function getAllEvents(
   return extractPostEntries(entries);
 }
 
+export async function getAllPastEvents(
+  locale: Locale,
+  date: string,
+  limit: number = 100,
+  skip: number = 0,
+): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: ${limit},
+        skip: ${skip},
+        where:{ OR: [{AND:[{date2_exists:false}, {date_lt: "${date}"}]},{date2_lt:"${date}"} ]}
+      ) {
+        items {
+          slug
+          title
+          title2
+          date
+          duration
+          date2
+          duration2
+          church
+          poster {
+            url
+            description
+          }
+        }
+      }
+    }`,
+  );
+  return extractPostEntries(entries);
+}
+
+
+export async function getLatestEventFromChurch(
+  locale: Locale,
+  church: Church
+): Promise<any> {
+  const entries = await fetchGraphQL(
+    `query {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: 1,
+        where: { church: "${church}" }
+      ) {
+        items {
+          slug
+          title
+          title2
+          date
+          duration
+          date2
+          duration2
+          church
+          poster {
+            url
+            description
+          }
+        }
+      }
+    }`,
+  );
+  return extractPost(entries);
+}
+
 export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {
   const entries = await fetchGraphQL(
     `query {
@@ -430,12 +464,12 @@ export async function getAllEventsSlug(isDraftMode: boolean): Promise<any[]> {
   return extractPostEntries(entries);
 }
 
-export async function getEvent(slug: string, preview: boolean) {
+export async function getEvent(slug: string, preview: boolean, locale: string) {
   const entry = await fetchGraphQL(
     `query {
       eventsCollection(where: { slug: "${slug}" }, preview: ${
         preview ? 'true' : 'false'
-      }, limit: 1) {
+      }, limit: 1, locale:"${locale}") {
         items {
           ${EVENTS_GRAPHQL_FIELDS}
         }
@@ -449,16 +483,14 @@ export async function getEvent(slug: string, preview: boolean) {
   };
 }
 
-export async function getTotalEvents(
-): Promise<number> {
+export async function getTotalPastEvents(date: string): Promise<number> {
   const entry = await fetchGraphQL(
     `query {
-        eventsCollection(limit:1000) {
+        eventsCollection(limit:1000, where:{ OR: [{AND:[{date2_exists:false}, {date_lt: "${date}"}]},{date2_lt:"${date}"} ]}) {
         total
       }
     }`,
   );
-  console.log(entry)
   return entry?.data?.eventsCollection?.total;
 }
 
@@ -557,6 +589,36 @@ export async function getLatestArticles(
   );
   return extractArticleEntries(entry);
 }
+export async function getRelatedArticles(
+  locale: Locale,
+  currSlug: string,
+  limit: number = 100,
+  currTags: string[] = [],
+): Promise<ArticleEntry[]> {
+  const entry = await fetchGraphQL(
+    `query {
+        articleCollection(
+          limit: ${limit},
+          locale:"${locale}",
+          order: date_DESC
+          where: {
+            contentfulMetadata: { tags: { id_contains_some: [ ${currTags.length > 0 ? `"${currTags.join('","')}"` : ``} ] } },
+            slug_not: "${currSlug}"
+          }
+          
+        ) {
+        items {
+          ${ARTICLE_GRAPHQL_FIELDS}
+            content {
+              json
+            }
+        }
+      }
+    }`,
+  );
+
+  return extractArticleEntries(entry);
+}
 
 export async function getTotalArticles(
   locale: Locale,
@@ -581,13 +643,47 @@ export async function getTotalArticles(
   return entry?.data?.articleCollection?.total;
 }
 
+function extractArticleTags(fetchResponse: any): Map<string, string> {
+  const tags = new Map();
+
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    item.contentfulMetadata.tags?.forEach(
+      (tag: { name: string; id: string }) => {
+        if (!tags.get(tag.id)) {
+          tags.set(tag.id, tag.name);
+        }
+      },
+    );
+  });
+  return tags;
+}
+
+export async function getAllArticleTags(): Promise<Map<string, string>> {
+  const entry = await fetchGraphQL(
+    `query {
+      articleCollection(limit: 1000) {
+        items {
+          contentfulMetadata {
+            tags {
+              id
+              name
+            }
+          } 
+        }
+      }
+    }`,
+  );
+  return extractArticleTags(entry);
+}
+
 export async function getArticle(
   slug: string,
+  locale: Locale,
   preview: boolean,
 ): Promise<ArticleEntry> {
   const entry = await fetchGraphQL(
     `query {
-      articleCollection(where: { slug: "${slug}" }, preview: ${
+      articleCollection(where: { slug: "${slug}" }, locale: "${locale}", preview: ${
         preview ? 'true' : 'false'
       }, limit: 1) {
         items {
@@ -619,17 +715,15 @@ export async function getArticle(
 function extractCdbdBooks(fetchResponse: any): any {
   const books = new Set();
 
-  fetchResponse?.data?.articleCollection?.items?.forEach(
-    (item: any) => {
-      let book = item.contentfulMetadata.tags.find((tag:any) => tag.id.startsWith('book'))
-      ?.name.split('-')
-      book.shift();
-      books.add(book.join("-"));
-    },
-  );
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    let book = item.contentfulMetadata.tags
+      .find((tag: any) => tag.id.startsWith('book'))
+      ?.name.split('-');
+    book.shift();
+    books.add(book.join('-'));
+  });
   return Array.from(books);
 }
-
 
 export async function getAllCdbdBooks(): Promise<Book[]> {
   const entry = await fetchGraphQL(
@@ -651,7 +745,7 @@ export async function getAllCdbdBooks(): Promise<Book[]> {
   return extractCdbdBooks(entry);
 }
 
-export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
+export async function getAllCdbdSlugs(): Promise<{ slug: string }[]> {
   const entry = await fetchGraphQL(
     `query {
       articleCollection(
@@ -671,14 +765,11 @@ export async function getAllCdbdSlugs(): Promise<{slug: string}[]> {
 function extractCdbdAuthors(fetchResponse: any): any {
   const authors = new Set();
 
-  fetchResponse?.data?.articleCollection?.items?.forEach(
-    (item: any) => {
-      authors.add(item.author?.split(' ').join('-').toLowerCase());
-    },
-  );
+  fetchResponse?.data?.articleCollection?.items?.forEach((item: any) => {
+    authors.add(item.author?.split(' ').join('-').toLowerCase());
+  });
   return Array.from(authors);
 }
-
 
 export async function getAllCdbdAuthors(): Promise<string[]> {
   const entry = await fetchGraphQL(

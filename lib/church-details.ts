@@ -1,9 +1,13 @@
+export type Church = 'adam' | 'tk' | 'sembawang' | 'serangoon';
+
 type Details = {
   name: string;
+  nameChurch: string;
+  nearestMrt: string;
   timings: { day: string; time: string }[];
   map_src: string;
   twitch: string;
-  shortform: 'adam' | 'tk' | 'sembawang' | 'serangoon';
+  shortform: Church;
   address: string;
 };
 
@@ -18,9 +22,10 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
   en: {
     adam: {
       name: 'True Jesus Church (Adam Road)',
+      nameChurch: 'Adam Road Church',
       shortform: 'adam',
-      address:
-        '17D Adam Road, Singapore 289890',
+      nearestMrt: 'Botanic Gardens',
+      address: '17D Adam Road, Singapore 289890',
       timings: [
         { day: 'Wednesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -33,9 +38,10 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
     },
     tk: {
       name: 'True Jesus Church (Telok Kurau)',
+      nameChurch: 'Telok Kurau Church',
       shortform: 'tk',
-      address:
-        '32 Lorong H, Telok Kurau, Singapore 426020',
+      nearestMrt: 'Eunos',
+      address: '32 Lorong H, Telok Kurau, Singapore 426020',
       timings: [
         { day: 'Tuesday', time: '7:30pm - 8:45pm' },
         { day: 'Friday', time: '7:30pm - 8:45pm' },
@@ -49,8 +55,9 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
     sembawang: {
       name: 'True Jesus Church (Sembawang)',
       shortform: 'sembawang',
-      address:
-        '11 Woodlands Close, Unit #04-19, Singapore 737853',
+      nameChurch: 'Sembawang Church',
+      nearestMrt: 'Admiralty',
+      address: '11 Woodlands Close, Unit #04-19, Singapore 737853',
       timings: [
         { day: 'Wednesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },
@@ -63,9 +70,10 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
     },
     serangoon: {
       name: 'True Jesus Church (Serangoon)',
+      nameChurch: 'Serangoon Church',
       shortform: 'serangoon',
-      address:
-        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
+      nearestMrt: 'Hougang',
+      address: '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
       timings: [
         { day: 'Tuesday', time: '7:45pm - 9:00pm' },
         { day: 'Friday', time: '7:45pm - 9:00pm' },
@@ -79,10 +87,11 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
   },
   zh: {
     adam: {
-      name: '亚当路教会',
+      name: '真耶稣教会（亚当路）',
+      nameChurch: '亚当路教会',
       shortform: 'adam',
-      address:
-        '17D Adam Road, Singapore 289890.（最靠近的地铁站： 植物园，陈嘉庚）',
+      nearestMrt: 'Botanic Gardens',
+      address: '17D Adam Road, Singapore 289890',
       timings: [
         { day: '周三', time: '晚上 7:30 - 晚上 8:45' },
         { day: '周五', time: '晚上 7:30 - 晚上 8:45' },
@@ -94,10 +103,11 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjcadam',
     },
     tk: {
-      name: '直落古楼教会',
+      name: '真耶稣教会（直落古楼）',
+      nameChurch: '直落古楼教会',
       shortform: 'tk',
-      address:
-        '32 Lorong H, Telok Kurau, Singapore 426020.（最靠近的地铁站：友诺士）',
+      nearestMrt: 'Eunos',
+      address: '32 Lorong H, Telok Kurau, Singapore 426020',
       timings: [
         { day: '周二', time: '晚上 7:30 - 晚上 8:45' },
         { day: '周五', time: '晚上 7:30 - 晚上 8:45' },
@@ -109,10 +119,11 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjctk',
     },
     sembawang: {
-      name: '三巴旺教会',
+      name: '真耶稣教会（三巴旺）',
+      nameChurch: '三巴旺教会',
       shortform: 'sembawang',
-      address:
-        'Woodlands 11, Unit #04-19, 11 Woodlands Close, Singapore 737853. (Nearest MRT – Admiralty)',
+      nearestMrt: 'Admiralty',
+      address:'11 Woodlands Close, Unit #04-19, Singapore 737853',
       timings: [
         { day: '周三', time: '晚上 7:45 - 晚上 9:00' },
         { day: '周五', time: '晚上 7:45 - 晚上 9:00' },
@@ -124,10 +135,12 @@ export const details: { en: ChurchDetails; zh: ChurchDetails } = {
       twitch: 'tjcsbw',
     },
     serangoon: {
-      name: '实龙岗教会',
+      name: '真耶稣教会（实龙岗）',
+      nameChurch: '实龙岗教会',
       shortform: 'serangoon',
+      nearestMrt: 'Hougang',
       address:
-        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859. (Nearest MRT – Hougang))',
+        '55 Serangoon North Ave 4, Unit #08-05, Singapore 555859',
       timings: [
         { day: '周二', time: '晚上 7:45 - 晚上 9:00' },
         { day: '周五', time: '晚上 7:45 - 晚上 9:00' },

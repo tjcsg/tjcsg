@@ -1,62 +1,100 @@
 import { Locale } from '@/i18n-config';
-import { getAllEvents } from '@/lib/api';
-import { details } from '@/lib/church-details';
+import { getAllUpcomingEvents } from '@/lib/api';
 import Container from '@/lib/components/container';
-import EventStatus from '@/lib/components/event-status';
-import ContentfulImage from '@/lib/contentful-image';
 import Link from 'next/link';
-import { MapPinIcon } from '@heroicons/react/20/solid';
 import EventCard from '@/lib/components/event-card';
 
 const text = {
   en: {
-    title: 'Special Events',
-    subtitle: 'Stay tuned for our special services!',
+    title: 'Upcoming Events',
+    subtitle:
+      'Our special services are a great starting point for you to dive into specific topics from the Bible',
     viewall: 'View all events',
     cta: 'Find out more',
   },
   zh: {
     title: '特别聚会',
-    subtitle: '欢迎您参加我们的特别聚会！',
-    viewall: 'View all events',
-    cta: '欲知更多详情',
+    subtitle: '我们的特别聚会是您深入了解圣经中一些特定主题的绝佳起点',
+    viewall: '查看所有的特别聚会',
+    cta: '了解更多',
   },
 };
 
 export default async function SpecialEvents({
   lang,
-  background,
+  background = 'bg-white',
+  titleClasses = 'text-3xl font-bold tracking-tight md:text-4xl ',
+  paragraphClasses = 'text-lg md:text-xl',
 }: {
   lang: Locale;
-  background: string;
+  background?: string;
+  titleClasses?: string;
+  paragraphClasses?: string;
 }) {
-  const allEvents = await getAllEvents(lang);
+  const upcomingEvents = await getAllUpcomingEvents(
+    lang,
+    new Date(Date.now()).toISOString().split('T')[0],
+    2,
+    0,
+  );
 
   return (
-    <Container background={`${background}`}>
-      <div className="mx-auto block w-full">
-        <div className="mb-8 lg:mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            {text[lang].title}
-          </h2>
-          <p className="mt-2 text-xl leading-8 text-gray-600">
-            {text[lang].subtitle}
-          </p>
-          <Link href="/events">
-            <p className="mt-2 text-xl leading-8 text-button underline hover:text-button_hover">
-              {text[lang].viewall}
+    <>
+      {upcomingEvents.length > 1 ? (
+        <Container background={`${background} py-8 lg:py-10`}>
+          <div className="mb-8 lg:mb-16">
+            <h2 className={`text-gray-900 ${titleClasses}`}>
+              {text[lang].title}
+            </h2>
+            <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
+              {text[lang].subtitle}
             </p>
-          </Link>
-        </div>
-        <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-4/5 md:w-2/3 lg:w-full lg:gap-y-16">
-          {allEvents &&
-            allEvents
-              .slice(0, 3)
-              .map((event) => (
-                <EventCard key={event.slug} lang={'en'} event={event} />
+            <p className="mt-2">
+              <Link
+                href={`/${lang}/events`}
+                className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
+              >
+                {text[lang].viewall}
+              </Link>
+            </p>
+          </div>
+
+          <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-4 lg:w-full lg:grid-cols-1 lg:gap-y-12">
+            {upcomingEvents &&
+              upcomingEvents.map((event) => (
+                <EventCard key={event.slug} lang={lang} event={event} />
               ))}
-        </div>
-      </div>
-    </Container>
+          </div>
+        </Container>
+      ) : upcomingEvents.length == 1 ? (
+        <Container background={`${background} py-8 lg:py-10`}>
+          <div className="mb-8 lg:mb-16">
+            <h2 className={`text-gray-900 ${titleClasses}`}>
+              {text[lang].title}
+            </h2>
+            <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
+              {text[lang].subtitle}
+            </p>
+            <p className="mt-2">
+              <Link
+                href={`/${lang}/events`}
+                className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
+              >
+                {text[lang].viewall}
+              </Link>
+            </p>
+          </div>
+
+          <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-2/3 md:w-7/12  lg:w-full lg:grid-cols-1 lg:gap-y-12">
+            {upcomingEvents &&
+              upcomingEvents.map((event) => (
+                <EventCard key={event.slug} lang={lang} event={event} />
+              ))}
+          </div>
+        </Container>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

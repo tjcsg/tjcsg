@@ -2,7 +2,7 @@
 
 ## MVP by end Sept
 
-- Contact us form
+- ~~Contact us form~~
 - Articles landing page
 - Events landing page
 - ~~Footer links~~
@@ -31,6 +31,24 @@
 - Articles stuff (see tele)
 - Do we aim to support localisation by end Sept?
 - Do we want to port old events over to the new website or start from scratch?
+
+## Setup
+
+Environment variables required:
+
+```
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=
+CONTENTFUL_PREVIEW_SECRET=
+CONTENTFUL_REVALIDATE_SECRET=
+TWITCH_PARENT=
+NEXT_PUBLIC_WEB3_ACCESS_KEY=
+```
+
+The `CONTENTFUL_*` variables should be obtained from contentful. `TWITCH_PARENT` should be `localhost` if developing locally.
+
+`NEXT_PUBLIC_WEB3_ACCESS_KEY` should be your web3forms access key pointing to your email address to receive emails via the contact form.
 
 # A statically generated blog example using Next.js and Contentful
 

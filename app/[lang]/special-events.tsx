@@ -1,5 +1,5 @@
 import { Locale } from '@/i18n-config';
-import { getAllEvents } from '@/lib/api';
+import { getAllUpcomingEvents } from '@/lib/api';
 import Container from '@/lib/components/container';
 import Link from 'next/link';
 import EventCard from '@/lib/components/event-card';
@@ -31,31 +31,70 @@ export default async function SpecialEvents({
   titleClasses?: string;
   paragraphClasses?: string;
 }) {
-  const allEvents = await getAllEvents(lang, 2);
+  const upcomingEvents = await getAllUpcomingEvents(
+    lang,
+    new Date(Date.now()).toISOString().split('T')[0],
+    2,
+    0,
+  );
 
   return (
-    <Container background={`${background} py-8 lg:py-10`}>
-      <div className="mb-8 lg:mb-16">
-        <h2 className={`text-gray-900 ${titleClasses}`}>{text[lang].title}</h2>
-        <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
-          {text[lang].subtitle}
-        </p>
-        <p className="mt-2">
-          <Link
-            href={`/${lang}/events`}
-            className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
-          >
-            {text[lang].viewall}
-          </Link>
-        </p>
-      </div>
+    <>
+      {upcomingEvents.length > 1 ? (
+        <Container background={`${background} py-8 lg:py-10`}>
+          <div className="mb-8 lg:mb-16">
+            <h2 className={`text-gray-900 ${titleClasses}`}>
+              {text[lang].title}
+            </h2>
+            <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
+              {text[lang].subtitle}
+            </p>
+            <p className="mt-2">
+              <Link
+                href={`/${lang}/events`}
+                className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
+              >
+                {text[lang].viewall}
+              </Link>
+            </p>
+          </div>
 
-      <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-4 lg:w-full lg:grid-cols-1 lg:gap-y-12">
-        {allEvents &&
-          allEvents.map((event) => (
-            <EventCard key={event.slug} lang={lang} event={event} />
-          ))}
-      </div>
-    </Container>
+          <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-full sm:grid-cols-2 sm:gap-x-4 lg:w-full lg:grid-cols-1 lg:gap-y-12">
+            {upcomingEvents &&
+              upcomingEvents.map((event) => (
+                <EventCard key={event.slug} lang={lang} event={event} />
+              ))}
+          </div>
+        </Container>
+      ) : upcomingEvents.length == 1 ? (
+        <Container background={`${background} py-8 lg:py-10`}>
+          <div className="mb-8 lg:mb-16">
+            <h2 className={`text-gray-900 ${titleClasses}`}>
+              {text[lang].title}
+            </h2>
+            <p className={`mt-2 text-pretty text-gray-600 ${paragraphClasses}`}>
+              {text[lang].subtitle}
+            </p>
+            <p className="mt-2">
+              <Link
+                href={`/${lang}/events`}
+                className={`${paragraphClasses} capitalize leading-8 text-button underline hover:text-button_hover`}
+              >
+                {text[lang].viewall}
+              </Link>
+            </p>
+          </div>
+
+          <div className="mx-auto mt-4 grid w-full grid-cols-1 gap-y-10 pt-1 xs:w-5/6 sm:w-2/3 md:w-7/12  lg:w-full lg:grid-cols-1 lg:gap-y-12">
+            {upcomingEvents &&
+              upcomingEvents.map((event) => (
+                <EventCard key={event.slug} lang={lang} event={event} />
+              ))}
+          </div>
+        </Container>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

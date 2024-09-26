@@ -345,8 +345,9 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
   return extractPost(entry);
 }
 
-export async function getAllEvents(
+export async function getAllUpcomingEvents(
   locale: Locale,
+  date: string,
   limit: number = 100,
   skip: number = 0,
 ): Promise<any[]> {
@@ -356,7 +357,8 @@ export async function getAllEvents(
         locale: "${locale}",
         order: date_DESC,
         limit: ${limit},
-        skip: ${skip}
+        skip: ${skip},
+        where:{ OR: [{date_gt: "${date}"},{date2_gt:"${date}"} ]}
       ) {
         items {
           slug
@@ -377,6 +379,42 @@ export async function getAllEvents(
   );
   return extractPostEntries(entries);
 }
+
+export async function getAllPastEvents(
+  locale: Locale,
+  date: string,
+  limit: number = 100,
+  skip: number = 0,
+): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      eventsCollection(
+        locale: "${locale}",
+        order: date_DESC,
+        limit: ${limit},
+        skip: ${skip},
+        where:{ OR: [{AND:[{date2_exists:false}, {date_lt: "${date}"}]},{date2_lt:"${date}"} ]}
+      ) {
+        items {
+          slug
+          title
+          title2
+          date
+          duration
+          date2
+          duration2
+          church
+          poster {
+            url
+            description
+          }
+        }
+      }
+    }`,
+  );
+  return extractPostEntries(entries);
+}
+
 
 export async function getLatestEventFromChurch(
   locale: Locale,
@@ -445,10 +483,10 @@ export async function getEvent(slug: string, preview: boolean, locale: string) {
   };
 }
 
-export async function getTotalEvents(): Promise<number> {
+export async function getTotalPastEvents(date: string): Promise<number> {
   const entry = await fetchGraphQL(
     `query {
-        eventsCollection(limit:1000) {
+        eventsCollection(limit:1000, where:{ OR: [{AND:[{date2_exists:false}, {date_lt: "${date}"}]},{date2_lt:"${date}"} ]}) {
         total
       }
     }`,

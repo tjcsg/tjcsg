@@ -19,5 +19,13 @@ export default async function Page({
   if (!event) {
     redirect(`/${lang}/events`);
   }
+  const isOver = event.date2
+    ? Date.now() > new Date(event.date2).getTime()
+    : Date.now() > new Date(event.date).getTime();
+
+  if (isOver) {
+    redirect(`/${lang}/events`);
+  }
+
   redirect(`/${lang}/events/${event.slug}`);
 }

@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n-config';
 import { Aof } from './articles-of-faith';
+import { books } from './bible-books';
 
 export type MarkdownType = {
   json: any;
@@ -227,6 +228,8 @@ export type EventEntry = {
 const ARTICLE_GRAPHQL_FIELDS = `
   slug
   title
+  author
+  date
   description
   content {
     json
@@ -250,14 +253,16 @@ const ARTICLE_GRAPHQL_FIELDS = `
     width
     height
   }
-  category {
-      doctrine
-      subcategory
-  }
   relatedArticlesCollection {
     items {
       slug
       title
+    }
+  }
+  contentfulMetadata {
+    tags {
+      id
+      name
     }
   }
 `;
@@ -266,6 +271,8 @@ export type ArticleEntry = {
   slug: string;
   title: string;
   description: string;
+  author: string;
+  date: string;
   content: {
     json: any;
     links: {
@@ -288,16 +295,18 @@ export type ArticleEntry = {
     width: number;
     height: number;
   };
-  category: {
-    doctrine: Aof;
-    subcategory: string;
-  };
   relatedArticlesCollection: {
     items: {
       slug: string;
       title: string;
     }[];
   };
+  contentfulMetadata: {
+    tags: {
+      id: string;
+      name: string;
+    }[]
+  }
 };
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -365,7 +374,7 @@ function extractArticleSubcategories(fetchResponse: any): any {
   return Array.from(categories);
 }
 
-function extractArticleEntries(fetchResponse: any): any[] {
+function extractArticleEntries(fetchResponse: any): ArticleEntry[] {
   return fetchResponse?.data?.articleCollection?.items;
 }
 
@@ -550,19 +559,25 @@ export async function getArticlesInSubcat(
 
 export async function getLatestArticles(
   limit: number,
-  preview: boolean,
+  locale: Locale,
+  tags: string[]=[]
 ): Promise<ArticleEntry[]> {
   const entry = await fetchGraphQL(
     `query {
-      articleCollection(limit: ${limit}, order: sys_publishedAt_DESC, preview: ${
-        preview ? 'true' : 'false'
-      }) {
+        articleCollection(
+          limit: ${limit}
+          locale:"${locale}",
+          order: date_DESC
+          where: {
+            contentfulMetadata: { tags: { id_contains_all: [ ${tags.length > 0 ? `"${tags.join("','")}"` : ``} ] } }
+          }
+          
+        ) {
         items {
           ${ARTICLE_GRAPHQL_FIELDS}
         }
       }
     }`,
-    preview,
   );
   return extractArticleEntries(entry);
 }

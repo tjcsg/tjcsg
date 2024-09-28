@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'TJC SG',
     description:
       "We're True Jesus Church, a global Bible-based church. We welcome you to join God's loving family. Our goal is simple: transform lives and make disciples of Christ through preaching God's full truth of salvation.",
-    start_url: '/',
+    start_url: '.',
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#ffffff',

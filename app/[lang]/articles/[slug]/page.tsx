@@ -7,19 +7,17 @@ import {
   getAllArticlesSlug,
   getAllCdbdSlugs,
   getArticle,
-  getLatestArticles,
   getRelatedArticles,
 } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Header from '@/lib/components/header';
 import { Locale } from '@/i18n-config';
 import ContentfulImage from '@/lib/contentful-image';
-import { bibleBooks, Book } from '@/lib/bible-books';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Metadata, ResolvingMetadata } from 'next';
 import { openGraph } from '@/app/shared-metadata';
 import { obtainTextContent } from '@/lib/utils';
-import ContactForm from '@/lib/components/contact-form';
+import React from 'react';
 export const dynamic = 'force-static';
 // export const dynamicParams = false;
 
@@ -67,25 +65,25 @@ async function ArticleFoot({
 
     return (
       <div className="text-md mt-6 flex justify-between text-button underline">
-        {index > 0 ? (
-          <Link
-            href={`/${lang}/articles/${cdbdSlugs[index - 1].slug}`}
-            className="flex hover:text-button_hover"
-          >
-            <ChevronLeftIcon aria-hidden="true" className="block w-6" />
-            {index > 0 && text[lang].previous}
-          </Link>
-        ) : (
-          <p></p>
-        )}
         {index < cdbdSlugs.length - 1 && (
           <Link
             href={`/${lang}/articles/${cdbdSlugs[index + 1].slug}`}
             className="flex hover:text-button_hover"
           >
+            <ChevronLeftIcon aria-hidden="true" className="block w-6" />
             {text[lang].next}
+          </Link>
+        )}
+        {index > 0 ? (
+          <Link
+            href={`/${lang}/articles/${cdbdSlugs[index - 1].slug}`}
+            className="flex hover:text-button_hover"
+          >
+            {index > 0 && text[lang].previous}
             <ChevronRightIcon aria-hidden="true" className="block w-6" />
           </Link>
+        ) : (
+          <p></p>
         )}
       </div>
     );

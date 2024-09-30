@@ -13,9 +13,9 @@ const text = {
     cta: 'Read More',
   },
   zh: {
-    back: 'Back to all CDBD Devotionals',
-    all: 'All Devotionals by',
-    cta: 'Read More',
+    back: '返回查看所有的每日读经文章',
+    all: '所写的灵修文章',
+    cta: '阅读文章',
   },
 };
 
@@ -50,10 +50,15 @@ export default async function Page({
         </nav>
 
         <h1 className="mb-8 text-3xl font-bold">
-          {`${text[lang].all} ${author
-            .split('-')
-            .map((string) => string[0].toUpperCase() + string.slice(1))
-            .join(' ')}`}
+          {lang === 'en'
+            ? `${text[lang].all} ${author
+                .split('-')
+                .map((string) => string[0].toUpperCase() + string.slice(1))
+                .join(' ')}`
+            : `${author
+                .split('-')
+                .map((string) => string[0].toUpperCase() + string.slice(1))
+                .join(' ')} ${text[lang].all} `}
         </h1>
 
         <CdbdList

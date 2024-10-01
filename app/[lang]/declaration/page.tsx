@@ -48,5 +48,6 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraph,
     title: 'Declaration on Religious Harmony | True Jesus Church',
+    url: `https://tjc.sg/declaration`,
   },
 };

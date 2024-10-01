@@ -234,13 +234,14 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { isEnabled } = draftMode();
-  const { lang } = params;
+  const { lang, slug } = params;
   const { event } = await getEvent(params.slug, isEnabled, lang);
 
   return {
     title: `${event.title}${event.title2 ? ` & ${event.title2}` : ''}`,
     openGraph: {
       ...openGraph,
+      url: `https://tjc.sg/events/${slug}`,
       title: `${event.title}${event.title2 ? ` & ${event.title2}` : ''} | True Jesus Church`,
       images: [
         {

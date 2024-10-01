@@ -219,6 +219,7 @@ export async function generateMetadata(
     openGraph: {
       ...openGraph,
       title: `${article.title} | True Jesus Church`,
+      url: `https://tjc.sg/articles/${slug}`,
       description: `${
         article.description !== null
           ? article.description

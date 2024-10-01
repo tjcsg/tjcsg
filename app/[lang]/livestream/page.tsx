@@ -51,6 +51,7 @@ export const metadata: Metadata = {
   title: 'Our Livestreams',
   openGraph: {
     ...openGraph,
+    url: `https://tjc.sg/livestream`,
     title: 'Our Livestreams | True Jesus Church',
   },
 };

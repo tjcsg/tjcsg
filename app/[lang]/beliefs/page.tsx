@@ -316,5 +316,6 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraph,
     title: 'Our Beliefs | True Jesus Church',
+    url: `https://tjc.sg/beliefs`,
   },
 };

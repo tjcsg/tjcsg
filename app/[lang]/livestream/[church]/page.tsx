@@ -127,6 +127,7 @@ export async function generateMetadata(
     title: `Livestream for ${details['en'][church].nameChurch}`,
     openGraph: {
       ...openGraph,
+      url: `https://tjc.sg/livestream/${church}`,
       title: `Livestream for ${details['en'][church].nameChurch} | True Jesus Church`,
     },
   };

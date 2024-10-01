@@ -224,6 +224,7 @@ export const metadata: Metadata = {
     'Interested to find out more about our church and our beliefs? We warmly welcome you to come and visit any one of our four churches in Singapore!',
   openGraph: {
     ...openGraph,
+    url: `https://tjc.sg/locations`,
     title: 'Our Locations | True Jesus Church',
     description:
       'Interested to find out more about our church and our beliefs? We warmly welcome you to come and visit any one of our four churches in Singapore!',

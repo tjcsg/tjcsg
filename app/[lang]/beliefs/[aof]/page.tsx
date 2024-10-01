@@ -220,6 +220,7 @@ export async function generateMetadata(
       ...openGraph,
       title: `${aofDetails['en'][aof].name} | True Jesus Church`,
       description: aofDetails['en'][aof].details.join(' '),
+      url: `https://tjc.sg/beliefs/${aof}`,
       images: [
         {
           url: pageContent[aof].imgUrl,

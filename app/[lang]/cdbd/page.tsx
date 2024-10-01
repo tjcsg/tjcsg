@@ -66,6 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraph,
     title: 'Closer Day By Day | True Jesus Church',
+    url: `https://tjc.sg/cdbd`,
     description:
       'Drawing closer to Jesus through His words. Come and study the Bible with us!',
   },

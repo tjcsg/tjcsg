@@ -108,5 +108,6 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraph,
     title: 'Upcoming Events | True Jesus Church',
+    url: `https://tjc.sg/events`,
   },
 };
